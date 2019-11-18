@@ -1,0 +1,58 @@
+%\section{Quantum Secure Puncturable Pseudorandom Function and iO}
+%In this section we define a notion of classical puncturable pseudorandom and indistinguishability obfuscation that are secure against a polynomial-time quantum adversary with classical oracle access. Note we could define a stronger notion of security against polynomial-time adversaries with quantum oracle access, however, this is not required to construct a quantum public-key encryption from iO.
+
+
+%\begin{definition}
+%A family of quantum secure pseudorandom functions $F_k:  \{0,1\}^{f(n)} \longrightarrow \{0,1\}^{g(n)}$ indexed by a key $k\in \{0,1\}^{l(n)}$ are puncturable if there exists
+%two additional algorithms $\textsf{Puncture}_F$ and $\textsf{Eval}_F$ such that
+%
+%\begin{enumerate}
+%\item {\em Functionality Preserved Under Functioning}: For all PPT  distinguishers $D=(D_1, D_2)$ such that $D_1(1^n)$ outputs a set $S\subset \{0,1\}^{f(n)},$ then for all $x \in \{0,1\}^{f(n)} \wedge x\notin S$
+%$$Pr[\textsf{Eval}_F(k_s,x)=F_k(x): k_s\leftarrow \textsf{Puncture}_F(K, S),\; k\leftarrow \textsf{KeyGen}(1^n)]=1$$
+%
+%\item {\em Quantum Security}: For every polynomial-time quantum distinguisher $\mathcal{D}_q=(\mathcal{D}_1, \mathcal{D}_2)$  equipped with a classical oracle there exists a negligible function
+%negl such that  $$Pr[\textsf{qPunctPRF}_{D,F}(n)=1]\leq \frac{1}{2}+negl(n),$$
+%
+%where the experiment $\textsf{qPunctPRF}_{\mathcal{D}_q,F}(n)$ is defined as follows:\\
+%\item[] {\bf Quantum Puncturable PRF indistinguishability experiment} $\textsf{qPunctPRF}_{\mathcal{D}_q,F}(n)$
+%\begin{enumerate}
+%\item Challenger {\em C} generate a key $k\leftarrow \textsf{KeyGen}(1^n).$
+%\item $\mathcal{D}_1(1^n)$ outputs a set $S\subset \{0,1\}^{f(n)}$ and a quantum state $\sigma$ and sends  $S$ to {\em C}.
+%\item {\em C} computes $k_s\leftarrow \textsf{Puncture}_F(k,S).$ Then picks $i\xleftarrow[]{\$}\{0,1\}$ and outputs a binary string $y.$ Where $y\xleftarrow[]{\$}\{0,1\}^{f(m)|S|}$ if $i=0$ and otherwise $y\leftarrow F_k(s_1)||F_k(s_2)||\cdots ||F_k(s_k),$ where $S =\{s_1,s_2,\cdots, s_k\}$  is the enumeration of the elements of $S$ in lexicographic order.
+%\item $\mathcal{D}_2$ receives $(\sigma, S)$ from $D_1$ and $(K_s,S)$ from{\em C} and finally $D_2$ output a bit $j.$  (Note with the knowledge of $K_s$ the distinguisher can compute $F_k(x)$ on any input $x\in \{0,1\}^{f(n)}\wedge x\notin S$)\footnote{In this version adversary cannot choose the set $S$ adaptively. We can discuss the other scenario on Wednesday.}.
+%\item The output of the experiment is defined to be 1, if  $i=j$ and 0 otherwise. We write $\textsf{qPunctPRF}_{\mathcal{D}_2,F}(n)=1$ if the output is 1.
+%\end{enumerate}
+%\end{enumerate}
+%\end{definition}
+%\begin{theorem}
+%If quantum secure pseudorandom random number generators exist, then quantum secure puncturable pseudorandom functions exist.
+%\end{theorem}
+%
+%\noindent {\em Proof}
+
+%\subsection{Indistinguishability Obfuscation against Quantum Adversary}
+%\begin{definition}\label{def:qiO} (Quantum Secure Classical Indistinguishability Obfuscation $qi\mathcal{O}$)
+%A probabilistic polynomial-time algorithm (in security parameter $n$) is a quantum indistinguishability obfuscator, for a class of circuits  ${\mathcal C}$ (classical), if it satisfies{\rm:}
+%
+%\begin{enumerate}
+%\item {\tt Functionality:} For any circuit $C\in {\mathcal C},$ and for all inputs $x$ $$qi\mathcal{O}(C,x)=C(x).$$
+%\item {\tt Indistinguishability:} For any two circuits $C_0,C_1\in {\mathcal C},$ of the same size  that compute the same function
+% and for every probabilistic polynomial time distinguisher $\mathcal{D}_q,$ equipped with a quantum oracle, there exists a negligible function negl such that:
+%
+%					$$\mid Pr[A(qi\mathcal{O}(C_0,1^n))=1]-Pr[A(qi\mathcal{O}(C_1,1^n))=1] \mid\leq  {\rm negl}(n)$$	
+%				
+%\end{enumerate}										
+%\end{definition}
+
+%An classical obfuscator {\rm\textsf{qObf}} is quantum indistinguishability secure if:
+%
+%\begin{enumerate}
+%\item  For any two  equivalent classical programs (Turing Machines/Circuits) $C_0$ and $C_1$ that have the same size, for every probabilistic polynomial time distinguisher $\mathcal{D}_q,$ equipped with a quantum oracle, there exists a negligible function negl such that:
+%
+%
+%						$$\mid Pr[\mathcal{D}_q(\mbox{\textsf{qObf}}(C_0,1^n))=1]-Pr[\mathcal{D}_q({\rm\textsf{qObf}}(C_1,1^n))=1] \mid\leq  {\rm negl}(n)$$	
+%
+%\item  {\rm\textsf{qObf}} runs in polynomial-time in the size of input program and security parameter $n.$
+%\end{enumerate}
+\noindent Note iO is a public parameter and  adversary can directly query the iO, however it is important that $\mathcal{D}_q,$ has an access to a quantum oracle, so that a polynomial bound $\mathcal{D}_q,$ can compute answer to quantum queries.
+

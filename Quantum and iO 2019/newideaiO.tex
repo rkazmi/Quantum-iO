@@ -1,0 +1,46 @@
+
+\section{Quantum Indistinguishability Obfuscation}
+\label{sec:QiO-Cliffords and more}
+
+The new idea (Anne, January 2019) is that we could do an iO obfuscation that would tolerate polylog T-depth (I think). The idea is that the key updates can become larger (as in Aaronson-Gottesman), based on the Pauli decomposition of the $P$ corrrection. This expansion stays as a reasonable size, as long as the T-depth (or maybe T-count) is polylogarithmic. 
+
+We would also need to know that, for different circuit implementations of the same map, the key update function has the same input-output behaviour (therefore, we can use classical iO to implement it): 
+
+
+ 
+
+\begin{theorem}
+See below, the text in the email for the conjecture that needs to be proven. 
+\end{theorem} 
+
+
+Note: Quantum indistinguishability obfuscation.…. Seems to have been defined in Section 4 of \url{https://arxiv.org/pdf/1602.01771.pdf}
+The definition we achieve is something along the lines of Definition 9. It looks to me however that they have been quite general, we might not need that level of generality.
+
+
+\subsection{Notes from an email to Raza January 15th 2019}
+The “canonical” form from Aaronson and Gottesman doesn’t look unique to me, contrary to what I previously thought. So this is disappointing. However, the ‘normal’ form from Selinger is unique. So that would be a way to get iO for Clifford circuit. All references have .pdfs in the DropBox.
+
+If we use gate teleportation + obfuscated key update, this also gives iO. One drawback is that the classical iO for the key update can be replaced by computing the normal form as above for the Clifford, and outputting the key update function. So this is not so interesting.
+
+I think our best shot at a novel contribution would be iO obfuscation of quantum circuits which are Clifford circuits, with a certain number of T-gates.
+
+Previously, I had proposed that the position of the T gates would be known, and we would just basically obfuscated the Clifford parts. I think this works, but is not that interesting.
+
+After reading a bit, I think we can obfuscate circuits with a constant number of T gates. The idea is that the ‘corrections’ that need to be updated after each gate is kept as a vector of coefficients of Pauli matrices. The PAulis form a basis, so this is always possible. After the teleportation, the vector is a basis vector. Clifford gates move around the coefficients in a simple way. Since the correction for a non-Clifford T gate consists in possibly a P gate, we use the decomposition of P in the Pauli basis: P = (1+i)/2 * I + (1+i)*2*Z.  Some of these ideas are in the last few pages of Aaronson-Gottesman, although their paradigm is the simulation of Clifford circuits, so they think about the problem differently (and they use general non-Clifford gates, not T-gates).
+
+Now, the updated vector is more complicated; in particular our coefficients will no longer be only 0 and 1, but instead can take real and complex values. However, the general reasoning about updates still works (although it looks the the CNOT gate will require something special since the Paulis are no longer ‘simple’ tensor products and will contribute to complexity). I suspect the key gets more and more complicated with each T-gate (and CNOT gate), but I don’t know just how complicated it gets.
+Conjectures:
+
+\begin{enumerate}
+\item	With constant number of T-gate, we can still write down a poly-size circuit for the update function. Beyond constant, there would be an exponential blowup. Or maybe we can have log or polylog T gates. Or maybe CNOT is the deciding factor, or maybe a combination of T and CNOT. \textbf{Anne update: polylog T-count seems to work. Now could we have polylog T-depth? (this would take into account how the CNOTs ``propagate'' the key blowup)}
+\item 	Two circuits with constant number of T-gates that have the *same* input-output behaviour will have the same update functions.  (actually, probably no need to mention the ‘constant number of T-gate’ here; I would try to prove for general circuits.)
+\end{enumerate}
+
+Conj. 1 is required for efficiency,
+Whereas conj. 2 is required for the classical iO to be applicable.
+
+I would try to prove 1 via the actual construction, whereas possibly 2 could be proven along similar lines as Proposition 3.1 in Selinger’s paper.  (try a proof by contradiction: get two equations… and try to conclude that $U-U' \neq 0$, so that U is actually different from U’. )
+
+
+

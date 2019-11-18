@@ -1,0 +1,333 @@
+\section{Preliminaries}
+\subsection{Basic Classical Cryptographic Notions}
+\label{sec:classical-prelims}
+Let $\mathbb{N}$ be the set of positive integers. For $n \in \mathbb{N}$, we set $[n] = \{1, \cdots, n\}.$ We denote the set of all  binary strings of length $n$ by $\bit{n}.$
+ An element $s \in \bit{n}$ is called a bitstring, and $|s|=n$ denotes its length. We reserve the notation $0^n$ (resp., $1^n$) to denote the $n$-bit string with all zeroes (resp., all ones).  We denote an arbitrary polynomial from the set $\mathbb{N}$ to $\mathbb{N}$ by $poly( ).$ 
+ 
+ 
+A function ${\rm negl}:\mathbb{N}\rightarrow\mathbb{R}^{+}\cup \{0\}$ is negligible if for every positive polynomial $p(n)$ there exists a positive integer $n_0$ such that  for all  $n>n_0,$ ${\rm negl}(n) < 1/ p(n).$   A typical use of negligible functions is to indicate that the probability of success of some algorithm is too small to be amplified to a constant by a feasible (\emph{i.e.}, polynomial) number of repetitions. Given two bit strings $x$ and $y$ of equal length, we denote their bitwise XOR by $x \oplus y.$
+
+\section*{Classical Circuits and Algorithms}
+ For $n, m\in\mathbb{N}$ let  $f:\bit{n}\rightarrow \bit{m}$ be a function. We say a circuit $C$ computes $f$ if for every $s \in \bit{n},\; C(s)=f(s).$  We define the size of a circuit $C$ as the number of gates in it and is denoted by $|C|.$ A set of gates for classical computation  are universal if, for all $n, m\in\mathbb{N}$, and for every function $f:\bit{n}\rightarrow \bit{m}$ a circuit can be constructed for computing $f$ using only gates from that set. It is a well known fact that \{AND, OR, NOT\} is a set of universal gates for classical circuits. A family of circuits $\mathcal{F}=\{C_n\mid n\in\mathbb{N}\},$ one for each input  size $n\in \mathbb{N}$ is called uniform if there exists a deterministic Turing machine $M,$ such that 
+ \begin{itemize}
+ \item For each $n\in\mathbb{N},$ $M$ outputs a description of $C_n \in \mathcal{F}$ on input $1^n.$
+ \item  For each $n\in\mathbb{N},$ $M$ runs in $poly(n).$
+ \end{itemize}
+
+
+
+%We will sometimes abuse notation by stating that $f:\bit{n} \rightarrow \bit{m}$ defines a function family; in that case, it is implicit that $n$ is a parameter that indexes the input size and $m$ is some function of $n$ (usually a polynomial) that indexes the output size. Given a bit string $y$ and, the preimage of $f$ under $y$ is defined by $f^{-1}(y) := \{ x \in \{0,1\}^* : f(x) = y\}$.
+  
+
+
+%Let $\mathbb{N}$ be the set of positive integers. For $n \in \mathbb{N}$, we set $[n] = \{1, \cdots, n\}.$ We denote the set of all finite binary strings as $\{0,1\}^*.$
+% An element $x \in \{0,1\}^*$ is called a bitstring, and $|x|$ denotes its length, \emph{i.e.}, its number of bits. We reserve the notation $0^n$ (resp., $1^n$) to denote the $n$-bit string with all zeroes (resp., all ones). We denote the concatenation of two binary strings $x=x_1x_2,\cdots,x_l$ and $y=y_1y_2,\cdots,y_k$ as $x||y=x_1x_2,\cdots,x_ly_1y_2,\cdots,y_k.$ We denote an arbitrary polynomial from $\mathbb{N} \rightarrow \mathbb{N}$ by $poly(n).$
+%
+%For a finite set $X$, the notation $x \xleftarrow[]{\$}X$ indicates that $x$ is selected uniformly at random from~$X$. For a probability distribution $S$, the notation $x\leftarrow S$ indicates that $x$ is sampled according to $S$. Given finite sets $X$ and $Y$, the set of all functions from $Y$ to $X$ is denoted $X^Y$ (or sometimes $\{X \rightarrow Y\}$).
+%We will usually consider functions $f$ acting on binary strings, that is, of the form $f:\{0,1\}^n\rightarrow \bit{m}$, for some positive integers $n$ and $m$.
+%We will also consider function families  $f:\{0,1\}^* \rightarrow \{0,1\}^*$ defined on bitstrings of arbitrary size. One can construct such a family simply by choosing one function with input size $n$, for each $n$.
+%
+%
+%%We will sometimes abuse notation by stating that $f:\bit{n} \rightarrow \bit{m}$ defines a function family; in that case, it is implicit that $n$ is a parameter that indexes the input size and $m$ is some function of $n$ (usually a polynomial) that indexes the output size. Given a bit string $y$ and, the preimage of $f$ under $y$ is defined by $f^{-1}(y) := \{ x \in \{0,1\}^* : f(x) = y\}$.
+%
+%We will often write ${\rm negl}(\cdot)$ to denote a function  which is ``negligible'' in the sense that it grows at an inverse-superpolynomial rate. More precisely, a function ${\rm negl}:\mathbb{N}\rightarrow\mathbb{R}^{+}\cup \{0\}$ is negligible if for every positive polynomial $p(n)$ there exists a positive integer $n_0$ such that  for all  $n>n_0,$ $${\rm negl}(n) < 1/ p(n).$$   A typical use of negligible functions is to indicate that the probability of success of some algorithm is too small to be amplified to a constant by a feasible (\emph{i.e.}, polynomial) number of repetitions.
+%
+%Given two bit strings $x$ and $y$ of equal length, we denote their bitwise XOR by $x \oplus y$.  Recall that the \emph{classical one-time pad} encrypts a plaintext $x \in \bit{n}$ by XORing it with a uniformly random string (the key) $r \xleftarrow[]{\$} \bit{n}$. Decryption is performed by repeating the operation, \emph{i.e.}, by XORing the key with the ciphertext. Since the uniform distribution on $\bit{n}$ is invariant under XOR by $x$, the ciphertext is uniformly random to parties having no knowledge about~$r$~\cite{Shannon1948}. A significant drawback of the one-time pad is the key length. In order to reduce the key length, one may generate~$r$ pseudorandomly; this key-length reduction requires making computational assumptions about the adversary.
+%We denote a classical computational indistinguishability obfuscation by $i\mathcal{O}$ and  a quantum computational indistinguishability obfuscation by $Qi\mathcal{O}.$
+
+%
+%\begin{definition}{\bf Quantum Secure One-Way Function} {\rm (qOWF )}: A polynomial-time computable function $f:\{0,1\}^*\longrightarrow \{0,1\}^*$ is a quantum secure one-way function  if for every polynomial time quantum adversary $\mathcal{A}.$
+%
+%$$Pr[\mathcal{A}(f(x),1^n)\in f^{-1}(f(x))]\leq negl(n)$$
+%for any  $x\xleftarrow[]{\$}\{0,1\}^n.$  Where $f^{-1}(f(x)=\{x^\prime \in \{0,1\}^*\mid f(x)=f(x^\prime)\}.$
+%\end{definition}
+%
+%\begin{definition}{\bf Quantum Secure Pseudorandom Random Number Generator}  {\rm (qPRNG) } Let G be a deterministic polynomial-time algorithm (in $n$) such that upon any input $s\in\{0,1\}^n,$ algorithm G
+%outputs a string of polynomial length $p{\rm (}n{\rm )}.$ We say that G is a pseudorandom generator if the following two conditions hold:
+%\begin{enumerate}
+%\item For every $n$ it holds that ${p{\rm (}n{\rm )}}>n.$
+%\item For all polynomial-time (in $n$) quantum distinguishers $\mathcal{D}_q$ equipped with a quantum oracle, there exists a negligible function negl such that:
+%\end{enumerate}
+%$$\mid Pr[\mathcal{D}_q(r,1^n)=1]- Pr[\mathcal{D}_q(G(s),1^n))=1] \mid\leq  {\rm negl}(n)$$
+%for every $s\xleftarrow[]{\$}\{0,1\}^n$  and  $r\xleftarrow[]{\$}\{0,1\}^{p{\rm (}n{\rm )}}.$
+%\end{definition}
+%
+%
+%\begin{definition}{\bf Quantum and Classical Secure Pseudorandom Functions} {\rm (PRF \& qPRH)}: A family of functions $F_k:  \{0,1\}^{f(n)} \longrightarrow \{0,1\}^{g(n)}$ indexed by a key $k\in \{0,1\}^{l(n)},$ {\rm (}where $f(n)$, $g(n)$ and $l(n)$ are polynomials in $n${\rm)} is pseudorandom if there exists two polynomial-time algorithms KeyGen and Eval such that
+%
+%\begin{enumerate}
+%\item  {\tt Key Generation:}  $\textsf{KeyGen}(1^n)$ is a probabilistic polynomial-time  algorithm takes a security parameter $1^n$ and outputs a key $k\in \{0,1\}^{l(n)}.$
+%\item  {\tt  Efficiently Computable:}  $\textsf{Eval}(x,k)$ is a deterministic polynomial time algorithm such that for any $x\in\{0,1\}^n$ and $k\leftarrow \textsf{KeyGen}(1^n)$
+%$$\textsf{Eval}(x,k)=F_k(x).$$
+%\item  {\tt  Classical Security:} For all polynomial-time distinguishers $D,$ there exists a negligible function negl such that {\rm :}
+%$$\left| Pr[D^{F_k(\cdot)}(1^n)=1]- Pr[D^{F(\cdot)}(1^n)=1]:  k\leftarrow \textsf{KeyGen}(1^n),\; F\xleftarrow{\$}Func\{f(n),g(n)\} \right| \leq  {\rm negl}(n),$$
+%where $Func\{f(n),g(n)\}$ denote the set of random functions that map $f(n)$ bit strings to $g(n)$ bit strings.\\
+%\item  {\tt Quantum Security:}   For all polynomial-time quantum distinguishers $\mathcal{D}_q$ equipped with a classical oracle, there exists a negligible function negl such that:
+%$$\left| Pr[D^{F_k(\cdot)}(1^n)=1]- Pr[D^{F(\cdot)}(1^n)=1:  k\leftarrow \textsf{KeyGen}(1^n),\; F\xleftarrow{\$}Func\{f(n),g(n)\} \right| \leq  {\rm negl}(n),$$
+%where $Func\{f(n),g(n)\}$ denote the set of random functions that map $f(n)$ bit strings to $g(n)$ bit strings\footnote{The restriction to classical oracles might seem artificial. While one can certainly consider functions with the stronger guarantee of resistance to quantum adversaries with quantum oracle access, stronger functions are not necessary to establish our results.}.\\
+%\end{enumerate}
+%\end{definition}
+%
+%\begin{definition}{\bf Puncturable Pseudorandom Functions} A family of pseudorandom functions $F_k:  \{0,1\}^{f(n)} \longrightarrow \{0,1\}^{g(n)}$ indexed by a key $k\in \{0,1\}^{l(n)}$ are puncturable if there exists
+%two additional algorithms $\textsf{Puncture}_F$ and $\textsf{Eval}_F$ such that {\rm\cite{SW14}}.
+%
+%\begin{enumerate}
+%\item {\tt Functionality Preserved Under Puncturing:} For all PPT  distinguishers $D=(D_1, D_2)$ such that $D_1(1^n)$ outputs a set $S\subset \{0,1\}^{f(n)},$ then for all $x \in \{0,1\}^{f(n)} \wedge x\notin S$
+%$$Pr[\textsf{Eval}_F(k_s,x)=F_k(x): k_s\leftarrow \textsf{Puncture}_F(k, S),\; k\leftarrow \textsf{KeyGen}(1^n)]=1.$$
+%
+%\item {\tt  Classical Security:} For every polynomial-time distinguisher $D=(D_1, D_2)$ there exists a negligible function
+%negl such that  $$Pr[\textsf{PunctPRF}_{D,F}(n)=1]\leq \frac{1}{2}+negl(n)$$
+%
+%where the experiment $\textsf{PunctPRF}_{D,F}(n)$ is defined as follows {\rm:}\\
+%\item[] {\bf The Puncturable PRF indistinguishability experiment} $\textsf{PunctPRF}_{D,F}(n)$
+%\begin{enumerate}
+%\item Challenger {\em C} generate a key $k\leftarrow \textsf{KeyGen}(1^n).$
+%\item $D_1(1^n)$ outputs a set $S\subset \{0,1\}^{f(n)}$ and a state $\sigma$ and sends  $S$ to {\em C}.
+%\item {\em C} computes $k_s\leftarrow \textsf{Puncture}_F(k,S).$ Then picks $i\xleftarrow[]{\$}\{0,1\}$ and outputs a random binary string $y$ Where $y\xleftarrow[]{\$}\{0,1\}^{g(n)|S|}$ if $i=0$ and otherwise $y\leftarrow F_k(s_1)||F_k(s_2)||\cdots ||F_k(s_k),$ where $S =\{s_1,s_2,\cdots, s_k\}$  is the enumeration of the elements of $S$ in lexicographic order.
+%\item $D_2$ receives $(\sigma, S)$ from $D_1$ and $K_s$ from{\em C} and finally $D_2$ output a bit $j.$  (Note with the knowledge of $K_s$ the distinguisher can compute $F_k(x)$ on any input $x\in \{0,1\}^{f(n)}\wedge x\notin S$)\footnote{{\color{red}Anne in this version adversary cannot choose the set $S$ adaptively. We can discuss the other scenario on Wednesday.}}.
+%\item The output of the experiment is defined to be 1, if  $i=j$ and 0 otherwise. We write $\textsf{PunctPRF}_{D,F}(n)=1$ if the output is 1.
+%\end{enumerate}
+%$\bullet$ One possible way to constructs a family of Puncturable PRF is from GGM tree-based construction of pseudorandom functions \cite{KPT+13, BW13, BGI14, SW14}.
+%\end{enumerate}
+%\end{definition}
+
+
+
+%\begin{definition}{\rm({\bf Indistinguishability Obfuscation} $i\mathcal{O}$\rm)}: A probabilistic polynomial-time algorithm (in security parameter $n$) is an indistinguishability obfuscator $i\mathcal{O},$ for a class of circuits ${\mathcal C},$ if it satisfies:
+%\begin{enumerate}
+%\item {\tt Functionality:} For any circuit $C\in {\mathcal C},$ and for all inputs $x$ $$i\mathcal{O}(C,x)=C(x).$$
+%\item {\tt Indistinguishability:} For any two circuits $C_0,C_1\in {\mathcal C},$ of the same size  that compute the same function
+% and for every probabilistic polynomial time adversary $A,$ there exists a negligible function negl such that:
+%
+%					$$\mid Pr[A(i\mathcal{O}(C_0,1^n))=1]-Pr[A(i\mathcal{O}(C_1,1^n))=1] \mid\leq  {\rm negl}(n)$$	
+%				
+%\end{enumerate}										
+%\end{definition}
+
+%\subsection{Indistinguishability Obfuscation against Quantum Adversary}
+%\begin{definition}\label{def:qiO} {\rm({\bf Quantum Secure Indistinguishability Obfuscation} $i\mathcal{O}$)}
+%A probabilistic polynomial-time algorithm  is a quantum indistinguishability obfuscator, for a class of circuits  ${\mathcal C}$ (classical), if the following conditions hold:
+%
+%\begin{enumerate}
+%\item {\tt Functionality:} For any circuit $C\in {\mathcal C},$ and for all inputs $x$ $$i\mathcal{O}(C)(x)=C(x).$$
+%\item  {\tt Polynomial Slowdown:}  For every $C\in \mathcal{C},$ $|i\mathcal{O}(C)|\leq poly(|C|).$
+%\item {\tt Indistinguishability:} For any two circuits $C_0,C_1\in {\mathcal C},$ of the same size  that compute the same function
+% and for every polynomial time quantum distinguisher $\mathcal{D}_q,$  there exists a negligible function {\rm negl} such that:
+%
+%					$$\Big | {\rm Pr}[\mathcal{D}_q(i\mathcal{O}(C_0))=1]-{\rm Pr}[\mathcal{D}_q(i\mathcal{O}(C_1))=1] \Big |\leq  {\rm negl}(k)$$	
+%where $k=|C_0|=|C_1|.$			
+%\end{enumerate}										
+%\end{definition}
+
+
+\begin{definition}\label{def:qiO} {\rm({\bf Quantum Secure Indistinguishability Obfuscation} $i\mathcal{O}$)}
+A probabilistic polynomial-time algorithm is a quantum secure computational indistinguishability obfuscator $i\mathcal{O}$, for a class of circuits ${\mathcal C},$ if the following conditions hold:
+
+\begin{enumerate}
+\item {\tt Functionality:} For any circuit $C\in {\mathcal C},$ and for all inputs $x$ $$i\mathcal{O}(C)(x)=C(x).$$
+\item  {\tt Polynomial Slowdown:}  For every $C\in \mathcal{C},$  $|i\mathcal{O}(C)| \in poly(|C|).$
+\item {\tt Indistinguishability:} For any two circuits $C_0,C_1\in {\mathcal C},$ of the same size  that compute the same function
+ and for every polynomial time quantum distinguisher $\mathcal{D}_q,$  there exists a negligible function {\rm negl} such that:
+
+					$$\Big | {\rm Pr}[\mathcal{D}_q(i\mathcal{O}(C_0))=1]-{\rm Pr}[\mathcal{D}_q(i\mathcal{O}(C_1))=1] \Big |\leq  {\rm negl}(|C_0|).$$			
+\end{enumerate}										
+\end{definition}
+
+
+
+\subsection{Basic Quantum Notions}
+\label{sec:quantum-prelims}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cite{CH05}
+Given an $n$-bit string $x$, the corresponding quantum-computational $n$-qubit basis state is denoted~$\ket{x}$. The $2^n$-dimensional Hilbert space spanned by $n$-qubit basis states is denoted
+$$
+\mathcal{H}_n := \textbf{span} \left\{ \ket{x} : x \in \bit{n} \right\}\,.
+$$
+We denote by $\mathcal{D}(\mathcal{H}_n)$ the set of density operators (i.e., valid quantum states) on~$\mathcal{H}_n$. These are linear operators on $\mathcal{D}(\mathcal{H}_n)$ which are positive-semidefinite and have trace equal to $1$. When considering different physical subsystems, we will denote them with uppercase Latin letters; when a Hilbert space corresponds to a subsystem, we will place the subsystem label in the subscript. For instance, if $F \cup G \cup H = [n]$ then $\mathcal{H}_n = \mathcal{H}_F \otimes \mathcal{H}_G \otimes \mathcal{H}_H.$ Sometimes we will write explicitly the subsystems a state belongs to as subscripts; this will be useful when considering, \emph{e.g.}, the reduced state on some of the subspaces. For example, we will sometimes express the statement $\rho \in \mathcal{D}(\mathcal{H}_F \otimes \mathcal{H}_G \otimes \mathcal{H}_H)$ simply by calling the state $\rho_{FGH}$; in that case, the state obtained by tracing out the subsystem~$H$ will be denoted~$\rho_{FG}$.
+
+
+Given $\rho, \sigma \in \mathcal{D}(\mathcal{H})$, the trace distance between $\rho$ and $\sigma$ is given by half the trace norm $\|\rho - \sigma\|_1$ of their difference. When $\rho$ and $\sigma$ are classical probability distributions, the trace distance reduces to the total variation distance. Physically realizable maps from a state space $\mathcal{D}(\mathcal{H})$ to another state space $\mathcal{D}(\mathcal{H}')$ are called \emph{admissible}---these are the completely positive trace-preserving (CPTP) maps. For the purpose of distinguishability via input/output operations, the appropriate norm for CPTP maps is the diamond norm, denoted $\|\cdot\|_\diamond$. The set of admissible maps coincides with the set of all maps realizable by composing (i.) addition of ancillas, (ii.) unitary evolutions, (iii.) measurements in the computational basis, and (iv.) tracing out subspaces. We remark that unitaries $U \in U(\mathcal{H}_n)$ act on $\mathcal{D}(\mathcal{H}_n)$ by conjugation: $\rho \mapsto U \rho U^\dagger$. The identity operator~$\mathds{1}_n \in U(\mathcal{H}_n)$ is thus both a valid map, and (when normalized by $2^{-n}$) a valid state in $\mathcal{D}(\mathcal{H}_n)$---corresponding to the classical uniform distribution.
+
+
+\section*{Quantum Gates}
+Recall  the single-qubit Pauli operators  defined as:
+$$
+\igate = \left[\begin{array}{cc} 1 & 0\\ 0 & 1\end{array}\right]\,,
+\qquad
+\xgate = \left[\begin{array}{cc} 0 & 1\\ 1 & 0\end{array}\right]\,,
+\qquad
+\ygate = \left[\begin{array}{cc} 0 & -i\\ -i & 0\end{array}\right]\,\,,
+\qquad
+\zgate = \left[\begin{array}{cc} 1 & 0\\ 0 & -1\end{array}\right]\,.
+$$
+The Pauli operators are Hermitian and unitary quantum gates, i.e.\ $P^\dag=P$ and $P^\dag P=P P^\dag = P^2 = I$ for all $P \in \{\igate, \xgate, \ygate, \zgate\}$. It is easy to check that applying a uniformly random Pauli operator to any single-qubit density operator results in the maximally mixed state:
+$$
+\frac{1}{4}\left(\rho +  \xgate\rho  \xgate + \ygate\rho \ygate + \zgate\rho \zgate \right) = \frac{\mathds{1}_1}{2}
+\qquad
+\text{for all }
+\rho \in \mathcal{D} (\mathcal{H}_1)\,.
+$$
+
+Since the Pauli operators are self-adjoint, we may implement the above map by choosing two bits $s$ and $t$ uniformly at random and then applying
+$$
+\rho \mapsto \xgate^s \zgate^t \rho \zgate^t \xgate^s\,.
+$$
+To observers with no knowledge of $s$ and $t$, the resulting state is information-theoretically indistinguishable from $\mathds{1}_1/2$. Of course, if we know $s$ and $t$, we can invert the above map and recover $\rho$ completely.
+
+
+The above map can be straightforwardly extended to the $n$-qubit case in order to obtain an elementary {\em quantum encryption scheme} called the {\em quantum one-time pad}.
+We first set $\xgate_j = \mathds{1}^{\otimes j-1} \otimes \xgate \otimes \mathds{1}^{\otimes n-j}$ and likewise for $\ygate_j$ and $\zgate_j$. We define the $n$-qubit Pauli group $\mathcal P_n$ to be the subgroup of $\operatorname{SU}(\mathcal{H}_n)$ generated by $\{\xgate_j, \ygate_j, \zgate_j : j = 1, \dots, n \}$. Note that Hermiticity is inherited from the single-qubit case, i.e.\ $P^\dag = P$ for every $P \in \mathcal{P}_n$.
+
+
+
+%\begin{definition}\label{def:qotp}
+%{\bf (quantum one-time pad)}
+%For $r \in \bit{2n}$, we define the {\em quantum one-time pad (QOTP)} on $n$ qubits with classical key $r$ to be the map:
+%$$
+%P_r := \prod_{j=1}^{n} \xgate_{j}^{r_{2j-1}} \zgate_{j}^{r_{2j}} \in \mathcal{P}_n.
+%$$
+%\end{definition}
+%The effect of $P_r$ on any quantum state $\rho \in \mathcal{D}(\mathcal{H}_n)$ is simply
+%$$
+%\frac{1}{2^{2n}}\sum_{r \in \bit{2n}} P_r \rho P_r = \frac{\mathds{1}_n}{2^n}\,.
+%$$
+%As before, the map $\rho \mapsto P_r \rho P_r$ (for uniformly random key $r$) is an information-theoretically secure symmetric-key encryption scheme for quantum states.
+%
+%
+%Just as in the classical case~\cite{Shannon1948}, any reduction in key length is not possible without compromising information-theoretic security~\cite{AMTW00, BR2003}. Of course, in practice the key length of the one-time pad (quantumly or classically) is highly impractical. This is a crucial reason to consider---as we do in this work---encryption schemes which are secure only against computationally bounded adversaries.\\
+
+
+
+\begin{definition}
+\label{defn:Clifford+T:family}
+ \noindent{\bf Clifford Group}: The set of gates $\{\xgate, \zgate, \pgate, \cnot,\hgate\}$ applied to arbitrary wires (redundantly) generates the Clifford group, where
+$$\xgate = \left[\begin{array}{cc} 0 & 1\\ 1 & 0\end{array}\right],
+\quad\zgate = \left[\begin{array}{cc} 1 & 0\\ 0 & -1\end{array}\right],
+\quad\pgate = \left[\begin{array}{cc} 1 & 0\\ 0 & i\end{array}\right],
+ \quad\hgate = \frac{1}{\sqrt{2}}\left[\begin{array}{cc}1 & 1\\1 & -1\end{array}\right], \quad\mbox{and}
+\quad\cnot = \left[\begin{array}{cccc} 1 & 0 & 0 & 0\\ 0 & 1 & 0 & 0\\ 0 & 0 & 0 & 1\\ 0 & 0 & 1 & 0\end{array}\right].$$
+\end{definition}
+We note the following relations between these gates:
+$$\xgate\zgate = - \zgate\xgate,\quad \tgate^2=\pgate,\quad\pgate^2=\zgate,\quad\hgate\xgate\hgate=\zgate,\quad \tgate\pgate=\pgate\tgate,\quad\pgate\zgate=\zgate\pgate.$$
+Also, for any $a,b\in\{0,1\}$ we have
+$\hgate\xgate^b\zgate^a=\xgate^a\zgate^b \hgate$
+
+\section*{Quantum Circuits and Algorithm}
+For $n\in \mathbb{N},$ the set of all $n\times n$ unitary matrix is denoted by $O(n,\mathbb{C})=\{U\in \mathbb{C}^{n\times n} \mid U\cdot U^\dagger={\bf I}\}.$ We say a quantum circuit $C_q$ computes $U\in O(n,\mathbb{C})$ if for every quantum state $\ket{\psi} \in \mathit{Qubit}(n),$
+$$U(\ket{\psi} )=C_q(\ket{\psi}),$$
+where  $\mathit{Qubit}(n)$  denote the set of all $n$-qubit states.
+
+A quantum circuit that computes unitary matrix is called a reversible  quantum circuit, i.e it always possible to uniquely recover the input, given the output. A set of gates are said to be universal if, for any a unitary matrix $U$  a quantum circuit can be constructed for computing $U$ using only gates from that set. It is a well known fact that Clifford gates are not universal, but adding any non-Clifford gate, such as $\tgate$, gives a universal set of gates. The
+$$\quad\tgate = \left[\begin{array}{cc} 1 & 0\\ 0 & e^{i\pi/4}\end{array}\right],$$
+
+A family of quantum circuit $C=\{C_n\in \mathbb{N} \mid \}$ one for each input  size $n\in \mathbb{N}$ is called uniform if there exists a deterministic Turing machine $M,$ such that 
+ \begin{itemize}
+ \item For each $n\in\mathbb{N},$ $M$ outputs a description of $C_n \in \mathcal{F}$ on input $1^n.$
+ \item  For each $n\in\mathbb{N},$ $M$ runs in $poly(n).$
+ \end{itemize}
+
+All quantum operations are not unitary (reversible), nevertheless a general (possibly irreversible) quantum operation also called superoperator can efficiently simulated by a reversible quantum operations by adding ancilla states to the original system, then perform a unitary operation on the joint system, and then tracing out $Tr$ some subsystem \cite{}. More precisely, this can be described as the map: 
+
+$$\rho_{in} \xmapsto{\mbox{superoperator}} \rho_{out}=Tr_B(U(\rho_{in} \otimes \ket{00\cdots 0} \bra{00\cdots 0})U^\dagger)$$
+
+where $\rho_{in} \in \mathcal{H}_n,$ is the original state and $\ket{00\cdots 0}$ is an ancilla state of dimension at most $n^2.$ A circuit that computes a general quantum operation is called a general quantum circuit.  Therefore, general quantum circuit can refer to both reversible or irreversible circuits. A polynomial-time quantum algorithm is a uniform family of general quantum circuits. \\
+
+\noindent {\em Remark}: From now we use the term  quantum circuits to refer to reversible quantum circuits only and the term quantum algorithm is reserved for some family of general quantum circuits.
+
+
+\subsection{Correction and Update Functions for Clifford Circuits}
+\label{correction function}
+For any Clifford gate $U\in \{\xgate, \zgate, \pgate, \cnot,\hgate\}$ we define a correction function $f_U$ that relates  $U$ and the Pauli's $ \xgate$ and $ \zgate$ matrices in the following manner.
+$$\xgate(\xgate^b\zgate^a)=(-1)^a(\xgate^{b}\zgate^{a}) \xgate,\quad \mbox{ where }f_\hgate(a,b)=(a,b), \mbox{ for any } a, b\in\{0,1\}.$$
+$$\zgate(\xgate^b\zgate^a)=(-1)^b(\xgate^{b}\zgate^{a}) \zgate,\quad \mbox{ where }f_\hgate(a,b)=(a,b), \mbox{ for any } a, b\in\{0,1\}.$$
+$$\hgate(\xgate^b\zgate^a)=(\xgate^{a}\zgate^{b}) \hgate,\quad \mbox{ where }f_\hgate(a,b)=(b,a), \mbox{ for any } a, b\in\{0,1\}.$$
+$$ \pgate(\xgate^b\zgate^a)=((-i)^b\xgate^a\zgate^{a\oplus b}) \pgate, \quad \mbox{ where }f_ \pgate(a,b)=(a,a\oplus b), \mbox{ for any } a, b\in\{0,1\}.$$
+$$\cnot (\xgate^{b_1}\zgate^{a_1} \otimes \xgate^{b_2}\zgate^{a_2})=({\xgate^{b_1} {\zgate^{a_1\oplus a_2}}} \otimes {\xgate^{b_1\oplus b_2}}\zgate^{a_2})\cnot, \mbox{ where } f_{\cnot}(a_1,b_1,a_2,b_2)=(a_1\oplus a_2,b_1,a_2, b_1\oplus b_2).$$
+
+Similarly for any $n$-qubit Clifford Circuit\footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group.} $\mathcal{C}_q$ we define an update function $F_{c_q}:\, \mathbb{F}_2^n \rightarrow  \mathbb{F}_2^n$, that relates $\mathcal{C}_q$ and a unitary $(  \xgate^{\otimes_{i=1}^{n} b_{i}} \cdot  \zgate^{\otimes_{i=1}^{n} a_{i}})$ in the following manner,
+$$(  \xgate^{\otimes_{i=1}^{n} b_{i}} \cdot  \zgate^{\otimes_{i=1}^{n} a_{i}})\mathcal{C}_q=\mathcal{C}_q (  \xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot  \xgate^{\otimes_{i=1}^{n} a_{i}^\prime})$$
+where $a_i,b_i,a_i^\prime,b_i^\prime \in\{0,1\}$ for all integers  $1\leq i\leq n$ and  $F_{c_q}(a_1,b_1,a_2,b_2, \ldots a_n,b_n)=(a_1^\prime,b_1^\prime, \ldots, a_n^\prime,b_n^\prime).$ The update function $F_{c_q}$ is computed by the composition of the correction functions of the gates in the circuit $\mathcal{C}_q.$ For example consider a 2 qubit circuit Let $C_q=({\rm (I \otimes \hgate)\cdot (\cnot)}.$ The update function for this circuit is computed by first applying the $f_\hgate$ to the first two input bits and then $f_{\cnot}$ to all four bits.
+
+$$F_{C_q}=f_{\rm CNOT}\circ f_{\rm H}(a_1,b_1, a_2,b_2)= f_{\rm CNOT}(b_1,a_1,a_2,b_2)=(b_1\oplus a_2,a_1,a_2, a_1\oplus b_2).$$
+And we have $$( \xgate^{b_1} \otimes  \xgate^{b_2}) ( \zgate^{a_1} \otimes  \zgate^{a_2})C_q=C_q( \xgate^{a_1} \otimes  \xgate^{a_1\oplus b_2}) ( \zgate^{b_1\oplus a_2} \otimes  \zgate^{a_2}).$$
+
+\section*{Bell Basis}
+We denote the four Bell states as $\ket{\beta_{00}},$  $\ket{\beta_{01}},$ $\ket{\beta_{10}}$ and $\ket{\beta_{11}}.$
+$$\ket{\beta_{00}}=\frac{1}{\sqrt2}\left(\ket{00}+\ket{11}\right) \hspace{1cm}  \ket{\beta_{01}}=\frac{1}{\sqrt2}\left(\ket{01}+\ket{10}\right)$$ 
+$$\ket{\beta_{10}}=\frac{1}{\sqrt2}\left(\ket{00}-\ket{11}\right) \hspace{1cm} \ket{\beta_{11}}=\frac{1}{\sqrt2}\left(\ket{01}-\ket{10}\right)$$
+
+\subsection{Gate Teleportation}
+\label{protocol: gate  teleportation}
+Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate, \cnot,\hgate\}$ on some qubit $\ket{\psi}.$ Then using gate teleportation we can compute $U (\ket{\psi})$ as follows.
+\begin{algorithm}[H]
+\caption{Gate Teleportation Protocol for Clifford Gates.}
+\begin{enumerate}
+\item  Prepare a $2$ qubit Bell state $\ket{\beta_{00}}=\frac{\ket{00}+\ket{11})}{\sqrt{2}}.$
+\item Write the joint system as
+ \begin{equation}
+\ket{\psi} \ket{\beta_{00}}=\frac{1}{2}\ket{\beta_{00}} \ket{\psi}+ \frac{1}{2}\ket{\beta_{01}}( \xgate( \ket{\psi}) + \frac{1}{2}\ket{\beta_{10}}( \zgate( \ket{\psi})+ \frac{1}{2}\ket{\beta_{11}}( \xgate \zgate( \ket{\psi}).
+\end{equation}
+ Where $\beta_{ij},$  denotes the 2 qubit Bell basis.
+\item Apply the Clifford gate $U$ on the second qubit of the Bell state of the system 1.
+ \begin{equation}
+\mathbb{I}\otimes \mathbb{I} \otimes U (\ket{\psi} \ket{\beta_{00}})=\frac{1}{2}\ket{\beta_{00}} U(\ket{\psi})+ \frac{1}{2}\ket{\beta_{01}}U( \xgate( \ket{\psi}) + \frac{1}{2}\ket{\beta_{10}}U( \zgate( \ket{\psi})+ \frac{1}{2}\ket{\beta_{11}}U( \xgate \zgate( \ket{\psi}).
+ \end{equation}
+ \item Measure the first two qubits of the system 2 in the Bell basis and obtain the classical bits $(a,b).$ The system now in the state 
+ \begin{equation}
+							\ket{\beta_{ab}}\otimes U( \xgate^b \zgate^a( \ket{\psi})).
+\end{equation}
+\item Compute the correction function $f_U(a,b)=(a^\prime,b^\prime)$ associated with the gate $U.$ (section \ref{correction function}).
+\item Apply the correction unitary $ \zgate^{a^\prime}  \xgate^{b^\prime}$ to the last qubit of the system 3 
+
+$$\mathbb{I}\otimes \mathbb{I}\otimes  \zgate^{a^\prime}  \xgate^{b^\prime} \left(\ket{\beta_{ab}}\otimes U( \xgate^b \zgate^a( \ket{\psi}))\right)= \ket{\beta_{ab}}\otimes  \zgate^{a^\prime}  \xgate^{b^\prime}\left(U( \xgate^b \zgate^a( \ket{\phi}))\right)$$
+$$= \ket{\beta_{ab}}\otimes  \zgate^{a^\prime}  \xgate^{b^\prime} \left(\xgate^{b^\prime} \zgate^{a^\prime} U( \ket{\psi})\right)=\ket{\beta_{ab}}\otimes U( \ket{\psi})$$
+\item Trace out the state $\ket{\beta_{ab}}$ from the above system and obtained the state $U( \ket{\psi})$
+$$U( \ket{\psi})=Tr_{\ket{\beta_{ab}}}\left( \ket{\beta_{ab}}\otimes U(\ket{\psi})\right)$$
+
+\end{enumerate}	
+\end{algorithm}	
+
+
+\begin{remark}
+Using gate teleportation we can also evaluate a  $\tgate,$ however, the correction function becomes more complicated.
+						$$\tgate \xgate^b \zgate^a= \xgate^b \zgate^{a\oplus b} \pgate^b \tgate$$
+\end{remark}				
+%\item Compute $f(a,b)=a^\prime b^\prime$ where  $f:\{0,1\}^2\rightarrow \{0,1\}^2$ denote the correction function
+%\begin{center}
+%$f(0,0)=(0,0)$\\
+%$f(0,1)=(0,1)$\\
+%$f(1,0)=(0,1)$\\
+%$f(1,1)=(0,1)$
+%\end{center}
+%\item Apply $ \zgate^{a^\prime} \xgate^{b^\prime}(U( \xgate^b \zgate^a( \ket{\phi})_C)=U (\ket{\phi})_C.$					
+
+
+
+%\subsection{Quantum Symmetric-Key Encryption}
+%\label{sec:quantum-prelims}
+%\noindent A quantum symmetric-key encryption scheme (or qSKE) is a triple of Quantum polynomial time algorithms.
+%
+%A {\em quantum symmetric-key encryption scheme (or qSKE)} is a triple of QPTs:
+%\begin{enumerate}
+%\item (Key generation) ${\bf KeyGen}: 1^n \mapsto k \in \mathcal{K}.$
+%\item (Encryption) ${\bf Enc}: \mathcal{K}\times \mathcal{D}(\mathcal{H}_M) \mapsto \mathcal{D}(\mathcal{H}_C).$
+%\item (Decryption)  ${\bf Dec} : \mathcal{K}\times \mathcal{D}(\mathcal{H}_C) \mapsto \mathcal{D}(\mathcal{H}_M).$\\
+%Such that $\|  {\bf Dec}_k \circ   {\bf Enc}_k - \mathbb{I}_M\|_\diamond\leq negl(n)$ for all $k \leftarrow {\bf KeyGen}(1^n).$
+%\end{enumerate}
+%
+%
+%
+%
+%Next, we define a notion of {\em public-key encryption for quantum data}. In addition to the usual spaces from the symmetric-key setting above, we now also have a public key of length $p(n) \leq $ poly$(n)$ bits. We define the related public-key space as $\mathcal{K}_{pub} \subset \bit{p}$ and reuse $\mathcal{K}$ for the corresponding private-key space.
+%
+%\begin{definition}\label{def:PKE}
+%A {\em quantum public-key encryption scheme (or qPKE)} is a triple of QPTs:
+%\begin{enumerate}
+%\item (key-pair generation) ${\bf KeyGen}: 1^n \mapsto (pk,sk) \in \mathcal{K}_{pub}  \times \mathcal{K}$
+%\item (encryption with public key) $ {\bf Enc}: \mathcal{K}_{pub}  \times \mathcal{D}(\mathcal{H}_M) \rightarrow \mathcal{D}(\mathcal{H}_C)$
+%\item (decryption with private key) ${\bf Dec}: \mathcal{K} \times \mathcal{D}(\mathcal{H}_C) \rightarrow \mathcal{D}(\mathcal{H}_M).$
+%\end{enumerate}
+%such that $\|  {\bf Dec}_{sk} \circ {\bf Enc}_{pk} -\mathbb{I}_M \|_\diamond \leq negl(n)$
+%for all $(pk, sk)  \leftarrow {\bf KeyGen}(1^n).$
+%\end{definition}
+

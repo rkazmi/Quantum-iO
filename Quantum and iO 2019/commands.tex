@@ -1,0 +1,106 @@
+\newcommand{\Anne}[1]{{\color{red}\sc note}\footnote{\color{red} \underline{{\sc anne}:} #1}}
+\newcommand{\Raza}[1]{{\color{red}\sc note}\footnote{\color{red} \underline{{\sc gus}:} #1}}
+\newcommand{\bit}[1]{\{0,1\}^{#1}}
+
+
+\newboolean{ElectronicVersion}
+\setboolean{ElectronicVersion}{true}
+
+\ifthenelse{\boolean{ElectronicVersion}}{
+    \usepackage[letterpaper=true,pdftex,bookmarks,pagebackref,
+	plainpages=false, % Needed if Roman numbers in frontpages
+        pdfpagelabels=true % Adds page number as label in Acrobat's page count
+        ]{hyperref}}{}
+
+%\makeatletter
+%\newtheorem*{rep@theorem}{\rep@title}
+%\newcommand{\newreptheorem}[2]{%
+%\newenvironment{rep#1}[1]{%
+% \def\rep@title{#2 \ref*{##1}}%
+% \begin{rep@theorem}}%
+% {\end{rep@theorem}}}
+%\makeatother
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+%\newreptheorem{theorem}{Theorem}
+\newtheorem{goal}{Research Goal}[section]
+
+
+% highlight
+\newcommand{\hlight}[1]{\ \\ \fcolorbox{black}{white}{\begin{minipage}{6.5in}{\color{black} #1}\end{minipage}} \\}
+
+% pretty TODOs
+\definecolor{darkgreen}{rgb}{0,.5,0}
+\newcommand{\TODO}[1]{\ \\ \fcolorbox{darkgreen}{white}{\begin{minipage}{6in}{\color{darkgreen}{\underline{\textbf{TODO:}}} #1}\end{minipage}} \\}
+
+\renewenvironment{proof}{\setlength{\parindent}{\parindent}\def\FrameCommand{{\color{black}\vrule\hspace{3pt}}}\MakeFramed {\noindent\emph{Proof.}}{}}
+{\qed\endMakeFramed} %left barred proofs
+
+%%% Environment for schemes
+\newcommand{\scheme}[2]{\begin{minipage}{6in}
+\hrule
+\vspace{2pt}
+#1
+\vspace{2pt}
+\hrule
+#2
+\hrule
+\end{minipage}}
+
+
+\def\ket#1{{\lvert}#1\rangle}
+\def\bra#1{{\langle}#1\rvert}
+\def\braket#1#2{{{\langle}#1\vert}#2\rangle}
+\def\abs#1{\left| #1 \right|}
+\def\ceil#1{{\lceil}#1\rceil}
+\def\floor#1{{\lfloor}#1\rfloor}
+\def\norm#1{\left\| #1 \right\|}
+\DeclareMathOperator{\Tr}{Tr}
+\def\span{\mbox{span}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\E}{E}
+\def\cost#1{\mathfrak{#1}}
+\def\a{f_A}
+\def\b{f_B}
+\newcommand{\eps}{\varepsilon}
+\def\O{\mathrm{O}}
+\def\tO{\widetilde{\mathrm{O}}}
+\def\set#1{\mathcal{#1}}
+\renewcommand{\th}[1]{${#1}^{\textrm{th}}$}
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\newcommand{\defeq}{\colonequals}
+\newcommand{\BSR}{\mathbb{B}}
+\def\m{m}
+
+\newcommand{\sA}{{\sf A}}
+\newcommand{\sB}{{\sf B}}
+\newcommand{\sR}{{\sf R}}
+\newcommand{\cA}{{\mathcal{A}}}
+\newcommand{\cB}{{\mathcal{B}}}
+
+
+\newcommand{\igate}{{\sf I}}
+\newcommand{\hgate}{{\sf H}}
+\newcommand{\pgate}{{\sf P}}
+\newcommand{\tgate}{{\sf T}}
+\newcommand{\xgate}{{\sf X}}
+\newcommand{\ygate}{{\sf Y}}
+\newcommand{\zgate}{{\sf Z}}
+\newcommand{\cnot}{{\sf CNOT}}
+\newcommand{\cEnc}{{\mathsf{Enc}}^{\mathsf c}}
+\newcommand{\cDec}{{\mathsf{Dec}}^{\mathsf c}}
+\newcommand{\cEval}{{\mathsf{Eval}}^{\mathsf c}}
+\newcommand{\cKeyGen}{{\mathsf{KeyGen}}^{\mathsf c}}
+\newcommand{\cek}{ek^{\mathsf{c}}}
+%\mathbb{N}ewcommand{\csk}{sk^{\mathsf{c}}} 

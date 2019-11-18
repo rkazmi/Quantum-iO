@@ -1,0 +1,176 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Section
+\section{Quantum Public-Key Encryption from iO}
+\label{sec:Quantum-public-key}
+Here, \emph{quantum public-key encryption} refers to the  encryption of a quantum register using a classical public key, see Section~\ref{sec:prelim-quantum-PKE} for related definitions.
+
+
+\subsection{Obfuscation-based Scheme}
+The scheme is based on an idea for ``classical public-key encryption based from indistinguishability obfuscation'' see~\cite{SW14}.
+\label{sec:obfuscation}
+\begin{itemize}
+\item Common Parameters:
+\begin{enumerate}
+\item Let  ${\rm G}: \{0,1\}^n\rightarrow \{0,1\}^{2n}$ be a quantum secure pseudorandom number generator.
+\item Let  $F_k:\{0,1\}^{2n} \times \{0,1\}^{2n} \longrightarrow \{0,1\}^{2n}$ be a quantum secure puncturable pseudorandom function.
+\item Let $qi\mathcal{O}$ be a quantum secure classical indistinguishability obfuscation
+\item Plaintext space  $\mathcal{D}(\mathcal{H}_{M}),$ where $M=2n$ and Ciphertext space $\mathcal{H}_C=\mathcal{D}(\mathcal{H}_{M})\otimes \mathcal{D}(\mathcal{H}_{M}).$
+\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+\item ${\rm KeyGen}(1^n)$
+\begin{enumerate}
+\item  Pick a random key $k\rightarrow \{0,1\}^{2n}$ and set $k$ as the puncturable qPRF key.
+\item Construct  program $P_k(s)$ that takes an $n$ bit string as an input and the key $k$ is hardcoded in $P_k.$
+\begin{itemize}
+\item[] $P_k(s) \{$
+\begin{itemize}
+\item[] $r\leftarrow {\rm G}(s)$
+\item[] $y \leftarrow F_k(r)$
+\item[] return $(r,y).$
+\end{itemize}
+\item[] \}
+\end{itemize}
+\item Set public key $pk=qi\mathcal{O}(P_k,1^n)$ and the secret key $sk=k.$
+\item Output $(pk,sk).$
+\end{enumerate}
+\end{itemize}
+
+
+\begin{itemize}
+\item ${\rm Enc}(qi\mathcal{O}(P_k,1^n), \rho):$
+\begin{enumerate}
+\item Pick a random string $s\rightarrow \{0,1\}^n.$
+\item Set $(y,r)=qi\mathcal{O}(P_k,1^n)(s).$
+\item  Output the ciphertext $\ket{r}\bra{r} \otimes P_y \rho P_y.$
+\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+\item ${\rm Dec}(k, \sigma):$
+\begin{enumerate}
+\item Measure the first $2n$ qubits in the computational basis to obtain $r^\prime \in \{0,1\}^n.$
+\item Compute $y^\prime=F_k(r^\prime).$
+\item Output the plaintext $P_{y^\prime}\sigma P_{y^\prime}.$
+\end{enumerate}
+\end{itemize}
+
+\begin{theorem}
+If $G$ is a quantum secure qPRNG, $F_k$ is a quantum secure puncturable qPRF  and $qi\mathcal{O}$ is quantum secure classical obfuscator, then Scheme \ref{sec:obfuscation} is an IND-CPA secure
+ quantum public key encryption scheme.
+\end{theorem}
+
+\noindent{\bf Proof}. Our proof is consists of a sequence of hybrid experiments where the first hybrid corresponds to the
+IND-CPA experiment, in which a challenger{\em C} interacts with a polynomial-time adversary $\mathcal{A}=(\mathcal{A}_1, \mathcal{A}_2).$ We prove that adversaries's advantage must be the negligibly close between each successive hybrid and that the adversary has zero advantage in the last experiment. Hence, concluding that for any polynomial-time adversary the advantage of winning IND-CPA  experiment is at most negligible.
+
+\begin{itemize}
+\item ${\bf Hybrid_0}$
+\begin{enumerate}
+\item {\em C} generates pair of secret/ public keys $(k, qi\mathcal{O}(P_k)) \leftarrow{\rm KeyGen}(1^n).$
+\item $\mathcal{A}_1$ obtained the public-key $qi\mathcal{O}(P_k)$ from {\em C}
+\item $\mathcal{A}_1$ outputs a quantum state  $\rho_{ME}$ on  $\mathcal{D}(\mathcal{H}_{2n}) \otimes \mathcal{E}.$
+\item {\em C} computes $c_0={\rm Enc}(pk,\ket{0}\bra{0}_\mathcal{M}), c_1={\rm Enc}(pk,\rho_M),$ $r^* \xleftarrow[]{\$} \bit{}$ and outputs $c_i=\ket{r}\bra{r} \otimes P_y \rho P_y,$ where $\rho=\ket{0}\bra{0}_\mathcal{M}$ if $i=0$ and  $\rho=\rho_M$ otherwise.
+\item  $\mathcal{A}_2$ obtains the challenge ciphertext $\ket{r}\bra{r} \otimes P_y \rho P_y$ from{\em C} and $\rho_E$ from $\mathcal{A}_1.$
+\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+\item${\bf Hybrid_1} \hspace{-0.12cm}:$ This hybrid is similar to $\mbox{Hybrid}_0$ except the ciphertext is given as $\ket{r^*}\bra{r^*} \otimes P_{f_k(r^*)} \rho P_{f_k(r^*)},$ where $r^* \xleftarrow[]{\$} \bit{2n}.$
+\begin{enumerate}
+\item {\em C} generates pair of secret/public keys $(k, qi\mathcal{O}(P_k)) \leftarrow{\rm KeyGen}(1^n).$
+\item $\mathcal{A}_1$ obtained the public-key $qi\mathcal{O}(P_k)$ from{\em C}
+\item $\mathcal{A}_1$ picks a quantum state  $\rho_{ME}$ on  $\mathcal{D}(\mathcal{H}_{2n}) \otimes \mathcal{E}$ and outputs $\rho_{M}.$
+\item{\em C} picks $r^* \xleftarrow[]{\$} \bit{n},\, i \xleftarrow[]{\$} \bit{}$  and output the ciphertext $\ket{r^*}\bra{r^*} \otimes P_{f_k(r^*)} \rho P_{f_k(r^*)},$ where $\rho=\ket{0}\bra{0}_\mathcal{M}$ if $i=0$ and  $\rho=\rho_M$ otherwise.
+\item  $\mathcal{A}_2$ obtains the challenge ciphertext $\ket{r^*}\bra{r^*} \otimes P_{f_k(r^*)} \rho P_{f_k(r^*)}$ from{\em C} and $\rho_E$ from $\mathcal{A}_1.$
+\end{enumerate}
+\end{itemize}
+
+
+
+\begin{itemize}
+\item ${\bf Hybrid_2}:$ In this hybrid we replace the public key in hybrid 1 by the obfuscation of the program $P_{k\{r^*\}}$ (define below).
+\begin{enumerate}
+\item{\em C} picks a random key $k\rightarrow \{0,1\}^{2n}$ and constructs a program $P_{k\{r^*\}}.$
+\begin{itemize}
+\item[] $P_{k\{r^*\}}(s) \{$
+\begin{itemize}
+\item[] $r\leftarrow {\rm G}(s)$
+\item[] $y \leftarrow \textsf{Eval}_F(k\{r^*\},r)$
+\item[] return $(r,\textsf{Eval}_F(k\{r^*\}).$
+\end{itemize}
+\item[] \}
+\end{itemize}
+ \item Set the secret key $sk=k$ and the public key $pk^*=qi\mathcal{O}(P_{k\{r^*\}},1^n).$
+ \item  $\mathcal{A}_1$ obtains $pk$ from{\em C} and outputs a quantum state  $\rho_{ME}$ on $\mathcal{D}(\mathcal{H}_{2n}) \otimes \mathcal{E}.$
+ \item {\em C} picks $s\xleftarrow[]{\$} \bit{2n}$ and obtain $(r,y)= qi\mathcal{O}(P_{k\{r^*\}},1^n)(s).$
+ \item{\em C} picks $r^* \xleftarrow[]{\$} \bit{n},\, i \xleftarrow[]{\$} \bit{}$ and output the ciphertext $c_i=\ket{r^*}\bra{r^*} \otimes P_y \rho P_y,$ where $\rho=\ket{0}\bra{0}_\mathcal{M}$ if $i=0$ and  $\rho=\rho_M$ otherwise.
+\item  $\mathcal{A}_2$ obtains the challenge ciphertext $\ket{r^*}\bra{r^*} \otimes P_y \rho P_y$ from{\em C} and $\rho_E$ from $\mathcal{A}_1.$
+\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+\item ${\bf Hybrid_3}\hspace{-0.09cm}:$ This hybrid is similar to $\mbox{Hybrid}_2$ except the ciphertext is given as $\ket{r^*}\bra{r^*} \otimes P_{y^*} \rho P_{y^*}.$ Where $y^* \xleftarrow[]{\$} \bit{2n}.$
+\end{itemize}
+
+\begin{itemize}
+\item ${\bf Hybrid_0}$ and ${\bf Hybrid_1}\hspace{-0.09cm}:$ If there is a polynomial-time quantum adversary can distinguish between the two hybirds, then there exists a  polynomial-time quantum adversary that can break the security of PRNG. Suppose $\mathcal{A}$ on input  $\ket{G(s)}\bra{G(s)} \otimes P_{G(s)} \rho P_{G(s)}$  outputs 0 and on input $\ket{r^*}\bra{r^*} \otimes P_{f_k(r^*)} \rho P_{f_k(r^*)}$  outputs 1 with non-negligible advantage, then we construct polynomial-time quantum adversary $\mathcal{B}$ that can break the security of PRNG G.
+
+ \begin{enumerate}
+\item $\mathcal{B}$ runs the PRNG experiment and obtain a challenge $z.$
+\item $\mathcal{B}$ then runs  $\mbox{Hybrid}_0$ and obtain the plaintext $\rho_M.$
+\item $\mathcal{B}$ picks a random bit $i \xleftarrow[]{\$} \bit{}$ and sets the ciphertext $c_i=\ket{z}\bra{z} \otimes P_z \rho P_z,$ where $\rho=\ket{0}\bra{0}_\mathcal{M}$ if $i=0$ and  $\rho=\rho_M$ otherwise.
+\item  $\mathcal{B}$ runs $\mathcal{A}$ on the input $c_i.$ If $\mathcal{A}$ outputs bit $j,$ then $\mathcal{B}$ outputs $j.$ Note $j=0$ corresponds to ${\bf Hybrid_o}$ which means $z$ is the output of PRNG and $j=1$ corresponds to ${\bf Hybrid_1}$ which means $z$ is randomly picked. Therefore, if $\mathcal{A}$ exist then we can construct $\mathcal{B}$ breaks the security of Puncturable PRF with non-negligible advantage.
+\end{enumerate}
+\end{itemize}
+
+
+
+
+\begin{itemize}
+\item ${\bf Hybrid_1}$ and ${\bf Hybrid_2}\hspace{-0.09cm}:$ In both of these hydrids $r^*$ is picked randomly. All we have to show that  $P_{k\{r^*\}}$ and $P_{k}$ have same functionality. Note if $r^*\notin \{G(s) \mid s\in \{0,1\}^n\}$ then both $P_{k\{r^*\}}$ and $P_{k}$ will have the same functionality. When $r^*$ is picked randomly from $\bit{2n}$ then with probability $\frac{1}{2^n},$  $r^*\in \{G(s) \mid s\in \{0,1\}^n\}$ is $1-\frac{1}{2^n}.$ Therefore with overwhelming probability both programs will have same functionality. We can apply apply iO security to conclude that $qi\mathcal{O}(P_k,1^n)$ and $qi\mathcal{O}(P_{k\{r^*\}},1^n)$ are computationally indistinguishable.
+\end{itemize}
+
+
+\begin{itemize}
+\item ${\bf Hybrid_2}$ and ${\bf Hybrid_3}\hspace{-0.09cm}:$ The ciphertext in $\mbox{Hybrid}_2$ is given as $$\ket{r^*}\bra{r^*} \otimes P_{f_k(r^*)} \rho P_{f_k(r^*)}$$ and the ciphertext in $\mbox{Hybrid}_3$ is given as $$\ket{r^*}\bra{r^*} \otimes P_{y^*} \rho P_{y^*},$$ where $r^*\xleftarrow[]{\$} \bit{2n}$ and $y^*\xleftarrow[]{\$} \bit{2n}.$ If there exists is a polynomial-time adversary $\mathcal{A}$ that can distinguish between the two hybrids with non-negligible advantage, i.e
+
+\[
+    \mathcal{A}(1^n, (\ket{r^*}\bra{r^*} \otimes P_{y} \rho P_{y} ))=
+\begin{cases}
+    0, & \text{if } y\xleftarrow[]{\$} \bit{2n}.\\
+    1, & \text{if }  y=F_k(r^*),
+\end{cases}
+\]
+then we can construct a polynomial time adversary $\mathcal{B}$ that can break the Puncturable PRF security.
+
+\begin{enumerate}
+\item $\mathcal{B}$ picks a random secret key $k\rightarrow \{0,1\}^{2n}$ and set public key as  $qi\mathcal{O}(P_{k\{r^*\}},1^n).$
+\item $\mathcal{B}$ runs the experiment $\textsf{PunctPRF}_{D,F}(n)$ and obtain $(k\{r^*\}, y),$ where $y=f_k(r^*)$ or $y=y\xleftarrow[]{\$} \bit{2n}.$
+\item $\mathcal{B}$ then  run  $\mbox{Hybrid}_2$  and obtain the ciphertext $\ket{r^*}\bra{r^*} \otimes P_{f_k(r^*)} \rho P_{f_k(r^*)}.$
+\item $\mathcal{B}$ creates modified ciphertext  as $\ket{r^*}\bra{r^*} \otimes P_{y} \rho^\prime P_{y}.$
+\item  $\mathcal{B}$ runs $\mathcal{A}$ on the input  $\ket{r^*}\bra{r^*} \otimes P_{y} \rho^\prime P_y.$
+\item $\mathcal{B}$ outputs whatever the bit outputs by $\mathcal{A}.$  Note if $y$ is the value of PRF at the punctured point, then we are in hybrid 2 and $\mathcal{A}$ outputs 1 with non-negligible advantage. Otherwise $y$ is random and we are in hybrid 3 and $\mathcal{A}$ outputs 0 with non-negligible advantage. Therefore, $\mathcal{B}$ breaks the security of Puncturable PRF.
+\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+\item ${\bf Hybrid_3}\hspace{-0.09cm}:$ The ciphertext in this experiment leaks no information about the plaintext. Since the advantage of all polynomial-time attacker's are negligibly close in each successive hybrid, this proves that the  scheme \ref{sec:obfuscation} is IND-CPA secure.
+\end{itemize}
+
+\subsection{Instantiation of Quantum Public-Key Cryptosystems}
+
+{\color{red} So far all seems to be broken. Need to work on this.}
+%This scheme is based on an idea for ``classical public-key encryption based from indistinguishability obfuscation'' (see Sahai and Water. \emph{How to Use Indistinguishability Obfuscation: Deniable Encryption, and More} \url{https://eprint.iacr.org/2013/454.pdf}).
+%
+%The public key consists in an obfuscation of $f(r) = (PRG(r), PRF(K, PRG(r))$, where $PRF$ is a pseudo-random function, $PRG$ is a pseudo-random generator.
+%
+%The encryption procedure consists in computing:  $a = PRF(K, PRG(x))$ and $b =   PRF(K, PRG(y))$ for randomly-chosen $x, y$.
+%
+%Next, we encrypt register $R$ with $Z^a Z^b$. The full ciphertext consists in $PRG(x), PRG(y)$ as well as register $R$.
+%
+%The security of this scheme depends on the existence of a quantum-secure \emph{indistinguishability obfuscator}, as well as on the $PRF$ and $PRG$, I guess.
+%
+%Actually, the scheme can be more abstractly defined as Section 5.1 of Sahai-Waters. The description above follows along the lines of the more intuitive description they give in the introduction.
+%
+%The proof, I anticipated would consists in a nice hybrid argument, using a technique of \emph{puncture programs} as introduced by Sahai-Waters. All of this would need to be adapted to the quantum case, see their Theorem 4.

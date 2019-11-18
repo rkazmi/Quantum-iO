@@ -1,0 +1,85 @@
+\documentclass[english,11pt]{article}
+\usepackage[english]{babel}
+\usepackage{latexsym,amssymb,amsmath,amsfonts,epsfig,amsthm,color,dsfont,mathtools}
+ \usepackage{braket,graphicx,authblk,colonequals,algorithm,algpseudocode,ifthen,framed}
+\usepackage{float,array}
+\usepackage[left=1in,right=1in]{geometry}
+\usepackage[leftbars,color]{changebar}
+\newtheorem*{remark}{Remark}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[toc]{multitoc}
+%\usepackage{cleveref}
+\floatname{algorithm}{Algorithm}
+\input{commands.tex}
+
+
+
+
+\title{Indistinguishability obfuscation \\for\\ quantum circuits of low $\tgate$-gate complexity}
+
+
+\author[1]{Anne Broadbent}
+\author[2]{Raza Ali Kazmi}
+\affil[1]{Anne affiliation}
+\affil[2]{Raza affiliation}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+We initiate the study of constructions for indistinguishability obfuscation for quantum circuits. In particular, we construct an indistinguishability  obfuscator that takes as input a quantum circuit, and outputs a quantum state and a quantum circuit, which together can be used to evaluate the original quantum circuit, on any quantum input.  In our construction, the size of the output of the obfuscator is exponential in the number of non-Clifford gates, which means that the construction is efficient as long as the number of non-Clifford gates is logarithmic.
+%\TODO{Anne: do obfuscators output circuits or programs? I guess circuits}.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Section Introduction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{intro.tex}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Section Prelims
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{prelims.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Section newIdea iO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\input{newIdeaiO.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Section Constructing iO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{BuildingQiO.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Section Application of quantum-secure classical iO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\input{qPQfromiO.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Section Conclusion and Open Problems
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{Conclusion.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Acknowledgements}
+This material is based upon work supported by the Air Force Office of Scientific Research under award number FA9550-17-1-0083, Canada's NSERC, an Ontario ERA, and the University of Ottawa’s Research Chairs program.
+
+\bibliographystyle{alpha}
+\bibliography{full.bib}
+\bibliography{quantum.bib}
+\bibliographystyle{./bibtex/bst/alphaarxiv}
+\bibliography{bibtex/bib/full.bib,bibtex/bib/quantum.bib}
+
+
+\end{document} 
