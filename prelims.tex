@@ -2,13 +2,13 @@
 \subsection{Basic Classical Cryptographic Notions}
 \label{sec:classical-prelims}
 Let $\mathbb{N}$ be the set of positive integers. For $n \in \mathbb{N}$, we set $[n] = \{1, \cdots, n\}.$ We denote the set of all  binary strings of length $n$ by $\bit{n}.$
- An element $s \in \bit{n}$ is called a bitstring, and $|s|=n$ denotes its length. We reserve the notation $0^n$ (resp., $1^n$) to denote the $n$-bit string with all zeroes (resp., all ones).  We denote an arbitrary polynomial from the set $\mathbb{N}$ to $\mathbb{N}$ by $poly( ).$ 
- 
- 
+ An element $s \in \bit{n}$ is called a bitstring, and $|s|=n$ denotes its length. We reserve the notation $0^n$ (resp., $1^n$) to denote the $n$-bit string with all zeroes (resp., all ones).  We denote an arbitrary polynomial from the set $\mathbb{N}$ to $\mathbb{N}$ by $poly( ).$
+
+
 A function ${\rm negl}:\mathbb{N}\rightarrow\mathbb{R}^{+}\cup \{0\}$ is negligible if for every positive polynomial $p(n)$ there exists a positive integer $n_0$ such that  for all  $n>n_0,$ ${\rm negl}(n) < 1/ p(n).$   A typical use of negligible functions is to indicate that the probability of success of some algorithm is too small to be amplified to a constant by a feasible (\emph{i.e.}, polynomial) number of repetitions. Given two bit strings $x$ and $y$ of equal length, we denote their bitwise XOR by $x \oplus y.$
 
-\section*{Classical Circuits and Algorithms}
- For $n, m\in\mathbb{N}$ let  $f:\bit{n}\rightarrow \bit{m}$ be a function. We say a circuit $C$ computes $f$ if for every $s \in \bit{n},\; C(s)=f(s).$  We define the size of a circuit $C$ as the number of gates in it and is denoted by $|C|.$ A set of gates for classical computation  are universal if, for all $n, m\in\mathbb{N}$, and for every function $f:\bit{n}\rightarrow \bit{m}$ a circuit can be constructed for computing $f$ using only gates from that set. It is a well known fact that \{AND, OR, NOT\} is a set of universal gates for classical circuits. A family of circuits $\mathcal{F}=\{C_n\mid n\in\mathbb{N}\},$ one for each input  size $n\in \mathbb{N}$ is called uniform if there exists a deterministic Turing machine $M,$ such that 
+\subsubsection{Classical Circuits and Algorithms}
+ For $n, m\in\mathbb{N}$ let  $f:\bit{n}\rightarrow \bit{m}$ be a function. We say a circuit $C$ computes $f$ if for every $s \in \bit{n},\; C(s)=f(s).$  We define the size of a circuit $C$ as the number of gates in it and is denoted by $|C|.$ A set of gates for classical computation  are universal if, for all $n, m\in\mathbb{N}$, and for every function $f:\bit{n}\rightarrow \bit{m}$ a circuit can be constructed for computing $f$ using only gates from that set. It is a well known fact that \{AND, OR, NOT\} is a set of universal gates for classical circuits. A family of circuits $\mathcal{F}=\{C_n\mid n\in\mathbb{N}\},$ one for each input  size $n\in \mathbb{N}$ is called uniform if there exists a deterministic Turing machine $M,$ such that
  \begin{itemize}
  \item For each $n\in\mathbb{N},$ $M$ outputs a description of $C_n \in \mathcal{F}$ on input $1^n.$
  \item  For each $n\in\mathbb{N},$ $M$ runs in $poly(n).$
@@ -17,7 +17,7 @@ A function ${\rm negl}:\mathbb{N}\rightarrow\mathbb{R}^{+}\cup \{0\}$ is negligi
 
 
 %We will sometimes abuse notation by stating that $f:\bit{n} \rightarrow \bit{m}$ defines a function family; in that case, it is implicit that $n$ is a parameter that indexes the input size and $m$ is some function of $n$ (usually a polynomial) that indexes the output size. Given a bit string $y$ and, the preimage of $f$ under $y$ is defined by $f^{-1}(y) := \{ x \in \{0,1\}^* : f(x) = y\}$.
-  
+
 
 
 %Let $\mathbb{N}$ be the set of positive integers. For $n \in \mathbb{N}$, we set $[n] = \{1, \cdots, n\}.$ We denote the set of all finite binary strings as $\{0,1\}^*.$
@@ -149,7 +149,7 @@ We denote by $\mathcal{D}(\mathcal{H}_n)$ the set of density operators (i.e., va
 Given $\rho, \sigma \in \mathcal{D}(\mathcal{H})$, the trace distance between $\rho$ and $\sigma$ is given by half the trace norm $\|\rho - \sigma\|_1$ of their difference. When $\rho$ and $\sigma$ are classical probability distributions, the trace distance reduces to the total variation distance. Physically realizable maps from a state space $\mathcal{D}(\mathcal{H})$ to another state space $\mathcal{D}(\mathcal{H}')$ are called \emph{admissible}---these are the completely positive trace-preserving (CPTP) maps. For the purpose of distinguishability via input/output operations, the appropriate norm for CPTP maps is the diamond norm, denoted $\|\cdot\|_\diamond$. The set of admissible maps coincides with the set of all maps realizable by composing (i.) addition of ancillas, (ii.) unitary evolutions, (iii.) measurements in the computational basis, and (iv.) tracing out subspaces. We remark that unitaries $U \in U(\mathcal{H}_n)$ act on $\mathcal{D}(\mathcal{H}_n)$ by conjugation: $\rho \mapsto U \rho U^\dagger$. The identity operator~$\mathds{1}_n \in U(\mathcal{H}_n)$ is thus both a valid map, and (when normalized by $2^{-n}$) a valid state in $\mathcal{D}(\mathcal{H}_n)$---corresponding to the classical uniform distribution.
 
 
-\section*{Quantum Gates}
+\subsubsection{Quantum Gates}
 Recall  the single-qubit Pauli operators  defined as:
 $$
 \igate = \left[\begin{array}{cc} 1 & 0\\ 0 & 1\end{array}\right]\,,
@@ -212,7 +212,7 @@ $$\xgate\zgate = - \zgate\xgate,\quad \tgate^2=\pgate,\quad\pgate^2=\zgate,\quad
 Also, for any $a,b\in\{0,1\}$ we have
 $\hgate\xgate^b\zgate^a=\xgate^a\zgate^b \hgate$
 
-\section*{Quantum Circuits and Algorithm}
+\subsubsection{Quantum Circuits and Algorithm}
 For $n\in \mathbb{N},$ the set of all $n\times n$ unitary matrix is denoted by $O(n,\mathbb{C})=\{U\in \mathbb{C}^{n\times n} \mid U\cdot U^\dagger={\bf I}\}.$ We say a quantum circuit $C_q$ computes $U\in O(n,\mathbb{C})$ if for every quantum state $\ket{\psi} \in \mathit{Qubit}(n),$
 $$U(\ket{\psi} )=C_q(\ket{\psi}),$$
 where  $\mathit{Qubit}(n)$  denote the set of all $n$-qubit states.
@@ -220,13 +220,13 @@ where  $\mathit{Qubit}(n)$  denote the set of all $n$-qubit states.
 A quantum circuit that computes unitary matrix is called a reversible  quantum circuit, i.e it always possible to uniquely recover the input, given the output. A set of gates are said to be universal if, for any a unitary matrix $U$  a quantum circuit can be constructed for computing $U$ using only gates from that set. It is a well known fact that Clifford gates are not universal, but adding any non-Clifford gate, such as $\tgate$, gives a universal set of gates. The
 $$\quad\tgate = \left[\begin{array}{cc} 1 & 0\\ 0 & e^{i\pi/4}\end{array}\right],$$
 
-A family of quantum circuit $C=\{C_n\in \mathbb{N} \mid \}$ one for each input  size $n\in \mathbb{N}$ is called uniform if there exists a deterministic Turing machine $M,$ such that 
+A family of quantum circuit $C=\{C_n\in \mathbb{N} \mid \}$ one for each input  size $n\in \mathbb{N}$ is called uniform if there exists a deterministic Turing machine $M,$ such that
  \begin{itemize}
  \item For each $n\in\mathbb{N},$ $M$ outputs a description of $C_n \in \mathcal{F}$ on input $1^n.$
  \item  For each $n\in\mathbb{N},$ $M$ runs in $poly(n).$
  \end{itemize}
 
-All quantum operations are not unitary (reversible), nevertheless a general (possibly irreversible) quantum operation also called superoperator can efficiently simulated by a reversible quantum operations by adding ancilla states to the original system, then perform a unitary operation on the joint system, and then tracing out $Tr$ some subsystem \cite{}. More precisely, this can be described as the map: 
+All quantum operations are not unitary (reversible), nevertheless a general (possibly irreversible) quantum operation also called superoperator can efficiently simulated by a reversible quantum operations by adding ancilla states to the original system, then perform a unitary operation on the joint system, and then tracing out $Tr$ some subsystem \cite{}. More precisely, this can be described as the map:
 
 $$\rho_{in} \xmapsto{\mbox{superoperator}} \rho_{out}=Tr_B(U(\rho_{in} \otimes \ket{00\cdots 0} \bra{00\cdots 0})U^\dagger)$$
 
@@ -251,9 +251,9 @@ where $a_i,b_i,a_i^\prime,b_i^\prime \in\{0,1\}$ for all integers  $1\leq i\leq 
 $$F_{C_q}=f_{\rm CNOT}\circ f_{\rm H}(a_1,b_1, a_2,b_2)= f_{\rm CNOT}(b_1,a_1,a_2,b_2)=(b_1\oplus a_2,a_1,a_2, a_1\oplus b_2).$$
 And we have $$( \xgate^{b_1} \otimes  \xgate^{b_2}) ( \zgate^{a_1} \otimes  \zgate^{a_2})C_q=C_q( \xgate^{a_1} \otimes  \xgate^{a_1\oplus b_2}) ( \zgate^{b_1\oplus a_2} \otimes  \zgate^{a_2}).$$
 
-\section*{Bell Basis}
+\subsubsection{Bell Basis}
 We denote the four Bell states as $\ket{\beta_{00}},$  $\ket{\beta_{01}},$ $\ket{\beta_{10}}$ and $\ket{\beta_{11}}.$
-$$\ket{\beta_{00}}=\frac{1}{\sqrt2}\left(\ket{00}+\ket{11}\right) \hspace{1cm}  \ket{\beta_{01}}=\frac{1}{\sqrt2}\left(\ket{01}+\ket{10}\right)$$ 
+$$\ket{\beta_{00}}=\frac{1}{\sqrt2}\left(\ket{00}+\ket{11}\right) \hspace{1cm}  \ket{\beta_{01}}=\frac{1}{\sqrt2}\left(\ket{01}+\ket{10}\right)$$
 $$\ket{\beta_{10}}=\frac{1}{\sqrt2}\left(\ket{00}-\ket{11}\right) \hspace{1cm} \ket{\beta_{11}}=\frac{1}{\sqrt2}\left(\ket{01}-\ket{10}\right)$$
 
 \subsection{Gate Teleportation}
@@ -272,12 +272,12 @@ Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate, \
  \begin{equation}
 \mathbb{I}\otimes \mathbb{I} \otimes U (\ket{\psi} \ket{\beta_{00}})=\frac{1}{2}\ket{\beta_{00}} U(\ket{\psi})+ \frac{1}{2}\ket{\beta_{01}}U( \xgate( \ket{\psi}) + \frac{1}{2}\ket{\beta_{10}}U( \zgate( \ket{\psi})+ \frac{1}{2}\ket{\beta_{11}}U( \xgate \zgate( \ket{\psi}).
  \end{equation}
- \item Measure the first two qubits of the system 2 in the Bell basis and obtain the classical bits $(a,b).$ The system now in the state 
+ \item Measure the first two qubits of the system 2 in the Bell basis and obtain the classical bits $(a,b).$ The system now in the state
  \begin{equation}
 							\ket{\beta_{ab}}\otimes U( \xgate^b \zgate^a( \ket{\psi})).
 \end{equation}
 \item Compute the correction function $f_U(a,b)=(a^\prime,b^\prime)$ associated with the gate $U.$ (section \ref{correction function}).
-\item Apply the correction unitary $ \zgate^{a^\prime}  \xgate^{b^\prime}$ to the last qubit of the system 3 
+\item Apply the correction unitary $ \zgate^{a^\prime}  \xgate^{b^\prime}$ to the last qubit of the system 3
 
 $$\mathbb{I}\otimes \mathbb{I}\otimes  \zgate^{a^\prime}  \xgate^{b^\prime} \left(\ket{\beta_{ab}}\otimes U( \xgate^b \zgate^a( \ket{\psi}))\right)= \ket{\beta_{ab}}\otimes  \zgate^{a^\prime}  \xgate^{b^\prime}\left(U( \xgate^b \zgate^a( \ket{\phi}))\right)$$
 $$= \ket{\beta_{ab}}\otimes  \zgate^{a^\prime}  \xgate^{b^\prime} \left(\xgate^{b^\prime} \zgate^{a^\prime} U( \ket{\psi})\right)=\ket{\beta_{ab}}\otimes U( \ket{\psi})$$

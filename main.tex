@@ -3,7 +3,8 @@
 \usepackage{latexsym,amssymb,amsmath,amsfonts,epsfig,amsthm,color,dsfont,mathtools}
  \usepackage{braket,graphicx,authblk,colonequals,algorithm,algpseudocode,ifthen,framed}
 \usepackage{float,array}
-\usepackage[left=1in,right=1in]{geometry}
+\usepackage{xcolor} %
+%\usepackage[left=1in,right=1in]{geometry}
 \usepackage[leftbars,color]{changebar}
 \newtheorem*{remark}{Remark}
 \usepackage[utf8]{inputenc}
@@ -11,7 +12,11 @@
 \usepackage[toc]{multitoc}
 %\usepackage{cleveref}
 \floatname{algorithm}{Algorithm}
+
+
+%********************
 \input{commands.tex}
+%********************
 
 
 
@@ -19,34 +24,42 @@
 \title{Indistinguishability obfuscation \\for\\ quantum circuits of low $\tgate$-gate complexity}
 
 
-\author[1]{Anne Broadbent}
-\author[2]{Raza Ali Kazmi}
-\affil[1]{Anne affiliation}
-\affil[2]{Raza affiliation}
+\author{Anne Broadbent and Raza Ali Kazmi}
+\affil{University of Ottawa, Department of Mathematics and Statistics,\\\{abroadbe,rkazmi\}@uottawa.ca.}
+%\affil[2]{Raza affiliation}
+\date{} %leave blank for the submission
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-
-We initiate the study of constructions for indistinguishability obfuscation for quantum circuits. In particular, we construct an indistinguishability  obfuscator that takes as input a quantum circuit, and outputs a quantum state and a quantum circuit, which together can be used to evaluate the original quantum circuit, on any quantum input.  In our construction, the size of the output of the obfuscator is exponential in the number of non-Clifford gates, which means that the construction is efficient as long as the number of non-Clifford gates is logarithmic.
-%\TODO{Anne: do obfuscators output circuits or programs? I guess circuits}.
+An \emph{indistiguishability obfuscator} takes as input a circuit $C$ and outputs a new circuit $C'$, such that for any $C_1$, $C_2$ that have the \emph{same} input-output behaviour, $C'_1$ and $C'_2$ are computationally indistinguishable. Here, we initiate the study of feasibility for indistinguishability obfuscation for \emph{quantum} circuits. We construct an indistinguishability  obfuscator that takes as input a quantum circuit, and outputs a quantum state and a quantum circuit, which together can be used to evaluate the original quantum circuit, on any quantum input; the security guarantee being that for two quantum circuits that have the same input-output behaviour, the outputs of the obfuscator are indistinguishable. In our construction, the size of the output of the obfuscator is exponential in the number of non-Clifford gates, which means that the construction is efficient as long as the number of non-Clifford gates is logarithmic. \anote{Need to update prior text, based on final results. }
 \end{abstract}
+
+
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Section Introduction
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%********************
 \input{intro.tex}
+%********************
 
-
-
+\anote{need to move applications and conclusions to the front part of the paper}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Section Prelims
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%********************
 \input{prelims.tex}
-
+%********************
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Section newIdea iO
@@ -56,8 +69,9 @@ We initiate the study of constructions for indistinguishability obfuscation for 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Section Constructing iO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%********************
 \input{BuildingQiO.tex}
-
+%********************
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Section Application of quantum-secure classical iO
@@ -65,21 +79,23 @@ We initiate the study of constructions for indistinguishability obfuscation for 
 %\input{qPQfromiO.tex}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Section Conclusion and Open Problems
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{Conclusion.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section*{Acknowledgements}
-This material is based upon work supported by the Air Force Office of Scientific Research under award number FA9550-17-1-0083, Canada's NSERC, an Ontario ERA, and the University of Ottawa’s Research Chairs program.
+This material is based upon work supported by the Air Force Office of Scientific Research under award number FA9550-17-1-0083, Canada's   NFRF and NSERC, an Ontario ERA, and the University of Ottawa’s Research Chairs program.
 
-\bibliographystyle{alpha}
-\bibliography{full.bib}
-\bibliography{quantum.bib}
-\bibliographystyle{./bibtex/bst/alphaarxiv}
-\bibliography{bibtex/bib/full.bib,bibtex/bib/quantum.bib}
 
+%\bibliographystyle{alpha}
+%\bibliography{full.bib}
+%\bibliography{quantum.bib}
+
+%\bibliography{more.bib}
+%\bibliographystyle{./bibtex/bst/alphaarxiv}
+%\bibliography{bibtex/bib/full.bib,bibtex/bib/quantum.bib}
+
+%add new entries to more.bib, they will be cleaned and entered into quantum.bib by the BibMaster
+\bibliographystyle{bst/alphaarxiv}
+\bibliography{bib/full,bib/quantum,bib/more}
 
 \end{document} 
