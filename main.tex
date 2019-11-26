@@ -9,7 +9,7 @@
 \newtheorem*{remark}{Remark}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage[toc]{multitoc}
+%\usepackage[toc]{multitoc}
 %\usepackage{cleveref}
 \floatname{algorithm}{Algorithm}
 
@@ -25,7 +25,7 @@
 
 
 \author{Anne Broadbent and Raza Ali Kazmi}
-\affil{University of Ottawa, Department of Mathematics and Statistics,\\\{abroadbe,rkazmi\}@uottawa.ca.}
+\affil{University of Ottawa, Department of Mathematics and Statistics,\\\texttt{\{abroadbe,rkazmi\}@uottawa.ca.}}
 %\affil[2]{Raza affiliation}
 \date{} %leave blank for the submission
 
@@ -37,7 +37,7 @@
 An \emph{indistiguishability obfuscator} takes as input a circuit $C$ and outputs a new circuit $C'$, such that for any $C_1$, $C_2$ that have the \emph{same} input-output behaviour, $C'_1$ and $C'_2$ are computationally indistinguishable. Here, we initiate the study of feasibility for indistinguishability obfuscation for \emph{quantum} circuits. We construct an indistinguishability  obfuscator that takes as input a quantum circuit, and outputs a quantum state and a quantum circuit, which together can be used to evaluate the original quantum circuit, on any quantum input; the security guarantee being that for two quantum circuits that have the same input-output behaviour, the outputs of the obfuscator are indistinguishable. In our construction, the size of the output of the obfuscator is exponential in the number of non-Clifford gates, which means that the construction is efficient as long as the number of non-Clifford gates is logarithmic. \anote{Need to update prior text, based on final results. }
 \end{abstract}
 
-
+\newpage
 
 \setcounter{tocdepth}{2}
 \tableofcontents
@@ -52,7 +52,7 @@ An \emph{indistiguishability obfuscator} takes as input a circuit $C$ and output
 \input{intro.tex}
 %********************
 
-\anote{need to move applications and conclusions to the front part of the paper}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Section Prelims

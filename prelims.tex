@@ -204,8 +204,8 @@ We first set $\xgate_j = \mathds{1}^{\otimes j-1} \otimes \xgate \otimes \mathds
 $$\xgate = \left[\begin{array}{cc} 0 & 1\\ 1 & 0\end{array}\right],
 \quad\zgate = \left[\begin{array}{cc} 1 & 0\\ 0 & -1\end{array}\right],
 \quad\pgate = \left[\begin{array}{cc} 1 & 0\\ 0 & i\end{array}\right],
- \quad\hgate = \frac{1}{\sqrt{2}}\left[\begin{array}{cc}1 & 1\\1 & -1\end{array}\right], \quad\mbox{and}
-\quad\cnot = \left[\begin{array}{cccc} 1 & 0 & 0 & 0\\ 0 & 1 & 0 & 0\\ 0 & 0 & 0 & 1\\ 0 & 0 & 1 & 0\end{array}\right].$$
+ \quad\hgate = \frac{1}{\sqrt{2}}\left[\begin{array}{cc}1 & 1\\1 & -1\end{array}\right], \quad\mbox{and}$$
+$$\quad\cnot = \left[\begin{array}{cccc} 1 & 0 & 0 & 0\\ 0 & 1 & 0 & 0\\ 0 & 0 & 0 & 1\\ 0 & 0 & 1 & 0\end{array}\right].$$
 \end{definition}
 We note the following relations between these gates:
 $$\xgate\zgate = - \zgate\xgate,\quad \tgate^2=\pgate,\quad\pgate^2=\zgate,\quad\hgate\xgate\hgate=\zgate,\quad \tgate\pgate=\pgate\tgate,\quad\pgate\zgate=\zgate\pgate.$$
@@ -242,7 +242,7 @@ $$\xgate(\xgate^b\zgate^a)=(-1)^a(\xgate^{b}\zgate^{a}) \xgate,\quad \mbox{ wher
 $$\zgate(\xgate^b\zgate^a)=(-1)^b(\xgate^{b}\zgate^{a}) \zgate,\quad \mbox{ where }f_\hgate(a,b)=(a,b), \mbox{ for any } a, b\in\{0,1\}.$$
 $$\hgate(\xgate^b\zgate^a)=(\xgate^{a}\zgate^{b}) \hgate,\quad \mbox{ where }f_\hgate(a,b)=(b,a), \mbox{ for any } a, b\in\{0,1\}.$$
 $$ \pgate(\xgate^b\zgate^a)=((-i)^b\xgate^a\zgate^{a\oplus b}) \pgate, \quad \mbox{ where }f_ \pgate(a,b)=(a,a\oplus b), \mbox{ for any } a, b\in\{0,1\}.$$
-$$\cnot (\xgate^{b_1}\zgate^{a_1} \otimes \xgate^{b_2}\zgate^{a_2})=({\xgate^{b_1} {\zgate^{a_1\oplus a_2}}} \otimes {\xgate^{b_1\oplus b_2}}\zgate^{a_2})\cnot, \mbox{ where } f_{\cnot}(a_1,b_1,a_2,b_2)=(a_1\oplus a_2,b_1,a_2, b_1\oplus b_2).$$
+$$\cnot (\xgate^{b_1}\zgate^{a_1} \otimes \xgate^{b_2}\zgate^{a_2})=({\xgate^{b_1} {\zgate^{a_1\oplus a_2}}} \otimes {\xgate^{b_1\oplus b_2}}\zgate^{a_2})\cnot, \mbox{ where }$$ $$f_{\cnot}(a_1,b_1,a_2,b_2)=(a_1\oplus a_2,b_1,a_2, b_1\oplus b_2).$$
 
 Similarly for any $n$-qubit Clifford Circuit\footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group.} $\mathcal{C}_q$ we define an update function $F_{c_q}:\, \mathbb{F}_2^n \rightarrow  \mathbb{F}_2^n$, that relates $\mathcal{C}_q$ and a unitary $(  \xgate^{\otimes_{i=1}^{n} b_{i}} \cdot  \zgate^{\otimes_{i=1}^{n} a_{i}})$ in the following manner,
 $$(  \xgate^{\otimes_{i=1}^{n} b_{i}} \cdot  \zgate^{\otimes_{i=1}^{n} a_{i}})\mathcal{C}_q=\mathcal{C}_q (  \xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot  \xgate^{\otimes_{i=1}^{n} a_{i}^\prime})$$

@@ -125,7 +125,7 @@ C&D
 
 apply 11 rounds  $\hgate-\cnot-\pgate-\cnot-\pgate-\cnot-\hgate-\pgate-\cnot-\pgate-\cnot$ to the above block matrix to obtain standard initial tableau $[{\bf I}_{2n}|{\bf 0}].$ Let $(g_i)_{i=1}^k,\, k\in\mathbb{N}$ be the sequence of gates corresponding to these rounds. Then the canonical form of the circuit $C_q$ is given be the reverse of the sequence $(g_i)_{i=1}^k.$ Now suppose $C_q^\prime$  is another circuit that is equivalent to
 $C_q$ and $\mathcal{T}_i^\prime \neq \mathcal{T}_i$ be a initial tableau representing the state $\ket{0}^{\otimes n}.$ Let $\mathcal{T}_f^\prime$ be the final tableau representing the state $C_q^\prime(\ket{0}^{\otimes n}).$ Then it is possible that $\mathcal{T}_f\neq \mathcal{T}_f^\prime$ and in this case the sequence $(g_i^\prime )_{i=1}^{k^\prime} \leftarrow {\tt AG-Canonical}(\mathcal{T}_f^\prime)$ is different from $(g_i)_{i=1}^k,\, k\in\mathbb{N}.$ Therefore, in general the output of {\tt AG-Canonical}  can be different for two equivalent circuits.
-\abnote{The above needs to be emphasized earlier on- the cannonical form of AG is not actually unique}
+\anote{The above needs to be emphasized earlier on- the cannonical form of AG is not actually unique}
 
 %This can also be demonstrated by a counter example, Let $C_q= \igate \otimes  \igate$ and $C_q^\prime= (\igate \otimes  \hgate)\cdot (\igate \otimes  \hgate)$ are equivalent circuits.  Let $\mathcal{T}_i$ and $\mathcal{T}_i^\prime$ denote initial tableaus for the state $\ket{0}^{\otimes 2}.$
 %
