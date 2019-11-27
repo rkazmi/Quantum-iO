@@ -56,7 +56,7 @@ Aaronson and Gottesman invented a polynomial-time algorithm that computed a cano
 
 \anote{excellent lead-in paragraph above!}
 
-The algorithm  represent an $n$-qubit state by tableau consist of $2n$ rows and $2n+1$ columns, where $x_{i,j} ,z_{i,j}\in \{0,1\}.$
+The algorithm  represents an $n$-qubit state by tableau consisting of $2n$ rows and $2n+1$ columns, where $x_{i,j} ,z_{i,j}\in \{0,1\}.$
 
 
 \[
@@ -78,9 +78,9 @@ $x_{\left(  2n\right)  1}$ & $\cdots$ & $x_{\left(  2n\right)  n}$ & $r_{2n}$%
 \]
 
 Each row  of the tableau $R_{i}=\pm (P_{1}\otimes \cdots \otimes P_{n})\in \mathcal{P}_n$, for $1\leq i\leq 2n,$ where bits $(x_{ij},z_{ij})$ determine the $j^{th}$ Pauli gate $P_{j}$: $00$
-means $\igate$, $01$ means $\xgate$, $11$ means $\ygate$, and $10$ means $\zgate$ and $r_{i}$ is $1$ if $R_{i}$ has negative phase and $0$ if $r_{i}$\ has
+means $\igate$, $01$ means $\xgate$, $11$ means~$\ygate$, and $10$ means~$\zgate$ and $r_{i}$ is $1$ if $R_{i}$ has negative phase and $0$ if $r_{i}$\ has
 positive phase. Rows $1$ to $n$ of the tableau represent the destabilizer generators $R_{1},\ldots,R_{n}$ and rows $n+1$ to $2n$ represent the stabilizer
-generators $R_{n+1},\ldots,R_{2n}$ of the state it represents. A state is uniquely determined by the group of pauli operators that stabilize it.
+generators $R_{n+1},\ldots,R_{2n}$ of the state it represents. A state is uniquely determined by the group of Pauli operators that stabilize it.
 
 For example for the $2$-qubit state $\ket{00}$ a possible tableau is
 \[
@@ -95,7 +95,7 @@ $~0~$ & $~0~$ & $~0~$ & $~1~$ & $~0~$%
 \right)
 \]
 
-and the stabilizer generator for the state are $R_3=+(\zgate \otimes \igate)$ and $R_4=+(\igate\otimes \zgate).$ Note if we swap row 3 with row 4, then we get another tableau for the state $\ket{00},$ therefore a quantum state can be represented by more than one tableau. Now suppose we want to compute a canonical form of an $n$-qubit Clifford circuit $C_q.$ Let $\mathcal{T}_i$ be a initial tableau representing the state $\ket{0}^{\otimes n}.$ As we proceeds through the gates in $C_q;$ we update $\mathcal{T}_i$  according to the following rules \cite{AG04}.\\
+and the stabilizer generator for the state are $R_3=+(\zgate \otimes \igate)$ and $R_4=+(\igate\otimes \zgate).$ Note if we swap row 3 with row 4, then we get another tableau for the state $\ket{00},$ therefore a quantum state can be represented by more than one tableau. Now suppose we want to compute a canonical form of an $n$-qubit Clifford circuit $C_q.$ Let $\mathcal{T}_i$ be a initial tableau representing the state $\ket{0}^{\otimes n}.$ As we proceed through the gates in $C_q;$ we update $\mathcal{T}_i$  according to the following rules \cite{AG04}.\\
 
 
 \noindent\textbf{CNOT from control }$a$\textbf{ to target }$b$\textbf{.} \ For
@@ -107,13 +107,14 @@ x_{ia}$, and $z_{ia}:=z_{ia}\oplus z_{ib}$.\medskip
 1,\ldots,2n\right\}  $, set $r_{i}:=r_{i}\oplus x_{ia}z_{ia}$\ and swap
 $x_{ia}$\ with $z_{ia}$.\medskip
 
+\anote{todo: make sure we say somewhere (in prelims) that Phase gate is $\pgate$.    }
 \noindent\textbf{Phase on qubit }$a$\textbf{.} \ For all $i\in\left\{
 1,\ldots,2n\right\}  $, set $r_{i}:=r_{i}\oplus x_{ia}z_{ia}$ and then set
 $z_{ia}:=z_{ia}\oplus x_{ia}$.\medskip
 
 
 
-Let $\mathcal{T}_f$ be the final tableau representing the state $C_q(\ket{0}^{\otimes n}).$ The algorithm  {\tt AG-Canonical}  takes the $2n\times 2n$ entries of $\mathcal{T}_f$ (ignore the phase bits $r_i$) as a input and compute a canonical form as follows: First write the tableau into four $n\times n$ matrices $A, B, C$ and $D$
+Let $\mathcal{T}_f$ be the final tableau representing the state $C_q(\ket{0}^{\otimes n}).$ The algorithm  {\tt AG-Canonical}  takes the $2n\times 2n$ entries of $\mathcal{T}_f$ (ignore the phase bits $r_i$) as  input and computes a canonical form as follows: First write the tableau into four $n\times n$ matrices $A, B, C$ and $D$
 \[
 \left[
 \begin{tabular}
@@ -124,7 +125,7 @@ C&D
 \right]
 \]
 
-
+\anote{really, 11 rounds? What is so special about this number?}
 
 
 apply 11 rounds  $\hgate-\cnot-\pgate-\cnot-\pgate-\cnot-\hgate-\pgate-\cnot-\pgate-\cnot$ to the above block matrix to obtain standard initial tableau $[{\bf I}_{2n}|{\bf 0}].$ Let $(g_i)_{i=1}^k,\, k\in\mathbb{N}$ be the sequence of gates corresponding to these rounds. Then the canonical form of the circuit $C_q$ is given be the reverse of the sequence $(g_i)_{i=1}^k.$ Now suppose $C_q^\prime$  is another circuit that is equivalent to
@@ -157,7 +158,7 @@ $C_q$ and $\mathcal{T}_i^\prime \neq \mathcal{T}_i$ be a initial tableau represe
 %
 %After running  $C_q$ and $C_q^\prime$ on the state $\ket{0}^{\otimes 2}$ and updating their initial tableaus according to the above rules, we have $\mathcal{T}_f=\mathcal{T}_i \neq \mathcal{T}_f^\prime=\mathcal{T}_i^\prime.$ Then we calculate the canonical form of  using {\tt AG-Canonical} on input  $\mathcal{T}_f$ and $\mathcal{T}_f^\prime,$ then we cannot possibly apply to both final tableau the same sequence of $\cnot, \hgate$ and $\pgate$ to obtain the initial tableau, therefore the output of {\tt AG-Canonical} is a different canonical form for $C_q$ from $C_q^\prime.$
 
-However, one can trivially modified the algorithm ({\tt AG-Canonical}) \cite{AG04} so that it take a Clifford circuit as an input and outputs a unique canonical form. We add the following initial lines of code to {\tt AG-Canonical} and called this new algorithm {\tt AG-Canonical-Unique}.
+However, one can trivially modify the algorithm ({\tt AG-Canonical}) \cite{AG04} so that it take a Clifford circuit as an input and outputs a unique canonical form. We add the following initial lines of code to {\tt AG-Canonical} and called this new algorithm {\tt AG-Canonical-Unique}.
 
 
 
@@ -212,12 +213,15 @@ The cost of computing the final tableau $\mathcal{T}_f$ is at most $O(n)$ gates 
 $\mathcal{T}_{i_1}=\mathcal{T}_{i_2}=[{\bf I}_{2n}|{\bf 0}]$, then $C_{q_1}$ and $C_{q_2}$ are equivalent if and only if $\mathcal{T}_{f_1}=\mathcal{T}_{f_2}.$ This means the final tableau $\mathcal{T}_f$ obtain in {\tt AG-Canonical-Unique} is the same for every equivalent Clifford circuit. Therefore {\tt AG-Canonical-Unique} computes a unique canonical form for Clifford circuits.
 \end{proof}
 
+\anote{should the following have a section number?}
 \noindent{\bf Quantum Indistinguishability Obfuscator from Canonical Form}:  On input a Clifford circuit $C_q,$ the $Qi\mathcal{O}$ first computes the canonical form  {\tt AG-Canonical-Unique}$(C_q)$ and then outputs an empty register $\rho$ along with {\tt AG-Canonical-Unique}$(C_q).$
 
 \begin{center}
 $(\rho, \mbox{{\tt AG-Canonical-Unique}}(C_q))\leftarrow Qi\mathcal{O}(C_q).$
 \end{center}
 Note we output an empty register $\rho$ to be consistent with our definition of  $Qi\mathcal{O}.$ Clearly, $Qi\mathcal{O}$ satisfy the first two properties (functionality and polynomial slow down). Moreover the canonical form reveals no knowledge about the input circuit, therefore this $Qi\mathcal{O}$ is perfectly indistinguishable against any quantum adversary.
+
+\anote{``reveals no knowledge'' is misleading. Actually, iO can reveal alot of knowledge. The point is that the output of the obfuscators are indistinguishable, which is the case.}
 
 %The cost computing tableau $\mathcal{T}_f$ is bounded by a polynomial  $n$ (section III, ~\cite{AG04}). Moreover, if $C_{q_1}$ and $C_{q_2}$ are two equivalents circuits then, there final tableau as computed in step 3 are also equivalent $\mathcal{T}_{f_1}=\mathcal{T}_{f_2}.$ (Lemma 5 ~\cite{AG04}). This means the final tableau obtain in step 3 is independent of the input circuit. The output of the algorithm 1 is computed using the theorem 8 ~\cite{AG04} which only take the final tableau $\mathcal{T}_f$  and output an equivalent circuit $C_q^\prime$ which is completely determined by $\mathcal{T}_f.$ Moreover, the procedure describe in theorem 8 ~\cite{AG04} is a deterministic polynomial-time algorithm. Therefore, the algorithm 1 is guaranteed to output in polynomial-time a unique canonical form for any Clifford circuit.
 
