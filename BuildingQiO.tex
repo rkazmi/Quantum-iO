@@ -238,9 +238,14 @@ Note we output an empty register $\rho$ to be consistent with our definition of 
 
 \subsubsection{Quantum Indistinguishability Obfuscation using Gate Teleportation}
 \label{sec:Clifford-iO-teleportaion}
-In this section we  show that how gate teleportation can be used to obfuscate Clifford circuits. Our algorithm relies on the assumption that there exists a quantum secure $i\mathcal{O}$ for classical circuits, this seems problematic at first since, there is no provably quantum secure $i\mathcal{O}$ known for general classical circuits. However,  our construction relies on the assumption that a quantum secure $i\mathcal{O}$ exists for a very specific class of circuits that are associated with the update functions (section \ref{correction function}). In fact,  to construct a quantum secure $i\mathcal{O}$ for the family circuits (update functions) corresponding to Clifford circuits is quite easy (section \ref{sec: iO-clifford-functions}).
+In this section we  show that how gate teleportation can be used to obfuscate Clifford circuits. Our algorithm relies on the assumption that there exists a quantum secure $i\mathcal{O}$ for classical circuits, this seems problematic at first since, there is no provably quantum secure $i\mathcal{O}$ known for general classical circuits. 
+\anote{Really? I thought there were some candidates.... }
+However,  our construction relies on the assumption that a quantum secure $i\mathcal{O}$ exists for a very specific class of circuits that are associated with the update functions (section \ref{correction function}). In fact,  to construct a quantum secure $i\mathcal{O}$ for the family circuits (update functions) corresponding to Clifford circuits is quite easy (section \ref{sec: iO-clifford-functions}). \anote{Indeed, we're looking at some classical circuits that are probably quite easy to deal with. I'm not sure they are Cliffords, however, since I think they are classical functions.}
 
 
+
+\anote{below, $\rho$ is usually a density matrix, which does not require a $\ket{\cdot}$.}
+\anote{below, say something about what ``lower half'' means, or establish earlier on that another way to write the tensor product of $n$ Bell states is $\sum_i \ket{i}{i}$ (or something like this; need to check). Then it is clear which register we are talking about for applying $C_q$.}
 
 \begin{algorithm}[H]
    \caption{$Qi\mathcal{O}$ using Gate Teleportation}
@@ -249,7 +254,7 @@ In this section we  show that how gate teleportation can be used to obfuscate Cl
   \begin{enumerate}
   \item Prepare $2n$ qubit Bell state $\ket{\beta^{ 2n}}=\ket{\beta_{00}}\otimes \cdots \otimes \ket{\beta_{00}}.$
   \item Apply the circuit $C_q$ on the lower half of the qubits $\ket{\rho}=(I\otimes C_q) \ket{\beta^{2n}}.$
-  \item Compute the circuit $C_q^\prime$ (define below).
+  \item Compute the circuit $C_q^\prime$ (defined below).
   \item Output $\left(\ket{\rho},C_q^\prime \right).$
   \end{enumerate}
   %\item[-] Note we denote the classical circuit that computes the function $F_{C_q}$  also by $C.$
@@ -257,7 +262,7 @@ In this section we  show that how gate teleportation can be used to obfuscate Cl
 \end{algorithm}
 
 
-
+\anote{For step 2 below, shall we add to preliminaries that classical circuits can be embedded into quantum ones? I'm not sure, actually, how you envisage this classical part of the corrections- maybe I haven't fully understood yet.}
 \begin{algorithm}[H]
 \caption{Circuit $C_q^\prime$}
   \begin{itemize}
@@ -274,6 +279,8 @@ In this section we  show that how gate teleportation can be used to obfuscate Cl
 If $i\mathcal{O}$ is a quantum secure classical indistinguishability obfuscation, then $Qi\mathcal{O}$ constructed from the gate teleportation protocol is a quantum Indistinguishability Obfuscation for all Clifford Circuits.
 \end{theorem}
 
+\anote{Note to self: I have not checked the below}
+
 \noindent{\bf Proof}:
 \begin{itemize}
 \item  {\tt Functionality:} The functionality $Qi\mathcal{O}$ is followed from the gate teleportation.
@@ -289,7 +296,7 @@ Since $C_{q_1}(\ket{\tau})=C_{q_2}(\ket{\tau})$ for every quantum state $\ket{\t
 
 $$\ket{\rho_1}=(I\otimes C_{q_1}) \ket{\beta^{2n}}=(I\otimes C_{q_2}) \ket{\beta^{2n}}=\ket{\rho_2}.$$
 
-so the first part of the $Qi\mathcal{O}$ output is perfectly indistinguishable. Now for the second  part note that he only difference between  $C_{q_1}^\prime$ and $C_{q_2}^\prime$ are circuits that compute the update functions $F_{C_{q_1}}$ and  $F_{C_{q_2}}.$ If we can prove that $F_{C_{q_1}}({\bf s})=F_{C_{q_2}}({\bf s})$ for every  ${\bf s}\in\{0,1\}^{2n},$ then from definition of classical indistinguishability obfuscation we can conclude that  $iO(C_{F_{C_{q_2}}})$ and $iO(C_{F_{C_{q_2}}})$
+so the first part of the $Qi\mathcal{O}$ output is perfectly indistinguishable. \anote{Yes, the above passage is correct.} Now for the second  part note that he only difference between  $C_{q_1}^\prime$ and $C_{q_2}^\prime$ are circuits that compute the update functions $F_{C_{q_1}}$ and  $F_{C_{q_2}}.$ If we can prove that $F_{C_{q_1}}({\bf s})=F_{C_{q_2}}({\bf s})$ for every  ${\bf s}\in\{0,1\}^{2n},$ then from definition of classical indistinguishability obfuscation we can conclude that  $iO(C_{F_{C_{q_2}}})$ and $iO(C_{F_{C_{q_2}}})$
 are computationally indistinguishable against any quantum adversary \footnote{Note without loss of generality we can assume that $|C_{F_{C_{q_1}}}|=|C_{F_{C_{q_2}}}|,$ because we can always increase the size of a circuit by adding trivial gates to it. }
 
 From Theorem \ref{sec:Clifford Functions} we have $F_{C_{q_1}}$ and $F_{C_{q_2}}$ equivalent functions, therefore $Qi\mathcal{O}$ is a quantum indistinguishability obfuscation for all Clifford Circuits.
@@ -300,7 +307,7 @@ Let $C_{q_1}$ and $C_{q_2}$ be two equivalent Clifford circuits and  $F_{C_{q_1}
 
 
 \begin{flushleft}
-{\bf Proof:} For any {\em n}-qubit state $\ket \psi$ we have $C_{q_1}(\ket \psi)=C_{q_2}(\ket \psi).$ If we use Circuit teleportation protocol to compute $C_1(\ket \psi)$ and $C_{q_2}(\ket \psi),$ After measurement and tracing out the bell states the system corresponding to the circuit $C_{q_1}$ and $C_{q_2}$ are in the states.
+{\bf Proof:} For any {\em n}-qubit state $\ket \psi$ we have $C_{q_1}(\ket \psi)=C_{q_2}(\ket \psi).$ If we use Circuit teleportation protocol to compute $C_1(\ket \psi)$ and $C_{q_2}(\ket \psi),$ After measurement and tracing out the Bell states \anote{I'm not sure which part you are tracing out?} the system corresponding to the circuit $C_{q_1}$ and $C_{q_2}$ are in the states.
 
 $$C_{q_1} ({\rm {\rm U}}\ket \psi)={\rm {\rm U}}_{C_{q_1}}C_{q_1}(\ket \psi)  \;\mbox{ and }\; C_{q_2} ({\rm {\rm U}}\ket \psi)={\rm {\rm U}}_{C_{q_2}}(C_{q_2}(\ket \psi))$$
 Where
@@ -342,6 +349,10 @@ Let $C_{q_1}$ and $C_{q_2}$ be two equivalent Clifford circuits, then $F_{C_{q_1
 
 \subsection{Indistinguishability Obfuscation for the Clifford Update Functions}
 \label{sec: iO-clifford-functions}
+
+
+\anote{I am not sure how am I to understand that the $F_{C_q}$ are Cliffords.... I thought they were classical circuits?}
+
 In this section we present a (quantum secure classical) $i\mathcal{O}$ that can obfuscate the update function $F_{C_q},$ for any $n$-qubit Clifford circuit $C_q.$
 
 \begin{algorithm}[H]
@@ -366,20 +377,22 @@ Main idea: Each Clifford layer is obfuscated using the canonical form. The $\tga
 
 
 \subsubsection{Using Gate Teleportation}
-As mentioned in the section\ref{defn:Clifford+T:family} that adding a non-Clifford gates  such as $\tgate$ to Clifford gates gives us a generating set for all quantum circuits. The $\tgate$ relates to the $\xgate, \zgate$
+As mentioned in  Section~\ref{defn:Clifford+T:family}, adding a non-Clifford gates  such as $\tgate$ to Clifford gates gives us a generating set for all quantum circuits. The $\tgate$ relates to the $\xgate, \zgate$
 $$\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\pgate^b \tgate$$
 Note we write $\pgate=(\frac{1+i}{2}) \igate + (\frac{1-i}{2})\zgate,$
-$$\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\left[\left(\frac{1+i}{2}) \igate + (\frac{1-i}{2}\right)\zgate\right]^b \tgate$$
+$$\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate\right]^b \tgate$$
 $$\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate^b\right] \tgate$$
+\anote{For the last line, I would add some explanation, otherwise it looks like a mistake}
 Now suppose we  want evaluate the circuit $\hgate \tgate$ on some qubit $\ket{\phi}$ using gate teleportation, then
  $$\hgate \tgate \xgate^b \zgate^a (\ket{\phi}) = \xgate^{b\oplus a} \zgate^b \hgate \pgate^b \tgate(\ket{\phi})$$
- If $b=0,$ then we don't have to worry about $\pgate$ correction, otherwise we have to perform a $\pgate$ correction which is a problem since  $\hgate$ and $\pgate$ does not compute.\anote{commute?}
+ If $b=0,$ then we don't have to worry about the $\pgate$ correction, otherwise we have to perform a $\pgate$ correction which is a problem since  $\hgate$ and $\pgate$ does not compute.\anote{commute?}
  $$\hgate \tgate \xgate^b \zgate^a (\ket{\phi}=\xgate^{a\oplus b} \zgate^b  \left[\left(\frac{1+i}{2}\right) \hgate + \left(\frac{1-i}{2}\right)\hgate\zgate^b\right] \tgate(\ket{\phi})$$
 $$= \xgate^{a\oplus b} \zgate^b  \left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\xgate^b\right] \hgate\tgate(\ket{\phi})$$
 $$=\left[\left(\frac{1+i}{2}\right)\xgate^{a\oplus b} \zgate^b  + (-1)^b\left(\frac{1-i}{2}\right)  \xgate^{a} \zgate^b\right]\hgate\tgate(\ket{\phi})$$
 $$=\left[\alpha_1\xgate^{a\oplus b} \zgate^b  + (-1)^b\alpha_2  \xgate^{a} \zgate^b\right]\hgate\tgate(\ket{\phi})$$
- where $\alpha_1=\left(\frac{1+i}{2}\right)$ and $\alpha_2=\left(\frac{1-i}{2}\right).$ For this particular circuit the update function required at most two complex numbers and four bits.
- In general for any 1-qubit  unitary circuit we need to store at most fours complex numbers and eights bits to represent the corresponding update function. To realize this note that the set $\{\hgate,  \tgate\}$ is universal for 1-qubit unitary and any 1-qubit (unitary circuit) can be written as an alternating sequence of $\hgate,$ and $\tgate$ as follows,
+ where $\alpha_1=\left(\frac{1+i}{2}\right)$ and $\alpha_2=\left(\frac{1-i}{2}\right).$ For this particular circuit, the update function requires at most two complex numbers and four bits.
+ In general for any 1-qubit  unitary circuit we need to store at most four complex numbers and eights bits to represent the corresponding update function. To realize this, note that the set $\{\hgate,  \tgate\}$ is universal for 1-qubit unitary and any 1-qubit (unitary circuit) can be written as an alternating sequence of $\hgate,$ and $\tgate$ as follows,
+\anote{I don't think the decomposition below is universal. Also, need to describe in preliminaries how to interpret this - from right-to-left or the other way?}
 
  $$C_q=\textsf{G}\mbox{ --- }\tgate \mbox{ --- } \hgate \mbox{ --- } \tgate \mbox{ --- } \hgate \mbox{ --- } \cdots \mbox{ --- } \tgate \mbox{ --- } \hgate \mbox{ --- } \tgate \mbox{ --- } \textsf{G}$$
   where $\textsf{G}=\hgate$ or $\textsf{G}=\igate.$
