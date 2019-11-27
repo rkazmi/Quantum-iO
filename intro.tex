@@ -3,6 +3,7 @@
 \anote{start more smoothly. What is iO, how did it come about, why do we care, what is the state-of-the-art? Also, mention somewhere that a canonical form is an iO}
 Indistinguishability obfuscation ($i\mathcal{O}$) was first proposed by Barak, Goldreich, Impagliazzo, Rudich, Sahai, Vadhan and Yang~\cite{BGI+12}. Among other things, it has been shown to enable digital signatures, public key encryption~\cite{SW14}, multiparty key agreement, broadcast encryption~\cite{BZ14}, fully homomorphic encryption~\cite{CLTV15} and zero knowledge~\cite{BP15} etc.   Add more stuff. 
 
+\anote{Add more background about the state-of-the art in iO: what are the current candidates, and is there a post-quantum one?}
 
 \anote{introduce quantum cryptography. Introduce Quantum iO as per \cite{AF16arxiv}. }
 
@@ -34,7 +35,7 @@ The quantum obfuscation is studied more rigorously in \cite{AF16arxiv}, where th
 
 \subsection{Our Results}
 
- In this work we define a new definition of computational quantum obfuscation $Qi\mathcal{O}$ and provide two concrete instantiation of it. The first instantiation is based on the work of Aronson and Gottesman ~\cite{AG04}, In this paper, an efficient algorithm to compute a canonical form of any Clifford circuit was describe. However, the canonical form was not guaranteed to be unique, so we slightly modified their algorithm so that it always outputs a unique canonical form for any Clifford circuit. The second instantiation is based on gate-teleportation \cite{} and assume an existence of a quantum-secure classical $i\mathcal{O}$ for certain class of functions (section \ref{correction function}). Using this technique we can obfuscate any $n$-qubit quantum circuit as far as the number of $\tgate$ gates are in $O(\log(n)).$
+ In this work we define a new definition of computational quantum obfuscation $Qi\mathcal{O}$ and provide two concrete instantiation of it. The first instantiation is based on the work of Aaronson and Gottesman ~\cite{AG04}, In this paper, an efficient algorithm to compute a canonical form of any Clifford circuit was describe. However, the canonical form was not guaranteed to be unique, so we slightly modified their algorithm so that it always outputs a unique canonical form for any Clifford circuit. The second instantiation is based on gate-teleportation \cite{} and assume an existence of a quantum-secure classical $i\mathcal{O}$ for certain class of functions (section \ref{correction function}). Using this technique we can obfuscate any $n$-qubit quantum circuit as far as the number of $\tgate$ gates are in $O(\log(n)).$
 
 
 
@@ -51,6 +52,7 @@ The quantum obfuscation is studied more rigorously in \cite{AF16arxiv}, where th
 
 \anote{Make sure we emphasize somewhere why the paper belong in the ICT conference--- perhaps because the reduction is information-theoretic, assuming classical iO?}
 
+\anote{TODO: emphasize other work where a limited number of $T$-gates was tolerated, e.g. \cite{BJ15}., and also how the $T$-gate is often seen as the bottle-neck, e.g. in fault-tolerant quantum computing. }
 
 \Anne{Is there an advantage in using quantum states to obfuscate programs? I would suspect that one big advantage would be unclonable programs (they cannot be copied). Is this too ambitious to look at?  What does it even mean to have unclonable programs? (this links with work that I am currently doing with Sébastien Lord, a PhD student).}
 

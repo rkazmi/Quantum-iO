@@ -18,6 +18,7 @@ $$C_{q_1}(\ket{\psi}) =C_{q_2}(\ket{\psi}).$$
 \end{definition}
 \anote{Need some blah blah before an important definition to describe what it is saying, but in words}
 
+\anote{why is computational in brackets below?}
 \begin{definition}\label{def:QiO} {\rm (Quantum Indistinguishability Obfuscation)}
 A  polynomial-time quantum algorithm for a class of quantum circuits $\mathcal{C}_Q$ is a quantum {\rm(}computational{\rm)} indistinguishability obfuscator $Qi\mathcal{O}$  if the following conditions hold:
 
@@ -26,11 +27,14 @@ A  polynomial-time quantum algorithm for a class of quantum circuits $\mathcal{C
 $$(\rho, C_q^\prime)\leftarrow Qi\mathcal{O}(C_q) \;  \mbox{ and }\; C_q^\prime(\rho,\ket{\phi})=C_{q}(\ket{\phi})$$
 %where $\rho \in Q(m)$ and $C_q^\prime$  is a $m+n$ qubit quantum circuit.
 											
+\anote{above, we are mixing pure states such as $\ket{\phi}$ with mixed states, such as $\rho$. This gets confusing, but I don't know exacly how to fix it. Maybe $\rho$ could be assumed wlog to be pure, so we can use use $\ket{\psi}$ instead of $\rho?$. }
+
 \item  {\tt Polynomial Slowdown:}  For every $C_{q}\in \mathcal{C}_Q,$
 \begin{itemize}
-\item  $\rho \in \mathit{Qubit}(poly(|C_{q}|)),$ i.e. $\rho$ is at most a $poly(|C_{q}|)$ qubit state.
+\item  $\rho \in \mathit{Qubit}(poly(|C_{q}|)),$ \emph{i.e.}, $\rho$ is at most a $poly(|C_{q}|)$ qubit state.
 \item $|C_{q}^\prime| \in poly(|C_{q}|).$
 \end{itemize}
+\anote{in below, did we define what we mean by size? If this is the number of gates, I would find the definition quite restrictive. Maybe you mean the same dimensions for input- output?}
 
 \item {\tt Indistinguishability:} For any two equivalent quantum circuits $C_{q_1},C_{q_2}\in \mathcal{C}_Q,$ of the same size
  and for every polynomial-time quantum distinguisher $\mathcal{D}_q,$ there exists a negligible function {\rm negl} such that:
@@ -44,11 +48,11 @@ Where $k=|C_{q_1}|=|C_{q_2}|.$
 
 
 \subsection{Quantum Indistinguishability Obfuscation for Clifford Circuits}
- In this section we present two methods to obfuscate any Clifford circuit,  one using a canonical form and the other using the gate teleportation.
+ In this section we present two methods to obfuscate any Clifford circuit,  one using a canonical form and the other using gate teleportation.
 
 \subsubsection{Obfuscating Clifford Using the Canonical Form}
 \label{sec:Clifford-iO-canonical}
-Aronson and Gottesman invented a polynomial-time algorithm that computed a canonical form of any Clifford circuit~\cite{AG04}. Their algorithm (we denote as {\tt AG-Canonical}, page 8 - 9 \cite{AG04})\anote{pages 8-9 of the AG reference?}takes a tableau (binary matrix) related to a Clifford circuit as an input and output its canonical form.  However, the {\tt AG-Canonical} lacks two properties that our important for obtaining $Qi\mathcal{O}.$ First, it does not take a circuit as an input, but rather a $2n \times 2n$ binary matrix representing some quantum state and second, the canonical form computed by it may not always be unique. In this section we show that how one can easily tweak {\tt AG-Canonical}, so that it satisfies both of the properties and allow us to construct a  $Qi\mathcal{O}$ for all Clifford Circuits. We start by briefly describing  {\tt AG-Canonical}.
+Aaronson and Gottesman invented a polynomial-time algorithm that computed a canonical form of any Clifford circuit~\cite{AG04}. Their algorithm (we denote as {\tt AG-Canonical}, page 8 - 9 \cite{AG04})\anote{pages 8-9 of the AG reference?}takes a tableau (binary matrix) related to a Clifford circuit as an input and output its canonical form.  However, the {\tt AG-Canonical} lacks two properties that our important for obtaining $Qi\mathcal{O}.$ First, it does not take a circuit as an input, but rather a $2n \times 2n$ binary matrix representing some quantum state and second, the canonical form computed by it may not always be unique. In this section we show that how one can easily tweak {\tt AG-Canonical}, so that it satisfies both of the properties and allow us to construct a  $Qi\mathcal{O}$ for all Clifford Circuits. We start by briefly describing  {\tt AG-Canonical}.
 
 \anote{excellent lead-in paragraph above!}
 
@@ -204,7 +208,7 @@ The {\tt AG-Canonical-Unique} computes a unique canonical form for Clifford Circ
 \end{lemma}
 
 \begin{proof}
-The cost of computing the final tableau $\mathcal{T}_f$ is at most $O(n)$ gates (\cite{AG04}) and $|C_q^\prime |\in O(poly(|n|)$ (\cite{AG04}).  Note, for any $n$-qubit circuit $n\leq |C_q|,$ therefore the size of the algorithm {\tt AG-Canonical-Unique} is at most $poly(|C_q|)$ gates. Moreover, Aronson and Gottesman proved in \cite{AG04} that if $C_{q_1}$ and $C_{q_2}$ are two Clifford circuits and $\mathcal{T}_{f_1}$ and $\mathcal{T}_{f_2}$ are their final tableaus obtained by running them on the standard initial tableau
+The cost of computing the final tableau $\mathcal{T}_f$ is at most $O(n)$ gates (\cite{AG04}) and $|C_q^\prime |\in O(poly(|n|)$ (\cite{AG04}).  Note, for any $n$-qubit circuit $n\leq |C_q|,$ therefore the size of the algorithm {\tt AG-Canonical-Unique} is at most $poly(|C_q|)$ gates. Moreover, Aaronson and Gottesman proved in \cite{AG04} that if $C_{q_1}$ and $C_{q_2}$ are two Clifford circuits and $\mathcal{T}_{f_1}$ and $\mathcal{T}_{f_2}$ are their final tableaus obtained by running them on the standard initial tableau
 $\mathcal{T}_{i_1}=\mathcal{T}_{i_2}=[{\bf I}_{2n}|{\bf 0}]$, then $C_{q_1}$ and $C_{q_2}$ are equivalent if and only if $\mathcal{T}_{f_1}=\mathcal{T}_{f_2}.$ This means the final tableau $\mathcal{T}_f$ obtain in {\tt AG-Canonical-Unique} is the same for every equivalent Clifford circuit. Therefore {\tt AG-Canonical-Unique} computes a unique canonical form for Clifford circuits.
 \end{proof}
 
@@ -223,7 +227,7 @@ Note we output an empty register $\rho$ to be consistent with our definition of 
 
 \subsubsection{Quantum Indistinguishability Obfuscation using Gate Teleportation}
 \label{sec:Clifford-iO-teleportaion}
-In this section we will show that how gate teleportation can be used to obfuscate Clifford circuits. Our algorithm relies on the assumption that there exists a quantum secure $i\mathcal{O}$ for classical circuits, this seems problematic at first since, there is no provably quantum secure $i\mathcal{O}$ known for general classical circuits. However,  our construction relies on the assumption that a quantum secure $i\mathcal{O}$ exists for a very specific class of circuits that are associated with the update functions (section \ref{correction function}). In fact,  to construct a quantum secure $i\mathcal{O}$ for the family circuits (update functions) corresponding to Clifford circuits is quite easy (section \ref{sec: iO-clifford-functions}).
+In this section we  show that how gate teleportation can be used to obfuscate Clifford circuits. Our algorithm relies on the assumption that there exists a quantum secure $i\mathcal{O}$ for classical circuits, this seems problematic at first since, there is no provably quantum secure $i\mathcal{O}$ known for general classical circuits. However,  our construction relies on the assumption that a quantum secure $i\mathcal{O}$ exists for a very specific class of circuits that are associated with the update functions (section \ref{correction function}). In fact,  to construct a quantum secure $i\mathcal{O}$ for the family circuits (update functions) corresponding to Clifford circuits is quite easy (section \ref{sec: iO-clifford-functions}).
 
 
 
@@ -388,7 +392,7 @@ where $b_1=a,\, a_1=b,$ if $\textsf{G} =\hgate,$  otherwise   $b_1=b,\, a_1=a.$\
  \hspace{2.3in}   $=\left(c_1\igate+ c_2^\prime\xgate+c_3\zgate+c_4^\prime\xgate\zgate\right)\tgate \xgate\zgate\hgate\tgate\hgate \tgate \textsf{G},$ \\
   where $c_2^\prime=(c_2\alpha_2+c_4\alpha_1)$ and $c_4^\prime=(c_2\alpha_1+c_4\alpha_2).$
   %$\tgate(\left(c_1\igate+ c_2\xgate+c_3\zgate+c_4\xgate\zgate\right)\hgate\tgate\hgate \tgate \textsf{G},\right)$
-\item[-] Note applying $\tgate$ gate in the line 6 only affected the coefficients but didn't increase the number of terms in the summation. It is easy to see that after applying the remain gates in $C_q$ we will have the quantity
+\item[-] Note applying $\tgate$ gate in the line 6 only affected the coefficients but didn't increase the number of terms in the summation. It is easy to see that after applying the remain gates in $C_q$ we  have the quantity
 $$\left(\beta_1 \igate+\beta_2 \xgate+\beta_3 \zgate+\beta_4 \xgate \zgate\right) C_q(\ket{\phi}), \; \mbox{ where } \beta_i\in \mathbb{C}.$$
 \end{enumerate}
 Further more the correction matrix $\left(\beta_1 \igate+\beta_2 \xgate+\beta_3 \zgate+\beta_4 \xgate \zgate\right)^{-1}$  is completely determine by $(\beta_1, \beta_2, \beta_3, \beta_4).$ Therefore, for any arbitrary 1-qubit unitary circuit $C_q,$ the update function is $$F_{C_q}: \mathbb{F}_2^2 \longrightarrow \mathbb{C}^4,\hspace{0.5cm} (a,b)\longrightarrow (\beta_1,\beta_2,\beta_3, \beta_4).$$

@@ -5,13 +5,13 @@ Let $\mathbb{N}$ be the set of positive integers. For $n \in \mathbb{N}$, we set
  An element $s \in \bit{n}$ is called a bitstring, and $|s|=n$ denotes its length. We reserve the notation $0^n$ (resp., $1^n$) to denote the $n$-bit string with all zeroes (resp., all ones).  We denote an arbitrary polynomial from the set $\mathbb{N}$ to $\mathbb{N}$ by $poly( ).$
 
 
-A function ${\rm negl}:\mathbb{N}\rightarrow\mathbb{R}^{+}\cup \{0\}$ is negligible if for every positive polynomial $p(n)$ there exists a positive integer $n_0$ such that  for all  $n>n_0,$ ${\rm negl}(n) < 1/ p(n).$   A typical use of negligible functions is to indicate that the probability of success of some algorithm is too small to be amplified to a constant by a feasible (\emph{i.e.}, polynomial) number of repetitions. Given two bit strings $x$ and $y$ of equal length, we denote their bitwise XOR by $x \oplus y.$
+A function ${\rm negl}:\mathbb{N}\rightarrow\mathbb{R}^{+}\cup \{0\}$ is \emph{negligible} if for every positive polynomial $p(n)$ there exists a positive integer $n_0$ such that  for all  $n>n_0,$ ${\rm negl}(n) < 1/ p(n).$   A typical use of negligible functions is to indicate that the probability of success of some algorithm is too small to be amplified to a constant by a feasible (\emph{i.e.}, polynomial) number of repetitions. Given two bit strings $x$ and $y$ of equal length, we denote their bitwise XOR by $x \oplus y.$
 
 \subsubsection{Classical Circuits and Algorithms}
- For $n, m\in\mathbb{N}$ let  $f:\bit{n}\rightarrow \bit{m}$ be a function. We say a circuit $C$ computes $f$ if for every $s \in \bit{n},\; C(s)=f(s).$  We define the size of a circuit $C$ as the number of gates in it and is denoted by $|C|.$ A set of gates for classical computation  are universal if, for all $n, m\in\mathbb{N}$, and for every function $f:\bit{n}\rightarrow \bit{m}$ a circuit can be constructed for computing $f$ using only gates from that set. It is a well known fact that \{AND, OR, NOT\} is a set of universal gates for classical circuits. A family of circuits $\mathcal{F}=\{C_n\mid n\in\mathbb{N}\},$ one for each input  size $n\in \mathbb{N}$ is called uniform if there exists a deterministic Turing machine $M,$ such that
+ For $n, m\in\mathbb{N}$ let  $f:\bit{n}\rightarrow \bit{m}$ be a function. We say a circuit $C$ computes $f$ if for every $s \in \bit{n},\; C(s)=f(s).$  We define the size of a circuit $C$ as the number of gates in it and is denoted by $|C|.$ A set of gates for classical computation  are universal if, for all $n, m\in\mathbb{N}$, and for every function $f:\bit{n}\rightarrow \bit{m}$ a circuit can be constructed for computing~$f$ using only gates from that set. It is a well known fact that \{AND, OR, NOT\} is a set of universal gates for classical circuits. A family of circuits $\mathcal{F}=\{C_n\mid n\in\mathbb{N}\},$ one for each input  size $n\in \mathbb{N}$ is called uniform if there exists a deterministic Turing machine $M,$ such that
  \begin{itemize}
  \item For each $n\in\mathbb{N},$ $M$ outputs a description of $C_n \in \mathcal{F}$ on input $1^n.$
- \item  For each $n\in\mathbb{N},$ $M$ runs in $poly(n).$
+ \item  For each $n\in\mathbb{N},$ $M$ runs in time $poly(n).$
  \end{itemize}
 
 
@@ -121,7 +121,7 @@ A function ${\rm negl}:\mathbb{N}\rightarrow\mathbb{R}^{+}\cup \{0\}$ is negligi
 
 
 \begin{definition}\label{def:qiO} {\rm({\bf Quantum Secure Indistinguishability Obfuscation} $i\mathcal{O}$)}
-A probabilistic polynomial-time algorithm is a quantum secure computational indistinguishability obfuscator $i\mathcal{O}$, for a class of circuits ${\mathcal C},$ if the following conditions hold:
+A probabilistic polynomial-time algorithm is a \emph{quantum-secure computational indistinguishability obfuscator} $i\mathcal{O}$ for a class of circuits ${\mathcal C},$ if the following conditions hold:
 
 \begin{enumerate}
 \item {\tt Functionality:} For any circuit $C\in {\mathcal C},$ and for all inputs $x$ $$i\mathcal{O}(C)(x)=C(x).$$
@@ -138,12 +138,14 @@ A probabilistic polynomial-time algorithm is a quantum secure computational indi
 \subsection{Basic Quantum Notions}
 \label{sec:quantum-prelims}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\cite{CH05}
-Given an $n$-bit string $x$, the corresponding quantum-computational $n$-qubit basis state is denoted~$\ket{x}$. The $2^n$-dimensional Hilbert space spanned by $n$-qubit basis states is denoted
-$$
+\cite{CH05} \anote{Not sure what this reference is doing here? maybe you meant something else?}
+Given an $n$-bit string $x$, the corresponding quantum-computational $n$-qubit basis state is denoted~$\ket{x}$. The $2^n$-dimensional Hilbert space spanned by $n$-qubit basis states is denoted:
+\anote{in general, we will try to include equation numbers unless there is a reason not to. This will help in reviewing and referencing our work.}
+\begin{equation}
 \mathcal{H}_n := \textbf{span} \left\{ \ket{x} : x \in \bit{n} \right\}\,.
-$$
-We denote by $\mathcal{D}(\mathcal{H}_n)$ the set of density operators (i.e., valid quantum states) on~$\mathcal{H}_n$. These are linear operators on $\mathcal{D}(\mathcal{H}_n)$ which are positive-semidefinite and have trace equal to $1$. When considering different physical subsystems, we will denote them with uppercase Latin letters; when a Hilbert space corresponds to a subsystem, we will place the subsystem label in the subscript. For instance, if $F \cup G \cup H = [n]$ then $\mathcal{H}_n = \mathcal{H}_F \otimes \mathcal{H}_G \otimes \mathcal{H}_H.$ Sometimes we will write explicitly the subsystems a state belongs to as subscripts; this will be useful when considering, \emph{e.g.}, the reduced state on some of the subspaces. For example, we will sometimes express the statement $\rho \in \mathcal{D}(\mathcal{H}_F \otimes \mathcal{H}_G \otimes \mathcal{H}_H)$ simply by calling the state $\rho_{FGH}$; in that case, the state obtained by tracing out the subsystem~$H$ will be denoted~$\rho_{FG}$.
+\end{equation}
+\anote{In general, there is some confusion throughout related to pure and mixed states. This preliminaries is good, but need to make sure that it matches the level of formalism in the main body.}
+We denote by $\mathcal{D}(\mathcal{H}_n)$ the set of density operators (\emph{i.e.}, valid quantum states) on~$\mathcal{H}_n$. These are linear operators on $\mathcal{D}(\mathcal{H}_n)$ which are positive-semidefinite and have trace equal to $1$. When considering different physical subsystems, we denote them with uppercase Latin letters; when a Hilbert space corresponds to a subsystem, we place the subsystem label in the subscript. For instance, if $F \cup G \cup H = [n]$ then $\mathcal{H}_n = \mathcal{H}_F \otimes \mathcal{H}_G \otimes \mathcal{H}_H.$ Sometimes we  write explicitly the subsystems a state belongs to as subscripts; this will be useful when considering, \emph{e.g.}, the reduced state on some of the subspaces. For example, wesometimes express the statement $\rho \in \mathcal{D}(\mathcal{H}_F \otimes \mathcal{H}_G \otimes \mathcal{H}_H)$ simply by calling the state $\rho_{FGH}$; in that case, the state obtained by tracing out the subsystem~$H$ will be denoted~$\rho_{FG}$.
 
 
 Given $\rho, \sigma \in \mathcal{D}(\mathcal{H})$, the trace distance between $\rho$ and $\sigma$ is given by half the trace norm $\|\rho - \sigma\|_1$ of their difference. When $\rho$ and $\sigma$ are classical probability distributions, the trace distance reduces to the total variation distance. Physically realizable maps from a state space $\mathcal{D}(\mathcal{H})$ to another state space $\mathcal{D}(\mathcal{H}')$ are called \emph{admissible}---these are the completely positive trace-preserving (CPTP) maps. For the purpose of distinguishability via input/output operations, the appropriate norm for CPTP maps is the diamond norm, denoted $\|\cdot\|_\diamond$. The set of admissible maps coincides with the set of all maps realizable by composing (i.) addition of ancillas, (ii.) unitary evolutions, (iii.) measurements in the computational basis, and (iv.) tracing out subspaces. We remark that unitaries $U \in U(\mathcal{H}_n)$ act on $\mathcal{D}(\mathcal{H}_n)$ by conjugation: $\rho \mapsto U \rho U^\dagger$. The identity operator~$\mathds{1}_n \in U(\mathcal{H}_n)$ is thus both a valid map, and (when normalized by $2^{-n}$) a valid state in $\mathcal{D}(\mathcal{H}_n)$---corresponding to the classical uniform distribution.
@@ -160,7 +162,7 @@ $$
 \qquad
 \zgate = \left[\begin{array}{cc} 1 & 0\\ 0 & -1\end{array}\right]\,.
 $$
-The Pauli operators are Hermitian and unitary quantum gates, i.e.\ $P^\dag=P$ and $P^\dag P=P P^\dag = P^2 = I$ for all $P \in \{\igate, \xgate, \ygate, \zgate\}$. It is easy to check that applying a uniformly random Pauli operator to any single-qubit density operator results in the maximally mixed state:
+The Pauli operators are Hermitian and unitary quantum gates, \emph{i.e.}, $P^\dag=P$ and $P^\dag P=P P^\dag = P^2 = I$ for all $P \in \{\igate, \xgate, \ygate, \zgate\}$. It is easy to check that applying a uniformly random Pauli operator to any single-qubit density operator results in the maximally mixed state:
 $$
 \frac{1}{4}\left(\rho +  \xgate\rho  \xgate + \ygate\rho \ygate + \zgate\rho \zgate \right) = \frac{\mathds{1}_1}{2}
 \qquad
@@ -175,10 +177,10 @@ $$
 To observers with no knowledge of $s$ and $t$, the resulting state is information-theoretically indistinguishable from $\mathds{1}_1/2$. Of course, if we know $s$ and $t$, we can invert the above map and recover $\rho$ completely.
 
 
-The above map can be straightforwardly extended to the $n$-qubit case in order to obtain an elementary {\em quantum encryption scheme} called the {\em quantum one-time pad}.
-We first set $\xgate_j = \mathds{1}^{\otimes j-1} \otimes \xgate \otimes \mathds{1}^{\otimes n-j}$ and likewise for $\ygate_j$ and $\zgate_j$. We define the $n$-qubit Pauli group $\mathcal P_n$ to be the subgroup of $\operatorname{SU}(\mathcal{H}_n)$ generated by $\{\xgate_j, \ygate_j, \zgate_j : j = 1, \dots, n \}$. Note that Hermiticity is inherited from the single-qubit case, i.e.\ $P^\dag = P$ for every $P \in \mathcal{P}_n$.
+The above map can be straightforwardly extended to the $n$-qubit case in order to obtain an elementary {\em quantum encryption scheme} called the {\em quantum one-time pad}\cite{AMTW00}.
+We first set $\xgate_j = \mathds{1}^{\otimes j-1} \otimes \xgate \otimes \mathds{1}^{\otimes n-j}$ and likewise for $\ygate_j$ and $\zgate_j$. We define the $n$-qubit Pauli group $\mathcal P_n$ to be the subgroup of $\operatorname{SU}(\mathcal{H}_n)$ generated by $\{\xgate_j, \ygate_j, \zgate_j : j = 1, \dots, n \}$. Note that Hermiticity is inherited from the single-qubit case, \emph{i.e.}, $P^\dag = P$ for every $P \in \mathcal{P}_n$.
 
-
+\anote{It is not clear to me that, above, the identity is part of $\mathcal{P}_n$. I think it should be.}
 
 %\begin{definition}\label{def:qotp}
 %{\bf (quantum one-time pad)}
@@ -196,7 +198,7 @@ We first set $\xgate_j = \mathds{1}^{\otimes j-1} \otimes \xgate \otimes \mathds
 %
 %Just as in the classical case~\cite{Shannon1948}, any reduction in key length is not possible without compromising information-theoretic security~\cite{AMTW00, BR2003}. Of course, in practice the key length of the one-time pad (quantumly or classically) is highly impractical. This is a crucial reason to consider---as we do in this work---encryption schemes which are secure only against computationally bounded adversaries.\\
 
-
+\anote{$\xgate$ and $\zgate$ already defined. I would re-phrase, first defining the new gates, and then defining the Clifford group.}
 
 \begin{definition}
 \label{defn:Clifford+T:family}
@@ -210,55 +212,64 @@ $$\quad\cnot = \left[\begin{array}{cccc} 1 & 0 & 0 & 0\\ 0 & 1 & 0 & 0\\ 0 & 0 &
 We note the following relations between these gates:
 $$\xgate\zgate = - \zgate\xgate,\quad \tgate^2=\pgate,\quad\pgate^2=\zgate,\quad\hgate\xgate\hgate=\zgate,\quad \tgate\pgate=\pgate\tgate,\quad\pgate\zgate=\zgate\pgate.$$
 Also, for any $a,b\in\{0,1\}$ we have
-$\hgate\xgate^b\zgate^a=\xgate^a\zgate^b \hgate$
+$\hgate\xgate^b\zgate^a=\xgate^a\zgate^b \hgate$\,.
 
 \subsubsection{Quantum Circuits and Algorithm}
+\anote{todo: define what is a quantum circuit, and also any type of notation that will be used in the rest of the paper. For instance, what does $\hgate-\cnot-\pgate-\cnot-\pgate-\cnot-\hgate-\pgate-\cnot-\pgate-\cnot$ mean? Do I apply gates from left-to-right, or from right-to-left?}
+
 For $n\in \mathbb{N},$ the set of all $n\times n$ unitary matrix is denoted by $O(n,\mathbb{C})=\{U\in \mathbb{C}^{n\times n} \mid U\cdot U^\dagger={\bf I}\}.$ We say a quantum circuit $C_q$ computes $U\in O(n,\mathbb{C})$ if for every quantum state $\ket{\psi} \in \mathit{Qubit}(n),$
 $$U(\ket{\psi} )=C_q(\ket{\psi}),$$
-where  $\mathit{Qubit}(n)$  denote the set of all $n$-qubit states.
+where  $\mathit{Qubit}(n)$  denote the set of all $n$-qubit states. \anote{Do we need this Qubit notation? Don't we already have something?}
 
-A quantum circuit that computes unitary matrix is called a reversible  quantum circuit, i.e it always possible to uniquely recover the input, given the output. A set of gates are said to be universal if, for any a unitary matrix $U$  a quantum circuit can be constructed for computing $U$ using only gates from that set. It is a well known fact that Clifford gates are not universal, but adding any non-Clifford gate, such as $\tgate$, gives a universal set of gates. The
-$$\quad\tgate = \left[\begin{array}{cc} 1 & 0\\ 0 & e^{i\pi/4}\end{array}\right],$$
+A quantum circuit that computes unitary matrix is called a reversible  quantum circuit, i.e it always possible to uniquely recover the input, given the output. A set of gates are said to be universal if, for any a unitary matrix $U$  a quantum circuit can be constructed for computing~$U$ using only gates from that set. It is a well-known fact that Clifford gates are not universal, but adding any non-Clifford gate, such as $\tgate$, gives a universal set of gates, where
+$$\quad\tgate = \left[\begin{array}{cc} 1 & 0\\ 0 & e^{i\pi/4}\end{array}\right],.$$
 
-A family of quantum circuit $C=\{C_n\in \mathbb{N} \mid \}$ one for each input  size $n\in \mathbb{N}$ is called uniform if there exists a deterministic Turing machine $M,$ such that
+A family of quantum circuits $C=\{C_n\in \mathbb{N} \mid \}$ one for each input  size $n\in \mathbb{N}$ is called \emph{uniform} if there exists a deterministic Turing machine $M,$ such that
  \begin{itemize}
  \item For each $n\in\mathbb{N},$ $M$ outputs a description of $C_n \in \mathcal{F}$ on input $1^n.$
  \item  For each $n\in\mathbb{N},$ $M$ runs in $poly(n).$
  \end{itemize}
 
-All quantum operations are not unitary (reversible), nevertheless a general (possibly irreversible) quantum operation also called superoperator can efficiently simulated by a reversible quantum operations by adding ancilla states to the original system, then perform a unitary operation on the joint system, and then tracing out $Tr$ some subsystem \cite{}. More precisely, this can be described as the map:
+All quantum operations are not unitary (reversible), nevertheless a general (possibly irreversible) quantum operation also called superoperator can efficiently be simulated by a reversible quantum operations by adding auxiliary states to the original system, then performing a unitary operation on the joint system, and then tracing out $Tr$ some subsystem \cite{}. \anote{todo: find ref (I think Sebastien has some references in his thesis). Actually, do we use this?} More precisely, this can be described as the map:
 
 $$\rho_{in} \xmapsto{\mbox{superoperator}} \rho_{out}=Tr_B(U(\rho_{in} \otimes \ket{00\cdots 0} \bra{00\cdots 0})U^\dagger)$$
 
-where $\rho_{in} \in \mathcal{H}_n,$ is the original state and $\ket{00\cdots 0}$ is an ancilla state of dimension at most $n^2.$ A circuit that computes a general quantum operation is called a general quantum circuit.  Therefore, general quantum circuit can refer to both reversible or irreversible circuits. A polynomial-time quantum algorithm is a uniform family of general quantum circuits. \\
+where $\rho_{in} \in \mathcal{H}_n,$ is the original state and $\ket{00\cdots 0}$ is an auxiliary state of dimension at most $n^2.$ A circuit that computes a general quantum operation is called a general quantum circuit.  Therefore, general quantum circuits can refer to both reversible or irreversible circuits. A polynomial-time quantum algorithm is a uniform family of general quantum circuits. \\
 
-\noindent {\em Remark}: From now we use the term  quantum circuits to refer to reversible quantum circuits only and the term quantum algorithm is reserved for some family of general quantum circuits.
+\noindent {\em Remark}: From now we use the term  quantum circuits to refer to reversible quantum circuits only and the term quantum algorithm is reserved for some family of general quantum circuits. \anote{ok, well actually I do believe that we could define quantum circuits that also include auxiliary qubit preparation and measurements/trace outs, and that we can obfuscate these also using gate teleportation. Hence the distinction circuit/algorithm is not very natural. Need to think about this.}
 
 
 \subsection{Correction and Update Functions for Clifford Circuits}
 \label{correction function}
 For any Clifford gate $U\in \{\xgate, \zgate, \pgate, \cnot,\hgate\}$ we define a correction function $f_U$ that relates  $U$ and the Pauli's $ \xgate$ and $ \zgate$ matrices in the following manner.
+\anote{I am not sure what these $f$ functions are doing, and how to read these equations.  Are there typos in the subscripts? }
 $$\xgate(\xgate^b\zgate^a)=(-1)^a(\xgate^{b}\zgate^{a}) \xgate,\quad \mbox{ where }f_\hgate(a,b)=(a,b), \mbox{ for any } a, b\in\{0,1\}.$$
 $$\zgate(\xgate^b\zgate^a)=(-1)^b(\xgate^{b}\zgate^{a}) \zgate,\quad \mbox{ where }f_\hgate(a,b)=(a,b), \mbox{ for any } a, b\in\{0,1\}.$$
 $$\hgate(\xgate^b\zgate^a)=(\xgate^{a}\zgate^{b}) \hgate,\quad \mbox{ where }f_\hgate(a,b)=(b,a), \mbox{ for any } a, b\in\{0,1\}.$$
 $$ \pgate(\xgate^b\zgate^a)=((-i)^b\xgate^a\zgate^{a\oplus b}) \pgate, \quad \mbox{ where }f_ \pgate(a,b)=(a,a\oplus b), \mbox{ for any } a, b\in\{0,1\}.$$
 $$\cnot (\xgate^{b_1}\zgate^{a_1} \otimes \xgate^{b_2}\zgate^{a_2})=({\xgate^{b_1} {\zgate^{a_1\oplus a_2}}} \otimes {\xgate^{b_1\oplus b_2}}\zgate^{a_2})\cnot, \mbox{ where }$$ $$f_{\cnot}(a_1,b_1,a_2,b_2)=(a_1\oplus a_2,b_1,a_2, b_1\oplus b_2).$$
+\anote{Note that the usual notation would be $X^aZ^b$, but you've consistently used $X^bZ^a$, which is strange, but let's go with it, since this is done already.}
 
-Similarly for any $n$-qubit Clifford Circuit\footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group.} $\mathcal{C}_q$ we define an update function $F_{c_q}:\, \mathbb{F}_2^n \rightarrow  \mathbb{F}_2^n$, that relates $\mathcal{C}_q$ and a unitary $(  \xgate^{\otimes_{i=1}^{n} b_{i}} \cdot  \zgate^{\otimes_{i=1}^{n} a_{i}})$ in the following manner,
+Similarly for any $n$-qubit Clifford Circuit\footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group.} $\mathcal{C}_q$ we define an update function $F_{\mathcal{C}_q}:\, \mathbb{F}_2^n \rightarrow  \mathbb{F}_2^n$, that relates $\mathcal{C}_q$ and a unitary $(  \xgate^{\otimes_{i=1}^{n} b_{i}} \cdot  \zgate^{\otimes_{i=1}^{n} a_{i}})$ in the following manner,
 $$(  \xgate^{\otimes_{i=1}^{n} b_{i}} \cdot  \zgate^{\otimes_{i=1}^{n} a_{i}})\mathcal{C}_q=\mathcal{C}_q (  \xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot  \xgate^{\otimes_{i=1}^{n} a_{i}^\prime})$$
-where $a_i,b_i,a_i^\prime,b_i^\prime \in\{0,1\}$ for all integers  $1\leq i\leq n$ and  $F_{c_q}(a_1,b_1,a_2,b_2, \ldots a_n,b_n)=(a_1^\prime,b_1^\prime, \ldots, a_n^\prime,b_n^\prime).$ The update function $F_{c_q}$ is computed by the composition of the correction functions of the gates in the circuit $\mathcal{C}_q.$ For example consider a 2 qubit circuit Let $C_q=({\rm (I \otimes \hgate)\cdot (\cnot)}.$ The update function for this circuit is computed by first applying the $f_\hgate$ to the first two input bits and then $f_{\cnot}$ to all four bits.
+\anote{like on previous expression, I am not sure how to read this.}
+where $a_i,b_i,a_i^\prime,b_i^\prime \in\{0,1\}$ for all integers  $1\leq i\leq n$ and  $F_{\mathcal{C}_q}(a_1,b_1,a_2,b_2, \ldots a_n,b_n)=(a_1^\prime,b_1^\prime, \ldots, a_n^\prime,b_n^\prime).$ The update function $F_{c_q}$ is computed by the composition of the correction functions of the gates in the circuit $\mathcal{C}_q.$ For example, consider a 2 qubit circuit Let $C_q=({\rm (I \otimes \hgate)\cdot (\cnot)}.$ The update function for this circuit is computed by first applying the $f_\hgate$ to the first two input bits and then $f_{\cnot}$ to all four bits.
 
 $$F_{C_q}=f_{\rm CNOT}\circ f_{\rm H}(a_1,b_1, a_2,b_2)= f_{\rm CNOT}(b_1,a_1,a_2,b_2)=(b_1\oplus a_2,a_1,a_2, a_1\oplus b_2).$$
 And we have $$( \xgate^{b_1} \otimes  \xgate^{b_2}) ( \zgate^{a_1} \otimes  \zgate^{a_2})C_q=C_q( \xgate^{a_1} \otimes  \xgate^{a_1\oplus b_2}) ( \zgate^{b_1\oplus a_2} \otimes  \zgate^{a_2}).$$
 
-\subsubsection{Bell Basis}
-We denote the four Bell states as $\ket{\beta_{00}},$  $\ket{\beta_{01}},$ $\ket{\beta_{10}}$ and $\ket{\beta_{11}}.$
-$$\ket{\beta_{00}}=\frac{1}{\sqrt2}\left(\ket{00}+\ket{11}\right) \hspace{1cm}  \ket{\beta_{01}}=\frac{1}{\sqrt2}\left(\ket{01}+\ket{10}\right)$$
-$$\ket{\beta_{10}}=\frac{1}{\sqrt2}\left(\ket{00}-\ket{11}\right) \hspace{1cm} \ket{\beta_{11}}=\frac{1}{\sqrt2}\left(\ket{01}-\ket{10}\right)$$
+
+
+
 
 \subsection{Gate Teleportation}
 \label{protocol: gate  teleportation}
-Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate, \cnot,\hgate\}$ on some qubit $\ket{\psi}.$ Then using gate teleportation we can compute $U (\ket{\psi})$ as follows.
+
+We recall the \emph{Bell states}: %$\ket{\beta_{00}},$  $\ket{\beta_{01}},$ $\ket{\beta_{10}}$ and $\ket{\beta_{11}}.$
+$\ket{\beta_{00}}=\frac{1}{\sqrt2}\left(\ket{00}+\ket{11}\right)$, ${\beta_{01}}=\frac{1}{\sqrt2}\left(\ket{01}+\ket{10}\right)$,
+$\ket{\beta_{10}}=\frac{1}{\sqrt2}\left(\ket{00}-\ket{11}\right)$,  $\ket{\beta_{11}}=\frac{1}{\sqrt2}\left(\ket{01}-\ket{10}\right)$\,. 
+
+Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate, \cnot,\hgate\}$ on some qubit $\ket{\psi}.$ Then using gate teleportation  \cite{GC99} we can compute $U (\ket{\psi})$ as follows.
 \begin{algorithm}[H]
 \caption{Gate Teleportation Protocol for Clifford Gates.}
 \begin{enumerate}
@@ -272,7 +283,7 @@ Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate, \
  \begin{equation}
 \mathbb{I}\otimes \mathbb{I} \otimes U (\ket{\psi} \ket{\beta_{00}})=\frac{1}{2}\ket{\beta_{00}} U(\ket{\psi})+ \frac{1}{2}\ket{\beta_{01}}U( \xgate( \ket{\psi}) + \frac{1}{2}\ket{\beta_{10}}U( \zgate( \ket{\psi})+ \frac{1}{2}\ket{\beta_{11}}U( \xgate \zgate( \ket{\psi}).
  \end{equation}
- \item Measure the first two qubits of the system 2 in the Bell basis and obtain the classical bits $(a,b).$ The system now in the state
+ \item Measure the first two qubits of the system 2 in the Bell basis and obtain the classical bits $(a,b).$ The system is now in the state
  \begin{equation}
 							\ket{\beta_{ab}}\otimes U( \xgate^b \zgate^a( \ket{\psi})).
 \end{equation}
@@ -281,7 +292,7 @@ Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate, \
 
 $$\mathbb{I}\otimes \mathbb{I}\otimes  \zgate^{a^\prime}  \xgate^{b^\prime} \left(\ket{\beta_{ab}}\otimes U( \xgate^b \zgate^a( \ket{\psi}))\right)= \ket{\beta_{ab}}\otimes  \zgate^{a^\prime}  \xgate^{b^\prime}\left(U( \xgate^b \zgate^a( \ket{\phi}))\right)$$
 $$= \ket{\beta_{ab}}\otimes  \zgate^{a^\prime}  \xgate^{b^\prime} \left(\xgate^{b^\prime} \zgate^{a^\prime} U( \ket{\psi})\right)=\ket{\beta_{ab}}\otimes U( \ket{\psi})$$
-\item Trace out the state $\ket{\beta_{ab}}$ from the above system and obtained the state $U( \ket{\psi})$
+\item Trace out the state $\ket{\beta_{ab}}$ from the above system and obtain the state $U( \ket{\psi})$
 $$U( \ket{\psi})=Tr_{\ket{\beta_{ab}}}\left( \ket{\beta_{ab}}\otimes U(\ket{\psi})\right)$$
 
 \end{enumerate}	
@@ -289,8 +300,8 @@ $$U( \ket{\psi})=Tr_{\ket{\beta_{ab}}}\left( \ket{\beta_{ab}}\otimes U(\ket{\psi
 
 
 \begin{remark}
-Using gate teleportation we can also evaluate a  $\tgate,$ however, the correction function becomes more complicated.
-						$$\tgate \xgate^b \zgate^a= \xgate^b \zgate^{a\oplus b} \pgate^b \tgate$$
+Using gate teleportation we can also evaluate a  $\tgate,$ however, the correction function becomes more complicated, since:
+						\begin{equation}\tgate \xgate^b \zgate^a= \xgate^b \zgate^{a\oplus b} \pgate^b \tgate \end{equation}
 \end{remark}				
 %\item Compute $f(a,b)=a^\prime b^\prime$ where  $f:\{0,1\}^2\rightarrow \{0,1\}^2$ denote the correction function
 %\begin{center}
