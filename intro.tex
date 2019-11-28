@@ -1,7 +1,7 @@
 \section{Introduction}
 
 \anote{start more smoothly. What is iO, how did it come about, why do we care, what is the state-of-the-art? Also, mention somewhere that a canonical form is an iO}
-Indistinguishability obfuscation ($i\mathcal{O}$) was first proposed by Barak, Goldreich, Impagliazzo, Rudich, Sahai, Vadhan and Yang~\cite{BGI+12}. Among other things, it has been shown to enable digital signatures, public key encryption~\cite{SW14}, multiparty key agreement, broadcast encryption~\cite{BZ14}, fully homomorphic encryption~\cite{CLTV15} and zero knowledge~\cite{BP15} etc.   Add more stuff. 
+Indistinguishability obfuscation ($i\mathcal{O}$) was first proposed by Barak, Goldreich, Impagliazzo, Rudich, Sahai, Vadhan and Yang~\cite{BGI+12}. Among other things, it has been shown to enable digital signatures, public key encryption~\cite{SW14}, multiparty key agreement, broadcast encryption~\cite{BZ14}, fully homomorphic encryption~\cite{CLTV15} and zero knowledge~\cite{BP15} etc.   Add more stuff.
 
 \anote{Add more background about the state-of-the art in iO: what are the current candidates, and is there a post-quantum one?}
 
@@ -10,7 +10,7 @@ Indistinguishability obfuscation ($i\mathcal{O}$) was first proposed by Barak, G
 
 
 In this work, we continue the study of computational indistinguishable obfuscation in the quantum world.
-The main contribution of this paper is to provide a new definition of quantum indistinguishability obfuscation $Qi\mathcal{O}$ and show how to construct a $Qi\mathcal{O}$ for certain families of quantum circuits. The first construction is based on the canonical representation of Clifford circuits~\cite{AG04}, while the second construction is based on the principle of gate teleportation~\cite{GC99}. The two constructions present different advantages: the technique using the canonical form is straightforward and does not require any computational assumption. Moreover, the obfuscated circuits are classical, and hence can be easily communicated, stored, used and copied.  In contrast, the gate-teleportation scheme requires the assumption of quantum-secure classical $i\mathcal{O}$ for a certain family of functions (section \ref{correction function}) and the obfuscated circuits are quantum. While this presents a technological challenge to communication, storage and also usage, this methodology allow us to obfuscate a more general set of quantum circuit than the canonical base contruction. Moreover the gate-teleportation methodology could also enable a new functionality related to the \emph{unclonability} of quantum states. 
+The main contribution of this paper is to provide a new definition of quantum indistinguishability obfuscation $Qi\mathcal{O}$ and show how to construct a $Qi\mathcal{O}$ for certain families of quantum circuits. The first construction is based on the canonical representation of Clifford circuits~\cite{AG04}, while the second construction is based on the principle of gate teleportation~\cite{GC99}. The two constructions present different advantages: the technique using the canonical form is straightforward and does not require any computational assumption. Moreover, the obfuscated circuits are classical, and hence can be easily communicated, stored, used and copied.  In contrast, the gate-teleportation scheme requires the assumption of quantum-secure classical $i\mathcal{O}$ for a certain family of functions (section \ref{correction function}) and the obfuscated circuits are quantum. While this presents a technological challenge to communication, storage and also usage, this methodology allow us to obfuscate a more general set of quantum circuit than the canonical base contruction. Moreover the gate-teleportation methodology could also enable a new functionality related to the \emph{unclonability} of quantum states.
 
 %In this work, we continue the study of $i\mathcal{O}$ in the quantum world. We give two main contributions, both assuming the existence of quantum-secure $q\mathcal{O}$ for classical circuits.
 %Our first contribution echoes the private-to-public key transformation of~\cite{SW14}, by showing its applicability to the encryption of \emph{quantum} messages. In this case, the security is based on (quantum-secure one-way functions?)..., and is shown according to the notion of quantum semantic security ~\cite{BJ15,ABF+16}. Our second contribution shows how to build $i\mathcal{O}$ for certain families of quantum circuits. Namely, we show two different ways in which Clifford circuits admit an $i\mathcal{O}$ scheme. The first method is based on the canonical representation of Clifford circuits~\cite{AG04,Nest10}, while the second method is based on the principle of gate teleportation~\cite{GC99}. We  extend these schemes to circuits that include layers of non-Clifford $\tgate$-gates, as long as each Clifford layer is within a family of circuits that admit the $i\mathcal{O}$ obfuscation described above, and as long as the $\tgate$-gates are in fixed positions.
@@ -49,6 +49,10 @@ The quantum obfuscation is studied more rigorously in \cite{AF16arxiv}, where th
 %(however, as noted above, the Clifford canonical form is well-known, and its extension to $i\mathcal{O}$ (see Section~\ref{sec:Clifford-$i\mathcal{O}$-canonical}) is relatively straightforward.
 
 
+\subsubsection{Cliffords} TODO: place somewhere 
+Although Clifford circuits can be efficiently simulated on a classical computer \cite{Got98}, this simulation is with respect to a \emph{classical} distribution, hence for a purely quantum computation, quantum circuits are required. While Clifford circuits are known not to be universal for quantum computation, they are an important building block for fault-tolerant quantum computing, for instant, due to the fact that Cliffords admit transversal computations on many fault-tolerant codes\cite{BCL+06}.
+
+
 
 \anote{Make sure we emphasize somewhere why the paper belong in the ICT conference--- perhaps because the reduction is information-theoretic, assuming classical iO?}
 
@@ -71,8 +75,8 @@ The main open questions related to this work are:
 
 $i\mathcal{O}$ obfuscation for general quantum circuits
 
-applications of gate-teleportation based quantum $i\mathcal{O}$ (for instance, to unclonable programs~\cite{Aar09}). 
+applications of gate-teleportation based quantum $i\mathcal{O}$ (for instance, to unclonable programs~\cite{Aar09}).
 
 
 \subsection*{Outline}
-\anote{In Section~ blah blah blah.}
+\anote{In Section~ blah blah blah.} 
