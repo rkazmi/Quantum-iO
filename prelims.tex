@@ -138,7 +138,6 @@ A probabilistic polynomial-time algorithm is a \emph{quantum-secure computationa
 \subsection{Basic Quantum Notions}
 \label{sec:quantum-prelims}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\cite{CH05} \anote{Not sure what this reference is doing here? maybe you meant something else?}
 Given an $n$-bit string $x$, the corresponding quantum-computational $n$-qubit basis state is denoted~$\ket{x}$. The $2^n$-dimensional Hilbert space spanned by $n$-qubit basis states is denoted:
 \anote{in general, we will try to include equation numbers unless there is a reason not to. This will help in reviewing and referencing our work.}
 \begin{equation}
@@ -243,8 +242,8 @@ where $\rho_{in} \in \mathcal{H}_n,$ is the original state and $\ket{00\cdots 0}
 \label{correction function}
 For any Clifford gate $U\in \{\xgate, \zgate, \pgate, \cnot,\hgate\}$ we define a correction function $f_U$ that relates  $U$ and the Pauli's $ \xgate$ and $ \zgate$ matrices in the following manner.
 \anote{I am not sure what these $f$ functions are doing, and how to read these equations.  Are there typos in the subscripts? }
-$$\xgate(\xgate^b\zgate^a)=(-1)^a(\xgate^{b}\zgate^{a}) \xgate,\quad \mbox{ where }f_\hgate(a,b)=(a,b), \mbox{ for any } a, b\in\{0,1\}.$$
-$$\zgate(\xgate^b\zgate^a)=(-1)^b(\xgate^{b}\zgate^{a}) \zgate,\quad \mbox{ where }f_\hgate(a,b)=(a,b), \mbox{ for any } a, b\in\{0,1\}.$$
+$$\xgate(\xgate^b\zgate^a)=(-1)^a(\xgate^{b}\zgate^{a}) \xgate,\quad \mbox{ where }f_\xgate(a,b)=(a,b), \mbox{ for any } a, b\in\{0,1\}.$$
+$$\zgate(\xgate^b\zgate^a)=(-1)^b(\xgate^{b}\zgate^{a}) \zgate,\quad \mbox{ where }f_\zgate(a,b)=(a,b), \mbox{ for any } a, b\in\{0,1\}.$$
 $$\hgate(\xgate^b\zgate^a)=(\xgate^{a}\zgate^{b}) \hgate,\quad \mbox{ where }f_\hgate(a,b)=(b,a), \mbox{ for any } a, b\in\{0,1\}.$$
 $$ \pgate(\xgate^b\zgate^a)=((-i)^b\xgate^a\zgate^{a\oplus b}) \pgate, \quad \mbox{ where }f_ \pgate(a,b)=(a,a\oplus b), \mbox{ for any } a, b\in\{0,1\}.$$
 $$\cnot (\xgate^{b_1}\zgate^{a_1} \otimes \xgate^{b_2}\zgate^{a_2})=({\xgate^{b_1} {\zgate^{a_1\oplus a_2}}} \otimes {\xgate^{b_1\oplus b_2}}\zgate^{a_2})\cnot, \mbox{ where }$$ $$f_{\cnot}(a_1,b_1,a_2,b_2)=(a_1\oplus a_2,b_1,a_2, b_1\oplus b_2).$$
