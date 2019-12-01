@@ -379,9 +379,10 @@ Main idea: Each Clifford layer is obfuscated using the canonical form. The $\tga
 \subsubsection{Using Gate Teleportation}
 As mentioned in  Section~\ref{defn:Clifford+T:family}, adding a non-Clifford gates  such as $\tgate$ to Clifford gates gives us a generating set for all quantum circuits. The $\tgate$ relates to the $\xgate, \zgate$
 $$\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\pgate^b \tgate$$
-Note we write $\pgate=(\frac{1+i}{2}) \igate + (\frac{1-i}{2})\zgate,$
-$$\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate\right]^b \tgate$$
-$$\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate^b\right] \tgate$$
+Note  $\pgate=(\frac{1+i}{2}) \igate + (\frac{1-i}{2})\zgate,$
+$$\tgate \xgate^b \zgate^a$$
+$$=\xgate^b \zgate^{a\oplus b}\left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate\right]^b \tgate$$
+$$=\xgate^b \zgate^{a\oplus b}\left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate^b\right] \tgate$$
 \anote{For the last line, I would add some explanation, otherwise it looks like a mistake}
 Now suppose we  want evaluate the circuit $\hgate \tgate$ on some qubit $\ket{\phi}$ using gate teleportation, then
  $$\hgate \tgate \xgate^b \zgate^a (\ket{\phi}) = \xgate^{b\oplus a} \zgate^b \hgate \pgate^b \tgate(\ket{\phi})$$
