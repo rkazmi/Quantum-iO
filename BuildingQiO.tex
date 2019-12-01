@@ -377,7 +377,7 @@ Main idea: Each Clifford layer is obfuscated using the canonical form. The $\tga
 
 
 \subsubsection{Using Gate Teleportation}
-In this section we will first show that how we can obfuscate any 1-qubit unitary circuit using gate teleportation and and a quantum secure iO. Then using the ideas from 1-qubit we will show that how we can obfuscate any $n$-qubit circuit $C_q$ as far as the number of $\tgate$-gates remain logarithmic in $|C_q|.$ Recall from the section \ref{defn:Clifford+T:family} that adding a non-Clifford gates  such as $\tgate$-gate to Clifford gates gives us a generating set for all quantum circuits. The $\tgate$ relates to the $\xgate, \zgate$
+In this section we will first show that how we can obfuscate any 1-qubit unitary circuit using gate teleportation and a quantum secure iO. Then using the ideas from 1-qubit we will show that how we can obfuscate any $n$-qubit circuit $C_q$ as far as the number of $\tgate$-gates remain logarithmic in $|C_q|.$ Recall from the section \ref{defn:Clifford+T:family} that adding a non-Clifford gates  such as $\tgate$-gate to Clifford gates gives us a generating set for all quantum circuits. The $\tgate$ relates to the $\xgate, \zgate$
 $$\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\pgate^b \tgate$$
 If $b=0,$ then we don't have to worry about $\pgate$ gate otherwise we have to perform a $\pgate$ correction. We can write $\pgate=(\frac{1+i}{2}) \igate + (\frac{1-i}{2})\zgate,$ therefore
 
@@ -473,7 +473,6 @@ Let $C_q$ and $C_q^\prime$ be two equivalent 1-qubit circuits and
 F_{C_q}:\{0,1\}^2\rightarrow \mathbb{C}^4 \mbox{ and } F_{C_q^\prime}:\{0,1\}^2\rightarrow \mathbb{C}^4
 \end{equation*}
 are the corresponding update functions, then $F_{C_q}=F_{C_q^\prime}.$
-%Let $C_q$ and $C_q^\prime$ be two 1-qubit equivalent circuits and $\beta_1 \igate+\beta_2 \xgate+\beta_3 \zgate+\beta_4 \xgate \zgate$ and $\beta^\prime_1 \igate+\beta^\prime_2 \xgate+\beta^\prime_3 \zgate+\beta^\prime_4 \xgate \zgate$ are the corresponding correction unitary matrices, then $\beta_i=\beta_i^\prime$  for all integers $1\leq i\leq 4.$
 \end{lemma}
 
 {\bf Proof:} Let  $F_{C_q}(a,b)=(\beta_0, \beta_1, \beta_2, \beta_3)$ and $F_{C_q^\prime}(a,b)=(\beta_0^\prime, \beta_1^\prime, \beta_2^\prime, \beta_3^\prime)$ for $a,b\in\{0,1\}.$ For any qubit $(\ket{\psi}$
@@ -508,118 +507,9 @@ From equation \ref{lemma:1qubit:eq3} we must have
 \end{equation}
 
 If $\beta_i \neq \beta_i^\prime$ for some $i\in[4],$ then the expression on the L.H.S cannot be equal to the zero matrix, therefore we must have $\beta_i = \beta_i^\prime$ for every $i\in[4].$ Hence,  $F_{C_q}=F_{C_q^\prime}.$
-%\begin{equation}
-%\label{eq:qubit1}
-% \beta_1 \igate+\beta_2 \xgate+\beta_3 \zgate+\beta_4 \xgate \zgate C_q (\ket{\psi})=\beta^\prime_1 \igate+\beta^\prime_2 \xgate+\beta^\prime_3 \zgate+\beta^\prime_4 \xgate \zgate  C_q^\prime (\ket{\psi}).
-% \end{equation}
-% since $C_q (\ket{\psi})=C_q^\prime (\ket{\psi})$ we can substitute $C_q^\prime (\ket{\psi})$ in equation \ref{eq:qubit1} with $C_q (\ket{\psi}).$
-%
-% 
-% \begin{equation}
-% \label{eq:qubit2}
-% \beta_1 \igate+\beta_2 \xgate+\beta_3 \zgate+\beta_4 \xgate \zgate (C_q (\ket{\psi}))=\beta^\prime_1 \igate+\beta^\prime_2 \xgate+\beta^\prime_3 \zgate+\beta^\prime_4 (C_q (\ket{\psi})).
-%  \end{equation}
-%  
-%  From  equation \ref{eq:qubit2} we have 
-% \begin{equation}
-% \begin{aligned}
-% \label{eq:qubit2}
-%\beta_1 \igate+\beta_2 \xgate+\beta_3 \zgate+\beta_4 \xgate \zgate =\beta^\prime_1 \igate+\beta^\prime_2 \xgate+\beta^\prime_3 \zgate+\beta^\prime_4\\
-%  =(\beta_1-\beta_1^\prime) \igate+(\beta_2 -\beta_2^\prime)\xgate+(\beta_3-\beta_3^\prime) \zgate+(\beta_4-\beta^\prime_4) \xgate \zgate={\bf 0}.
-%  \end{aligned}
-% \end{equation}
-%  
-%If for any $i,$ $\beta_i \neq \beta_i^\prime$ then the expression on the L.H.S cannot be equal to the zero matrix, therefore we must have $\beta_i =\beta_i^\prime$ for all integers $1\leq i\leq 4.$
-
-%Lets compute this circuit gate by gate on some qubit $\ket{\phi}$ using gate teleportation
-% \begin{enumerate}
-%\item[1)] $\textsf{G} \xgate^{b}\zgate^{a}(\ket{\phi})=\xgate^{b_1}\zgate^{a_1}\textsf{G}(\ket{\phi}),$
-%where $b_1=a,\, a_1=b,$ if $\textsf{G} =\hgate,$  otherwise   $b_1=b,\, a_1=a.$\\
-%\item[2)] $\tgate\xgate^{b_1}\zgate^{a_1}\textsf{G}= (\alpha_1\xgate^{a_1\oplus b_1 }\zgate^{b_1} +(-1)^{b_1} \alpha_2\xgate^{a_1}\zgate^{b_1})\tgate \textsf{G}.$
-%\item[3)]   $\hgate (\alpha_1\xgate^{a_1\oplus b_1 }\zgate^{b_1} + (-1)^{b_1} \alpha_2\alpha_2\xgate^{a_1}\zgate^{b_1})\tgate \textsf{G}=(\alpha_1\xgate^{b_1}\zgate^{a_1\oplus b_1 } + (-1)^{b_1} \alpha_2\xgate^{b_1}\zgate^{a_1}) \hgate \tgate \textsf{G}.$
-%\item[4)] $\tgate(\alpha_1\xgate^{b_1}\zgate^{a_1\oplus b_1 } + \alpha_2\xgate^{b_1}\zgate^{a_1}) \hgate \tgate \textsf{G}$\\
-%               $=\left(\frac{i}{2}\xgate^{a_1}\zgate^{a_1\oplus b_1 } +  \frac{(-1)^{b_1}}{2}\xgate^{a_1\oplus b_1}\zgate^{b_1}+
-%   \frac{(-1)^{b_1}}{2}\xgate^{a_1\oplus b_1}\zgate^{a_1}  - \frac{i}{2}\xgate^{a_1}\zgate^{b_1} \right) \tgate\hgate \tgate \textsf{G}.$
-%
-%\item[5)]$\hgate  \left(\frac{i}{2}\xgate^{a_1}\zgate^{a_1\oplus b_1 } +  \frac{(-1)^{b_1}}{2}\xgate^{a_1\oplus b_1}\zgate^{b_1}+
-%   \frac{(-1)^{b_1}}{2}\xgate^{a_1\oplus b_1}\zgate^{a_1}  - \frac{i}{2}\xgate^{a_1}\zgate^{b_1} \right)\tgate\hgate \tgate \textsf{G}\\=  \left(\frac{i}{2}\xgate^{a_1\oplus b_1}\zgate^{a_1} +  \frac{(-1)^{b_1}}{2}\xgate^{b_1}\zgate^{a_1\oplus b_1}+
-%   \frac{(-1)^{b_1}}{2}\xgate^{a_1}\zgate^{a_1\oplus b_1}  - \frac{i}{2}\xgate^{b_1}\zgate^{a_1} \right)\hgate \tgate\hgate \tgate \textsf{G}$
-%
-%   $=\left(c_1\igate+ c_2\xgate+c_3\zgate+c_4\xgate\zgate\right)\hgate\tgate\hgate \tgate \textsf{G},$  for $c_i\in \mathbb{C}.$
-%\item[6)]  $\tgate\left(c_1\igate+ c_2\xgate+c_3\zgate+c_4\xgate\zgate\right)\hgate\tgate\hgate \tgate \textsf{G}=\left(c_1\igate+ c_2\xgate \zgate\pgate+c_3\zgate +c_4\xgate\pgate\right)\tgate \xgate\zgate\hgate\tgate\hgate \tgate \textsf{G}$
-%
-% \hspace{2.3in}   $=\left(c_1^\prime\igate+ c_2^\prime\xgate+c_3^\prime\zgate+c_4^\prime\xgate\zgate\right)\tgate \xgate\zgate\hgate\tgate\hgate \tgate \textsf{G},$ \\
-%  where $c_1^\prime=c_1,$  $c_2^\prime=(c_2\alpha_2+c_4\alpha_1),$ $c_3^\prime=c_3,$ and $c_4^\prime=(c_2\alpha_1+c_4\alpha_2).$
-%  %$\tgate(\left(c_1\igate+ c_2\xgate+c_3\zgate+c_4\xgate\zgate\right)\hgate\tgate\hgate \tgate \textsf{G},\right)$
-%\item[-] Note applying any number gates after step 6 cannot increase the number of terms in the sum, but can only change the coefficients $c_i^\prime.$ In general, for any $1$-qubit  circuit the correction unitary is of form
-%$$\left(\beta_1 \igate+\beta_2 \xgate+\beta_3 \zgate+\beta_4 \xgate \zgate\right), \; \mbox{ where } \beta_i\in \mathbb{C}.$$
-%\end{enumerate}
-%Therefore, for any arbitrary 1-qubit unitary circuit $C_q,$ the update function is $$F_{C_q}: \mathbb{F}_2^2 \longrightarrow \mathbb{C}^4,\hspace{0.5cm} (a,b)\longrightarrow (\beta_1,\beta_2,\beta_3, \beta_4).$$
-
-% $$F_{C_q}: \mathbb{F}_2^2 \longrightarrow \mathbb{C}^4 \times  \mathbb{F}_2^8,\hspace{0.5cm} (a,b)\longrightarrow ((\alpha_1,\alpha_2,\alpha_3, \alpha_4), (a_1,b_1,a_2,b_2,a_3,b_3,a_4,b_4)).$$
-% and corresponds to the correction unitary $\sum_{i=1}^{4} \alpha_i\xgate^{b_i}\zgate^{a_i}.$
-% To realize this note that the set $\{\hgate,  \tgate\}$ is universal for 1-qubit unitary, therefore any 1-qubit (unitary circuit) can be written as an alternating sequence of $\hgate,$ and $\tgate$ as follows, where $\textsf{G}=\hgate$ or $\textsf{G}=\igate$
-%
-% $$\textsf{G}\mbox{ --- }\tgate \mbox{ --- } \hgate \mbox{ --- } \tgate \mbox{ --- } \hgate \mbox{ --- } \cdots \mbox{ --- } \tgate \mbox{ --- } \hgate \mbox{ --- } \tgate \mbox{ --- } \textsf{G}$$
-%
-% Moreover, the number terms in the summation $\sum_{i=1}^{4} c_i(\xgate^{a_i\oplus b_i }\zgate^{b_i} + \xgate^{a_i}\zgate^{b_i}),$ remain at most 4 when acted upon by $\tgate$-gate
 
 
-%How big  are the $\beta_i's $? Note each $\beta_i's$ are generated by multiplying and adding elements from the set $\{\left(\frac{1+i}{2}\right), \left(\frac{1-i}{2}\right)\}$ and only $\tgate$ can have impact on the size of the coefficients in the summation. Therefore, the size of complex numbers grows polynomially in the number of $\tgate$-gates.
-%
-%
-%What about $n$-qubit circuits for $n>1$? As we will see that if a circuit has $k$ number of $\tgate$-gates, then in the worst-case the number of complex numbers required to specify grows super-polynomial in $k.$ The problem arises when $\cnot$ and $\tgate$-gates are mixed. To explain this let's consider the following 2-qubit circuit.
-%$$\cnot_{2,1}(\igate\otimes \tgate)\cnot_{1,2}(\tgate\otimes \igate)$$
-%Let compute this circuit gate by gate using gate-teleportation
-%
-% \begin{enumerate}
-%\item[1)]  $\tgate\otimes \igate \left[\xgate^{b_1}\zgate^{a_1}\otimes \xgate^{b_1^\prime}\zgate^{a_1^\prime}\right]=\left[\alpha_1 \xgate^{b_1}\zgate^{a_1} \otimes \xgate^{b_1^\prime}\zgate^{a_1^\prime \oplus b_1^\prime} + \alpha_2 \xgate^{b_1}\zgate^{a_1} \otimes \xgate^{b_1^\prime}\zgate^{a_1^\prime})\right]\tgate\otimes \igate.$
-%\item[2)] $\cnot_{1,2}\left[\alpha_1 \xgate^{b_1}\zgate^{a_1} \otimes \xgate^{b_1^\prime}\zgate^{a_1^\prime \oplus b_1^\prime} + \alpha_2 \xgate^{b_1}\zgate^{a_1} \otimes \xgate^{b_1^\prime}\zgate^{a_1^\prime}\right] (\tgate\otimes \igate)$
-%
-%$\hspace{3.9cm}=\left[(\alpha_1 \xgate^{b_1}\zgate^{a_2} \otimes \xgate^{b_2}\zgate^{a_1^\prime \oplus b_1^\prime} + \alpha_2 \xgate^{b_1}\zgate^{a_2^\prime} \otimes \xgate^{b_2^\prime}\zgate^{a_1^\prime})\right]\cnot_{1,2}(\tgate\otimes \igate)$\\
-%where $a_2=a_1 \oplus a_1^\prime \oplus b_1^\prime,\, b_2=b_1 \oplus b_1^\prime$  and  $a_2^\prime=a_1 \oplus a_1^\prime,\, b_2^\prime=b_1 \oplus b_1^\prime.$
-%\item[3)] $\igate\otimes \tgate \left[\alpha_1 \xgate^{b_1}\zgate^{a_2} \otimes \xgate^{b_2}\zgate^{a_1^\prime \oplus b_1^\prime} + \alpha_2 \xgate^{b_1}\zgate^{a_2^\prime} \otimes \xgate^{b_2^\prime}\zgate^{a_1^\prime}\right]\cnot_{1,2}(\tgate\otimes \igate).$
-%
-%$=\left[(\alpha_1^2 \xgate^{b_1}\zgate^{a_2} \otimes \xgate^{b_2}\zgate^{a_1^\prime \oplus b_1^\prime})+(\alpha_1\alpha_2 \xgate^{b_1}\zgate^{a_2\oplus b_1} \otimes \xgate^{b_2}\zgate^{a_1^\prime \oplus b_1^\prime})+ (\alpha_1\alpha_2 \xgate^{b_1}\zgate^{a_2^\prime} \otimes \xgate^{b_2^\prime}\zgate^{a_1^\prime})\right.$
-%
-%$+ \left.(\alpha_2^2 \xgate^{b_1}\zgate^{a_2^\prime \oplus b_1} \otimes \xgate^{b_2^\prime}\zgate^{a_1^\prime})\right] (\igate\otimes \tgate)\cnot_{1,2}(\tgate\otimes \igate).$
-%\item[4)] Applying $\cnot_{2,1}$ to the above system.
-%
-%$\left[(\alpha_1^2 \xgate^{b_1\oplus b_2}\zgate^{a_2} \otimes \xgate^{b_2}\zgate^{a_1^\prime \oplus b_1^\prime})+(\alpha_1\alpha_2 \xgate^{b_1\oplus b_2}\zgate^{a_2\oplus b_1} \otimes \xgate^{b_2}\zgate^{a_1^\prime \oplus b_1^\prime})+ (\alpha_1\alpha_2 \xgate^{b_1^\prime}\zgate^{a_2^\prime} \otimes \xgate^{b_2^\prime}\zgate^{a_1})+\right.$
-%
-%$\left.(\alpha_2^2 \xgate^{b_1^\prime}\zgate^{a_2^\prime \oplus b_1} \otimes \xgate^{b_2}\zgate^{a_1})\right] \cnot_{2,1}(\igate\otimes \tgate)\cnot_{1,2}(\tgate\otimes \igate).$
-%$$=\left(\sum_{i=1}^{4} \beta_i \xgate^{e_i}\zgate^{d_i}\otimes \xgate^{e_i^\prime}\zgate^{d_i^\prime}\right)\cnot_{2,1}(\igate\otimes \tgate)\cnot_{1,2}(\tgate\otimes \igate);\; \beta_i\in \mathbb{C}, e_i,d_i,e_i^\prime,d_i^\prime \in\{0,1\}$$
-%\end{enumerate}
-%
-%We observe the following 2 things from the above example:
-%\begin{enumerate}
-%\item[1)] We need 4 complex  numbers and 16 bits to represent the correction matrix.
-%\item[2)] $\cnot$ gates when combine with $\tgate$-gates increases the number of terms in the expression.
-%\end{enumerate}
-%
-%For any 2-qubit quantum circuit  $C_q$ that has $k$ number of $\tgate$-gates, the correction unitary in the worst-case has $2^k$ terms;
-%         $$\sum_{i=1}^{2^k} \left(\beta_i \xgate^{e_i}\zgate^{d_i}\otimes \xgate^{e_i^\prime}\zgate^{d_i^\prime}\right),\; \mbox{ for } \beta_i\in \mathbb{C},\, e_i,d_i,e_i^\prime,d_i^\prime \in\{0,1\}.$$
-%This means we need $2^k$ complex numbers and $2^k\cdot 4$ bits to represent the correction unitary and the update function $f_{C_q}:\mathbb{C}^{2^k}\times \{0,1\}^{2^{k+2}}.$ Therefore, we can obfuscate any 2-qubit quantum circuit $C_q$ using gate-teleportation as far as  the number of $\tgate$  gates are at most $O(\log(|C_q|).$
-%
-%In, general, for any $n$-qubit circuit $C_q,$  the correction unitary can be written as $$\sum_{j=1}^{2^k} \left(\beta_j \xgate^{e_{1j}}\zgate^{d_{1j}}\otimes \xgate^{e_{2j}}\zgate^{d_{2j}}\otimes \cdots  \otimes  \xgate^{e_{2n}}\zgate^{d_{2n}}\right),$$
-%where $\beta_i\in \mathbb{C}$ and  $ e_i,j,d_i,j \in \{0,1\}.$  This means we need $2^k$ complex numbers and $2^k\cdot n$ bits to represent the correction unitary and the update function $f_{C_q}:\{0,1\}^n\longrightarrow \mathbb{C}^{2^k}\times \{0,1\}^{n2^{k}}.$
-%%$$\cnot_{2,1}\cnot_{1,2}(\tgate \otimes \tgate)((\xgate^{b_1} \zgate^{a_1})_1\otimes (\xgate^{b_2} \zgate^{a_2})_2)$$
-%$$\cnot_{2,1}\cnot_{1,2}[(\alpha_1(\xgate^{a_1\oplus b_1} \zgate^{b_1})+\alpha_2(\xgate^{a_1\oplus b_1})]_1 \otimes [\alpha_2(\xgate^{a_2\oplus b_2}\zgate^{b_2})+ (\xgate^{b_2} \zgate^{a_2})]_2(\tgate \otimes \tgate)$$
-%%$$\left(\frac{1+i}{2}\right)^{k_1} \left(\frac{1-i}{2}\right)^{k_2}=\left[\left(\frac{1+i}{2}\right) \left(\frac{1-i}{2}\right)\right]^k \left(\frac{1+i}{2}\right)^{k_1-k} \left(\frac{1-i}{2}\right)^{k_2-k},\; k=min\{k_1, k_2\} $$
-%%$$=\frac{1}{2^k} \left(\frac{1+i}{2}\right)^{k_1-k} \left(\frac{1-i}{2}\right)^{k_2-k}$$
-%%Suppose $k= k_1,$ and $k_2-k=2l$ then $\frac{1}{2^k} \left(\frac{1+i}{2}\right)^{k_1-k} \left(\frac{1-i}{2}\right)^{k_2-k}=(1-i)^{k_2-k}/2^{k_2}$ otherwise $\frac{1}{2^k} \left(\frac{1+i}{2}\right)^{k_1-k} \left(\frac{1-i}{2}\right)^{k_2-k}=(1+i)^{k_1-k}/2^{k_1}$
-%%
-%%If ${k_1-k}=2l$ is even then $(1-i)^{2l}/2^{k_2}=.$
-%
-%
-%
-% In general, to evaluate a $n$-qubit quantum circuit $C_q$ with $k$ number of $\tgate,$ the update function is
-% $$F_{C_q}: \mathbb{F}_2^n \longrightarrow \mathbb{C}^{l_1} \times  \mathbb{F}_2^{l_2}, \mbox{ where } l_1=n\cdot 4^k, \; l_2=2n\cdot 4^k,$$
-%
-% $$\sum_{j=1}^{4^k} \left(\alpha_{1j}\xgate^{b_{1j}}\zgate^{a_{1j}} \otimes \alpha_{2j}\xgate^{b_{2j}}\zgate^{a_{2j}} \otimes \cdots \otimes \alpha_{nj}\xgate^{b_{nj}}\zgate^{a_{nj}}\right)$$
-% where $a_{ij},b_{ij}\in \mathbb{F}_2, \alpha_{ij}\in \mathbb{C}$ and  $\frac{1}{2^k}\leq|\alpha_{ij}| \leq k.$ Therefore, we can efficiently obfuscate any quantum circuit as far as  the number of $\tgate$-gates in it are at most $O(\log(n)).$
-%
-%{\color{red}Here we use an idea related to \cite{BFK09,BJ15}. See Figure 8 in \cite{BJ15}. We leave EPR pairs at each T-gate layer, and after the gate teleportation, use iO on a program that will decide whether or not the $\pgate$-gate correction needs to be applied. Have to ask Anne about the relevance of \cite{BFK09} }
+
 
 
 
