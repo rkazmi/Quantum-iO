@@ -377,7 +377,7 @@ Main idea: Each Clifford layer is obfuscated using the canonical form. The $\tga
 
 
 \subsubsection{Using Gate Teleportation}
-In this section we will first show that how we can obfuscate any 1-qubit unitary circuit using gate teleportation and a quantum secure iO. Then using the ideas from 1-qubit we will show that how we can obfuscate any $n$-qubit circuit $C_q$ as far as the number of $\tgate$-gates remain logarithmic in $|C_q|.$ Recall from the section \ref{defn:Clifford+T:family} that adding a non-Clifford gates  such as $\tgate$-gate to Clifford gates gives us a generating set for all quantum circuits. The $\tgate$ relates to the $\xgate, \zgate$
+In this section we will show how we can obfuscate any 1-qubit unitary circuit using gate teleportation and a quantum secure iO; and then based on this idea we will show how we can obfuscate any $n$-qubit circuit $C_q$ as far as the number of $\tgate$-gates remain logarithmic in $|C_q|.$ Recall from  section \ref{defn:Clifford+T:family} that adding a non-Clifford gate  such as $\tgate$-gate to Clifford gates gives us a generating set for all quantum circuits. The $\tgate$ relates to the $\xgate, \zgate$
 $$\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\pgate^b \tgate$$
 If $b=0,$ then we don't have to worry about $\pgate$ gate otherwise we have to perform a $\pgate$ correction. We can write $\pgate=(\frac{1+i}{2}) \igate + (\frac{1-i}{2})\zgate,$ therefore
 
@@ -385,16 +385,16 @@ If $b=0,$ then we don't have to worry about $\pgate$ gate otherwise we have to p
 \label{eq:pgate1}
 \tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate\right]^b \tgate
 \end{equation}
-Note  $\left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate\right]^b=\left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate^b\right]$ for $b \in \{0,1\},$ therefore we can rewrite the equation \ref{eq:pgate1} as
+Note  $\left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate\right]^b=\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate^b$ for $b \in \{0,1\},$ therefore we can rewrite the equation \ref{eq:pgate1} as
 \begin{equation}
 \label{eq:pgate2}
 \begin{aligned}
 \tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate^b\right] \tgate \\
-=\left[\left(\frac{1+i}{2}\right) \xgate^b \zgate^{a\oplus b} + \left(\frac{1-i}{2}\right)\xgate^b \zgate^a\right] \tgate \\
+=\left[\left(\frac{1+i}{2}\right) \xgate^b \zgate^{a\oplus b} + \left(\frac{1-i}{2}\right)\xgate^b \zgate^a\right] \tgate. \\
 \end{aligned}
 \end{equation}
 
-Since $a$ and $b$ are bits , the equation \ref{eq:pgate2} can be written as a linear combination of $\{\igate, \xgate, \zgate, \xgate \zgate\},$
+Since $a$ and $b$ are bits, the equation \ref{eq:pgate2} can be written as a linear combination of $\{\igate, \xgate, \zgate, \xgate \zgate\},$
 
 \begin{equation}
 \label{eq:pgate3}
@@ -402,19 +402,19 @@ Since $a$ and $b$ are bits , the equation \ref{eq:pgate2} can be written as a li
 \tgate \xgate^b \zgate^a= (\alpha_0 \igate +  \alpha_1 \xgate + \alpha_2 \zgate + \alpha_3 \xgate\zgate)\tgate \\
 \end{aligned}
 \end{equation}
-for   $\alpha_i \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\},$  $i\in[4].$ The equation \ref{eq:pgate3} is crucial as we will see that for any 1-qubit circuit the correction unitary has this form. 
+for   $\alpha_i \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\},$  $i\in[4].$ The equation \ref{eq:pgate3} is important as we will see that the correction unitary or any 1-qubit circuit can be expressed in the form of \ref{eq:pgate3} .
 
 
-Let $C_q$ be a $1$-qubit circuit we want to obfuscate and $\ket{\psi}$ is the quantum state on which we want to evaluate $C_q.$ Note we can write any $1$-qubit circuit as sequence of gates from the set $\{\hgate, \tgate\}$ \footnote{The set $\{\hgate,  \tgate\}$ is universal for 1-qubit unitary.}
+Let $C_q$ be a $1$-qubit circuit we want to obfuscate and $\ket{\psi}$ is the quantum state on which we want to evaluate $C_q.$ Note we can write any $1$-qubit circuit as a sequence of gates from the set $\{\hgate, \tgate\}$ \footnote{The set $\{\hgate,  \tgate\}$ is universal for 1-qubit unitary.}
 
 $$C_q=(g_{|C_q|},\ldots,g_2,g_1 ),\; g_i\in\{\hgate, \tgate\}$$
-In gate teleportation algorithm we  have an subsystem of the form $C_q \xgate^b\zgate^a (\ket{\psi})$ (section \ref{protocol: gate  teleportation} ) and to evaluate the circuit on the input we have to apply a correction unitary
+In gate teleportation algorithm we have an subsystem of the form $C_q \xgate^b\zgate^a (\ket{\psi})$ (section \ref{protocol: gate  teleportation}) 
 
 \begin{equation}
 \label{eq:pgate4}
-C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_2,g_1 )\xgate^b\zgate^a (\ket{\psi}).
+C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_2,g_1 )\xgate^b\zgate^a (\ket{\psi}),
 \end{equation}
-If $g_1=\hgate$ then we can write the above system as 
+and to evaluate the circuit on the input we have to apply a correction unitary. If $g_1=\hgate$ then we can write the above system as 
 
 \begin{equation}
 \begin{aligned}
@@ -423,7 +423,7 @@ C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_2)  \xgate^a \zgate^b g_1 
 =(g_{|C_q|},\ldots,g_2)(e_0 \igate +  e_1 \xgate + e_2 \zgate + e_3\xgate \zgate)g_1 (\ket{\psi})
 \end{aligned}
 \end{equation}
-where  $e_i \in \{0,1\}$ for $i\in[4].$ Similarly if $g_1=\tgate,$ then we can also write the expression \ref{eq:pgate4} as 
+where  $e_i \in \{0,1\},$  $i\in[4].$ Similarly if $g_1=\tgate,$ then we can also write the expression \ref{eq:pgate4} as 
 
 \begin{equation}
 \begin{aligned}
@@ -431,38 +431,37 @@ where  $e_i \in \{0,1\}$ for $i\in[4].$ Similarly if $g_1=\tgate,$ then we can a
 C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_2)(e_0^\prime \igate +  e_1^\prime \xgate + e_2^\prime \zgate + e_3^\prime \xgate \zgate)g_1 (\ket{\psi})
 \end{aligned}
 \end{equation}
-where $e_i^\prime \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\}$  for $i\in[4].$ Note there are more possibilities for $e_i^\prime$'s in the expression \ref{eq:pgate6} then $e_i$'s in the expression \ref{eq:pgate5}. This is because $\tgate$-gates can affect the size of the coefficients and whereas $\hgate$-gates can only permute the coefficients in the expression. After applying $g_2$ to expressions \ref{eq:pgate5} or \ref{eq:pgate6} the number of terms in the summation cannot exceed to more than 4. Moreover, the size of the coefficients $e_i$'s may only change if $g_2=\tgate,$ 
+where $e_i^\prime \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\}$  for $i\in[4].$ Note there are more possibilities for $e_i^\prime$'s in the expression \ref{eq:pgate6} then $e_i$'s in the expression \ref{eq:pgate5}. This is because $\tgate$-gates can affect the size of the coefficients and whereas $\hgate$-gates can only permute the coefficients in the summation. After applying $g_2$ to expressions \ref{eq:pgate5} or \ref{eq:pgate6} the number of terms in the summation cannot exceed to more than 4. Moreover, the size of the coefficients $e_i$'s may only change if $g_2=\tgate,$ 
 
 \begin{equation}
 \begin{aligned}
 \label{eq:pgate7}
-C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_2)  \xgate^a \zgate^b g_1 (\ket{\psi})\\
-=(g_{|C_q|},\ldots,g_2)(\gamma_0 \igate +  \gamma_1 \xgate + \gamma_2 \zgate + \gamma_3 \xgate \zgate)g_1 (\ket{\psi})
+C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_3)(\gamma_0 \igate +  \gamma_1 \xgate + \gamma_2 \zgate + \gamma_3 \xgate \zgate)g_2g_1 (\ket{\psi})
 \end{aligned}
 \end{equation}
-where $\gamma_i \in \mathbb{C}$ if $g_2=\tgate$ and $\gamma_i  \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\}$ for $i\in[4].$
+where $\gamma_i \in \mathbb{C}$ if $g_2=\tgate$ and $\gamma_i  \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\},$  $i\in[4].$
 
-Hence, it follows from the above that by applying the remaining  sequence of gates $(g_{|C_q|},\ldots,g_3)$, the expression \ref{eq:pgate7} can be written as 
+Hence, it follows  that by applying the remaining  sequence of gates $(g_{|C_q|},\ldots,g_3)$, the expression \ref{eq:pgate7} can be written as 
 \begin{equation}
 \begin{aligned}
 \label{eq:pgate8}
 C_q \xgate^b\zgate^a (\ket{\psi})=(\beta_0 \igate +  \beta_1 \xgate + \beta_2 \zgate + \beta_3\xgate \zgate)(g_{|C_q|},\ldots,g_2,g_1 )(\ket{\psi}) 
 \end{aligned}
 \end{equation}
-where $\beta_i  \in \mathbb{C}$ for $i\in[4].$  Therefore, for any  $1$-qubit circuit $C_q,$  the correction unitary can be written as  
+where $\beta_i  \in \mathbb{C},$ $i\in[4].$  Therefore, for any  $1$-qubit circuit $C_q,$ the correction unitary can be written as  
 
 \begin{equation}
 \label{eq:pgate9}
  (\beta_0 \igate +   \beta_1 \xgate +  \beta_2 \zgate +  \beta_3 \xgate\zgate), \mbox{ for }  \beta_i \in \mathbb{C},\; i\in[n]
 \end{equation}
 
-Moreover, it can be shown that the size of $\beta_i$'s grows at most a polynomial in the number of $\tgate$-gates in the circuit. Therefore the update function for the circuit $C_q$ can be define as a following map,
+Moreover, it can be shown that the size of $\beta_i$'s grows at most a polynomial in the number of $\tgate$-gates in the circuit (appendix ?). Therefore the update function for any $1$-qubit circuit $C_q$ can be defined as a following map,
 
 \begin{equation*}
-F_{C_q}:\{0,1\}^2\rightarrow \mathbb{C}^4,\; (a,b)\mapsto (\beta_0, \beta_1,\beta_2,\beta_3)
+F_{C_q}:\{0,1\}^2\rightarrow \mathbb{C}^4,\; (a,b)\mapsto (\beta_0, \beta_1,\beta_2,\beta_3),
 \end{equation*}
 which corresponds to the correction unitary $(\beta_0 \igate +  \beta_1 \xgate + \beta_2 \zgate + \beta_3\xgate \zgate).$
-Moreover, the update functions are for the any two equivalent 1-qubit circuit are equivalent (see Lemma \ref{lemma:1qubit}. Hence, we obfuscate any 1-qubit circuit using gate teleportation and a quantum secure iO as we did for the Clifford circuits. 
+Moreover, the update functions are for the any two equivalent 1-qubit circuit are equivalent (see Lemma \ref{lemma:1qubit}). Therefore, we can obfuscate any 1-qubit circuit using gate teleportation and a quantum secure iO as we did for the Clifford circuits (section \ref{sec:Clifford-iO-teleportaion}).
 
 
 
@@ -472,10 +471,10 @@ Let $C_q$ and $C_q^\prime$ be two equivalent 1-qubit circuits and
 \begin{equation*}
 F_{C_q}:\{0,1\}^2\rightarrow \mathbb{C}^4 \mbox{ and } F_{C_q^\prime}:\{0,1\}^2\rightarrow \mathbb{C}^4
 \end{equation*}
-are the corresponding update functions, then $F_{C_q}=F_{C_q^\prime}.$
+are the corresponding update functions for $C_q$ and $C_q^\prime,$  then $F_{C_q}=F_{C_q^\prime}.$
 \end{lemma}
 
-{\bf Proof:} Let  $F_{C_q}(a,b)=(\beta_0, \beta_1, \beta_2, \beta_3)$ and $F_{C_q^\prime}(a,b)=(\beta_0^\prime, \beta_1^\prime, \beta_2^\prime, \beta_3^\prime)$ for $a,b\in\{0,1\}.$ For any qubit $(\ket{\psi}$
+{\bf Proof:}  Suppose  $C_q$ and $C_q^\prime$ be two equivalent and let  $F_{C_q}(a,b)=(\beta_0, \beta_1, \beta_2, \beta_3)$ and $F_{C_q^\prime}(a,b)=(\beta_0^\prime, \beta_1^\prime, \beta_2^\prime, \beta_3^\prime)$ for $a,b\in\{0,1\}$ be their corresponding update functions. Let $(\ket{\psi}$ be any  qubit.
 \begin{equation}
 \label{lemma:1qubit:eq1}
 \begin{aligned}
@@ -490,23 +489,39 @@ are the corresponding update functions, then $F_{C_q}=F_{C_q^\prime}.$
  \end{aligned}
 \end{equation}
 
-Since,  $C_q (\rho)=C_q^\prime (\rho)$ for every input $\rho$ we can must have $C_q \xgate^b \zgate^a(\ket{\psi})= C_q^\prime \xgate^b \zgate^a(\ket{\psi}).$ Therefore we have 
+Since,  $C_q (\rho)=C_q^\prime (\rho)$ for every input $\rho$ we can must have 
+\begin{equation}
+C_q \xgate^b \zgate^a(\ket{\psi})= C_q^\prime \xgate^b \zgate^a(\ket{\psi}).
+\end{equation}
+
+Therefore we have 
+
 \begin{equation}
 \label{lemma:1qubit:eq3}
 \begin{aligned}
 (\beta_0 \igate+\beta_1 \xgate+\beta_2 \zgate+\beta_3 \xgate \zgate)  C_q (\ket{\psi})=(\beta_0^\prime \igate+\beta_1^\prime \xgate+\beta_2^\prime \zgate+\beta_3^\prime \xgate \zgate)  C_q^\prime (\ket{\psi})\\
-(\beta_0 \igate+\beta_1 \xgate+\beta_2 \zgate+\beta_3 \xgate \zgate)  C_q (\ket{\psi})=(\beta_0^\prime \igate+\beta_1^\prime \xgate+\beta_2^\prime \zgate+\beta_3^\prime \xgate \zgate)  C_q(\ket{\psi})\\
+(\beta_0 \igate+\beta_1 \xgate+\beta_2 \zgate+\beta_3 \xgate \zgate)  C_q (\ket{\psi})=(\beta_0^\prime \igate+\beta_1^\prime \xgate+\beta_2^\prime \zgate+\beta_3^\prime \xgate \zgate)  C_q(\ket{\psi}).\\
 \end{aligned}
 \end{equation}
 
 
-From equation \ref{lemma:1qubit:eq3} we must have
+From \ref{lemma:1qubit:eq3} we must have,
 \begin{equation}
 \label{lemma:1qubit:eq4}
-(\beta_0-\beta_0^\prime) \igate+(\beta_1 -\beta_1^\prime)\xgate+(\beta_2-\beta_2^\prime) \zgate+(\beta_3-\beta^\prime_3) \xgate \zgate={\bf 0}.
+\begin{aligned}
+(\beta_0 \igate+\beta_1 \xgate+\beta_2 \zgate+\beta_3 \xgate \zgate) =(\beta_0^\prime \igate+\beta_1^\prime \xgate+\beta_2^\prime \zgate+\beta_3^\prime \xgate \zgate).\\
+\end{aligned}
 \end{equation}
 
-If $\beta_i \neq \beta_i^\prime$ for some $i\in[4],$ then the expression on the L.H.S cannot be equal to the zero matrix, therefore we must have $\beta_i = \beta_i^\prime$ for every $i\in[4].$ Hence,  $F_{C_q}=F_{C_q^\prime}.$
+From equation \ref{lemma:1qubit:eq4}
+\begin{equation}
+\label{lemma:1qubit:eq5}
+\begin{aligned}
+(\beta_0-\beta_0^\prime) \igate+(\beta_1 -\beta_1^\prime)\xgate+(\beta_2-\beta_2^\prime) \zgate+(\beta_3-\beta^\prime_3) \xgate \zgate={\bf 0}.
+\end{aligned}
+\end{equation}
+
+The equation \ref{lemma:1qubit:eq5},  can only be satisfied if $\beta_i = \beta_i^\prime$ for every $i\in[4],$ therefore,  $F_{C_q}=F_{C_q^\prime}.$
 
 
 
