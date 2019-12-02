@@ -19,7 +19,7 @@ $$C_{q_1}(\ket{\psi}) =C_{q_2}(\ket{\psi}).$$
 \anote{Need some blah blah before an important definition to describe what it is saying, but in words}
 
 \anote{why is computational in brackets below?}
-\begin{definition}\label{def:QiO} {\rm (Quantum Indistinguishability Obfuscation)}
+\begin{definition}\label{def:} {\rm (Quantum Indistinguishability Obfuscation)}
 A  polynomial-time quantum algorithm for a class of quantum circuits $\mathcal{C}_Q$ is a quantum {\rm(}computational{\rm)} indistinguishability obfuscator $Qi\mathcal{O}$  if the following conditions hold:
 
 \begin{enumerate}
@@ -524,7 +524,8 @@ From equation \ref{lemma:1qubit:eq4}
 The equation \ref{lemma:1qubit:eq5},  can only be satisfied if $\beta_i = \beta_i^\prime$ for every $i\in[4],$ therefore,  $F_{C_q}=F_{C_q^\prime}.$
 
 
-
+\subsection{$Qi\mathcal{O} for $n$-qubit Circuits}
+In the previous section we showed that we can obfuscate any $1$-qubit unitary circuit via gate teleportation and quantum secure iO. Can we not construct a $Qi\mathcal{O}$ for any $n$-qubit unitary circuit using  the same methodology. Unfortunately, for any circuit $n>1,$ the complexity of 
 
 
 
