@@ -592,7 +592,97 @@ $\mathcal{C}_q=\{C_{q_n}\mid n\in \mathbb{N}\}$ there exist a $poly(n)$ such tha
 \end{remark}
 
 
+{\em Update Function for arbitrary $n$-Qubit circuits}
+We have defined above how a unitary looks like for an arbitrary circuit, but in order to construct $Qi\mathcal{O}$ construct for a more general class of qubit circuits; we have to define precisely define update functions. The update function must satisfy the following two properties.
 
+\begin{enumerate}
+\item ({\bf Invariant}) Any two equivalent quantum circuits should have the update functions.
+\item ({\bf Efficiency}) Update function can be computed by a polynomial-time size circuit.
+\end{enumerate}
+
+Let $C_q$ be an $n$-qubit circuit and $\mathbb{C}^*= \mathbb{C}-\{0\}.$ The update function $F_{C_q}$ for the circuit is define as 
+
+\begin{equation}
+\label{nqubit:eq10}
+\begin{aligned}
+F_{C_q}: \{0,1\}^{2n}\longrightarrow {\mathbb{C}^*}^m\times \{0,1,\ldots,2^{2n}-1\}^m, \\
+(a_1,b_1,\ldots, a_n,b_n) \mapsto ((\beta_{k_1}, \beta_{k_2},\ldots, \beta_{k_m}),(k_1,k_2,\ldots, k_m))
+\end{aligned}
+\end{equation}
+
+where $m$ is some integer depend on $C_q$ and each integer $k_i$ encode a $2n$ bit string. Moreover  $k_i< k_j$ for all indices $1 \leq i<j \leq n.$ Note  the update function (relation \ref{nqubit:eq10} ) corresponds to the correction unitary (relation  \ref{nqubit:eq11} )
+
+\begin{equation}
+\label{nqubit:eq11}
+\begin{aligned}
+\sum_{i=1}^m \beta_{k_i} \xgate^{b_{k_{i1}}} \zgate^{a_{k_{i1}}} \otimes \cdots  \otimes \xgate^{b_{k_{in}}} \zgate^{a_{k_{in}}}.
+\end{aligned}
+\end{equation}
+
+\begin{lemma}
+\label{lemma:nqubit}
+Let $C_q$ and $C_q^\prime$ be two equivalent $n$-qubit circuits and 
+\begin{equation*}
+\begin{aligned}
+F_{C_q}: \{0,1\}^{2n}\longrightarrow {\mathbb{C}^*}^m\times \{0,1,\ldots,2^{2n}-1\}^m,  \\
+F_{C_q^\prime}: \{0,1\}^{2n}\longrightarrow {\mathbb{C}^*}^{t}\times \{0,1,\ldots,2^{2n}-1\}^{t}. 
+\end{aligned}
+\end{equation*}
+are the corresponding update functions for $C_q$ and $C_q^\prime,$  (as defined in relation relation \ref{nqubit:eq10}), then $F_{C_q}=F_{C_q^\prime}.$
+\end{lemma}
+
+\noindent{\bf Proof}: Suppose $C_q$ and $C_q^\prime$ are equivalent circuits and 
+\begin{equation*}
+\begin{aligned}
+F_{C_q}(a_1,b_1,\ldots,a_n,b_n)= ((\beta_{k_1}, \beta_{k_2},\ldots, \beta_{k_m}),(k_1,k_2,\ldots, k_m)) \\
+F_{C_q}^\prime(a_1,b_1,\ldots,a_n,b_n)= ((\beta_{k_1}^\prime, \beta_{k_2}^\prime,\ldots, \beta_{k_m}^\prime),(k_1^\prime,k_2^\prime,\ldots, k_m^\prime)) 
+\end{aligned}
+\end{equation*}
+Since, For every quantum state $\ket{\psi}$ we have
+\begin{equation}
+\label{nqubit:eq12}
+\begin{aligned}
+C_q (\xgate^{b_i}\zgate^{a_i})^{\otimes_{i=1}^n}(\ket{\psi})=C_q^\prime (\xgate^{b_i}\zgate^{a_i})^{\otimes_{i=1}^n}(\ket{\psi})
+\end{aligned}
+\end{equation}
+
+From relation \ref{nqubit:eq12} we have
+\begin{equation}
+\label{nqubit:eq13}
+\begin{aligned}
+\left(\sum_{i=1}^m \beta_{k_i} \xgate^{b_{k_{i1}}} \zgate^{a_{k_{i1}}} \otimes \cdots  \otimes \xgate^{b_{k_{in}}} \zgate^{a_{k_{in}}}\right) C_q (\ket{\rho})=\left(\sum_{i=1}^t \beta_{k_i}^\prime \xgate^{b_{k_{i1}^\prime}} \zgate^{a_{k_{i1}}^\prime} \otimes \cdots  \otimes \xgate^{b_{k_{in}}^\prime} \zgate^{a_{k_{in}}^\prime}\right)C_q^\prime (\ket{\rho})
+\end{aligned}
+\end{equation}
+
+We assume WLOG that the terms in the relation \ref{nqubit:eq13} are written in the lexicographic order impose by the $k_1<k_2<\ldots <k_m$'s. We can substitute $C_q$ for $C_q^\prime$ in relation \ref{nqubit:eq13}.
+
+\begin{equation}
+\label{nqubit:eq14}
+\begin{aligned}
+\left(\sum_{i=1}^m \beta_{k_i} \xgate^{b_{k_{i1}}} \zgate^{a_{k_{i1}}} \otimes \cdots  \otimes \xgate^{b_{k_{in}}} \zgate^{a_{k_{in}}}\right) C_q (\ket{\rho})=\left(\sum_{i=1}^t \beta_{k_i}^\prime \xgate^{b_{k_{i1}^\prime}} \zgate^{a_{k_{i1}}^\prime} \otimes \cdots  \otimes \xgate^{b_{k_{in}}^\prime} \zgate^{a_{k_{in}}^\prime}\right)C_q (\ket{\rho}).
+\end{aligned}
+\end{equation}
+Similarly, WLOG we can assume that the terms in the relation \ref{nqubit:eq14} are written in the lexicographic order impose by the $k_1^\prime<k_2^\prime<\ldots <k_t^\prime$ (relation \ref{nqubit:eq10}). From relation \ref{nqubit:eq14} it follows that 
+
+\begin{equation}
+\label{nqubit:eq15}
+\begin{aligned}
+\left(\sum_{i=1}^m \beta_{k_i} \xgate^{b_{k_{i1}}} \zgate^{a_{k_{i1}}} \otimes \cdots  \otimes \xgate^{b_{k_{in}}} \zgate^{a_{k_{in}}}\right)=\left(\sum_{i=1}^t \beta_{k_i}^\prime \xgate^{b_{k_{i1}^\prime}} \zgate^{a_{k_{i1}}^\prime} \otimes \cdots  \otimes \xgate^{b_{k_{in}}^\prime} \zgate^{a_{k_{in}}^\prime}\right)
+\end{aligned}
+\end{equation}
+
+From relation \ref{nqubit:eq15} we have 
+\begin{equation}
+\label{nqubit:eq16}
+\begin{aligned}
+\left(\sum_{i=1}^m \beta_{k_i} \xgate^{b_{k_{i1}}} \zgate^{a_{k_{i1}}} \otimes \cdots  \otimes \xgate^{b_{k_{in}}} \zgate^{a_{k_{in}}}\right)-\left(\sum_{i=1}^t \beta_{k_i}^\prime \xgate^{b_{k_{i1}^\prime}} \zgate^{a_{k_{i1}}^\prime} \otimes \cdots  \otimes \xgate^{b_{k_{in}}^\prime} \zgate^{a_{k_{in}}^\prime}\right)={\bf 0}
+\end{aligned}
+\end{equation}
+
+By definition of update functions (relation \ref{nqubit:eq10}) we have $m$ distinct binary strings $b_{k_{i1}} a_{k_{i1}}\ldots b_{k_{in}} a_{k_{in}}$ corresponding to the $m$ distinct integers $\{k_1,k_2,\cdots, k_m\}$ and similarly we have $t$ distinct binary strings $b_{k_{i1}^\prime} a_{k_{i1}^\prime}\ldots b_{k_{in}^\prime} a_{k_{in}^\prime}$ corresponding to corresponding to the $t$ distinct integers $\{k_1^\prime,k_2^\prime,\cdots, k_t^\prime\}.$  Moreover, by definition of the update functions (relation \ref{nqubit:eq10}) $\beta_i\neq 0$ for $i\in [m]$ and $\beta_i^\prime\neq 0$  for $i\in [t].$ Now suppose if  $m>t$ or $m<t$ then there is at least one non-zero term on the L.H.S
+in the relation \ref{nqubit:eq16}, while the R.H.S is equal to a {\bf 0} matrix. Therefore $m=t$ and since the terms our in  lexicographic order we must have  
+
+ $\beta_{k_i}\xgate^{b_{k_{i1}}} \zgate^{a_{k_{i1}}} \otimes \cdots  \otimes \xgate^{b_{k_{in}}} \zgate^{a_{k_{in}}}$ t
 
 
 
