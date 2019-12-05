@@ -3,38 +3,36 @@
 %Section
 \section{Quantum Indistinguishability Obfuscation}
 \label{sec:QiO-Cliffords and more}
- In this section we 
-\anote{Need some blah blah at the beginning of a section to say what we present in this section.}
- %Here, we show how to achieve iO for some families of quantum circuits.
-%We give two alternative methods, the first based on canonical forms, and the second based on gate teleportation.
-%% can be obfuscated using a quantum-secure indistinguishability obfuscator.
+In this section we give a definition of equivalent quantum circuits and also define a notion of Quantum Indistinguishability Obfuscation $Qi\mathcal{O}.$ Then in section \ref{QiO:Clifford-Circuits}. In section, we show how to construct $Qi\mathcal{O}$ for some families of quantum circuits. We give two alternative methods, the first based on canonical forms, and the second based on gate teleportation. 
+
+%\anote{Need some blah blah at the beginning of a section to say what we present in this section.}
 
 \subsection{Definitions}
 \label{sec:iO-Cliffords and more}
 \begin{definition} {\rm (Equivalent Quantum Circuits):}
 \label{def:eqcircuit}
-Let $C_{q_0}$ and $C_{q_1}$ be two $n$-qubit quantum circuits. We say $C_{q_0}$ and $C_{q_1}$ are equivalent if for every state $\ket{\psi}\in\mathit{Q}(n)$
+Let $C_{q_0}$ and $C_{q_1}$ be two $n$-qubit quantum circuits. We say $C_{q_0}$ and $C_{q_1}$ are equivalent if for every $n$-qubit state $\ket{\psi}$
 $$C_{q_1}(\ket{\psi}) =C_{q_2}(\ket{\psi}).$$
 \end{definition}
-\anote{Need some blah blah before an important definition to describe what it is saying, but in words}
+%\anote{Need some blah blah before an important definition to describe what it is saying, but in words}
 
-\anote{why is computational in brackets below?}
+%\anote{why is computational in brackets below?}
 \begin{definition}\label{def:} {\rm (Quantum Indistinguishability Obfuscation)}
-A  polynomial-time quantum algorithm for a class of quantum circuits $\mathcal{C}_Q$ is a quantum {\rm(}computational{\rm)} indistinguishability obfuscator $Qi\mathcal{O}$  if the following conditions hold:
+A  polynomial-time quantum algorithm for a class of quantum circuits $\mathcal{C}_Q$ is a quantum computational indistinguishability obfuscator $Qi\mathcal{O}$  if the following conditions hold:
 
 \begin{enumerate}
 \item {\tt Functionality:}  For every $C_q\in \mathcal{C}_Q$ and every quantum state $\ket{\phi},$
 $$(\rho, C_q^\prime)\leftarrow Qi\mathcal{O}(C_q) \;  \mbox{ and }\; C_q^\prime(\rho,\ket{\phi})=C_{q}(\ket{\phi})$$
 %where $\rho \in Q(m)$ and $C_q^\prime$  is a $m+n$ qubit quantum circuit.
 											
-\anote{above, we are mixing pure states such as $\ket{\phi}$ with mixed states, such as $\rho$. This gets confusing, but I don't know exacly how to fix it. Maybe $\rho$ could be assumed wlog to be pure, so we can use use $\ket{\psi}$ instead of $\rho?$. }
+%\anote{above, we are mixing pure states such as $\ket{\phi}$ with mixed states, such as $\rho$. This gets confusing, but I don't know exacly how to fix it. Maybe $\rho$ could be assumed wlog to be pure, so we can use use $\ket{\psi}$ instead of $\rho?$. }
 
 \item  {\tt Polynomial Slowdown:}  For every $C_{q}\in \mathcal{C}_Q,$
 \begin{itemize}
 \item  $\rho$ is at most a $poly(|C_{q}|)$ qubit state. 
 \item $|C_{q}^\prime| \in poly(|C_{q}|).$
 \end{itemize}
-\anote{in below, did we define what we mean by size? If this is the number of gates, I would find the definition quite restrictive. Maybe you mean the same dimensions for input- output?}
+%\anote{in below, did we define what we mean by size? If this is the number of gates, I would find the definition quite restrictive. Maybe you mean the same dimensions for input- output?}
 
 \item {\tt Indistinguishability:} For any two equivalent quantum circuits $C_{q_1},C_{q_2}\in \mathcal{C}_Q,$ of the same size
  and for every polynomial-time quantum distinguisher $\mathcal{D}_q,$ there exists a negligible function {\rm negl} such that:
@@ -43,16 +41,22 @@ $$(\rho, C_q^\prime)\leftarrow Qi\mathcal{O}(C_q) \;  \mbox{ and }\; C_q^\prime(
 					$$\Big |{\rm Pr}[\mathcal{D}_q(Qi\mathcal{O}(C_{q_1}))=1]-{\rm Pr}[\mathcal{D}_q(Qi\mathcal{O}(C_{q_2}))=1] \Big |\leq  {\rm negl}(k).$$		
 Where $k=|C_{q_1}|=|C_{q_2}|.$						
 \end{enumerate}
-
 \end{definition}
 
 
 \subsection{Quantum Indistinguishability Obfuscation for Clifford Circuits}
+\label{QiO:Clifford-Circuits}
  In this section we present two methods to obfuscate any Clifford circuit,  one using a canonical form and the other using gate teleportation.
 
-\subsubsection{Obfuscating Clifford Using the Canonical Form}
+\subsubsection{$Qi\mathcal{O}$ for Clifford via Canonical Form}
 \label{sec:Clifford-iO-canonical}
+Let $C_q$ be a Clifford circuit. 
+Aaronson and Gottesman invented a polynomial algorithm that takes a Clifford circuit and output its canonical form ~\cite{AG04} (section ). This canonical form is invariant for any two equivalent circuits. Therefore, the $Qi\mathcal{O}$ is simply the polynomial size circuit  that takes computes Clifford circuit $C_q,$ as an input and outputs its canonical form $C_q^\prime$ and an empty register $\rho,$ i.e.
+														$$  (\rho, C_q^\prime)\leftarrow Qi\mathcal{O}(C_q)$$
+                                                 
 
+
+\begin{comment}
 \anote{This entire section is very cryptic. We need to have a good intuitive understanding of why their canonical form works, and then explain this to the reader. Currently, it seems like magic. I'm also unsure about this part taking up so much space- with essentially zero contribution from us, but I don't have an alternative. I am thinking about it.}
 \anote{For instance, is there a relationship between the $f$ update functions in the preliminaries, and the update functions here for the Cliffords?}
 
@@ -232,7 +236,7 @@ Note we output an empty register $\rho$ to be consistent with our definition of 
 
 %The cost computing tableau $\mathcal{T}_f$ is bounded by a polynomial  $n$ (section III, ~\cite{AG04}). Moreover, if $C_{q_1}$ and $C_{q_2}$ are two equivalents circuits then, there final tableau as computed in step 3 are also equivalent $\mathcal{T}_{f_1}=\mathcal{T}_{f_2}.$ (Lemma 5 ~\cite{AG04}). This means the final tableau obtain in step 3 is independent of the input circuit. The output of the algorithm 1 is computed using the theorem 8 ~\cite{AG04} which only take the final tableau $\mathcal{T}_f$  and output an equivalent circuit $C_q^\prime$ which is completely determined by $\mathcal{T}_f.$ Moreover, the procedure describe in theorem 8 ~\cite{AG04} is a deterministic polynomial-time algorithm. Therefore, the algorithm 1 is guaranteed to output in polynomial-time a unique canonical form for any Clifford circuit.
 
-
+\end{comment}
 
 
 
