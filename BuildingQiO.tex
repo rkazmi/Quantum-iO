@@ -8,16 +8,16 @@ In this section we give a definition of equivalent quantum circuits and also def
 %\anote{Need some blah blah at the beginning of a section to say what we present in this section.}
 
 \subsection{Definitions}
-\label{sec:iO-Cliffords and more}
+\label{def:equivalent-circuits}
 \begin{definition} {\rm (Equivalent Quantum Circuits):}
-\label{def:eqcircuit}
 Let $C_{q_0}$ and $C_{q_1}$ be two $n$-qubit quantum circuits. We say $C_{q_0}$ and $C_{q_1}$ are equivalent if for every $n$-qubit state $\ket{\psi}$
 $$C_{q_1}(\ket{\psi}) =C_{q_2}(\ket{\psi}).$$
 \end{definition}
 %\anote{Need some blah blah before an important definition to describe what it is saying, but in words}
 
 %\anote{why is computational in brackets below?}
-\begin{definition}\label{def:} {\rm (Quantum Indistinguishability Obfuscation)}
+\begin{definition}{\rm (Quantum Indistinguishability Obfuscation)}
+\label{def:QiO} 
 A  polynomial-time quantum algorithm for a class of quantum circuits $\mathcal{C}_Q$ is a quantum computational indistinguishability obfuscator $Qi\mathcal{O}$  if the following conditions hold:
 
 \begin{enumerate}
@@ -36,8 +36,6 @@ $$(\rho, C_q^\prime)\leftarrow Qi\mathcal{O}(C_q) \;  \mbox{ and }\; C_q^\prime(
 
 \item {\tt Indistinguishability:} For any two equivalent quantum circuits $C_{q_1},C_{q_2}\in \mathcal{C}_Q,$ of the same size
  and for every polynomial-time quantum distinguisher $\mathcal{D}_q,$ there exists a negligible function {\rm negl} such that:
-
-	
 					$$\Big |{\rm Pr}[\mathcal{D}_q(Qi\mathcal{O}(C_{q_1}))=1]-{\rm Pr}[\mathcal{D}_q(Qi\mathcal{O}(C_{q_2}))=1] \Big |\leq  {\rm negl}(k).$$		
 Where $k=|C_{q_1}|=|C_{q_2}|.$						
 \end{enumerate}
@@ -50,11 +48,17 @@ Where $k=|C_{q_1}|=|C_{q_2}|.$
 
 \subsubsection{$Qi\mathcal{O}$ for Clifford via Canonical Form}
 \label{sec:Clifford-iO-canonical}
-Let $C_q$ be a Clifford circuit. 
-Aaronson and Gottesman invented a polynomial algorithm that takes a Clifford circuit and output its canonical form ~\cite{AG04} (section ). This canonical form is invariant for any two equivalent circuits. Therefore, the $Qi\mathcal{O}$ is simply the polynomial size circuit  that takes computes Clifford circuit $C_q,$ as an input and outputs its canonical form $C_q^\prime$ and an empty register $\rho,$ i.e.
-														$$  (\rho, C_q^\prime)\leftarrow Qi\mathcal{O}(C_q)$$
-                                                 
+Aaronson and Gottesman invented a polynomial-quantum algorithm (polynomial size circuit) that takes a Clifford circuit $C_q$ and output its canonical form $C_q^\prime$  ~\cite{AG04} (section VI). This canonical form is invariant for any two equivalent circuits. The Moreover the size of $C_q^\prime$ is in $poly(|C_q|).$ Therefore, the $Qi\mathcal{O}$ is a quantum algorithm that takes a Clifford circuit $C_q,$ as an input and outputs   
+														$$(\rho, C_q^\prime)\leftarrow Qi\mathcal{O}(C_q),$$
+   
+where $\rho$ is an empty register and $C_q^\prime$ is a canonical form of $C_q$ computed using the Aaronson and Gottesman algorithm.
 
+ \begin{lemma}                                                
+The above construction (section \ref{sec:Clifford-iO-canonical}) is a Quantum Indistinguishability Obfuscation for Clifford Circuits.
+\end{lemma}
+
+\noindent {\bf Proof}: We have to show that the construction satisfies definition \ref{def:QiO} . Note $Qi\mathcal{O}$ is a polynomial-time quantum algorithm, since it is essentially the same a Aaronson and Gottesman a polynomial-quantum algorithm for computing a canonical form of a Clifford circuit ~\cite{AG04} (section VI). 
+To show the construction satisfies all 3 properties of the definition \ref{def:QiO}; let $C_q^\prime$ be the canonical form of some Clifford circuit $C_q.$  Since, $C_q^\prime$ and $C_q$ are equivalent circuits (definition \ref{def:equivalent-circuits}) they have the same function functionality. Note $\rho$ is an empty register and the size of $|C_q^\prime| \in poly(|C_q|)$ ~\cite{AG04}, hence the construction is efficient (polynomial slowdown). Moreover the canonical form reveals no knowledge about the input circuit except the unitary it computes, therefore this $Qi\mathcal{O}$ is perfectly indistinguishable against any quantum adversary. Therefore, also computationally indistinguishable against any quantum adversary.
 
 \begin{comment}
 \anote{This entire section is very cryptic. We need to have a good intuitive understanding of why their canonical form works, and then explain this to the reader. Currently, it seems like magic. I'm also unsure about this part taking up so much space- with essentially zero contribution from us, but I don't have an alternative. I am thinking about it.}
