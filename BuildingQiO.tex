@@ -524,7 +524,7 @@ From equation \ref{lemma:1qubit:eq4}
 The equation \ref{lemma:1qubit:eq5},  can only be satisfied if $\beta_i = \beta_i^\prime$ for every $i\in[4],$ therefore,  $F_{C_q}=F_{C_q^\prime}.$
 
 
-\subsection{$Qi\mathcal{O}$ for $n$-qubit Circuits}
+\subsection{Quantum Indistinguishability Obfuscation for $n$-qubit Circuits}
 In the previous section we showed how we can construct a $Qi\mathcal{O}$  for any $1$-qubit unitary circuit. Can we not construct a $Qi\mathcal{O}$ for any $n$-qubit unitary circuit using iO gate teleportation and quantum secure iO?  As we will see that when $\cnot$ and $\tgate$-gates are mixed together then the second property ({\tt Polynomial Slowdown}) of $Qi\mathcal{O}$ is violated, therefore, the construction becomes infeasible. More precisely we will show that for any $n$-qubit circuit with $k$ number of $\tgate$-gates, $k\leq n,$ the correction unitary in the worst-case has $4^k$ terms,
 
 \begin{equation}
@@ -592,7 +592,7 @@ $\mathcal{C}_q=\{C_{q_n}\mid n\in \mathbb{N}\}$ there exist a $poly(n)$ such tha
 \end{remark}
 
 
-{\em Update Function for arbitrary $n$-Qubit circuits}
+\subsection*{Update Function for an arbitrary $n$-Qubit circuit}
 We have defined above how a unitary looks like for an arbitrary circuit, but in order to construct $Qi\mathcal{O}$ construct for a more general class of qubit circuits; we have to define precisely define update functions. The update function must satisfy the following two properties.
 
 \begin{enumerate}
@@ -680,10 +680,18 @@ From relation \ref{nqubit:eq15} we have
 \end{equation}
 
 By definition of update functions (relation \ref{nqubit:eq10}) we have $m$ distinct binary strings $b_{k_{i1}} a_{k_{i1}}\ldots b_{k_{in}} a_{k_{in}}$ corresponding to the $m$ distinct integers $\{k_1,k_2,\cdots, k_m\}$ and similarly we have $t$ distinct binary strings $b_{k_{i1}^\prime} a_{k_{i1}^\prime}\ldots b_{k_{in}^\prime} a_{k_{in}^\prime}$ corresponding to corresponding to the $t$ distinct integers $\{k_1^\prime,k_2^\prime,\cdots, k_t^\prime\}.$  Moreover, by definition of the update functions (relation \ref{nqubit:eq10}) $\beta_i\neq 0$ for $i\in [m]$ and $\beta_i^\prime\neq 0$  for $i\in [t].$ Now suppose if  $m>t$ or $m<t$ then there is at least one non-zero term on the L.H.S
-in the relation \ref{nqubit:eq16}, while the R.H.S is equal to a {\bf 0} matrix. Therefore $m=t$ and since the terms our in  lexicographic order we must have  
+in the relation \ref{nqubit:eq16}, while the R.H.S is equal to a {\bf 0} matrix. Therefore $m=t$ and since the terms our in  lexicographic order we must have for all $i\in[m].$
+\begin{equation}
+\label{nqubit:eq17}
+ \beta_{k_i}\xgate^{b_{k_{i1}}} \zgate^{a_{k_{i1}}} \otimes \cdots  \otimes \xgate^{b_{k_{in}}} \zgate^{a_{k_{in}}}=\beta_{k_i}^\prime\xgate^{b_{k_{i1}^\prime}} \zgate^{a_{k_{i1}}^\prime} \otimes \cdots  \otimes \xgate^{b_{k_{in}^\prime}} \zgate^{a_{k_{in}^\prime}}.
+\end{equation}
+ Therefore we have  for all $i\in[m]$ we have $\beta_{k_i}=\beta_{k_i}^\prime$ and $k_i=k_i^\prime$ and $F_{C_q}=F_{C_q^\prime}.$
 
- $\beta_{k_i}\xgate^{b_{k_{i1}}} \zgate^{a_{k_{i1}}} \otimes \cdots  \otimes \xgate^{b_{k_{in}}} \zgate^{a_{k_{in}}}$ t
-
+\subsection{$Qi\mathcal{O}$ for Unitary Quantum Circuits with Low $\tgate$ gate Complexity}
+Let $C_q $be an $n$-qubit circuit with number of $\tgate$-gates in $O(\log(|C_q|)$  and $$F_{C_q}(s)=((\beta_{k_1}, \beta_{k_2},\ldots, \beta_{k_m}),(k_1,k_2,\ldots, k_m)),\; \mbox{for } s\in\{0,1\}^{2n}.$$
+ From the above discussion it follows that $m\in O(|C_q|).$ Moreover, each the size of $\beta_i \in poly(|C_q|)$ (appendix C) and $k_i \in O(|n|).$ But $n\leq |C_q|$ we also have $k_i \in poly(|n|).$ Therefore, the size of $((\beta_{k_1}^\prime, \beta_{k_2}^\prime,\ldots, \beta_{k_m}^\prime),(k_1^\prime,k_2^\prime,\ldots, k_m^\prime))$ is in $O(poly(|C_q|).$ Let $C$ be the classical circuit that computes $F_{C_q},$ note for each quantum gate $g$ in $C_q,$ $C$ has to implement the the operations such as $\oplus$, swaps, $+$ and $\otimes$ corresponding to the $g$ and the size of operands the circuit $C$ has to deal are also in $poly(|C_q|).$ Since, there are $|C_q|$ quantum gates, it follows that $F_{C_q}$ can be computed by a classical circuit of size $poly(|C_q|).$
+ 
+ The $Qi\mathcal{O}$ construction is identical to the to the construction for Clifford gates (section \ref{sec:Clifford-iO-teleportaion}).
 
 
 
