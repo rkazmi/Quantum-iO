@@ -525,24 +525,27 @@ The equation \ref{lemma:1qubit:eq5},  can only be satisfied if $\beta_i = \beta_
 
 
 \subsection{Quantum Indistinguishability Obfuscation for $n$-qubit Circuits}
-In the previous section we showed how we can construct a $Qi\mathcal{O}$  for any $1$-qubit unitary circuit. Can we not construct a $Qi\mathcal{O}$ for any $n$-qubit unitary circuit using iO gate teleportation and quantum secure iO?  As we will see that when $\cnot$ and $\tgate$-gates are mixed together then the second property ({\tt Polynomial Slowdown}) of $Qi\mathcal{O}$ is violated, therefore, the construction becomes infeasible. More precisely we will show that for any $n$-qubit circuit with $k$ number of $\tgate$-gates, $k\leq n,$ the correction unitary in the worst-case has $4^k$ terms,
+In the previous section we showed how we can construct a $Qi\mathcal{O}$  for any $1$-qubit unitary circuit. In this section we show that how to construct  $Qi\mathcal{O}$ for any $n$-qubit unitary circuit $C_q$ using iO gate teleportation and quantum secure iO provided the number of $\tgate$-gates are in $C_q$ are $O(\log(|C_q|).$  The reason for $O(\log(|C_q|)$ bound is that when $\cnot$ and $\tgate$-gates are mixed together then the
+the second property ({\tt Polynomial Slowdown}) of $Qi\mathcal{O}$ is violated if $\tgate$-count $\in \omega(\log(|C_q|)).$ More precisely we will show that for any $n$-qubit circuit with $k$ number of $\tgate$-gates,  the correction unitary in the worst-case has $4^k$ terms is of form  \ref{exp:nqubit-correction} 
 
 \begin{equation}
 \label{exp:nqubit-correction}
 \sum_{i=0}^{4^k-1} \beta_i \xgate^{b{i_1}} \zgate^{a{i_1}}\otimes \cdots \otimes \xgate^{b{i_n}} \zgate^{a{i_n}},\; \beta_i\in\mathbb{C},\; a_{i,j},b_{i_j}\in\{0,1\}.
 \end{equation}
 
-Since, there are at most $2^{2n}$ bit strings of size $n,$ it follows from the expression \ref{exp:nqubit-correction} that for any $n$-qubit circuit the correction unitary can be written as a summation of at most $2^{2n}$ terms, i.e $4^k\leq 2^{2n}$ for any $k\in\mathbb{N}.$ Where $k$ is the number of $\tgate$-gates in the circuit. Note the size of coefficients $\beta_i$'s can grow with number of $\tgate$-gates (see Remark \ref{remark:nqubit-correction} )
+Since, there are at most $2^{2n}$ bit strings of size $n,$ it follows from  \ref{exp:nqubit-correction} that for any $n$-qubit circuit the correction unitary can be written as a summation of at most $2^{2n}$ terms. This means the terms in the correction unitary can increase exponential in the number of $\tgate$-gates for $k\leq n.$ But if the correction unitary has $2^{2n}$ terms, then by applying more $\tgate$-gates or any gate cannot increase the number of terms in the expression \ref{exp:nqubit-correction}. However,  the size of size of coefficients $\beta_i$'s can be affected with each application of a $\tgate$-gate (see Remark \ref{remark:nqubit-correction2} for details). Note that for any uniform family of quantum circuits 
+$\mathcal{C}_q=\{C_{q_n}\mid n\in \mathbb{N}\}$ there exist a $poly(n)$ such that for every $C_{q_n}\in \mathcal{C}_q,$ imply $|C_{q_n}|\leq poly(n).$ Otherwise we can add $\igate$-gates to any circuit such that the $|C_q|\geq 2^{2n},$ and then obfuscate any circuit with polynomially many $\tgate$-gates using gate teleportation and class iO.
+
 
 Let $C_q$ be an $n$-qubit circuit and $\ket{\psi}$ be an $n$-qubit state. If we want to evaluate $C_q$ on the state $\ket{\psi}$ using gate teleportation, then we are required to compute the correction unitary $U^\prime$ corresponding to $C_q$ (section \ref{protocol: gate  teleportation}) satisfying equation \ref{nqubit:eq6}.
 
 \begin{equation}
 \label{nqubit:eq6}
- U^\prime C_q (\xgate^{a_{1}}\zgate^{b_{1}}\otimes \xgate^{a_{2}}\zgate^{b_{2}}\cdots \otimes \xgate^{a_{n}}\zgate^{b_{n}})(\ket{\psi})=C_qU(\ket{\psi}).
+C_qU(\ket{\psi})= U^\prime C_q (\xgate^{a_{1}}\zgate^{b_{1}}\otimes \xgate^{a_{2}}\zgate^{b_{2}}\cdots \otimes \xgate^{a_{n}}\zgate^{b_{n}})(\ket{\psi}).
 \end{equation}
 
 
-Let's estimate how big correction unitary $U^\prime$ can grow. Suppose number of $\tgate$ gates in $C_q$ are $k$ for some non-negative integer $k\leq n.$ To simplify the analysis we assume that $\tgate$-gates are in the first $l$ wires of $C_q.$ \footnote{This restriction will not not affect our analysis see explanation below.} Note we must have $l\leq k.$ Then Every $j$-th wire  $\tgate$-gates in the worst-case can transform $\xgate^{a_{j}}\zgate^{b_{j}}$ 
+Let's construct $U^\prime$ and estimate how big it can grow. Suppose number of $\tgate$ gates in $C_q$ are $k$ for some non-negative integer $k\leq n.$ To simplify the analysis we assume that $\tgate$-gates are in the first $l$ wires of $C_q.$ \footnote{This restriction will not not affect our analysis see  remark \ref{remark:nqubit-correction2}.} Note we must have $l\leq k.$ Then Every $j$-th wire  $\tgate$-gates in the worst-case can transform $\xgate^{a_{j}}\zgate^{b_{j}}$ 
 
 \begin{equation}
 \begin{aligned}
@@ -570,8 +573,12 @@ C_q (\xgate^{a_{i}}\zgate^{b_{i}})^{\otimes_{i=1}^{n}}=\left(\sum_{j=0}^{4^l} \b
  =\left(\sum_{j=0}^{4^{l}-1} \beta_j \xgate^{b_{j1}^\prime}\zgate^{a_{j1}^\prime} \otimes \cdots \otimes\xgate^{b_{jl}^\prime}\zgate^{a_{jl}^\prime} \otimes \xgate^{a_{l+1}^\prime}\zgate^{b_{l+1}^\prime}  \otimes \cdots   \otimes\xgate^{a_{n}^\prime}\zgate^{b_{n}^\prime}\right)
  \end{aligned}
 \end{equation}
-where $\beta_j\in \mathbb{C}$ for $0\leq j\leq 4^l-1.$  Recall that $k$ denote the number of $\tgate$-gates and $l\leq k,$ therefore in the worst case the correction unitary can have $4^k$ terms. Note the restriction that $\tgate$-gates are in the first $l$ wires of the circuit has no affect on our analysis. This because, any permutation of the wires in the circuit will give us $l$ terms of form $\sum_{i=0}^3 \lambda_{j_i} \xgate^{a_{j_i}^\prime} \zgate^{b_{j_i}^\prime}$ and $n-l$ terms of the form 
-$\xgate^{a_{i}^\prime} \zgate^{b_{i}^\prime}.$  And the tensor product of these terms in any order will result into a unitary in the worst-case of form
+where $\beta_j\in \mathbb{C}$ for $0\leq j\leq 4^l-1.$  Recall that $k$ denote the number of $\tgate$-gates and $l\leq k,$ therefore in the worst case the correction unitary can have $4^k$ terms. 
+
+\begin{remark}
+\label{remark:nqubit-correction1}
+Note the restriction that $\tgate$-gates are in the first $l$ wires of the circuit has no affect on our analysis. This because, any permutation of the wires in the circuit will give us $l$ terms of form $\sum_{i=0}^3 \lambda_{j_i} \xgate^{a_{j_i}^\prime} \zgate^{b_{j_i}^\prime}$ and $n-l$ terms of the form $\xgate^{a_{i}^\prime} \zgate^{b_{i}^\prime}.$  And the tensor product of these terms in any order will result into a unitary in the worst-case of form
+\end{remark}
 
 \begin{equation}
 \sum_{i=0}^{4^k-1} \beta_i \xgate^{b{i_1}} \zgate^{a{i_1}}\otimes \cdots \otimes \xgate^{b{i_n}} \zgate^{a{i_n}},\; \beta_i\in\mathbb{C},\; a_{i_j},b_{i_j}\in\{0,1\}.
@@ -583,12 +590,11 @@ Therefore, if the number of $\tgate$-gates $k\in O(\log(|C_q|),$ then number of 
 
 
 \begin{remark}
-\label{remark:nqubit-correction}
-Note for any $n$-qubit circuit the corresponding  correction unitary can also be written as sum of at most $2^{2n}$ terms, regardless how many $\tgate$-gates  a circuit has. To realize this suppose we have 
+\label{remark:nqubit-correction2}
+Note for any $n$-qubit circuit the corresponding  correction unitary can also be written as sum of at most $2^{2n}$ terms, regardless how many $\tgate$-gates a circuit has. To realize this suppose we have 
 $$C_q (\xgate^{a_{i}}\zgate^{b_{i}})^{\otimes_{i=1}^{n}}=\left(\sum_{j=0}^{l} \beta_j \xgate^{b_{j1}}\zgate^{a_{j1}} \otimes \cdots \otimes\xgate^{b_{jl}}\zgate^{a_{jl}} \otimes \xgate^{a_{l+1}^\prime}\zgate^{b_{l+1}^\prime}  \otimes \cdots   \otimes\xgate^{a_{n}^\prime}\zgate^{b_{n}^\prime}\right)$$
 for some integer $l>2^{2n}.$
-But since, there are at most $2^{2n}$ bit strings of size $2n,$ by pigeon hole principle we must have at least $2n-l$ terms that have common binary strings and by adding these terms we are guaranteed to have every unitary can be written with at most $2^{2n}$ terms. This means that if the number of terms in the correction unitary grows exponentially (in worst-case) in the number of $\tgate$-gates $k$ as far as $k\geq n.$ Note the size of the coefficients $\beta_i$ is a function of $\tgate$-gates and will be affected as number of $\tgate$-gates increases. So if there are exponentially many $\tgate$-gates then the size of the $\beta_i$ can also also grow exponentially. It is also important to note that for a uniform family of quantum circuits 
-$\mathcal{C}_q=\{C_{q_n}\mid n\in \mathbb{N}\}$ there exist a $poly(n)$ such that for every $C_{q_n}\in \mathcal{C}_q,$ imply $|C_{q_n}|\leq poly(n).$ Otherwise we can add $\igate$-gates to any circuit such that the $|C_q|\geq 2^{2n},$ and then obfuscate any circuit with polynomially many $\tgate$-gates.
+But since, there are at most $2^{2n}$ bit strings of size $2n,$ by pigeon hole principle we must have at least $2n-l$ terms that have common binary strings and by adding these terms we are guaranteed to have every unitary can be written with at most $2^{2n}$ terms. This means that if the number of terms in the correction unitary grows exponentially (in worst-case) in the number of $\tgate$-gates $k$ as far as $k\geq n.$ Note the size of the coefficients $\beta_i$ is a function of $\tgate$-gates and will be affected as number of $\tgate$-gates increases. So if there are exponentially many $\tgate$-gates then the size of the $\beta_i$ can also also grow exponentially. 
 \end{remark}
 
 
