@@ -244,16 +244,15 @@ Note we output an empty register $\rho$ to be consistent with our definition of 
 
 
 
-\subsubsection{Quantum Indistinguishability Obfuscation using Gate Teleportation}
+\subsubsection{$Qi\mathcal{O}$ for Clifford via Gate Teleportation}
 \label{sec:Clifford-iO-teleportaion}
-In this section we  show that how gate teleportation can be used to obfuscate Clifford circuits. Our algorithm relies on the assumption that there exists a quantum secure $i\mathcal{O}$ for classical circuits, this seems problematic at first since, there is no provably quantum secure $i\mathcal{O}$ known for general classical circuits. 
-\anote{Really? I thought there were some candidates.... }
-However,  our construction relies on the assumption that a quantum secure $i\mathcal{O}$ exists for a very specific class of circuits that are associated with the update functions (section \ref{correction function}). In fact,  to construct a quantum secure $i\mathcal{O}$ for the family circuits (update functions) corresponding to Clifford circuits is quite easy (section \ref{sec: iO-clifford-functions}). \anote{Indeed, we're looking at some classical circuits that are probably quite easy to deal with. I'm not sure they are Cliffords, however, since I think they are classical functions.}
+In this section we  show that how gate teleportation can be used to construct a quantum indistinguishability obfuscation for Clifford circuits Our algorithm relies on the assumption that there exists a quantum secure $i\mathcal{O}$ for classical circuits, this seems problematic at first since, there is no provably quantum secure $i\mathcal{O}$ known for general classical circuits. 
+%\anote{Really? I thought there were some candidates.... }
+However,  our construction relies on the assumption that a quantum secure $i\mathcal{O}$ exists for a very specific class of classical circuits the compute update functions (section \ref{correction function}). And In fact, it is easy to construct an $i\mathcal{O}$ for classical circuits that compute update functions for Clifford circuits (see appendix). %section \ref{sec: iO-clifford-functions}). %\anote{Indeed, we're looking at some classical circuits that are probably quite easy to deal with. I'm not sure they are Cliffords, however, since I think they are classical functions.}
 
 
-
-\anote{below, $\rho$ is usually a density matrix, which does not require a $\ket{\cdot}$.}
-\anote{below, say something about what ``lower half'' means, or establish earlier on that another way to write the tensor product of $n$ Bell states is $\sum_i \ket{i}{i}$ (or something like this; need to check). Then it is clear which register we are talking about for applying $C_q$.}
+%\anote{below, $\rho$ is usually a density matrix, which does not require a $\ket{\cdot}$.}
+%\anote{below, say something about what ``lower half'' means, or establish earlier on that another way to write the tensor product of $n$ Bell states is $\sum_i \ket{i}{i}$ (or something like this; need to check). Then it is clear which register we are talking about for applying $C_q$.}
 
 \begin{algorithm}[H]
    \caption{$Qi\mathcal{O}$ using Gate Teleportation}
@@ -261,24 +260,38 @@ However,  our construction relies on the assumption that a quantum secure $i\mat
   \item Input: A $n$-qubit Clifford Circuit $C_q.$
   \begin{enumerate}
   \item Prepare $2n$ qubit Bell state $\ket{\beta^{ 2n}}=\ket{\beta_{00}}\otimes \cdots \otimes \ket{\beta_{00}}.$
-  \item Apply the circuit $C_q$ on the lower half of the qubits $\ket{\rho}=(I\otimes C_q) \ket{\beta^{2n}}.$
-  \item Compute the circuit $C_q^\prime$ (defined below).
-  \item Output $\left(\ket{\rho},C_q^\prime \right).$
+  \item Apply the circuit $C_q$ on the right most $n$ qubits and obtain a system $\rho$
+  										 $$\rho=(\igate_n\otimes C_q) \ket{\beta^{2n}}.$$
+ \item Compute the classical circuit $C$ that computes the update function $F_{C_q}.$	
+ \item  Set $C^\prime=i\mathcal{O}(C).$							 
+  \item Let $B_q$ denote the circuit that takes a $3n$ qubit state and perform a Bell measurement on the leftmost $2n$-qubits of the input state and obtain the bits (output of measurement), $(a_1,b_1\ldots,a_n,b_n)$ 
+  \item Set $C_q^\prime=(B_q, C^\prime).$
+  \item Output $\left(\rho,C_q^\prime \right).$
   \end{enumerate}
   %\item[-] Note we denote the classical circuit that computes the function $F_{C_q}$  also by $C.$
   \end{itemize}
 \end{algorithm}
 
-
 \anote{For step 2 below, shall we add to preliminaries that classical circuits can be embedded into quantum ones? I'm not sure, actually, how you envisage this classical part of the corrections- maybe I haven't fully understood yet.}
+On receiving $\left(\rho,C_q^\prime \right).$ one can evaluate $C_q^\prime$ on any $n$-qubit state $\ket{\psi}$ as follows
+
 \begin{algorithm}[H]
-\caption{Circuit $C_q^\prime$}
-  \begin{itemize}
-  \item Input  $\left(\ket{\rho}, \ket{\psi} \right)$
+ \begin{itemize}
+  \item Input $\left(\rho,C_q^\prime \right)$ and a quantum state $\ket{\psi}.$
   \begin{enumerate}
-  \item  Measure the first $2n$ qubits of the system $\ket{\rho}\otimes \ket{\psi}$ in the Bell basis and obtain the classical output $(a_1,b_1,\ldots,a_n,b_n).$ ({\em Note last $n$-qubits are now in the state} $C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}})(\ket{\phi})=(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime})C_q(\ket{\phi})$ see section \ref{protocol: gate  teleportation}).
-  \item Compute the correction bits $(a_1^\prime,b_1^\prime,\ldots,a_n^\prime,b_n^\prime)=i\mathcal{O}(C_{F_{C_q}})(a_1,b_1,\ldots,a_n,b_n).$ Where $C_{F_{C_q}}$ is the circuit that computes $F_{C_q}.$
-  \item Apply $(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime})$ to the system $C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}})(\ket{\phi})$  and output the state $C_q(\ket{\phi}).$
+  \item   Write $C_q^\prime=(B_q, C^\prime)$ and the joint system $\rho_{AB}=\rho_A\otimes \ket{\psi}_B.$
+  \item   Obtain the state $\rho_{AB}^\prime=B_q(\rho_{AB})$ and classical output $(a_1,b_1\ldots,a_n,b_n).$ 
+  \item   Compute $C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}})\ket{\psi}=Tr_A(\rho_{AB}^\prime)$ (see  gate teleportation protocol \ref{protocol: gate teleportation}).
+  \item   Compute the update function $$(a_1^\prime, b_1^\prime,\ldots, a_n^\prime, b_n^\prime)=C^\prime(a_1,b_1\ldots,a_n,b_n).$$
+  \item    Compute the correction unitary $(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime})$ 
+  \item   Apply  $(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime})$ to the system $C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}})\ket{\psi}$ to obtain the state $C_q(\ket{\psi})$ as follows,
+  \begin{equation*}
+  \begin{aligned}
+ (\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime}) \cdot C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}b_{i}})\ket{\psi}\\
+ =(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime}) \cdot (\zgate^{\otimes_{i=1}^{n} a_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n}b_{i}^\prime})C_q(\ket{\psi})\\
+ = C_q(\ket{\psi}).
+ \end{aligned}
+ \end{equation*}
   \end{enumerate}
   \end{itemize}
 \end{algorithm}
