@@ -34,7 +34,7 @@ $$(\rho, C_q^\prime)\leftarrow Qi\mathcal{O}(C_q) \;  \mbox{ and }\; C_q^\prime(
 \end{itemize}
 %\anote{in below, did we define what we mean by size? If this is the number of gates, I would find the definition quite restrictive. Maybe you mean the same dimensions for input- output?}
 
-\item {\tt Indistinguishability:} For any two equivalent quantum circuits $C_{q_1},C_{q_2}\in \mathcal{C}_Q,$ of the same size
+\item {\tt Indistinguishability:} For any two equivalent quantum circuits $C_{q_1},C_{q_2}\in \mathcal{C}_Q,$ 
  and for every polynomial-time quantum distinguisher $\mathcal{D}_q,$ there exists a negligible function {\rm negl} such that:
 					$$\Big |{\rm Pr}[\mathcal{D}_q(Qi\mathcal{O}(C_{q_1}))=1]-{\rm Pr}[\mathcal{D}_q(Qi\mathcal{O}(C_{q_2}))=1] \Big |\leq  {\rm negl}(k).$$		
 Where $k=|C_{q_1}|=|C_{q_2}|.$						
@@ -255,6 +255,7 @@ However,  our construction relies on the assumption that a quantum secure $i\mat
 %\anote{below, say something about what ``lower half'' means, or establish earlier on that another way to write the tensor product of $n$ Bell states is $\sum_i \ket{i}{i}$ (or something like this; need to check). Then it is clear which register we are talking about for applying $C_q$.}
 
 \begin{algorithm}[H]
+\label{QiO:Clifford-teleportation}
    \caption{$Qi\mathcal{O}$ using Gate Teleportation}
   \begin{itemize}
   \item Input: A $n$-qubit Clifford Circuit $C_q.$
@@ -262,32 +263,33 @@ However,  our construction relies on the assumption that a quantum secure $i\mat
   \item Prepare $2n$ qubit Bell state $\ket{\beta^{ 2n}}=\ket{\beta_{00}}\otimes \cdots \otimes \ket{\beta_{00}}.$
   \item Apply the circuit $C_q$ on the right most $n$ qubits and obtain a system $\rho$
   										 $$\rho=(\igate_n\otimes C_q) \ket{\beta^{2n}}.$$
- \item Compute the classical circuit $C$ that computes the update function $F_{C_q}.$	
- \item  Set $C^\prime=i\mathcal{O}(C).$							 
+ \item Compute the classical circuit $C_{F_{C_q}}$ that computes the update function $F_{C_q}.$	
+ \item  Set $C=i\mathcal{O}(C_{F_{C_q}}).$							 
   \item Let $B_q$ denote the circuit that takes a $3n$ qubit state and perform a Bell measurement on the leftmost $2n$-qubits of the input state and obtain the bits (output of measurement), $(a_1,b_1\ldots,a_n,b_n)$ 
   \item Set $C_q^\prime=(B_q, C^\prime).$
   \item Output $\left(\rho,C_q^\prime \right).$
   \end{enumerate}
-  %\item[-] Note we denote the classical circuit that computes the function $F_{C_q}$  also by $C.$
   \end{itemize}
 \end{algorithm}
 
 \anote{For step 2 below, shall we add to preliminaries that classical circuits can be embedded into quantum ones? I'm not sure, actually, how you envisage this classical part of the corrections- maybe I haven't fully understood yet.}
-On receiving $\left(\rho,C_q^\prime \right).$ one can evaluate $C_q^\prime$ on any $n$-qubit state $\ket{\psi}$ as follows
+On receiving $\left(\rho,C_q^\prime \right),$ one can evaluate the original circuit $C_q$ on any $n$-qubit state $\ket{\psi}$ as follows
 
 \begin{algorithm}[H]
+\label{Eval:Clifford-teleportation}
+\caption{Computing $C_q$ from $\left(\rho,C_q^\prime \right)$}
  \begin{itemize}
   \item Input $\left(\rho,C_q^\prime \right)$ and a quantum state $\ket{\psi}.$
   \begin{enumerate}
-  \item   Write $C_q^\prime=(B_q, C^\prime)$ and the joint system $\rho_{AB}=\rho_A\otimes \ket{\psi}_B.$
+  \item   Write $C_q^\prime=(B_q, C)$ and the joint system $\rho_{AB}=\rho \otimes \ket{\psi}.$
   \item   Obtain the state $\rho_{AB}^\prime=B_q(\rho_{AB})$ and classical output $(a_1,b_1\ldots,a_n,b_n).$ 
-  \item   Compute $C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}})\ket{\psi}=Tr_A(\rho_{AB}^\prime)$ (see  gate teleportation protocol \ref{protocol: gate teleportation}).
-  \item   Compute the update function $$(a_1^\prime, b_1^\prime,\ldots, a_n^\prime, b_n^\prime)=C^\prime(a_1,b_1\ldots,a_n,b_n).$$
+  \item   Compute $C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}})\ket{\psi}=Tr_A(\rho_{AB}^\prime)$ (see  gate teleportation protocol \ref{protocol: gate-teleportation}).
+  \item   Compute the update function $$(a_1^\prime, b_1^\prime,\ldots, a_n^\prime, b_n^\prime)=C(a_1,b_1\ldots,a_n,b_n).$$
   \item    Compute the correction unitary $(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime})$ 
   \item   Apply  $(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime})$ to the system $C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}})\ket{\psi}$ to obtain the state $C_q(\ket{\psi})$ as follows,
   \begin{equation*}
   \begin{aligned}
- (\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime}) \cdot C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}b_{i}})\ket{\psi}\\
+ (\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime}) \cdot C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}a_{i}})\ket{\psi}\\
  =(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime}) \cdot (\zgate^{\otimes_{i=1}^{n} a_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n}b_{i}^\prime})C_q(\ket{\psi})\\
  = C_q(\ket{\psi}).
  \end{aligned}
@@ -297,96 +299,109 @@ On receiving $\left(\rho,C_q^\prime \right).$ one can evaluate $C_q^\prime$ on a
 \end{algorithm}
 
 \begin{theorem}
-If $i\mathcal{O}$ is a quantum secure classical indistinguishability obfuscation, then $Qi\mathcal{O}$ constructed from the gate teleportation protocol is a quantum Indistinguishability Obfuscation for all Clifford Circuits.
+If $i\mathcal{O}$ is a quantum secure classical indistinguishability obfuscation, then $Qi\mathcal{O}$ constructed from the gate teleportation  a quantum Indistinguishability Obfuscation for all Clifford Circuits.
 \end{theorem}
 
 \anote{Note to self: I have not checked the below}
 
 \noindent{\bf Proof}:
 \begin{itemize}
-\item  {\tt Functionality:} The functionality $Qi\mathcal{O}$ is followed from the gate teleportation.
-\item {\tt Polynomial Slowdown:} Note $\rho$ is a $2n$-qubit state  and the size of $C_q^\prime$ is equal to the size of the circuits that computes the Bell measurement,  $i\mathcal{O}(F_{C_q})$ and $(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime}.$ The Bell measurement of an $O(n)$ qubit system can be perform by a circuit of size $O(n)$ and clearly the size of the circuit  $(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime})$ is in $O(n).$ The function $F_{C_q}$ takes  $2n$ bits as an input and perform {\bf XOR} or {\bf Swap} operations on it as its passes through each layer of the gates in $C_{q}.$ There are at most $|C_q|$ layers of gates, therefore the total number gates  required to compute $F_{C_q}$ is $poly(n)|C_q|.$ Since, for any $n$-qubit circuit $C_q,$ $n\leq |C_q|,$ the function $F_{C_q}$ can be computed by a circuit  of size at most $poly(|C_{q}|).$  Hence, the size of $|C_q^\prime | \in poly(|C_q|).$
-
+\item  {\tt Functionality:} The functionality $Qi\mathcal{O}$ is followed from the gate teleportation (section \ref{protocol: gate-teleportation}).
+\item {\tt Polynomial Slowdown:} Note $\rho$ is a $O(n)$-qubit state  and the size of $|C_q|=|B_q|+|C^\prime|.$ The circuit $B_q$ perform the Bell measurement of a $O(n)$ qubit system. Therefore, $B_q$ can be constructed with $O(n)$ gates. Note from complexity theory we know that if a function can be computed by a deterministic algorithm in time $t(n),$ then it can be computed by a circuit of size $O(t^2(n)).$ Therefore if we can show  that  ${F_{q_c}}$ can be computed in $poly(|C_q|),$ then we can conclude that the size of $|C|\in poly(|C_q|).$ Note the function $F_{C_q}$ takes  $2n$ bits as an input and perform $O(n)$ operations on the input bits for each gate in $C_{q}.$ There are at most $|C_q|$ gates, therefore the total cost of computing $F_{C_q}$ is $O(n)|C_q|.$  Note any $n$-qubit circuit $C_q,$ $n\leq |C_q|,$ the function $F_{C_q}$ can be computed by a circuit  of size at most $poly(|C_{q}|).$ Therefore,
+\begin{equation*}
+\rho\in poly(|C_q|)    \mbox{ and } |C_q^\prime |=|B_q|+|C| \in poly(|C_q|)
+\end{equation*}
 
 \item  {\tt Indistinguishability:} Let $C_{q_1}$ and $C_{q_2}$ be two $n$-qubit equivalent Clifford circuits
-$$\left(\ket{\rho_1},C_{q_1}^\prime \right)= Qi\mathcal{O}(C_{q_1})
-\;\mbox{ and }\;\left(\ket{\rho_2},C_{q_2}^\prime \right)= Qi\mathcal{O}(C_{q_2}) $$
-\end{itemize}
+\begin{equation*}
+\left(\rho_1 ,\left(B_q, i\mathcal{O}(C_{F_{C_{q_1}}})\right)\right)= Qi\mathcal{O}(C_{q_1}) \mbox{ and } \left(\rho_2 ,\left(B_q, i\mathcal{O}(C_{F_{C_{q_2}}})\right)\right)= Qi\mathcal{O}(C_{q_2})
+\end{equation*}
 
 Since $C_{q_1}(\ket{\tau})=C_{q_2}(\ket{\tau})$ for every quantum state $\ket{\tau}$ we have,
 
-$$\ket{\rho_1}=(I\otimes C_{q_1}) \ket{\beta^{2n}}=(I\otimes C_{q_2}) \ket{\beta^{2n}}=\ket{\rho_2}.$$
+\begin{equation}
+\label{eq:1}
+\rho_1=(I\otimes C_{q_1}) \ket{\beta^{2n}}=(I\otimes C_{q_2}) \ket{\beta^{2n}}=\rho_2.
+\end{equation}
+And of course $B_q$ will always be the same circuit for circuits. So the only thing we need to show that $i\mathcal{O}(C_{F_{C_{q_1}}})$ and $i\mathcal{O}(C_{F_{C_{q_2}}})$ are computationally indistinguishable against any polynomial-time quantum adversary. Note if we can prove that $F_{C_{q_1}}$ and $F_{C_{q_2}}$ are equivalent functions then we can conclude that the classical circuits ($C_{q_1}$ and $C_{q_2}$) that computes these functions are also be equivalent. Then from the definition of classical quantum secure $i\mathcal{O}$ we can conclude that  $iO(C_{F_{C_{q_2}}})$ and $iO(C_{F_{C_{q_2}}})$ are computationally indistinguishable against any polynomial-time quantum adversary. From Theorem \ref{sec:Clifford Functions} we have $F_{C_{q_1}}$ and $F_{C_{q_2}}$ equivalent functions, therefore $Qi\mathcal{O}$ is a quantum secure indistinguishability obfuscation for all Clifford Circuits. \footnote{Note without loss of generality we can assume that $|C_{F_{C_{q_1}}}|=|C_{F_{C_{q_2}}}|,$ because we can always increase the size of a circuit by adding trivial gates to it. }
 
-so the first part of the $Qi\mathcal{O}$ output is perfectly indistinguishable. \anote{Yes, the above passage is correct.} Now for the second  part note that he only difference between  $C_{q_1}^\prime$ and $C_{q_2}^\prime$ are circuits that compute the update functions $F_{C_{q_1}}$ and  $F_{C_{q_2}}.$ If we can prove that $F_{C_{q_1}}({\bf s})=F_{C_{q_2}}({\bf s})$ for every  ${\bf s}\in\{0,1\}^{2n},$ then from definition of classical indistinguishability obfuscation we can conclude that  $iO(C_{F_{C_{q_2}}})$ and $iO(C_{F_{C_{q_2}}})$
-are computationally indistinguishable against any quantum adversary \footnote{Note without loss of generality we can assume that $|C_{F_{C_{q_1}}}|=|C_{F_{C_{q_2}}}|,$ because we can always increase the size of a circuit by adding trivial gates to it. }
+\end{itemize}
 
-From Theorem \ref{sec:Clifford Functions} we have $F_{C_{q_1}}$ and $F_{C_{q_2}}$ equivalent functions, therefore $Qi\mathcal{O}$ is a quantum indistinguishability obfuscation for all Clifford Circuits.
 
 \begin{theorem}\label{sec:Clifford Functions}
 Let $C_{q_1}$ and $C_{q_2}$ be two equivalent Clifford circuits and  $F_{C_{q_1}}$ and $F_{C_{q_2}}$  denote the update functions for the circuits $C_{q_1}$ and $C_{q_2},$ then $F_{C_{q_1}}({\bf s})=F_{C_{q_2}}({\bf s})$ for every ${\bf s}\in\{0,1\}^{2n}.$
 \end{theorem}
 
-
 \begin{flushleft}
-{\bf Proof:} For any {\em n}-qubit state $\ket \psi$ we have $C_{q_1}(\ket \psi)=C_{q_2}(\ket \psi).$ If we use Circuit teleportation protocol to compute $C_1(\ket \psi)$ and $C_{q_2}(\ket \psi),$ After measurement and tracing out the Bell states \anote{I'm not sure which part you are tracing out?} the system corresponding to the circuit $C_{q_1}$ and $C_{q_2}$ are in the states.
+{\bf Proof:} For any {\em n}-qubit state $\ket \psi$ we have $C_{q_1}(\ket \psi)=C_{q_2}(\ket \psi)$ and let $F_{C_{q_1}}$ and $F_{C_{q_2}}$ denote the update functions for the circuits $C_{q_1}$ and $C_{q_2}.$ Suppose $F_{C_{q_1}}\neq F_{C_{q_2}},$  then there must exist at least one binary string $a_1b_1,\ldots, a_nb_n$ such that 
+\begin{equation*}
+F_{C_{q_1}}(a_1,b_1,\ldots,a_n,b_n)\neq F_{C_{q_2}}(a_1,b_1,\ldots,a_n,b_n)
+\end{equation*}
 
-$$C_{q_1} ({\rm {\rm U}}\ket \psi)={\rm {\rm U}}_{C_{q_1}}C_{q_1}(\ket \psi)  \;\mbox{ and }\; C_{q_2} ({\rm {\rm U}}\ket \psi)={\rm {\rm U}}_{C_{q_2}}(C_{q_2}(\ket \psi))$$
-Where
+From the above (see indistinguishability) we have (see equation \ref{eq:1})
+\begin{equation*}
+\left(\rho ,\left(B_q, i\mathcal{O}(C_{F_{C_{q_1}}})\right)\right)= Qi\mathcal{O}(C_{q_1}) \mbox{ and } \left(\rho ,\left(B_q, i\mathcal{O}(C_{F_{C_{q_2}}})\right)\right)= Qi\mathcal{O}(C_{q_2}).
+\end{equation*}
 
- $${\rm {\rm U}}=( X^{\otimes_{i=1}^{n} b_{i}} \cdot Z^{\otimes_{i=1}^{n} a_{i}}),$$
-$${\rm {\rm U}}_{C_{q_1}}=(X^{\otimes_{i=1}^{n} b^\prime_{i}} \cdot Z^{\otimes_{i=1}^{n} a^\prime_{i}}),$$
-$${\rm {\rm U}}_{C_{q_2}}=(X^{\otimes_{i=1}^{n} e^\prime_{i}} \cdot Z^{\otimes_{i=1}^{n} d^\prime_{i}}).$$
-$$F_{C_{q_1}}(a_1,b_1,\ldots, a_n,b_n)=(a^\prime_1,b^\prime_1,\ldots, a^\prime_n,b^\prime_n) \;\mbox{ and }\; F_{C_{q_2}}(d_1,e_1,\ldots, d_n,e_n)=(d_1^\prime,e_1^\prime,\ldots, d_n^\prime,e^\prime_n)$$
+Suppose we want to evaluate circuits on some state $\ket \psi$ follows that for both circuits $C_{q_1}$ and $C_{q_2}$ in algorithm 3 we have the same state $\rho_{AB}=\rho\otimes \ket \psi$ (see algorithm 3). Therefore, the classical output bits we obtain after performing the Bell measurement in algorithm 3 are independent of the circuits $C_{q_1}$ and $C_{q_2}$). Suppose for both circuits we obtain the same classical outputs $a_1b_1,\ldots, a_nb_n.$ From algorithm 3 we have 
+ 
+ \begin{equation}
+  \label{eq:2}
+C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}})\ket{\psi}=C_q^\prime (\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}})\ket{\psi}
+\end{equation}
+Let $s=a_1b_1,\ldots, a_nb_n$ and let 
 
-We have
+ \begin{equation}
+ \label{eq:3}
+F_{C_{q_1}}(s)=(a^\prime_1,b^\prime_1,\ldots, a^\prime_n,b^\prime_n) \mbox{ and } F_{C_{q_2}}(s)=(d_1^\prime,e_1^\prime,\ldots, d_n^\prime,e^\prime_n)
+\end{equation}
 
-$$C_{q_1}(\ket \psi)=({\rm {\rm U}}_{C_{q_1}}^\dagger {\rm {\rm U}}_{C_{q_1}})C_{q_1}(\ket \psi)={\rm {\rm U}}_{C_{q_1}}^\dagger ( C_{q_1}({\rm {\rm U}}(\ket \psi))$$
-$$={\rm {\rm U}}_{C_{q_1}}^\dagger ( C_{q_2}({\rm {\rm U}}(\ket \psi)),  {\color{blue}[C_{q_1} \mbox{ and } C_{q_2} \mbox{ are equivalent } ]}$$
-$$={\rm {\rm U}}_{C_{q_1}}^\dagger {\rm {\rm U}}_{C_{q_2}}(C_{q_2}(\ket \psi))=C_{q_2}(\ket \psi)$$
-$$\Longrightarrow {\rm {\rm U}}_{C_{q_1}}^\dagger {\rm {\rm U}}_{C_{q_2}}={\bf I}\Longleftrightarrow {\rm {\rm U}}_{C_{q_1}}={\rm {\rm U}}_{C_{q_2}}$$
+We can rewrite equation \ref{eq:2} as (see gate teleportation \ref{protocol: gate-teleportation} or algorithm 3.
+ \begin{equation}
+  \label{eq:4}
+(\zgate^{\otimes_{i=1}^{n} a_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} b_{i}^\prime})C_q(\ket{\psi})=(\zgate^{\otimes_{i=1}^{n} d_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} e_{i}^\prime})C_q^\prime(\ket{\psi})
+\end{equation}
 
+Since $C_q^\prime(\ket{\psi})=C_q^\prime(\ket{\psi})$ we can substitute $C_q^\prime$ for $C_q^\prime$ in equation \ref{eq:4}
 
-By Lemma \ref{sec:Clifford Functions Equivalence}  we have that $F_{C_{q_1}}=F_{C_{q_2}}.$
+\begin{equation}
+  \label{eq:5}
+(\zgate^{\otimes_{i=1}^{n} a_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} b_{i}^\prime})C_q(\ket{\psi})=(\zgate^{\otimes_{i=1}^{n} d_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} e_{i}^\prime})C_q(\ket{\psi})
+\end{equation}
+
+It follows from equation \ref{eq:5} that 
+\begin{equation}
+  \label{eq:6}
+(\zgate^{\otimes_{i=1}^{n} a_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} b_{i}^\prime})=(\zgate^{\otimes_{i=1}^{n} d_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} e_{i}^\prime})
+\end{equation}
+
+It follows from equation \ref{eq:6}  that $$\zgate^{a_i^\prime} \cdot \xgate^{b_i^\prime}=\zgate^{d_i^\prime} \cdot \xgate^{e_i^\prime} \mbox{ for all } i\in[n].$$ This means $a_i^\prime=d_i^\prime$ and  $b_i^\prime=e_i^\prime$ and therefore, if $C_{q_1}$ and $C_{q_2},$ are two equivalent circuits, then they have the same update function.
+
 \end{flushleft}
 
-\begin{lemma}
-\label{sec:Clifford Functions Equivalence}
-Let $C_{q_1}$ and $C_{q_2}$ be two equivalent Clifford circuits, then $F_{C_{q_1}}=F_{C_{q_2}}$ if and only if ${\rm U}_{C_{q_1}}={\rm U}_{C_{q_2}}.$
-\end{lemma}
-{\bf Proof:} ($p\Rightarrow q)$ Suppose $F_{C_{q_1}}=F_{C_{q_2}}$ then clearly ${\rm U}_{C_{q_1}}={\rm U}_{C_{q_2}}.$\\
-
-		Now to proof $(q\Rightarrow p)$ Suppose ${\rm U}_{C_{q_1}}={\rm U}_{C_{q_2}}$ and $F_{C_{q_1}}\neq F_{C_{q_2}},$ then there exists a binary string $(a_1,b_1,\ldots, a_n,b_n)$ such that
-		  $$ F_{C_{q_1}}(a_1,b_1,\ldots, a_n,b_n)\neq F_{C_{q_2}}(a_1,b_1,\ldots, a_n,b_n)$$
-		  Since ${\rm U}_{C_{q_1}}({\ket \psi})={\rm U}_{C_{q_2}}({\ket \psi})$ for every {\em n}-qubit state ${\ket \psi}.$ Let  $${\ket \psi}={\ket {\phi_1}} \otimes {\ket {\phi_2}}\otimes \cdots \otimes {\ket {\phi_n}}$$
-		   where ${\ket {\phi_i}} =\alpha_i {\ket 0}+ \beta_i{\ket 1},$  $\alpha_i\neq 0$ and $\beta_i\neq 0,$ for every integer $1\leq i\leq n.$
-		
-		  $${\rm U}_{C_{q_1}}({\ket \psi})=\left(\alpha_1 {\ket {0+a^\prime_1}}+(-1)^{b^\prime_1} (i)^{c^\prime_1} \beta_1{\ket 1}\right) \otimes \dots \otimes  \left(\alpha_n {\ket {0+a^\prime_n}}+(-1)^{b^\prime_n} (i)^{c^\prime_i} \beta_n{\ket 1}\right)$$
-		
-		  $${\rm U}_{C_{q_2}}({\ket \psi})=\left(\alpha_1 {\ket {0+d^\prime_1}}+(-1)^{e^\prime_1} (i)^{f^\prime_1} \beta_1{\ket 1}\right) \otimes \dots  \otimes   \left(\alpha_n {\ket {0+d^\prime_n}}+(-1)^{e^\prime_n} (i)^{f^\prime_i} \beta_n{\ket 1}\right)$$
-		
-		  For any $i$ if  $a^\prime_i\neq d^\prime_i$ or $b^\prime_i\neq e^\prime_i$ or $c^\prime_i\neq f^\prime_i$ then the output ${\rm U}_{C_{q_1}}({\ket \psi})$ will differ from ${\rm U}_{C_{q_2}}({\ket \psi})$ on the {\em i}-th qubit. Which is a contraction to the assumption that ${\rm U}_{C_{q_1}}={\rm U}_{C_{q_2}}.$  Therefore $F_{C_{q_1}}=F_{C_{q_2}}.$
 
 
 
-\subsection{Indistinguishability Obfuscation for the Clifford Update Functions}
-\label{sec: iO-clifford-functions}
 
-
-\anote{I am not sure how am I to understand that the $F_{C_q}$ are Cliffords.... I thought they were classical circuits?}
-
-In this section we present a (quantum secure classical) $i\mathcal{O}$ that can obfuscate the update function $F_{C_q},$ for any $n$-qubit Clifford circuit $C_q.$
-
-\begin{algorithm}[H]
-   \caption{$i\mathcal{O}$ for Clifford update Functions $F_{\tt Clifford}$}
-  \begin{itemize}
-  \item Input: A $n$-qubit Clifford Circuit $C_q,$ a security parameter.
-  \begin{enumerate}
-  \item Compute $C_{q_c}\leftarrow$ {\tt AG-Canonical-Unique}$(C_q).$
-  \item Compute the circuit $C_{F_{q_c}}$ for the update function $F_{C_{q_c}}.$
-  \item Output $C_{F_{q_c}}.$
-  \end{enumerate}
-  \end{itemize}
-\end{algorithm}
+%\subsection{Indistinguishability Obfuscation for the Clifford Update Functions}
+%\label{sec: iO-clifford-functions}
+%
+%
+%\anote{I am not sure how am I to understand that the $F_{C_q}$ are Cliffords.... I thought they were classical circuits?}
+%
+%In this section we present a (quantum secure classical) $i\mathcal{O}$ that can obfuscate the update function $F_{C_q},$ for any $n$-qubit Clifford circuit $C_q.$
+%
+%\begin{algorithm}[H]
+%   \caption{$i\mathcal{O}$ for Clifford update Functions $F_{\tt Clifford}$}
+%  \begin{itemize}
+%  \item Input: A $n$-qubit Clifford Circuit $C_q,$ a security parameter.
+%  \begin{enumerate}
+%  \item Compute $C_{q_c}\leftarrow$ {\tt AG-Canonical-Unique}$(C_q).$
+%  \item Compute the circuit $C_{F_{q_c}}$ for the update function $F_{C_{q_c}}.$
+%  \item Output $C_{F_{q_c}}.$
+%  \end{enumerate}
+%  \end{itemize}
+%\end{algorithm}
 
 \section{Obfuscating Beyond Clifford Circuits}
 Here, we show how to build iO for quantum circuit families that satisfy Definition \ref{defn:Clifford+T:family}.
