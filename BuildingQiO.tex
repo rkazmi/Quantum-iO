@@ -272,8 +272,8 @@ However,  our construction relies on the assumption that a quantum secure $i\mat
   \end{itemize}
 \end{algorithm}
 
-\anote{For step 2 below, shall we add to preliminaries that classical circuits can be embedded into quantum ones? I'm not sure, actually, how you envisage this classical part of the corrections- maybe I haven't fully understood yet.}
-On receiving $\left(\rho,C_q^\prime \right),$ one can evaluate the original circuit $C_q$ on any $n$-qubit state $\ket{\psi}$ as follows
+%\anote{For step 2 below, shall we add to preliminaries that classical circuits can be embedded into quantum ones? I'm not sure, actually, how you envisage this classical part of the corrections- maybe I haven't fully understood yet.}
+%On receiving $\left(\rho,C_q^\prime \right),$ one can evaluate the original circuit $C_q$ on any $n$-qubit state $\ket{\psi}$ as follows
 
 \begin{algorithm}[H]
 \label{Eval:Clifford-teleportation}
@@ -404,8 +404,9 @@ It follows from equation \ref{eq:6}  that $$\zgate^{a_i^\prime} \cdot \xgate^{b_
 %\end{algorithm}
 
 \section{Obfuscating Beyond Clifford Circuits}
-Here, we show how to build iO for quantum circuit families that satisfy Definition \ref{defn:Clifford+T:family}.
-\anote{Is this the correct link to the Definition?}
+\label{QiO:Clifford+T:family}
+Recall from  section \ref{defn:Clifford+T:family} that adding a non-Clifford gate  such as $\tgate$-gate to Clifford gates gives us a generating set for all unitary quantum circuits. In this section we show how to build quantum indistinguishability obfuscation for any quantum circuit that has at most logarithmic  $\tgate$-gates in the size of the circuit.
+%\anote{Is this the correct link to the Definition?}
 
 \subsubsection{Using a Canonical Form}
 Main idea: Each Clifford layer is obfuscated using the canonical form. The $\tgate$-gate layers are given in the clear. The result is a canonical form, since the family is selected such that the description just given will be a canonical form.
@@ -413,7 +414,7 @@ Main idea: Each Clifford layer is obfuscated using the canonical form. The $\tga
 
 
 \subsubsection{Using Gate Teleportation}
-In this section we will show how we can obfuscate any 1-qubit unitary circuit using gate teleportation and a quantum secure iO; and then based on this idea we will show how we can obfuscate any $n$-qubit circuit $C_q$ as far as the number of $\tgate$-gates remain logarithmic in $|C_q|.$ Recall from  section \ref{defn:Clifford+T:family} that adding a non-Clifford gate  such as $\tgate$-gate to Clifford gates gives us a generating set for all quantum circuits. The $\tgate$ relates to the $\xgate, \zgate$
+In this section we will show how we can obfuscate any 1-qubit unitary circuit using gate teleportation and a quantum secure iO; and then based on this idea we will show how we can obfuscate any $n$-qubit circuit $C_q$ as far as the number of $\tgate$-gates remain logarithmic in $|C_q|.$ The $\tgate$ relates to the $\xgate, \zgate$
 $$\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\pgate^b \tgate$$
 If $b=0,$ then we don't have to worry about $\pgate$ gate otherwise we have to perform a $\pgate$ correction. We can write $\pgate=(\frac{1+i}{2}) \igate + (\frac{1-i}{2})\zgate,$ therefore
 
