@@ -2,7 +2,7 @@
 \subsection{Basic Classical Cryptographic Notions}
 \label{sec:classical-prelims}
 Let $\mathbb{N}$ be the set of positive integers. For $n \in \mathbb{N}$, we set $[n] = \{1, \cdots, n\}.$ We denote the set of all  binary strings of length $n$ by $\bit{n}.$
- An element $s \in \bit{n}$ is called a bitstring, and $|s|=n$ denotes its length. We reserve the notation $0^n$ (resp., $1^n$) to denote the $n$-bit string with all zeroes (resp., all ones).  We denote an arbitrary polynomial from the set $\mathbb{N}$ to $\mathbb{N}$ by $poly( ).$
+ An element $s \in \bit{n}$ is called a bitstring, and $|s|=n$ denotes its length. We denote an arbitrary polynomial from the set $\mathbb{N}$ to $\mathbb{N}$ by $poly( ).$
 
 
 A function ${\rm negl}:\mathbb{N}\rightarrow\mathbb{R}^{+}\cup \{0\}$ is \emph{negligible} if for every positive polynomial $p(n)$ there exists a positive integer $n_0$ such that  for all  $n>n_0,$ ${\rm negl}(n) < 1/ p(n).$   A typical use of negligible functions is to indicate that the probability of success of some algorithm is too small to be amplified to a constant by a feasible (\emph{i.e.}, polynomial) number of repetitions. Given two bit strings $x$ and $y$ of equal length, we denote their bitwise XOR by $x \oplus y.$
@@ -139,47 +139,43 @@ A probabilistic polynomial-time algorithm is a \emph{quantum-secure computationa
 \label{sec:quantum-prelims}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 Given an $n$-bit string $x$, the corresponding quantum-computational $n$-qubit basis state is denoted~$\ket{x}$. The $2^n$-dimensional Hilbert space spanned by $n$-qubit basis states is denoted:
-\anote{in general, we will try to include equation numbers unless there is a reason not to. This will help in reviewing and referencing our work.}
+%\anote{in general, we will try to include equation numbers unless there is a reason not to. This will help in reviewing and referencing our work.}
 \begin{equation}
+\label{eq:hilbert-space}
 \mathcal{H}_n := \textbf{span} \left\{ \ket{x} : x \in \bit{n} \right\}\,.
 \end{equation}
-\anote{In general, there is some confusion throughout related to pure and mixed states. This preliminaries is good, but need to make sure that it matches the level of formalism in the main body.}
-We denote by $\mathcal{D}(\mathcal{H}_n)$ the set of density operators (\emph{i.e.}, valid quantum states) on~$\mathcal{H}_n$. These are linear operators on $\mathcal{D}(\mathcal{H}_n)$ which are positive-semidefinite and have trace equal to $1$. When considering different physical subsystems, we denote them with uppercase Latin letters; when a Hilbert space corresponds to a subsystem, we place the subsystem label in the subscript. For instance, if $F \cup G \cup H = [n]$ then $\mathcal{H}_n = \mathcal{H}_F \otimes \mathcal{H}_G \otimes \mathcal{H}_H.$ Sometimes we  write explicitly the subsystems a state belongs to as subscripts; this will be useful when considering, \emph{e.g.}, the reduced state on some of the subspaces. For example, wesometimes express the statement $\rho \in \mathcal{D}(\mathcal{H}_F \otimes \mathcal{H}_G \otimes \mathcal{H}_H)$ simply by calling the state $\rho_{FGH}$; in that case, the state obtained by tracing out the subsystem~$H$ will be denoted~$\rho_{FG}$.
+We denote by $\mathcal{D}(\mathcal{H}_n)$ the set of density operators (\emph{i.e.}, valid quantum states) on~$\mathcal{H}_n$. These are linear operators on $\mathcal{D}(\mathcal{H}_n)$ which are positive-semidefinite and have trace equal to $1.$
 
 
-Given $\rho, \sigma \in \mathcal{D}(\mathcal{H})$, the trace distance between $\rho$ and $\sigma$ is given by half the trace norm $\|\rho - \sigma\|_1$ of their difference. When $\rho$ and $\sigma$ are classical probability distributions, the trace distance reduces to the total variation distance. Physically realizable maps from a state space $\mathcal{D}(\mathcal{H})$ to another state space $\mathcal{D}(\mathcal{H}')$ are called \emph{admissible}---these are the completely positive trace-preserving (CPTP) maps. For the purpose of distinguishability via input/output operations, the appropriate norm for CPTP maps is the diamond norm, denoted $\|\cdot\|_\diamond$. The set of admissible maps coincides with the set of all maps realizable by composing (i.) addition of ancillas, (ii.) unitary evolutions, (iii.) measurements in the computational basis, and (iv.) tracing out subspaces. We remark that unitaries $U \in U(\mathcal{H}_n)$ act on $\mathcal{D}(\mathcal{H}_n)$ by conjugation: $\rho \mapsto U \rho U^\dagger$. The identity operator~$\mathds{1}_n \in U(\mathcal{H}_n)$ is thus both a valid map, and (when normalized by $2^{-n}$) a valid state in $\mathcal{D}(\mathcal{H}_n)$---corresponding to the classical uniform distribution.
+%\anote{In general, there is some confusion throughout related to pure and mixed states. This preliminaries is good, but need to make sure that it matches the level of formalism in the main body.}
+%. When considering different physical subsystems, we denote them with uppercase Latin letters; when a Hilbert space corresponds to a subsystem, we place the subsystem label in the subscript. For instance, if $F \cup G \cup H = [n]$ then $\mathcal{H}_n = \mathcal{H}_F \otimes \mathcal{H}_G \otimes \mathcal{H}_H.$ Sometimes we  write explicitly the subsystems a state belongs to as subscripts; this will be useful when considering, \emph{e.g.}, the reduced state on some of the subspaces. For example, wesometimes express the statement $\rho \in \mathcal{D}(\mathcal{H}_F \otimes \mathcal{H}_G \otimes \mathcal{H}_H)$ simply by calling the state $\rho_{FGH}$; in that case, the state obtained by tracing out the subsystem~$H$ will be denoted~$\rho_{FG}$.
+
+
+%Given $\rho, \sigma \in \mathcal{D}(\mathcal{H})$, the trace distance between $\rho$ and $\sigma$ is given by half the trace norm $\|\rho - \sigma\|_1$ of their difference. When $\rho$ and $\sigma$ are classical probability distributions, the trace distance reduces to the total variation distance. Physically realizable maps from a state space $\mathcal{D}(\mathcal{H})$ to another state space $\mathcal{D}(\mathcal{H}')$ are called \emph{admissible}---these are the completely positive trace-preserving (CPTP) maps. For the purpose of distinguishability via input/output operations, the appropriate norm for CPTP maps is the diamond norm, denoted $\|\cdot\|_\diamond$. The set of admissible maps coincides with the set of all maps realizable by composing (i.) addition of ancillas, (ii.) unitary evolutions, (iii.) measurements in the computational basis, and (iv.) tracing out subspaces. We remark that unitaries $U \in U(\mathcal{H}_n)$ act on $\mathcal{D}(\mathcal{H}_n)$ by conjugation: $\rho \mapsto U \rho U^\dagger$. The identity operator~$\mathds{1}_n \in U(\mathcal{H}_n)$ is thus both a valid map, and (when normalized by $2^{-n}$) a valid state in $\mathcal{D}(\mathcal{H}_n)$---corresponding to the classical uniform distribution.
 
 
 \subsubsection{Quantum Gates}
-Recall  the single-qubit Pauli operators  defined as:
-$$
-\igate = \left[\begin{array}{cc} 1 & 0\\ 0 & 1\end{array}\right]\,,
-\qquad
-\xgate = \left[\begin{array}{cc} 0 & 1\\ 1 & 0\end{array}\right]\,,
-\qquad
-\ygate = \left[\begin{array}{cc} 0 & -i\\ -i & 0\end{array}\right]\,\,,
-\qquad
-\zgate = \left[\begin{array}{cc} 1 & 0\\ 0 & -1\end{array}\right]\,.
-$$
-The Pauli operators are Hermitian and unitary quantum gates, \emph{i.e.}, $P^\dag=P$ and $P^\dag P=P P^\dag = P^2 = I$ for all $P \in \{\igate, \xgate, \ygate, \zgate\}$. It is easy to check that applying a uniformly random Pauli operator to any single-qubit density operator results in the maximally mixed state:
-$$
-\frac{1}{4}\left(\rho +  \xgate\rho  \xgate + \ygate\rho \ygate + \zgate\rho \zgate \right) = \frac{\mathds{1}_1}{2}
-\qquad
-\text{for all }
-\rho \in \mathcal{D} (\mathcal{H}_1)\,.
-$$
+We will work with the following set of unitary gates
+\begin{definition}
+$$\xgate = \left[\begin{array}{cc} 0 & 1\\ 1 & 0\end{array}\right],
+\quad\zgate = \left[\begin{array}{cc} 1 & 0\\ 0 & -1\end{array}\right],
+\quad\pgate = \left[\begin{array}{cc} 1 & 0\\ 0 & i\end{array}\right],
+ \quad\hgate = \frac{1}{\sqrt{2}}\left[\begin{array}{cc}1 & 1\\1 & -1\end{array}\right], \quad\mbox{and}$$
+$$\quad\cnot = \left[\begin{array}{cccc} 1 & 0 & 0 & 0\\ 0 & 1 & 0 & 0\\ 0 & 0 & 0 & 1\\ 0 & 0 & 1 & 0\end{array}\right].$$
+\end{definition}
 
-Since the Pauli operators are self-adjoint, we may implement the above map by choosing two bits $s$ and $t$ uniformly at random and then applying
+
+For any single-qubit density operator $\rho \in \mathcal{D} (\mathcal{H}_1)$  and for any uniformly chosen bits $s$ and $t,$ 
+
 $$
 \rho \mapsto \xgate^s \zgate^t \rho \zgate^t \xgate^s\,.
 $$
-To observers with no knowledge of $s$ and $t$, the resulting state is information-theoretically indistinguishable from $\mathds{1}_1/2$. Of course, if we know $s$ and $t$, we can invert the above map and recover $\rho$ completely.
+ the resulting state is information-theoretically indistinguishable from $\mathds{1}_1/2$  to an observer that has no knowledge of $s$ and $t$ \cite{AMTW00}.
 
-
-The above map can be straightforwardly extended to the $n$-qubit case in order to obtain an elementary {\em quantum encryption scheme} called the {\em quantum one-time pad}\cite{AMTW00}.
-We first set $\xgate_j = \mathds{1}^{\otimes j-1} \otimes \xgate \otimes \mathds{1}^{\otimes n-j}$ and likewise for $\ygate_j$ and $\zgate_j$. We define the $n$-qubit Pauli group $\mathcal P_n$ to be the subgroup of $\operatorname{SU}(\mathcal{H}_n)$ generated by $\{\xgate_j, \ygate_j, \zgate_j : j = 1, \dots, n \}$. Note that Hermiticity is inherited from the single-qubit case, \emph{i.e.}, $P^\dag = P$ for every $P \in \mathcal{P}_n$.
-
-\anote{It is not clear to me that, above, the identity is part of $\mathcal{P}_n$. I think it should be.}
+%The above map can be straightforwardly extended to the $n$-qubit case in order to obtain an elementary {\em quantum encryption scheme} called the {\em quantum one-time pad}\cite{AMTW00}.
+%We first set $\xgate_j = \mathds{1}^{\otimes j-1} \otimes \xgate \otimes \mathds{1}^{\otimes n-j}$ and likewise for $\ygate_j$ and $\zgate_j$. We define the $n$-qubit Pauli group $\mathcal P_n$ to be the subgroup of $\operatorname{SU}(\mathcal{H}_n)$ generated by $\{\xgate_j, \ygate_j, \zgate_j : j = 1, \dots, n \}$. Note that Hermiticity is inherited from the single-qubit case, \emph{i.e.}, $P^\dag = P$ for every $P \in \mathcal{P}_n$.
+%
+%\anote{It is not clear to me that, above, the identity is part of $\mathcal{P}_n$. I think it should be.}
 
 %\begin{definition}\label{def:qotp}
 %{\bf (quantum one-time pad)}
@@ -197,29 +193,24 @@ We first set $\xgate_j = \mathds{1}^{\otimes j-1} \otimes \xgate \otimes \mathds
 %
 %Just as in the classical case~\cite{Shannon1948}, any reduction in key length is not possible without compromising information-theoretic security~\cite{AMTW00, BR2003}. Of course, in practice the key length of the one-time pad (quantumly or classically) is highly impractical. This is a crucial reason to consider---as we do in this work---encryption schemes which are secure only against computationally bounded adversaries.\\
 
-\anote{$\xgate$ and $\zgate$ already defined. I would re-phrase, first defining the new gates, and then defining the Clifford group.}
+%\anote{$\xgate$ and $\zgate$ already defined. I would re-phrase, first defining the new gates, and then defining the Clifford group.}
 
 \begin{definition}
 \label{defn:Clifford+T:family}
  \noindent{\bf Clifford Group}: The set of gates $\{\xgate, \zgate, \pgate, \cnot,\hgate\}$ applied to arbitrary wires (redundantly) generates the Clifford group, where
-$$\xgate = \left[\begin{array}{cc} 0 & 1\\ 1 & 0\end{array}\right],
-\quad\zgate = \left[\begin{array}{cc} 1 & 0\\ 0 & -1\end{array}\right],
-\quad\pgate = \left[\begin{array}{cc} 1 & 0\\ 0 & i\end{array}\right],
- \quad\hgate = \frac{1}{\sqrt{2}}\left[\begin{array}{cc}1 & 1\\1 & -1\end{array}\right], \quad\mbox{and}$$
-$$\quad\cnot = \left[\begin{array}{cccc} 1 & 0 & 0 & 0\\ 0 & 1 & 0 & 0\\ 0 & 0 & 0 & 1\\ 0 & 0 & 1 & 0\end{array}\right].$$
-\end{definition}
+
 We note the following relations between these gates:
 $$\xgate\zgate = - \zgate\xgate,\quad \tgate^2=\pgate,\quad\pgate^2=\zgate,\quad\hgate\xgate\hgate=\zgate,\quad \tgate\pgate=\pgate\tgate,\quad\pgate\zgate=\zgate\pgate.$$
 Also, for any $a,b\in\{0,1\}$ we have
 $\hgate\xgate^b\zgate^a=\xgate^a\zgate^b \hgate$\,.
+\end{definition}
 
 \subsubsection{Quantum Circuits and Algorithm}
-\anote{todo: define what is a quantum circuit, and also any type of notation that will be used in the rest of the paper. For instance, what does $\hgate-\cnot-\pgate-\cnot-\pgate-\cnot-\hgate-\pgate-\cnot-\pgate-\cnot$ mean? Do I apply gates from left-to-right, or from right-to-left?}
+A quantum circuit is an acyclic network of quantum gates connected by wires. The quantum gates represent quantum operations and wire represents the qubits on which gates act. In, general a quantum circuits can have $n$-input qubits and $m$-output qubits for any integer $n,m\geq 0.$
+%\anote{todo: define what is a quantum circuit, and also any type of notation that will be used in the rest of the paper. For instance, what does $\hgate-\cnot-\pgate-\cnot-\pgate-\cnot-\hgate-\pgate-\cnot-\pgate-\cnot$ mean? Do I apply gates from left-to-right, or from right-to-left?}
 
-For $n\in \mathbb{N},$ the set of all $n\times n$ unitary matrix is denoted by $O(n,\mathbb{C})=\{U\in \mathbb{C}^{n\times n} \mid U\cdot U^\dagger={\bf I}\}.$ We say a quantum circuit $C_q$ computes $U\in O(n,\mathbb{C})$ if for every quantum state $\ket{\psi} \in \mathit{Qubit}(n),$
-$$U(\ket{\psi} )=C_q(\ket{\psi}),$$
-where  $\mathit{Qubit}(n)$  denote the set of all $n$-qubit states. \anote{Do we need this Qubit notation? Don't we already have something?}
-
+For $n\in \mathbb{N},$ the set of all $n\times n$ unitary matrix is denoted by $O(n,\mathbb{C})=\{U\in \mathbb{C}^{n\times n} \mid U\cdot U^\dagger={\bf I}\}.$ We say a quantum circuit $C_q$ computes $U\in O(n,\mathbb{C})$ if for every $\rho\in \mathcal{H}_n$
+$$U(\rho )=C_q(\rho).$$
 A quantum circuit that computes unitary matrix is called a reversible  quantum circuit, i.e it always possible to uniquely recover the input, given the output. A set of gates are said to be universal if, for any a unitary matrix $U$  a quantum circuit can be constructed for computing~$U$ using only gates from that set. It is a well-known fact that Clifford gates are not universal, but adding any non-Clifford gate, such as $\tgate$, gives a universal set of gates, where
 $$\quad\tgate = \left[\begin{array}{cc} 1 & 0\\ 0 & e^{i\pi/4}\end{array}\right],.$$
 
@@ -229,13 +220,13 @@ A family of quantum circuits $C=\{C_n\in \mathbb{N} \mid \}$ one for each input 
  \item  For each $n\in\mathbb{N},$ $M$ runs in $poly(n).$
  \end{itemize}
 
-All quantum operations are not unitary (reversible), nevertheless a general (possibly irreversible) quantum operation also called superoperator can efficiently be simulated by a reversible quantum operations by adding auxiliary states to the original system, then performing a unitary operation on the joint system, and then tracing out $Tr$ some subsystem \cite{}. \anote{todo: find ref (I think Sebastien has some references in his thesis). Actually, do we use this?} More precisely, this can be described as the map:
-
+All quantum operations are not unitary (reversible), nevertheless a general (possibly irreversible) quantum operation also called superoperator can efficiently be simulated by a reversible quantum operations by adding auxiliary states to the original system, then performing a unitary operation on the joint system, and then tracing out $Tr$ some subsystem \cite{KLM07}. More precisely, this can be described as the map:
+%\anote{todo: find ref (I think Sebastien has some references in his thesis). Actually, do we use this?} 
 $$\rho_{in} \xmapsto{\mbox{superoperator}} \rho_{out}=Tr_B(U(\rho_{in} \otimes \ket{00\cdots 0} \bra{00\cdots 0})U^\dagger)$$
 
 where $\rho_{in} \in \mathcal{H}_n,$ is the original state and $\ket{00\cdots 0}$ is an auxiliary state of dimension at most $n^2.$ A circuit that computes a general quantum operation is called a general quantum circuit.  Therefore, general quantum circuits can refer to both reversible or irreversible circuits. A polynomial-time quantum algorithm is a uniform family of general quantum circuits. \\
 
-\noindent {\em Remark}: From now we use the term  quantum circuits to refer to reversible quantum circuits only and the term quantum algorithm is reserved for some family of general quantum circuits. \anote{ok, well actually I do believe that we could define quantum circuits that also include auxiliary qubit preparation and measurements/trace outs, and that we can obfuscate these also using gate teleportation. Hence the distinction circuit/algorithm is not very natural. Need to think about this.}
+%\noindent {\em Remark}: From now we use the term  quantum circuits to refer to reversible quantum circuits only and the term quantum algorithm is reserved for some family of general quantum circuits. \anote{ok, well actually I do believe that we could define quantum circuits that also include auxiliary qubit preparation and measurements/trace outs, and that we can obfuscate these also using gate teleportation. Hence the distinction circuit/algorithm is not very natural. Need to think about this.}
 
 
 \subsection{Correction and Update Functions for Clifford Circuits}
@@ -270,36 +261,49 @@ $\ket{\beta_{10}}=\frac{1}{\sqrt2}\left(\ket{00}-\ket{11}\right)$,  $\ket{\beta_
 
 Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate, \cnot,\hgate\}$ on some qubit $\ket{\psi}.$ Then using gate teleportation  \cite{GC99} we can compute $U (\ket{\psi})$ as follows.
 \begin{algorithm}[H]
-\caption{Gate Teleportation Protocol for Clifford Gates.}
+\caption{Gate Teleportation.}
 \begin{enumerate}
 \item  Prepare a $2$ qubit Bell state $\ket{\beta_{00}}=\frac{\ket{00}+\ket{11})}{\sqrt{2}}.$
 \item Write the joint system as
  \begin{equation}
-\ket{\psi} \ket{\beta_{00}}=\frac{1}{2}\ket{\beta_{00}} \ket{\psi}+ \frac{1}{2}\ket{\beta_{01}}( \xgate( \ket{\psi}) + \frac{1}{2}\ket{\beta_{10}}( \zgate( \ket{\psi})+ \frac{1}{2}\ket{\beta_{11}}( \xgate \zgate( \ket{\psi}).
+ \label{eq:telepprtation1}
+ \begin{aligned}
+\ket{\psi}_C \ket{\beta_{00}}_{AB}=\frac{1}{2}\ket{\beta_{00}}_{AC} \ket{\psi}_{B} + \frac{1}{2}\ket{\beta_{01}}_{AC} ( \xgate( \ket{\psi})_{B}  +\\
+ \frac{1}{2}\ket{\beta_{10}}_{AC} ( \zgate( \ket{\psi})_{B} + \frac{1}{2}\ket{\beta_{11}}_{AC} ( \xgate \zgate( \ket{\psi})_{B}.
+\end{aligned}
 \end{equation}
  Where $\beta_{ij},$  denotes the 2 qubit Bell basis.
-\item Apply the Clifford gate $U$ on the second qubit of the Bell state of the system 1.
+\item Apply the Clifford gate $U$ on the subsystem $B,$
  \begin{equation}
-\mathbb{I}\otimes \mathbb{I} \otimes U (\ket{\psi} \ket{\beta_{00}})=\frac{1}{2}\ket{\beta_{00}} U(\ket{\psi})+ \frac{1}{2}\ket{\beta_{01}}U( \xgate( \ket{\psi}) + \frac{1}{2}\ket{\beta_{10}}U( \zgate( \ket{\psi})+ \frac{1}{2}\ket{\beta_{11}}U( \xgate \zgate( \ket{\psi}).
+  \label{eq:telepprtation2}
+ \begin{aligned}
+\mathbb{I}\otimes \mathbb{I} \otimes U(\ket{\psi}_A \ket{\beta_{00}}_{BC})=\frac{1}{2}\ket{\beta_{00}}_{AC} U(\ket{\psi})_{B}+ \frac{1}{2}\ket{\beta_{01}}_{AC}U( \xgate( \ket{\psi})_{B} +\\ \frac{1}{2}\ket{\beta_{10}}_{AC}U( \zgate( \ket{\psi})_{B}+ \frac{1}{2}\ket{\beta_{11}}_{AC}U( \xgate \zgate( \ket{\psi})_{B}.
+\end{aligned}
  \end{equation}
- \item Measure the first two qubits of the system 2 in the Bell basis and obtain the classical bits $(a,b).$ The system is now in the state
+ \item Measure the subsystem AC  in the Bell basis and obtain the classical bits $(a,b).$ The system is now in the state
  \begin{equation}
-							\ket{\beta_{ab}}\otimes U( \xgate^b \zgate^a( \ket{\psi})).
+  \label{eq:telepprtation3}
+							\ket{\beta_{ab}}_{AC}\otimes U( \xgate^b \zgate^a( \ket{\psi}))_B.
 \end{equation}
+ \label{eq:telepprtation4}
 \item Compute the correction function $f_U(a,b)=(a^\prime,b^\prime)$ associated with the gate $U.$ (section \ref{correction function}).
-\item Apply the correction unitary $ \zgate^{a^\prime}  \xgate^{b^\prime}$ to the last qubit of the system 3
-
-$$\mathbb{I}\otimes \mathbb{I}\otimes  \zgate^{a^\prime}  \xgate^{b^\prime} \left(\ket{\beta_{ab}}\otimes U( \xgate^b \zgate^a( \ket{\psi}))\right)= \ket{\beta_{ab}}\otimes  \zgate^{a^\prime}  \xgate^{b^\prime}\left(U( \xgate^b \zgate^a( \ket{\phi}))\right)$$
-$$= \ket{\beta_{ab}}\otimes  \zgate^{a^\prime}  \xgate^{b^\prime} \left(\xgate^{b^\prime} \zgate^{a^\prime} U( \ket{\psi})\right)=\ket{\beta_{ab}}\otimes U( \ket{\psi})$$
-\item Trace out the state $\ket{\beta_{ab}}$ from the above system and obtain the state $U( \ket{\psi})$
-$$U( \ket{\psi})=Tr_{\ket{\beta_{ab}}}\left( \ket{\beta_{ab}}\otimes U(\ket{\psi})\right)$$
-
+\item Trace out the subsystem $AC,$
+ \begin{equation}
+  \label{eq:telepprtation5}
+U( \xgate^b \zgate^a( \ket{\psi}))_B=Tr_{AB}(\ket{\beta_{ab}}_{AC}\otimes U( \xgate^b \zgate^a( \ket{\psi}))_B.)
+ \end{equation}
+\item Apply the correction unitary $\zgate^{a^\prime}  \xgate^{b^\prime}$ to the system B.
+ \begin{equation}
+  \label{eq:telepprtation5}
+  \zgate^{a^\prime}  \xgate^{b^\prime} U( \xgate^b \zgate^a( \ket{\psi}))_B=\zgate^{a^\prime}  \xgate^{b^\prime} \left(\xgate^{b^\prime} \zgate^{a^\prime} U( \ket{\psi})\right)\\
+  =U( \ket{\psi})
+   \end{equation}
 \end{enumerate}	
 \end{algorithm}	
 
 
 \begin{remark}
-Using gate teleportation we can also evaluate a  $\tgate,$ however, the correction function becomes more complicated, since:
+Using gate teleportation we can also evaluate a  $\tgate$-gate however, the correction function becomes more complicated, since:
 						\begin{equation}\tgate \xgate^b \zgate^a= \xgate^b \zgate^{a\oplus b} \pgate^b \tgate \end{equation}
 \end{remark}				
 %\item Compute $f(a,b)=a^\prime b^\prime$ where  $f:\{0,1\}^2\rightarrow \{0,1\}^2$ denote the correction function
