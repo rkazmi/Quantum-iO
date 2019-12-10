@@ -118,7 +118,7 @@ We recall the \emph{Bell states}: %$\ket{\beta_{00}},$  $\ket{\beta_{01}},$ $\ke
 $\ket{\beta_{00}}=\frac{1}{\sqrt2}\left(\ket{00}+\ket{11}\right)$, ${\beta_{01}}=\frac{1}{\sqrt2}\left(\ket{01}+\ket{10}\right)$,
 $\ket{\beta_{10}}=\frac{1}{\sqrt2}\left(\ket{00}-\ket{11}\right)$,  $\ket{\beta_{11}}=\frac{1}{\sqrt2}\left(\ket{01}-\ket{10}\right)$\,. 
 
-Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate, \cnot,\hgate\}$ on some qubit $\ket{\psi}.$ Then using gate teleportation  \cite{GC99} we can compute $U (\ket{\psi})$ as follows.
+Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate,\hgate\}$ on some qubit $\ket{\psi}.$ Then using gate teleportation  \cite{GC99} we can compute $U (\ket{\psi})$ as follows.
 \begin{algorithm}[H]
 \caption{Gate Teleportation.}
 \begin{enumerate}
@@ -145,7 +145,7 @@ Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate, \
 							\ket{\beta_{ab}}_{AC}\otimes U( \xgate^b \zgate^a( \ket{\psi}))_B.
 \end{equation}
  \label{eq:telepprtation4}
-\item Compute the correction function $f_U(a,b)=(a^\prime,b^\prime)$ associated with the gate $U.$ (section \ref{correction function}).
+\item Compute the update function $f_U(a,b)=(a^\prime,b^\prime)$ associated with the gate $U.$ (section \ref{update function}).
 \item Trace out the subsystem $AC,$
  \begin{equation}
   \label{eq:telepprtation5}
@@ -160,49 +160,87 @@ U( \xgate^b \zgate^a( \ket{\psi}))_B=Tr_{AB}(\ket{\beta_{ab}}_{AC}\otimes U( \xg
 \end{enumerate}	
 \end{algorithm}	
 
-\subsection{Correction and Update Functions for Clifford Circuits}
-\label{correction function}
-For a quantum unitary gate we define a correction function $f_U$ such that
+\subsection{Update Functions for Quantum Circuits}
+\label{update function}
+In the gate teleportation (\ref{protocol: gate-teleportation}) we have to compute an ordered $(a^\prime, b^\prime)\in\mathbb{F}_2^2$ so that
 \begin{equation*}
-U\xgate^b\zgate^a=\xgate^{b^\prime}\zgate^{a^\prime} U,  \quad \mbox{ where }(a^\prime,b^\prime)=f_\xgate(a,b) \mbox{ for any } a, b\in\{0,1\}.
+U\xgate^b\zgate^a \ket{\psi}=\xgate^{b^\prime}\zgate^{a^\prime}U(\ket{\psi}),  
+\end{equation*}
+The ordered pair $(a^\prime, b^\prime)$ are computed by an update rule that is completely determinant by the the gate $U$ and $(a,b)\in\mathbb{F}_2^2.$ We can describe this rule concisely by an update function 
+\begin{equation*}
+f_U:\mathbb{F}^2\rightarrow \mathbb{F}^2, \; (a,b)\mapsto (a^\prime,b^\prime).
 \end{equation*}
 %\anote{I am not sure what these $f$ functions are doing, and how to read these equations.  Are there typos in the subscripts? }
-If $U\in\{\xgate, \zgate, \pgate, \cnot,\hgate\}$ is a Clifford gate, then
+For any $(a,b)\in\mathbb{F}_2^2$ and any single Clifford gate $U,$ the corresponding update functions are
+
 \begin{equation*}
 \begin{aligned}
-\xgate(\xgate^b\zgate^a)=(-1)^a(\xgate^{b}\zgate^{a}) \xgate,\quad \mbox{ where }f_\xgate(a,b)=(a,b), \mbox{ for any } a, b\in\{0,1\}.\\
-\zgate(\xgate^b\zgate^a)=(-1)^b(\xgate^{b}\zgate^{a}) \zgate,\quad \mbox{ where }f_\zgate(a,b)=(a,b), \mbox{ for any } a, b\in\{0,1\}.\\
-\hgate(\xgate^b\zgate^a)=(\xgate^{a}\zgate^{b}) \hgate,\quad \mbox{ where }f_\hgate(a,b)=(b,a), \mbox{ for any } a, b\in\{0,1\}.\\
- \pgate(\xgate^b\zgate^a)=((-i)^b\xgate^a\zgate^{a\oplus b}) \pgate, \quad \mbox{ where }f_ \pgate(a,b)=(a,a\oplus b), \mbox{ for any } a, b\in\{0,1\}.
-\cnot (\xgate^{b_1}\zgate^{a_1} \otimes \xgate^{b_2}\zgate^{a_2})=({\xgate^{b_1} {\zgate^{a_1\oplus a_2}}} \otimes {\xgate^{b_1\oplus b_2}}\zgate^{a_2})\cnot, \mbox{ where } f_{\cnot}(a_1,b_1,a_2,b_2)=(a_1\oplus a_2,b_1,a_2, b_1\oplus b_2).\\
+\mbox{ If } U=\xgate,  \mbox{ then } f_\xgate(a,b)=(a,b).\\
+\mbox{ If } U=\zgate,  \mbox{ then } f_\zgate(a,b)=(a,b).\\
+\mbox{ If } U=\hgate,  \mbox{ then } f_\hgate(a,b)=(b,a).\\
+\mbox{ If } U=\pgate,  \mbox{ then } f_ \pgate(a,b)=(a,a\oplus b).\\
+%\cnot (\xgate^{b_1}\zgate^{a_1} \otimes \xgate^{b_2}\zgate^{a_2})=({\xgate^{b_1} {\zgate^{a_1\oplus a_2}}} \otimes {\xgate^{b_1\oplus b_2}}\zgate^{a_2})\cnot, \mbox{ where } f_{\cnot}(a_1,b_1,a_2,b_2)=(a_1\oplus a_2,b_1,a_2, b_1\oplus b_2).\\
 \end{aligned}
 \end{equation*}
-%%\anote{Note that the usual notation would be $X^aZ^b$, but you've consistently used $X^bZ^a$, which is strange, but let's go with it, since this is done already.}
+Note we can also evaluate $\cnot$ gate on any 2-qubit state $\ket{\psi}$ using gate-teleportation. In this case we have to prepare $4$ qubit Bell state $\ket \beta_{00}\otimes \beta_{00}$ in the step 1 (gate-teleportation \ref{protocol: gate-teleportation}). After step 4 of the gate teleportation the system will be is state
+\begin{equation*}
+\begin{aligned}
+ \ket\beta_{a_1,b_1}\otimes \ket\beta_{a_2,b_2} \otimes \cnot(\xgate^{a_1}\zgate^{b_1}\otimes \xgate^{a_2}\zgate^{b_2})\ket{\psi}
+\end{aligned}
+\end{equation*}
+The update rule for the $\cnot$ gate is
+\begin{equation*}
+\begin{aligned}
+f_{\cnot}:\mathbb{F}_2^4\rightarrow \mathbb{F}_2^4, \; (a_1,b_1,a_2,b_2)\mapsto (a_1\oplus a_2,b_1,a_2, b_1\oplus b_2).
+\end{aligned}
+\end{equation*}
+Therefore we have 
+\begin{equation*}
+\begin{aligned}
+  \cnot(\xgate^{a_1}\zgate^{b_1}\otimes \xgate^{a_2}\otimes \zgate{b_2}))\ket{\psi}= (\xgate^{a_1\oplus a_2}\zgate^{b_1}\otimes \xgate^{a_2} \zgate^{b_1\oplus b_2})\cnot(\ket{\psi})
+ \end{aligned}
+\end{equation*}
+	
+Note we can evaluate any $n$-qubit quantum circuit  Clifford circuits $C_q$ (see appendix). \footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group}. Let $\mathcal{C}_q$ is consist of sequence of gates $g_k,\ldots,g_2,g_1$ for $k\in\mathbb{N}.$\footnote{In this paper we assume that we apply apply gates from R.H.S.} 
+\begin{equation}
+\label{relation:update}
+\begin{aligned}
+ \ket\beta_{a_1,b_1}\otimes \cdots \otimes \ket\beta_{a_n,b_n} \otimes C_q(\xgate^{a_1}\zgate^{b_1}\otimes \cdots \xgate^{a_n}\zgate^{b_n})\ket{\psi}
+\end{aligned}
+\end{equation}
+
+The update function corresponding to the circuit $C_q$ is computed by composing the update functions of each gate in $\mathcal{C}_q$
+\begin{equation*}
+\begin{aligned}
+F_{\mathcal{C}_q}:\, \mathbb{F}_2^{2n} \rightarrow  \mathbb{F}_2^{2n}, \; F_{\mathcal{C}_q}=f_k\circ\cdots \circ f_2 \circ f_1 \\(a_1,b_1,\dots, a_n,b_n)\mapsto (a_1^\prime,b_2^\prime,\dots, a_n^\prime,b_n^\prime) 
+ \end{aligned}
+\end{equation*}
+We can rewrite the relation \ref{relation:update} as
+\begin{equation*}
+\begin{aligned}
+\ket\beta_{a_1,b_1}\otimes \cdots \otimes \ket\beta_{a_n,b_n} \otimes (\xgate^{a_1^\prime}\zgate^{b_1^\prime}\otimes \cdots \xgate^{a_n^\prime}\zgate^{b_n^\prime})C_q(\ket{\psi}),
+ \end{aligned}
+\end{equation*}
+where $(a_1^\prime,b_1^\prime,\dots, a_n^\prime,b_n^\prime)=F_{C_q}(a_1,b_1,\ldots,a_n,b_n).$ \\
+
+\noindent{\bf Example for Update Function:} $C_q=\cnot \cdot (\igate \otimes \hgate)$ is 2-qubit circuit the update function $F_{C_q}$ for this circuit is 
+
+\begin{equation*}
+\begin{aligned}
+F_{C_q}(a_1,b_1,a_2,b_2)=(b_1\oplus a_2,a_1,a_2, a_1\oplus b_2),\\
+\end{aligned}
+\end{equation*}
+And computed as by first applying the $f_\hgate$ to the first two input bits and then $f_{\cnot}$ to all four bits.
+\begin{equation*}
+\begin{aligned}
+(a_1,b_1,a_2,b_2) \xmapsto{\igate \otimes \hgate} (b_1,a_1,a_2,b_2)\xmapsto{\cnot} (b_1\oplus a_2,a_1,a_2, a_1\oplus b_2).
+\end{aligned}
+\end{equation*}
+
 \begin{remark}
-Using gate teleportation we can also evaluate a  $\tgate$-gate however, the correction function becomes more complicated, since:
-						\begin{equation}\
-						\tgate \xgate^b \zgate^a= \xgate^b \zgate^{a\oplus b} \pgate^b \tgate 
-						\end{equation}
-\end{remark}	
-
-Similarly for any $n$-qubit Clifford Circuit\footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group.} $\mathcal{C}_q$ we define an update function $F_{\mathcal{C}_q}:\, \mathbb{F}_2^n \rightarrow  \mathbb{F}_2^n$, that relates $\mathcal{C}_q$ and a unitary $( \xgate^{\otimes_{i=1}^{n} b_{i}} \cdot  \zgate^{\otimes_{i=1}^{n} a_{i}})$ in the following manner,
-$$\mathcal{C}_q(  \xgate^{\otimes_{i=1}^{n} b_{i}} \cdot  \zgate^{\otimes_{i=1}^{n} a_{i}})=( \xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot  \xgate^{\otimes_{i=1}^{n} a_{i}^\prime})\mathcal{C}_q $$
-%\anote{like on previous expression, I am not sure how to read this.}
-where $a_i,b_i,a_i^\prime,b_i^\prime \in\{0,1\}$ for all integers  $1\leq i\leq n$ and  $F_{\mathcal{C}_q}(a_1,b_1,a_2,b_2, \ldots a_n,b_n)=(a_1^\prime,b_1^\prime, \ldots, a_n^\prime,b_n^\prime).$ The update function $F_{c_q}$ is computed by the composition of the correction functions of the gates in the circuit $\mathcal{C}_q.$ For example, if we want to evaluate a 2-qubit circuit $C_q=\cnot \cdot (\igate \otimes \hgate)$\footnote{In this paper we assume that we apply apply gates from R.H.S.} using gate teleportation, the update function for this circuit is
-%
-%\begin{equation*}
-%\begin{aligned}
-%F_{C_q}(a_1,b_1,a_2,b_2)=(b_1\oplus a_2,a_1,a_2, a_1\oplus b_2),\\
-%\end{aligned}
-%\end{equation*}
-%And computed as by first applying the $f_\hgate$ to the first two input bits and then $f_{\cnot}$ to all four bits.
-%\begin{equation*}
-%\begin{aligned}
-%(a_1,b_1,a_2,b_2) \xmapsto{\igate \otimes \hgate} (b_1,a_1,a_2,b_2)\xmapsto{\cnot} (b_1\oplus a_2,a_1,a_2, a_1\oplus b_2).
-%\end{aligned}
-%\end{equation*}
-
-
+Using gate teleportation we can also evaluate a  $\tgate,$  hence any $n$-qubit circuit. However, the update function becomes more complicated. This is discuss in section \ref{QiO:Clifford+T:family+GT}.
+						$$\tgate \xgate^b \zgate^a= \xgate^b \zgate^{a\oplus b} \pgate^b \tgate$$
+\end{remark}
 
 
 
