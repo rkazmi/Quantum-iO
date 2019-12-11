@@ -221,7 +221,7 @@ $$U(\ket{\psi} )=C_q(\ket{\psi}),$$
 where  $\mathit{Qubit}(n)$  denote the set of all $n$-qubit states. \anote{Do we need this Qubit notation? Don't we already have something?}
 
 A quantum circuit that computes unitary matrix is called a reversible  quantum circuit, i.e it always possible to uniquely recover the input, given the output. A set of gates are said to be universal if, for any a unitary matrix $U$  a quantum circuit can be constructed for computing~$U$ using only gates from that set. It is a well-known fact that Clifford gates are not universal, but adding any non-Clifford gate, such as $\tgate$, gives a universal set of gates, where
-$$\quad\tgate = \left[\begin{array}{cc} 1 & 0\\ 0 & e^{i\pi/4}\end{array}\right],.$$
+$$\quad\tgate = \left[\begin{array}{cc} 1 & 0\\ 0 & e^{i\pi/4}\end{array}\right]\,.$$
 
 A family of quantum circuits $C=\{C_n\in \mathbb{N} \mid \}$ one for each input  size $n\in \mathbb{N}$ is called \emph{uniform} if there exists a deterministic Turing machine $M,$ such that
  \begin{itemize}
@@ -266,7 +266,7 @@ And we have $$( \xgate^{b_1} \otimes  \xgate^{b_2}) ( \zgate^{a_1} \otimes  \zga
 
 We recall the \emph{Bell states}: %$\ket{\beta_{00}},$  $\ket{\beta_{01}},$ $\ket{\beta_{10}}$ and $\ket{\beta_{11}}.$
 $\ket{\beta_{00}}=\frac{1}{\sqrt2}\left(\ket{00}+\ket{11}\right)$, ${\beta_{01}}=\frac{1}{\sqrt2}\left(\ket{01}+\ket{10}\right)$,
-$\ket{\beta_{10}}=\frac{1}{\sqrt2}\left(\ket{00}-\ket{11}\right)$,  $\ket{\beta_{11}}=\frac{1}{\sqrt2}\left(\ket{01}-\ket{10}\right)$\,. 
+$\ket{\beta_{10}}=\frac{1}{\sqrt2}\left(\ket{00}-\ket{11}\right)$,  $\ket{\beta_{11}}=\frac{1}{\sqrt2}\left(\ket{01}-\ket{10}\right)$\,.
 
 Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate, \cnot,\hgate\}$ on some qubit $\ket{\psi}.$ Then using gate teleportation  \cite{GC99} we can compute $U (\ket{\psi})$ as follows.
 \begin{algorithm}[H]
