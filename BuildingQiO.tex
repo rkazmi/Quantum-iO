@@ -60,195 +60,13 @@ The above construction (section \ref{sec:Clifford-iO-canonical}) is a Quantum In
 \noindent {\bf Proof}: We have to show that the construction satisfies definition \ref{def:QiO} . Note $Qi\mathcal{O}$ is a polynomial-time quantum algorithm, since it is essentially the same a Aaronson and Gottesman a polynomial-quantum algorithm for computing a canonical form of a Clifford circuit ~\cite{AG04} (section VI). 
 To show the construction satisfies all 3 properties of the definition \ref{def:QiO}; let $C_q^\prime$ be the canonical form of some Clifford circuit $C_q.$  Since, $C_q^\prime$ and $C_q$ are equivalent circuits (definition \ref{def:equivalent-circuits}) they have the same function functionality. Note $\rho$ is an empty register and the size of $|C_q^\prime| \in poly(|C_q|)$ ~\cite{AG04}, hence the construction is efficient (polynomial slowdown). Moreover the canonical form reveals no knowledge about the input circuit except the unitary it computes, therefore this $Qi\mathcal{O}$ is perfectly indistinguishable against any quantum adversary. Therefore, also computationally indistinguishable against any quantum adversary.
 
-\begin{comment}
-\anote{This entire section is very cryptic. We need to have a good intuitive understanding of why their canonical form works, and then explain this to the reader. Currently, it seems like magic. I'm also unsure about this part taking up so much space- with essentially zero contribution from us, but I don't have an alternative. I am thinking about it.}
-\anote{For instance, is there a relationship between the $f$ update functions in the preliminaries, and the update functions here for the Cliffords?}
-
-Aaronson and Gottesman invented a polynomial-time algorithm that computed a canonical form of any Clifford circuit~\cite{AG04}. Their algorithm (we denote as {\tt AG-Canonical}, page 8 - 9 \cite{AG04})\anote{pages 8-9 of the AG reference? I think it is more standard to cite the Section numbers, and make sure you check the published version, not the arXiv version.}takes a tableau (binary matrix) related to a Clifford circuit as an input and output its canonical form.  However, the {\tt AG-Canonical} lacks two properties that our important for obtaining $Qi\mathcal{O}.$ First, it does not take a circuit as an input, but rather a $2n \times 2n$ binary matrix representing some quantum state and second, the canonical form computed by it may not always be unique. In this section we show that how one can easily tweak {\tt AG-Canonical}, so that it satisfies both of the properties and allow us to construct a  $Qi\mathcal{O}$ for all Clifford Circuits. We start by briefly describing  {\tt AG-Canonical}.
-
-\anote{excellent lead-in paragraph above!}
-
-The algorithm  represents an $n$-qubit state by tableau consisting of $2n$ rows and $2n+1$ columns, where $x_{i,j} ,z_{i,j}\in \{0,1\}.$
-
-
-\[
-\left(
-\begin{tabular}
-[c]{ccc|ccc|c}%
-$z_{11}$ & $\cdots$ & $z_{1n}$ & $x_{11}$ & $\cdots$ & $x_{1n}$ & $r_{1}$\\
-$\vdots$ & $\ddots$ & $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$ & $\vdots$\\
-$z_{n1}$ & $\cdots$ & $z_{nn}$ & $x_{n1}$ & $\cdots$ & $x_{nn}$ & $r_{n}%
-$\\\hline
-$z_{\left(  n+1\right)  1}$ & $\cdots$ & $z_{\left(  n+1\right)  n}$ &
-$x_{\left(  n+1\right)  1}$ & $\cdots$ & $x_{\left(  n+1\right)  n}$ &
-$r_{n+1}$\\
-$\vdots$ & $\ddots$ & $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$ & $\vdots$\\
-$z_{\left(  2n\right)  1}$ & $\cdots$ & $z_{\left(  2n\right)  n}$ &
-$x_{\left(  2n\right)  1}$ & $\cdots$ & $x_{\left(  2n\right)  n}$ & $r_{2n}$%
-\end{tabular}
-\ \ \ \ \right)
-\]
-
-Each row  of the tableau $R_{i}=\pm (P_{1}\otimes \cdots \otimes P_{n})\in \mathcal{P}_n$, for $1\leq i\leq 2n,$ where bits $(x_{ij},z_{ij})$ determine the $j^{th}$ Pauli gate $P_{j}$: $00$
-means $\igate$, $01$ means $\xgate$, $11$ means~$\ygate$, and $10$ means~$\zgate$ and $r_{i}$ is $1$ if $R_{i}$ has negative phase and $0$ if $r_{i}$\ has
-positive phase. Rows $1$ to $n$ of the tableau represent the destabilizer generators $R_{1},\ldots,R_{n}$ and rows $n+1$ to $2n$ represent the stabilizer
-generators $R_{n+1},\ldots,R_{2n}$ of the state it represents. A state is uniquely determined by the group of Pauli operators that stabilize it.
-
-For example for the $2$-qubit state $\ket{00}$ a possible tableau is
-\[
-\left(
-\begin{tabular}
-[c]{cc|cc|c}%
-$~1~$ & $~0~$ & $~0~$ & $~0~$ & $~0~$\\
-$~0~$ & $~1~$ & $~0~$ & $~0~$ & $~0~$\\\hline
-$~0~$ & $~0~$ & $~1~$ & $~0~$ & $~0~$\\
-$~0~$ & $~0~$ & $~0~$ & $~1~$ & $~0~$%
-\end{tabular}
-\right)
-\]
-
-and the stabilizer generator for the state are $R_3=+(\zgate \otimes \igate)$ and $R_4=+(\igate\otimes \zgate).$ Note if we swap row 3 with row 4, then we get another tableau for the state $\ket{00},$ therefore a quantum state can be represented by more than one tableau. Now suppose we want to compute a canonical form of an $n$-qubit Clifford circuit $C_q.$ Let $\mathcal{T}_i$ be a initial tableau representing the state $\ket{0}^{\otimes n}.$ As we proceed through the gates in $C_q;$ we update $\mathcal{T}_i$  according to the following rules \cite{AG04}.\\
-
-
-\noindent\textbf{CNOT from control }$a$\textbf{ to target }$b$\textbf{.} \ For
-all $i\in\left\{  1,\ldots,2n\right\}  $, set $r_{i}:=r_{i}\oplus x_{ia}%
-z_{ib}\left(  x_{ib}\oplus z_{ia}\oplus1\right)  $, $x_{ib}:=x_{ib}\oplus
-x_{ia}$, and $z_{ia}:=z_{ia}\oplus z_{ib}$.\medskip
-
-\noindent\textbf{Hadamard on qubit }$a$\textbf{.} \ For all $i\in\left\{
-1,\ldots,2n\right\}  $, set $r_{i}:=r_{i}\oplus x_{ia}z_{ia}$\ and swap
-$x_{ia}$\ with $z_{ia}$.\medskip
-
-\anote{todo: make sure we say somewhere (in prelims) that Phase gate is $\pgate$.    }
-\noindent\textbf{Phase on qubit }$a$\textbf{.} \ For all $i\in\left\{
-1,\ldots,2n\right\}  $, set $r_{i}:=r_{i}\oplus x_{ia}z_{ia}$ and then set
-$z_{ia}:=z_{ia}\oplus x_{ia}$.\medskip
-
-
-
-Let $\mathcal{T}_f$ be the final tableau representing the state $C_q(\ket{0}^{\otimes n}).$ The algorithm  {\tt AG-Canonical}  takes the $2n\times 2n$ entries of $\mathcal{T}_f$ (ignore the phase bits $r_i$) as  input and computes a canonical form as follows: First write the tableau into four $n\times n$ matrices $A, B, C$ and $D$
-\[
-\left[
-\begin{tabular}
-[c]{c|c}
-A&B \\\hline
-C&D
-\end{tabular}
-\right]
-\]
-
-\anote{really, 11 rounds? What is so special about this number?}
-
-
-apply 11 rounds  $\hgate-\cnot-\pgate-\cnot-\pgate-\cnot-\hgate-\pgate-\cnot-\pgate-\cnot$ to the above block matrix to obtain standard initial tableau $[{\bf I}_{2n}|{\bf 0}].$ Let $(g_i)_{i=1}^k,\, k\in\mathbb{N}$ be the sequence of gates corresponding to these rounds. Then the canonical form of the circuit $C_q$ is given be the reverse of the sequence $(g_i)_{i=1}^k.$ Now suppose $C_q^\prime$  is another circuit that is equivalent to
-$C_q$ and $\mathcal{T}_i^\prime \neq \mathcal{T}_i$ be a initial tableau representing the state $\ket{0}^{\otimes n}.$ Let $\mathcal{T}_f^\prime$ be the final tableau representing the state $C_q^\prime(\ket{0}^{\otimes n}).$ Then it is possible that $\mathcal{T}_f\neq \mathcal{T}_f^\prime$ and in this case the sequence $(g_i^\prime )_{i=1}^{k^\prime} \leftarrow {\tt AG-Canonical}(\mathcal{T}_f^\prime)$ is different from $(g_i)_{i=1}^k,\, k\in\mathbb{N}.$ Therefore, in general the output of {\tt AG-Canonical}  can be different for two equivalent circuits.
-\anote{The above needs to be emphasized earlier on- the cannonical form of AG is not actually unique}
-\anote{I think there is another reason why this form is not unique. There are possibly many choices of the gates that would lead to the standard initial tableau (think: you can chose in what order you do CNOTs, if the qubits are disjoint, you can decide to do a P now, or later, depending on the intermediate configuration, etc. So, I don't think we have the full proof that this is a unique canonical form. \cite{AG04} only claim that you can put your stabilizer in the form of 11 rounds of $H-C-P-C-P-C-H-P-C-P-C$, they do not claim that the specific decomposition is unique. }
-%This can also be demonstrated by a counter example, Let $C_q= \igate \otimes  \igate$ and $C_q^\prime= (\igate \otimes  \hgate)\cdot (\igate \otimes  \hgate)$ are equivalent circuits.  Let $\mathcal{T}_i$ and $\mathcal{T}_i^\prime$ denote initial tableaus for the state $\ket{0}^{\otimes 2}.$
-%
-% Then it is possible that $\mathcal{T}_f\neq \mathcal{T}_f^\prime.$ Moreover, the algorithm  {\tt AG-Canonical} takes $\mathcal{T}_f$ as a input and compute a canonical form as follows: First apply $\cnot, \hgate$ and $\pgate$  to $\mathcal{T}_f$ in a sequence (denoted by $S_G$) to obtain standard initial tableau  $[{\bf I}_{2n}|{\bf 0}].$ Then the canonical form of $C_q$ is given by the sequence $S_G.$ This means, the output of {\tt AG-Canonical}  may be different for $C_q$ from $C_q^\prime$ if $\mathcal{T}_f\neq \mathcal{T}_f^\prime.$  For example, $C_q= \igate \otimes  \igate$ and $C_q^\prime= (\igate \otimes  \hgate)\cdot (\igate \otimes  \hgate)$ are equivalent circuits. Let Let $\mathcal{T}_i$ and $\mathcal{T}_i^\prime$ denote initial tableaus for the state $\ket{0}^{\otimes 2}.$
-%
-% \[
-%\mathcal{T}_i=\left(
-%\begin{tabular}
-%[c]{cc|cc|c}%
-%$~1~$ & $~0~$ & $~0~$ & $~0~$ & $~0~$\\
-%$~0~$ & $~1~$ & $~0~$ & $~0~$ & $~0~$\\\hline
-%$~0~$ & $~0~$ & $~1~$ & $~0~$ & $~0~$\\
-%$~0~$ & $~0~$ & $~0~$ & $~1~$ & $~0~$%
-%\end{tabular}
-%\right) \; \mbox{ and }\;  \mathcal{T}_i^\prime=\left(
-%\begin{tabular}
-%[c]{cc|cc|c}%
-%$~1~$ & $~0~$ & $~0~$ & $~0~$ & $~0~$\\
-%$~0~$ & $~1~$ & $~0~$ & $~0~$ & $~0~$\\\hline
-%$~0~$ & $~0~$ & $~0~$ & $~1~$ & $~0~$\\
-%$~0~$ & $~0~$ & $~1~$ & $~0~$ & $~0~$
-%\end{tabular}
-%\right)
-%\]
-%
-%After running  $C_q$ and $C_q^\prime$ on the state $\ket{0}^{\otimes 2}$ and updating their initial tableaus according to the above rules, we have $\mathcal{T}_f=\mathcal{T}_i \neq \mathcal{T}_f^\prime=\mathcal{T}_i^\prime.$ Then we calculate the canonical form of  using {\tt AG-Canonical} on input  $\mathcal{T}_f$ and $\mathcal{T}_f^\prime,$ then we cannot possibly apply to both final tableau the same sequence of $\cnot, \hgate$ and $\pgate$ to obtain the initial tableau, therefore the output of {\tt AG-Canonical} is a different canonical form for $C_q$ from $C_q^\prime.$
-
-However, one can trivially modify the algorithm ({\tt AG-Canonical}) \cite{AG04} so that it take a Clifford circuit as an input and outputs a unique canonical form. We add the following initial lines of code to {\tt AG-Canonical} and called this new algorithm {\tt AG-Canonical-Unique}.
-
-
-
-
-%Then  In fact, if
-%. If we let
-% \[
-%\mathcal{T}_i=\left(
-%\begin{tabular}
-%[c]{cc|cc|c}%
-%$~1~$ & $~0~$ & $~0~$ & $~0~$ & $~0~$\\
-%$~0~$ & $~1~$ & $~0~$ & $~0~$ & $~0~$\\\hline
-%$~0~$ & $~0~$ & $~1~$ & $~0~$ & $~0~$\\
-%$~0~$ & $~0~$ & $~0~$ & $~1~$ & $~0~$%
-%\end{tabular}
-%\right) \; \mbox{ and }\;  \mathcal{T}_i^\prime=\left(
-%\begin{tabular}
-%[c]{cc|cc|c}%
-%$~1~$ & $~0~$ & $~0~$ & $~0~$ & $~0~$\\
-%$~0~$ & $~1~$ & $~0~$ & $~0~$ & $~0~$\\\hline
-%$~0~$ & $~0~$ & $~0~$ & $~1~$ & $~0~$\\
-%$~0~$ & $~0~$ & $~1~$ & $~0~$ & $~0~$
-%\end{tabular}
-%\right)
-%\]
-% $$\igate \otimes  \igate\leftarrow{\tt AG-Canonical}(T_f) \; \mbox{  and  } \; \igate \otimes  \igate\leftarrow{\tt AG-Canonical}(T_f^\prime) $$
-%  we have
-%  above the canonical form of  $\igate \otimes  \igate$
-
-
-\begin{framed}
-\begin{flushleft}
-({\tt AG-Canonical-Unique})
-\begin{itemize}
-\item[] Input: A $n$-qubit Clifford Circuit $C_q.$
-\begin{enumerate}
-\item Set $\mathcal{T}_i=[{\bf I}_{2n}|{\bf 0}]\in \{0,1\}^{2n \times 2n+1}$ be the standard  initial tableau  representing the state $\ket{0}^{\otimes n}.$
-\item Compute the final tableau $\mathcal{T}_f$ by running $\mathcal{T}_i$ on $C_q.$
-\item Computes  the circuit $C_q^\prime \leftarrow$ {\tt AG-Canonical}$(\mathcal{T}_f).$
-\item Output $C_q^\prime.$
-\end{enumerate}
-\end{itemize}
-\end{flushleft}
-\end{framed}
-
-\begin{lemma}
-The {\tt AG-Canonical-Unique} computes a unique canonical form for Clifford Circuits in polynomial-time.
-\end{lemma}
-
-\begin{proof}
-The cost of computing the final tableau $\mathcal{T}_f$ is at most $O(n)$ gates (\cite{AG04}) and $|C_q^\prime |\in O(poly(|n|)$ (\cite{AG04}).  Note, for any $n$-qubit circuit $n\leq |C_q|,$ therefore the size of the algorithm {\tt AG-Canonical-Unique} is at most $poly(|C_q|)$ gates. Moreover, Aaronson and Gottesman proved in \cite{AG04} that if $C_{q_1}$ and $C_{q_2}$ are two Clifford circuits and $\mathcal{T}_{f_1}$ and $\mathcal{T}_{f_2}$ are their final tableaus obtained by running them on the standard initial tableau
-$\mathcal{T}_{i_1}=\mathcal{T}_{i_2}=[{\bf I}_{2n}|{\bf 0}]$, then $C_{q_1}$ and $C_{q_2}$ are equivalent if and only if $\mathcal{T}_{f_1}=\mathcal{T}_{f_2}.$ This means the final tableau $\mathcal{T}_f$ obtain in {\tt AG-Canonical-Unique} is the same for every equivalent Clifford circuit. Therefore {\tt AG-Canonical-Unique} computes a unique canonical form for Clifford circuits.
-\end{proof}
-
-\anote{Regarding the above proof, as mentioned earlier, I am not convinced, because although we have idential tableaus $\mathcal{T}_{f_1}=\mathcal{T}_{f_2}$, the canonical form algorithm of \cite{AG04} does not necessarily give a unique decomposition into the 11 rounds of $H-C-P-C-P-C-H-P-C-P-C$.
-I think that, instead of trying to fix the AG04 method, it might be easier and safer to go with Seiliger's method (see the .pdf under the DropBox folder References/Selinger-notesAnne.pdf). I think he proves that what he calls the "normal form" is unique for Cliffords.  }
-
-\anote{should the following have a section number?}
-\noindent{\bf Quantum Indistinguishability Obfuscator from Canonical Form}:  On input a Clifford circuit $C_q,$ the $Qi\mathcal{O}$ first computes the canonical form  {\tt AG-Canonical-Unique}$(C_q)$ and then outputs an empty register $\rho$ along with {\tt AG-Canonical-Unique}$(C_q).$
-
-\begin{center}
-$(\rho, \mbox{{\tt AG-Canonical-Unique}}(C_q))\leftarrow Qi\mathcal{O}(C_q).$
-\end{center}
-Note we output an empty register $\rho$ to be consistent with our definition of  $Qi\mathcal{O}.$ Clearly, $Qi\mathcal{O}$ satisfy the first two properties (functionality and polynomial slow down). Moreover the canonical form reveals no knowledge about the input circuit, therefore this $Qi\mathcal{O}$ is perfectly indistinguishable against any quantum adversary.
-
-\anote{``reveals no knowledge'' is misleading. Actually, iO can reveal alot of knowledge. The point is that the output of the obfuscators are indistinguishable, which is the case.}
-
-%The cost computing tableau $\mathcal{T}_f$ is bounded by a polynomial  $n$ (section III, ~\cite{AG04}). Moreover, if $C_{q_1}$ and $C_{q_2}$ are two equivalents circuits then, there final tableau as computed in step 3 are also equivalent $\mathcal{T}_{f_1}=\mathcal{T}_{f_2}.$ (Lemma 5 ~\cite{AG04}). This means the final tableau obtain in step 3 is independent of the input circuit. The output of the algorithm 1 is computed using the theorem 8 ~\cite{AG04} which only take the final tableau $\mathcal{T}_f$  and output an equivalent circuit $C_q^\prime$ which is completely determined by $\mathcal{T}_f.$ Moreover, the procedure describe in theorem 8 ~\cite{AG04} is a deterministic polynomial-time algorithm. Therefore, the algorithm 1 is guaranteed to output in polynomial-time a unique canonical form for any Clifford circuit.
-
-\end{comment}
-
 
 
 \subsubsection{$Qi\mathcal{O}$ for Clifford via Gate Teleportation}
 \label{sec:Clifford-iO-teleportaion}
 In this section we  show that how gate teleportation can be used to construct a quantum indistinguishability obfuscation for Clifford circuits Our algorithm relies on the assumption that there exists a quantum secure $i\mathcal{O}$ for classical circuits, this seems problematic at first since, there is no provably quantum secure $i\mathcal{O}$ known for general classical circuits. 
 %\anote{Really? I thought there were some candidates.... }
-However,  our construction relies on the assumption that a quantum secure $i\mathcal{O}$ exists for a very specific class of classical circuits the compute update functions (section \ref{update function}). And In fact, it is easy to construct an $i\mathcal{O}$ for classical circuits that compute update functions for Clifford circuits (see appendix). %section \ref{sec: iO-clifford-functions}). %\anote{Indeed, we're looking at some classical circuits that are probably quite easy to deal with. I'm not sure they are Cliffords, however, since I think they are classical functions.}
+However,  our construction relies on the assumption that a quantum secure $i\mathcal{O}$ exists for a very specific class of classical circuits the compute update functions (section \ref{update function}). And In fact, it is easy to construct an $i\mathcal{O}$ for classical circuits that compute update functions for Clifford circuits (appendix \ref{sec: iO-clifford-functions}). %section \ref{sec: iO-clifford-functions}). %\anote{Indeed, we're looking at some classical circuits that are probably quite easy to deal with. I'm not sure they are Cliffords, however, since I think they are classical functions.}
 
 
 %\anote{below, $\rho$ is usually a density matrix, which does not require a $\ket{\cdot}$.}
@@ -493,7 +311,7 @@ where $\beta_i  \in \mathbb{C},$ $i\in[4].$  Therefore, for any  $1$-qubit circu
  (\beta_0 \igate +   \beta_1 \xgate +  \beta_2 \zgate +  \beta_3 \xgate\zgate), \mbox{ for }  \beta_i \in \mathbb{C},\; i\in[n]
 \end{equation}
 
-Moreover, it can be shown that the size of $\beta_i$'s grows at most a polynomial in the number of $\tgate$-gates in the circuit (appendix ?). Therefore the update function for any $1$-qubit circuit $C_q$ can be defined as a following map,
+Moreover, it can be shown that the size of $\beta_i$'s grows at most a polynomial in the number of $\tgate$-gates in the circuit (appendix \ref{coeff:size}). Therefore the update function for any $1$-qubit circuit $C_q$ can be defined as a following map,
 
 \begin{equation*}
 F_{C_q}:\{0,1\}^2\rightarrow \mathbb{C}^4,\; (a,b)\mapsto (\beta_0, \beta_1,\beta_2,\beta_3),
@@ -736,7 +554,7 @@ in the relation \ref{nqubit:eq16}, while the R.H.S is equal to a {\bf 0} matrix.
 \section*{Cost of Computing the Update Function}
 We have to show that the update function can be computed by a polynomially size classical circuit (see \ref{nqubit:update-function}). Let $C_q $ be an $n$-qubit circuit with at most $O(\log(|C_q|)$ $\tgate$-gates and 
                                                                                         $$F_{C_q}(s)=((\beta_{k_1}, \beta_{k_2},\ldots, \beta_{k_m}),(k_1,k_2,\ldots, k_m)),\; \mbox{for } s\in\{0,1\}^{2n}.$$
-Since, $\tgate$-count in $O(\log(|C_q|),$ we have $m\in O(4^{\log(|C_q|}))= O(|C_q|).$ Moreover, each the size of $\beta_i \in poly(|C_q|)$ (appendix ) and $k_i \in O(n),$ but $n\leq |C_q|,$ therefore  $k_i \in O(|C_q|).$ Now in order to compute $F_{C_q}$ we go gate by gate in $C_q$ and perform operations such as $\oplus$, swaps, $+$ and $\otimes$ on operand of size that are bounded by $poly(|C_q|).$ Therefore, $F_{C_q}$ can be computed in deterministic polynomial-time. From complexity theory we know that
+Since, $\tgate$-count in $O(\log(|C_q|),$ we have $m\in O(4^{\log(|C_q|}))= O(|C_q|).$ Moreover, each the size of $\beta_i \in poly(|C_q|)$ (appendix \ref{coeff:size}) and $k_i \in O(n),$ but $n\leq |C_q|,$ therefore  $k_i \in O(|C_q|).$ Now in order to compute $F_{C_q}$ we go gate by gate in $C_q$ and perform operations such as $\oplus$, swaps, $+$ and $\otimes$ on operand of size that are bounded by $poly(|C_q|).$ Therefore, $F_{C_q}$ can be computed in deterministic polynomial-time. From complexity theory we know that
 if $F_{C_q}$ can be computed in time $O(t|C_q|)),$ then there is a classical circuit $C$ of size $O(t^2|C_q|)),$ that can compute $F_{C_q}$ \cite{Sipser 3rd edition, page 407} (Sipser). Therefore $F_{C_q}$ can be computed by a classical circuit of $poly(|C_q|).$
 
 \subsection{$Qi\mathcal{O}$ for Unitary Quantum Circuits with Low $\tgate$ gate Complexity}

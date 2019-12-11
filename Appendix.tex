@@ -1,0 +1,20 @@
+\section{Appendix} 
+ \subsection{Indistinguishability Obfuscator for Update Functions}
+ \label{sec: iO-clifford-functions}
+ In this section we show that how one can easily construct a quantum secure $i\mathcal{O}$ for update function corresponding to Clifford Circuit. Suppose $C_q$ is an $n$-qubit circuit.
+\begin{algorithm}[H]
+  \caption{$i\mathcal{O}$ for Clifford update Functions $F_{\tt Clifford}$}
+  \begin{enumerate}
+  \item Compute the canonical form $C_q$ using the algorithm presented in ~\cite{AG04} (section VI). Denote the canonical form as $C_q^\prime.$
+  \item Let $g_k, \ldots,g_2,g_1$ be the topological ordering of the gates in $C_q^\prime,$ where $k=|C_q^\prime|.$
+  \item Construct the classical circuit $C^\prime$ that computes update function $F_{C_q^\prime}$ as follows. For $i=1$ to $k$ implement update rule (section \ref{update function})  for each gate $g_i$
+  \item Output the circuit $C^\prime.$
+  \end{enumerate}
+\end{algorithm}
+%
+\noindent Note $C_q^\prime$ reveal no information about $C_q,$ except the functionality. Therefore, $C^\prime$ can reveal no information about about $C_q,$ excepts its functionality. Note $|C^\prime|$ is at most $poly|C_q|.$ Moreover, each step of the $i\mathcal{O}$ can be done in the $poly(|C_q|),$ therefore $i\mathcal{O}$ runs in polynomial-time.
+
+
+
+ \subsection{Size of Coefficients in Update Functions}
+ \label{coeff:size}

@@ -201,11 +201,11 @@ Therefore we have
  \end{aligned}
 \end{equation*}
 	
-Note we can evaluate any $n$-qubit quantum circuit  Clifford circuits $C_q$ (see appendix). \footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group}. Let $\mathcal{C}_q$ is consist of sequence of gates $g_k,\ldots,g_2,g_1$ for $k\in\mathbb{N}.$\footnote{In this paper we assume that we apply apply gates from R.H.S.} 
+Note we can evaluate any $n$-qubit quantum circuit  Clifford circuits $C_q$ (appendix \ref{sec: iO-clifford-functions}). \footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group.} Let $\mathcal{C}_q$ is consist of sequence of gates $g_k,\ldots,g_2,g_1$ for $k=|\mathcal{C}_q|.$\footnote{In this paper we assume that we apply gates from R.H.S.} 
 \begin{equation}
 \label{relation:update}
 \begin{aligned}
- \ket\beta_{a_1,b_1}\otimes \cdots \otimes \ket\beta_{a_n,b_n} \otimes C_q(\xgate^{a_1}\zgate^{b_1}\otimes \cdots \xgate^{a_n}\zgate^{b_n})\ket{\psi}
+ \ket\beta_{a_1,b_1}\otimes \cdots \otimes \ket\beta_{a_n,b_n} \otimes C_q(\xgate^{a_1}\zgate^{b_1}\otimes \cdots \otimes\xgate^{a_n}\zgate^{b_n})\ket{\psi}
 \end{aligned}
 \end{equation}
 
@@ -218,7 +218,7 @@ F_{\mathcal{C}_q}:\, \mathbb{F}_2^{2n} \rightarrow  \mathbb{F}_2^{2n}, \; F_{\ma
 We can rewrite the relation \ref{relation:update} as
 \begin{equation*}
 \begin{aligned}
-\ket\beta_{a_1,b_1}\otimes \cdots \otimes \ket\beta_{a_n,b_n} \otimes (\xgate^{a_1^\prime}\zgate^{b_1^\prime}\otimes \cdots \xgate^{a_n^\prime}\zgate^{b_n^\prime})C_q(\ket{\psi}),
+\ket\beta_{a_1,b_1}\otimes \cdots \otimes \ket\beta_{a_n,b_n} \otimes (\xgate^{a_1^\prime}\zgate^{b_1^\prime}\otimes \cdots \otimes\xgate^{a_n^\prime}\zgate^{b_n^\prime})C_q(\ket{\psi}),
  \end{aligned}
 \end{equation*}
 where $(a_1^\prime,b_1^\prime,\dots, a_n^\prime,b_n^\prime)=F_{C_q}(a_1,b_1,\ldots,a_n,b_n).$ \\
