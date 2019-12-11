@@ -1,7 +1,7 @@
 \documentclass[english,11pt]{article}
 \usepackage[english]{babel}
 \usepackage{latexsym,amssymb,amsmath,amsfonts,epsfig,amsthm,color,dsfont,mathtools}
- \usepackage{braket,graphicx,authblk,colonequals,algorithm,algpseudocode,ifthen,framed}
+ \usepackage{braket,graphicx,authblk,colonequals,algorithm,algpseudocode,ifthen,framed, comment}
 \usepackage{float,array}
 \usepackage{xcolor} %
 %\usepackage[left=1in,right=1in]{geometry}
@@ -12,7 +12,6 @@
 %\usepackage[toc]{multitoc}
 %\usepackage{cleveref}
 \floatname{algorithm}{Algorithm}
-
 
 %********************
 \input{commands.tex}
@@ -34,11 +33,8 @@
 \maketitle
 
 \begin{abstract}
-An \emph{indistiguishability obfuscator} takes as input a circuit %C$ 
-and outputs a new circuit, %$C'$, 
-such that for any two circuits that compute the  \emph{same} function, the ouputs of the indistinguishability obfuscator are 
-%$C'_1$ and $C'_2$ are
- computationally indistinguishable. In this paper we study indistinguishability obfuscation for \emph{quantum} circuits. We construct an indistinguishability  obfuscator that takes as input a quantum circuit, and outputs a quantum state and a quantum circuit, which together can be used to evaluate the original quantum circuit, on any quantum input; the security guarantee being that for two quantum circuits of the same size that have the same input-output behaviour, the outputs of the obfuscator are indistinguishable. In our construction, the size of the output of the obfuscator is exponential in the number of non-Clifford gates, which means that the construction is efficient as long as the number of non-Clifford gates is logarithmic. \anote{Need to update prior text, based on final results. }
+An \emph{indistiguishability obfuscator} $i\mathcal{O}$ is probabilistic polynomial-time algorithm that takes a circuit $C$ as as input%C$ 
+and outputs a new circuit $C^\prime,$ that has the same functionality as the input circuit. Moreover, for any two circuits of similar size that compute the \emph{same} function, the ouput of the indistinguishability obfuscator are computationally indistinguishable. In this paper we study indistinguishability obfuscation for \emph{quantum} circuits. We construct an indistinguishability  obfuscator that takes as input a quantum circuit, and outputs a quantum state and a quantum circuit, which together can be used to evaluate the original quantum circuit, on any quantum input; the security guarantee being that for two quantum circuits ({\em not necessarily of the same size}) that have the same input-output behaviour, the outputs of the obfuscator are indistinguishable. In our construction, the size of the output of the obfuscator is exponential in the number of non-Clifford gates, which means that the construction is efficient as long as the number of non-Clifford gates is logarithmic. \anote{Need to update prior text, based on final results. }
 \end{abstract}
 
 \newpage
@@ -89,17 +85,17 @@ such that for any two circuits that compute the  \emph{same} function, the ouput
 \section*{Acknowledgements}
 This material is based upon work supported by the Air Force Office of Scientific Research under award number FA9550-17-1-0083, Canada's   NFRF and NSERC, an Ontario ERA, and the University of Ottawa’s Research Chairs program.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\bibliographystyle{alpha}
-%\bibliography{full.bib}
-%\bibliography{quantum.bib}
+%\bibliographystyle{bst/alphaarxiv}
+\bibliography{bib/full.bib/quantum.bib}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\bibliography{more.bib}
-%\bibliographystyle{./bibtex/bst/alphaarxiv}
-%\bibliography{bibtex/bib/full.bib,bibtex/bib/quantum.bib}
 
-%add new entries to more.bib, they will be cleaned and entered into quantum.bib by the BibMaster
-\bibliographystyle{bst/alphaarxiv}
-\bibliography{bib/full,bib/quantum,bib/more}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Section Appendix: Include iO for Clifford Circuits and bound on complex coefficients
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\input{Appendix.tex}
 
 \end{document} 
