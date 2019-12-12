@@ -105,50 +105,43 @@ where $\rho_{in} \in \mathcal{H}_n,$ is the original state and $\ket{00\cdots 0}
 
 
 
-
-
-
-
-
 \subsection{Gate Teleportation}
 \label{protocol: gate-teleportation}
-We recall the \emph{Bell states}: %$\ket{\beta_{00}},$  $\ket{\beta_{01}},$ $\ket{\beta_{10}}$ and $\ket{\beta_{11}}.$
-$\ket{\beta_{00}}=\frac{1}{\sqrt2}\left(\ket{00}+\ket{11}\right)$, ${\beta_{01}}=\frac{1}{\sqrt2}\left(\ket{01}+\ket{10}\right)$,
-$\ket{\beta_{10}}=\frac{1}{\sqrt2}\left(\ket{00}-\ket{11}\right)$,  $\ket{\beta_{11}}=\frac{1}{\sqrt2}\left(\ket{01}-\ket{10}\right)$\,.
-
+%We recall the \emph{Bell states}: %$\ket{\beta_{00}},$  $\ket{\beta_{01}},$ $\ket{\beta_{10}}$ and $\ket{\beta_{11}}.$
+%$\ket{\beta_{00}}=\frac{1}{\sqrt2}\left(\ket{00}+\ket{11}\right)$, ${\beta_{01}}=\frac{1}{\sqrt2}\left(\ket{01}+\ket{10}\right)$,
+%$\ket{\beta_{10}}=\frac{1}{\sqrt2}\left(\ket{00}-\ket{11}\right)$,  $\ket{\beta_{11}}=\frac{1}{\sqrt2}\left(\ket{01}-\ket{10}\right)$\,.
 Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate,\hgate\}$ on some qubit $\ket{\psi}.$ Then using gate teleportation  \cite{GC99} we can compute $U (\ket{\psi})$ as follows.
 \begin{algorithm}[H]
 \caption{Gate Teleportation.}
 \begin{enumerate}
 \item  Prepare a $2$ qubit Bell state $\ket{\beta_{00}}=\frac{\ket{00}+\ket{11})}{\sqrt{2}}.$
 \item Write the joint system as
- \begin{equation}
+ \begin{equation*}
  \label{eq:telepprtation1}
  \begin{aligned}
 \ket{\psi}_C \ket{\beta_{00}}_{AB}=\frac{1}{2}\ket{\beta_{00}}_{AC} \ket{\psi}_{B} + \frac{1}{2}\ket{\beta_{01}}_{AC} ( \xgate( \ket{\psi})_{B}  +\\
  \frac{1}{2}\ket{\beta_{10}}_{AC} ( \zgate( \ket{\psi})_{B} + \frac{1}{2}\ket{\beta_{11}}_{AC} ( \xgate \zgate( \ket{\psi})_{B}.
 \end{aligned}
-\end{equation}
- Where $\beta_{ij},$  denotes the 2 qubit Bell basis.
+\end{equation*}
+ Where $\beta_{ij},$  denotes the 2-qubit Bell basis.
 \item Apply the Clifford gate $U$ on the subsystem $B,$
- \begin{equation}
+ \begin{equation*}
   \label{eq:telepprtation2}
  \begin{aligned}
 \mathbb{I}\otimes \mathbb{I} \otimes U(\ket{\psi}_A \ket{\beta_{00}}_{BC})=\frac{1}{2}\ket{\beta_{00}}_{AC} U(\ket{\psi})_{B}+ \frac{1}{2}\ket{\beta_{01}}_{AC}U( \xgate( \ket{\psi})_{B} +\\ \frac{1}{2}\ket{\beta_{10}}_{AC}U( \zgate( \ket{\psi})_{B}+ \frac{1}{2}\ket{\beta_{11}}_{AC}U( \xgate \zgate( \ket{\psi})_{B}.
 \end{aligned}
- \end{equation}
+ \end{equation*}
  \item Measure the subsystem AC  in the Bell basis and obtain the classical bits $(a,b).$ The system is now in the state
  \begin{equation}
   \label{eq:telepprtation3}
 							\ket{\beta_{ab}}_{AC}\otimes U( \xgate^b \zgate^a( \ket{\psi}))_B.
 \end{equation}
- \label{eq:telepprtation4}
-\item Compute the update function $f_U(a,b)=(a^\prime,b^\prime)$ associated with the gate $U.$ (section \ref{update function}).
 \item Trace out the subsystem $AC,$
  \begin{equation}
   \label{eq:telepprtation5}
 U( \xgate^b \zgate^a( \ket{\psi}))_B=Tr_{AB}(\ket{\beta_{ab}}_{AC}\otimes U( \xgate^b \zgate^a( \ket{\psi}))_B.)
  \end{equation}
+\item Compute the update function $f_U(a,b)=(a^\prime,b^\prime)$ associated with the gate $U.$ (see section \ref{update function}).
 \item Apply the correction unitary $\zgate^{a^\prime}  \xgate^{b^\prime}$ to the system B.
  \begin{equation}
   \label{eq:telepprtation5}
@@ -160,11 +153,11 @@ U( \xgate^b \zgate^a( \ket{\psi}))_B=Tr_{AB}(\ket{\beta_{ab}}_{AC}\otimes U( \xg
 
 \subsection{Update Functions for Quantum Circuits}
 \label{update function}
-In the gate teleportation (\ref{protocol: gate-teleportation}) we have to compute an ordered $(a^\prime, b^\prime)\in\mathbb{F}_2^2$ so that
+In the gate teleportation (\ref{protocol: gate-teleportation}) we have to compute bits $(a^\prime, b^\prime)\in\mathbb{F}_2^2$ such that
 \begin{equation*}
 U\xgate^b\zgate^a \ket{\psi}=\xgate^{b^\prime}\zgate^{a^\prime}U(\ket{\psi}),  
 \end{equation*}
-The ordered pair $(a^\prime, b^\prime)$ are computed by an update rule that is completely determinant by the the gate $U$ and $(a,b)\in\mathbb{F}_2^2.$ We can describe this rule concisely by an update function 
+The ordered pair $(a^\prime, b^\prime)$ are computed by an update rule that is completely determinant by the gate $U$ and $(a,b)\in\mathbb{F}_2^2.$ We can describe this rule concisely by an update function 
 \begin{equation*}
 f_U:\mathbb{F}^2\rightarrow \mathbb{F}^2, \; (a,b)\mapsto (a^\prime,b^\prime).
 \end{equation*}
@@ -180,7 +173,7 @@ For any $(a,b)\in\mathbb{F}_2^2$ and any single Clifford gate $U,$ the correspon
 %\cnot (\xgate^{b_1}\zgate^{a_1} \otimes \xgate^{b_2}\zgate^{a_2})=({\xgate^{b_1} {\zgate^{a_1\oplus a_2}}} \otimes {\xgate^{b_1\oplus b_2}}\zgate^{a_2})\cnot, \mbox{ where } f_{\cnot}(a_1,b_1,a_2,b_2)=(a_1\oplus a_2,b_1,a_2, b_1\oplus b_2).\\
 \end{aligned}
 \end{equation*}
-Note we can also evaluate $\cnot$ gate on any 2-qubit state $\ket{\psi}$ using gate-teleportation. In this case we have to prepare $4$ qubit Bell state $\ket \beta_{00}\otimes \beta_{00}$ in the step 1 (gate-teleportation \ref{protocol: gate-teleportation}). After step 4 of the gate teleportation the system will be is state
+Note we can evaluate $\cnot$ gate on any 2-qubit state $\ket{\psi}$ using gate-teleportation. In this case we have to prepare $4$ qubit Bell state $\ket \beta_{00}\otimes \beta_{00}$ in the step 1 (gate-teleportation \ref{protocol: gate-teleportation}). After step 4 of the gate teleportation the system will be in the state
 \begin{equation*}
 \begin{aligned}
  \ket\beta_{a_1,b_1}\otimes \ket\beta_{a_2,b_2} \otimes \cnot(\xgate^{a_1}\zgate^{b_1}\otimes \xgate^{a_2}\zgate^{b_2})\ket{\psi}
@@ -199,14 +192,14 @@ Therefore we have
  \end{aligned}
 \end{equation*}
 	
-Note we can evaluate any $n$-qubit quantum circuit  Clifford circuits $C_q$ (appendix \ref{sec: iO-clifford-functions}). \footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group.} Let $\mathcal{C}_q$ is consist of sequence of gates $g_k,\ldots,g_2,g_1$ for $k=|\mathcal{C}_q|.$\footnote{In this paper we assume that we apply gates from R.H.S.} 
+In general, let $\mathcal{C}_q$ be an $n$-qubit Clifforf circuit. \footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group.} and $\mathcal{C}_q$ is consist of sequence of gates $g_k,\ldots,g_2,g_1$ for $k=|\mathcal{C}_q|.$\footnote{In this paper we assume that we apply gates from R.H.S.} 
 \begin{equation}
 \label{relation:update}
 \begin{aligned}
  \ket\beta_{a_1,b_1}\otimes \cdots \otimes \ket\beta_{a_n,b_n} \otimes C_q(\xgate^{a_1}\zgate^{b_1}\otimes \cdots \otimes\xgate^{a_n}\zgate^{b_n})\ket{\psi}
 \end{aligned}
 \end{equation}
-
+where  $(a_1,b_1,\ldots,a_n,b_n)\in\mathbb{F}_2^{2n}$ obtained in the step 4 of the gate teleportation \ref{protocol: gate-teleportation}.
 The update function corresponding to the circuit $C_q$ is computed by composing the update functions of each gate in $\mathcal{C}_q$
 \begin{equation*}
 \begin{aligned}
