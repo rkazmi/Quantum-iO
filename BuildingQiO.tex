@@ -556,7 +556,8 @@ in the relation \ref{nqubit:eq16}, while the R.H.S is equal to a {\bf 0} matrix.
 We have to show that the update function can be computed by a polynomially size classical circuit (see \ref{nqubit:update-function}). Let $C_q $ be an $n$-qubit circuit with at most $O(\log(|C_q|)$ $\tgate$-gates and
                                                                                         $$F_{C_q}(s)=((\beta_{k_1}, \beta_{k_2},\ldots, \beta_{k_m}),(k_1,k_2,\ldots, k_m)),\; \mbox{for } s\in\{0,1\}^{2n}.$$
 Since, $\tgate$-count in $O(\log(|C_q|),$ we have $m\in O(4^{\log(|C_q|}))= O(|C_q|).$ Moreover, each the size of $\beta_i \in poly(|C_q|)$ (appendix \ref{coeff:size}) and $k_i \in O(n),$ but $n\leq |C_q|,$ therefore  $k_i \in O(|C_q|).$ Now in order to compute $F_{C_q}$ we go gate by gate in $C_q$ and perform operations such as $\oplus$, swaps, $+$ and $\otimes$ on operand of size that are bounded by $poly(|C_q|).$ Therefore, $F_{C_q}$ can be computed in deterministic polynomial-time. From complexity theory we know that
-if $F_{C_q}$ can be computed in time $O(t|C_q|)),$ then there is a classical circuit $C$ of size $O(t^2|C_q|)),$ that can compute $F_{C_q}$ \cite{Sipser 3rd edition, page 407} (Sipser). Therefore $F_{C_q}$ can be computed by a classical circuit of $poly(|C_q|).$
+if $F_{C_q}$ can be computed in time $O(t|C_q|)),$ then there is a classical circuit $C$ of size $O(t^2|C_q|)),$ that can compute $F_{C_q}$. %\cite{Sipser 3rd edition, page 407} (Sipser). 
+Therefore $F_{C_q}$ can be computed by a classical circuit of $poly(|C_q|).$
 
 \subsection{$Qi\mathcal{O}$ for Unitary Quantum Circuits with Low $\tgate$ gate Complexity}
 The $Qi\mathcal{O}$ construction and proof of its security is identical to the to the construction for Clifford gates (section \ref{sec:Clifford-iO-teleportaion}).
