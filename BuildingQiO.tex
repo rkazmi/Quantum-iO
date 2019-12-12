@@ -3,7 +3,7 @@
 %Section
 \section{Quantum Indistinguishability Obfuscation}
 \label{sec:QiO-Cliffords and more}
-In this section we give a definition of equivalent quantum circuits and also define a notion of Quantum Indistinguishability Obfuscation $Qi\mathcal{O}.$ Then in section \ref{QiO:Clifford-Circuits}. In section, we show how to construct $Qi\mathcal{O}$ for some families of quantum circuits. We give two alternative methods, the first based on canonical forms, and the second based on gate teleportation. 
+In this section we give a definition of equivalent quantum circuits and also define a notion of Quantum Indistinguishability Obfuscation $Qi\mathcal{O}.$ Then in section \ref{QiO:Clifford-Circuits}. In section, we show how to construct $Qi\mathcal{O}$ for some families of quantum circuits. We give two alternative methods, the first based on canonical forms, and the second based on gate teleportation.
 
 %\anote{Need some blah blah at the beginning of a section to say what we present in this section.}
 
@@ -17,7 +17,7 @@ $$C_{q_1}(\ket{\psi}) =C_{q_2}(\ket{\psi}).$$
 
 %\anote{why is computational in brackets below?}
 \begin{definition}{\rm (Quantum Indistinguishability Obfuscation)}
-\label{def:QiO} 
+\label{def:QiO}
 A  polynomial-time quantum algorithm for a class of quantum circuits $\mathcal{C}_Q$ is a quantum computational indistinguishability obfuscator $Qi\mathcal{O}$  if the following conditions hold:
 
 \begin{enumerate}
@@ -29,12 +29,12 @@ $$(\rho, C_q^\prime)\leftarrow Qi\mathcal{O}(C_q) \;  \mbox{ and }\; C_q^\prime(
 
 \item  {\tt Polynomial Slowdown:}  For every $C_{q}\in \mathcal{C}_Q,$
 \begin{itemize}
-\item  $\rho$ is at most a $poly(|C_{q}|)$ qubit state. 
+\item  $\rho$ is at most a $poly(|C_{q}|)$ qubit state.
 \item $|C_{q}^\prime| \in poly(|C_{q}|).$
 \end{itemize}
 %\anote{in below, did we define what we mean by size? If this is the number of gates, I would find the definition quite restrictive. Maybe you mean the same dimensions for input- output?}
 
-\item {\tt Indistinguishability:} For any two equivalent quantum circuits $C_{q_1},C_{q_2}\in \mathcal{C}_Q,$ 
+\item {\tt Indistinguishability:} For any two equivalent quantum circuits $C_{q_1},C_{q_2}\in \mathcal{C}_Q,$
  and for every polynomial-time quantum distinguisher $\mathcal{D}_q,$ there exists a negligible function {\rm negl} such that:
 					$$\Big |{\rm Pr}[\mathcal{D}_q(Qi\mathcal{O}(C_{q_1}))=1]-{\rm Pr}[\mathcal{D}_q(Qi\mathcal{O}(C_{q_2}))=1] \Big |\leq  {\rm negl}(k).$$		
 Where $k=|C_{q_1}|=|C_{q_2}|.$						
@@ -48,23 +48,23 @@ Where $k=|C_{q_1}|=|C_{q_2}|.$
 
 \subsubsection{$Qi\mathcal{O}$ for Clifford via Canonical Form}
 \label{sec:Clifford-iO-canonical}
-Aaronson and Gottesman invented a polynomial-quantum algorithm (polynomial size circuit) that takes a Clifford circuit $C_q$ and output its canonical form $C_q^\prime$  ~\cite{AG04} (section VI). This canonical form is invariant for any two equivalent circuits. The Moreover the size of $C_q^\prime$ is in $poly(|C_q|).$ Therefore, the $Qi\mathcal{O}$ is a quantum algorithm that takes a Clifford circuit $C_q,$ as an input and outputs   
+Aaronson and Gottesman invented a polynomial-quantum algorithm (polynomial size circuit) that takes a Clifford circuit $C_q$ and output its canonical form $C_q^\prime$  ~\cite{AG04} (section VI). This canonical form is invariant for any two equivalent circuits. The Moreover the size of $C_q^\prime$ is in $poly(|C_q|).$ Therefore, the $Qi\mathcal{O}$ is a quantum algorithm that takes a Clifford circuit $C_q,$ as an input and outputs
 														$$(\rho, C_q^\prime)\leftarrow Qi\mathcal{O}(C_q),$$
-   
+
 where $\rho$ is an empty register and $C_q^\prime$ is a canonical form of $C_q$ computed using the Aaronson and Gottesman algorithm.
 
- \begin{lemma}                                                
+ \begin{lemma}
 The above construction (section \ref{sec:Clifford-iO-canonical}) is a Quantum Indistinguishability Obfuscation for Clifford Circuits.
 \end{lemma}
 
-\noindent {\bf Proof}: We have to show that the construction satisfies definition \ref{def:QiO} . Note $Qi\mathcal{O}$ is a polynomial-time quantum algorithm, since it is essentially the same a Aaronson and Gottesman a polynomial-quantum algorithm for computing a canonical form of a Clifford circuit ~\cite{AG04} (section VI). 
+\noindent {\bf Proof}: We have to show that the construction satisfies definition \ref{def:QiO} . Note $Qi\mathcal{O}$ is a polynomial-time quantum algorithm, since it is essentially the same a Aaronson and Gottesman a polynomial-quantum algorithm for computing a canonical form of a Clifford circuit ~\cite{AG04} (section VI).
 To show the construction satisfies all 3 properties of the definition \ref{def:QiO}; let $C_q^\prime$ be the canonical form of some Clifford circuit $C_q.$  Since, $C_q^\prime$ and $C_q$ are equivalent circuits (definition \ref{def:equivalent-circuits}) they have the same function functionality. Note $\rho$ is an empty register and the size of $|C_q^\prime| \in poly(|C_q|)$ ~\cite{AG04}, hence the construction is efficient (polynomial slowdown). Moreover the canonical form reveals no knowledge about the input circuit except the unitary it computes, therefore this $Qi\mathcal{O}$ is perfectly indistinguishable against any quantum adversary. Therefore, also computationally indistinguishable against any quantum adversary.
 
 
 
 \subsubsection{$Qi\mathcal{O}$ for Clifford via Gate Teleportation}
 \label{sec:Clifford-iO-teleportaion}
-In this section we  show that how gate teleportation can be used to construct a quantum indistinguishability obfuscation for Clifford circuits Our algorithm relies on the assumption that there exists a quantum secure $i\mathcal{O}$ for classical circuits, this seems problematic at first since, there is no provably quantum secure $i\mathcal{O}$ known for general classical circuits. 
+In this section we  show that how gate teleportation can be used to construct a quantum indistinguishability obfuscation for Clifford circuits Our algorithm relies on the assumption that there exists a quantum secure $i\mathcal{O}$ for classical circuits, this seems problematic at first since, there is no provably quantum secure $i\mathcal{O}$ known for general classical circuits.
 %\anote{Really? I thought there were some candidates.... }
 However,  our construction relies on the assumption that a quantum secure $i\mathcal{O}$ exists for a very specific class of classical circuits the compute update functions (section \ref{update function}). And In fact, it is easy to construct an $i\mathcal{O}$ for classical circuits that compute update functions for Clifford circuits (appendix \ref{sec: iO-clifford-functions}). %section \ref{sec: iO-clifford-functions}). %\anote{Indeed, we're looking at some classical circuits that are probably quite easy to deal with. I'm not sure they are Cliffords, however, since I think they are classical functions.}
 
@@ -82,8 +82,8 @@ However,  our construction relies on the assumption that a quantum secure $i\mat
   \item Apply the circuit $C_q$ on the right most $n$ qubits and obtain a system $\rho$
   										 $$\rho=(\igate_n\otimes C_q) \ket{\beta^{2n}}.$$
  \item Compute the classical circuit $C_{F_{C_q}}$ that computes the update function $F_{C_q}.$	
- \item  Set $C=i\mathcal{O}(C_{F_{C_q}}).$							 
-  \item Let $B_q$ denote the circuit that takes a $3n$ qubit state and perform a Bell measurement on the leftmost $2n$-qubits of the input state and obtain the bits (output of measurement), $(a_1,b_1\ldots,a_n,b_n)$ 
+ \item  Set $C=i\mathcal{O}(C_{F_{C_q}}).$							
+  \item Let $B_q$ denote the circuit that takes a $3n$ qubit state and perform a Bell measurement on the leftmost $2n$-qubits of the input state and obtain the bits (output of measurement), $(a_1,b_1\ldots,a_n,b_n)$
   \item Set $C_q^\prime=(B_q, C^\prime).$
   \item Output $\left(\rho,C_q^\prime \right).$
   \end{enumerate}
@@ -100,10 +100,10 @@ However,  our construction relies on the assumption that a quantum secure $i\mat
   \item Input $\left(\rho,C_q^\prime \right)$ and a quantum state $\ket{\psi}.$
   \begin{enumerate}
   \item   Write $C_q^\prime=(B_q, C)$ and the joint system $\rho_{AB}=\rho \otimes \ket{\psi}.$
-  \item   Obtain the state $\rho_{AB}^\prime=B_q(\rho_{AB})$ and classical output $(a_1,b_1\ldots,a_n,b_n).$ 
+  \item   Obtain the state $\rho_{AB}^\prime=B_q(\rho_{AB})$ and classical output $(a_1,b_1\ldots,a_n,b_n).$
   \item   Compute $C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}})\ket{\psi}=Tr_A(\rho_{AB}^\prime)$ (see  gate teleportation protocol \ref{protocol: gate-teleportation}).
   \item   Compute the update function $$(a_1^\prime, b_1^\prime,\ldots, a_n^\prime, b_n^\prime)=C(a_1,b_1\ldots,a_n,b_n).$$
-  \item    Compute the correction unitary $(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime})$ 
+  \item    Compute the correction unitary $(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime})$
   \item   Apply  $(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime})$ to the system $C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}})\ket{\psi}$ to obtain the state $C_q(\ket{\psi})$ as follows,
   \begin{equation*}
   \begin{aligned}
@@ -141,7 +141,7 @@ Since $C_{q_1}(\ket{\tau})=C_{q_2}(\ket{\tau})$ for every quantum state $\ket{\t
 \label{eq:1}
 \rho_1=(I\otimes C_{q_1}) \ket{\beta^{2n}}=(I\otimes C_{q_2}) \ket{\beta^{2n}}=\rho_2.
 \end{equation}
-And of course $B_q$ will always be the same circuit for circuits. So the only thing we need to show that $i\mathcal{O}(C_{F_{C_{q_1}}})$ and $i\mathcal{O}(C_{F_{C_{q_2}}})$ are computationally indistinguishable against any polynomial-time quantum adversary. Note if we can prove that $F_{C_{q_1}}$ and $F_{C_{q_2}}$ are equivalent functions then we can conclude that the classical circuits ($C_{q_1}$ and $C_{q_2}$) that computes these functions are also be equivalent. Then from the definition of classical quantum secure $i\mathcal{O}$ we can conclude that  $iO(C_{F_{C_{q_2}}})$ and $iO(C_{F_{C_{q_2}}})$ are computationally indistinguishable against any polynomial-time quantum adversary. From Theorem \ref{sec:Clifford Functions} we have $F_{C_{q_1}}$ and $F_{C_{q_2}}$ equivalent functions, therefore $Qi\mathcal{O}$ is a quantum secure indistinguishability obfuscation for all Clifford Circuits. \footnote{Note without loss of generality we can assume that $|C_{F_{C_{q_1}}}|=|C_{F_{C_{q_2}}}|,$ because we can always increase the size of a circuit by adding trivial gates to it. }
+And of course $B_q$ will always be the same circuit for circuits. So the only thing we need to show that $i\mathcal{O}(C_{F_{C_{q_1}}})$ and $i\mathcal{O}(C_{F_{C_{q_2}}})$ are computationally indistinguishable against any polynomial-time quantum adversary. Note if we can prove that $F_{C_{q_1}}$ and $F_{C_{q_2}}$ are equivalent functions then we can conclude that the classical circuits ($C_{q_1}$ and $C_{q_2}$) that computes these functions are also be equivalent. Then from the definition of classical quantum secure $i\mathcal{O}$ we can conclude that  $iO(C_{F_{C_{q_2}}})$ and $iO(C_{F_{C_{q_2}}})$ are computationally indistinguishable against any polynomial-time quantum adversary. From Theorem \ref{sec:Clifford Functions} we have $F_{C_{q_1}}$ and $F_{C_{q_2}}$ equivalent functions, therefore $Qi\mathcal{O}$ is a quantum secure indistinguishability obfuscation for all Clifford Circuits.\footnote{Note without loss of generality we can assume that $|C_{F_{C_{q_1}}}|=|C_{F_{C_{q_2}}}|,$ because we can always increase the size of a circuit by adding trivial gates to it. }
 
 \end{itemize}
 
@@ -151,7 +151,7 @@ Let $C_{q_1}$ and $C_{q_2}$ be two equivalent Clifford circuits and  $F_{C_{q_1}
 \end{theorem}
 
 \begin{flushleft}
-{\bf Proof:} For any {\em n}-qubit state $\ket \psi$ we have $C_{q_1}(\ket \psi)=C_{q_2}(\ket \psi)$ and let $F_{C_{q_1}}$ and $F_{C_{q_2}}$ denote the update functions for the circuits $C_{q_1}$ and $C_{q_2}.$ Suppose $F_{C_{q_1}}\neq F_{C_{q_2}},$  then there must exist at least one binary string $a_1b_1,\ldots, a_nb_n$ such that 
+{\bf Proof:} For any {\em n}-qubit state $\ket \psi$ we have $C_{q_1}(\ket \psi)=C_{q_2}(\ket \psi)$ and let $F_{C_{q_1}}$ and $F_{C_{q_2}}$ denote the update functions for the circuits $C_{q_1}$ and $C_{q_2}.$ Suppose $F_{C_{q_1}}\neq F_{C_{q_2}},$  then there must exist at least one binary string $a_1b_1,\ldots, a_nb_n$ such that
 \begin{equation*}
 F_{C_{q_1}}(a_1,b_1,\ldots,a_n,b_n)\neq F_{C_{q_2}}(a_1,b_1,\ldots,a_n,b_n)
 \end{equation*}
@@ -161,13 +161,13 @@ From the above (see indistinguishability) we have (see equation \ref{eq:1})
 \left(\rho ,\left(B_q, i\mathcal{O}(C_{F_{C_{q_1}}})\right)\right)= Qi\mathcal{O}(C_{q_1}) \mbox{ and } \left(\rho ,\left(B_q, i\mathcal{O}(C_{F_{C_{q_2}}})\right)\right)= Qi\mathcal{O}(C_{q_2}).
 \end{equation*}
 
-Suppose we want to evaluate circuits on some state $\ket \psi$ follows that for both circuits $C_{q_1}$ and $C_{q_2}$ in algorithm 3 we have the same state $\rho_{AB}=\rho\otimes \ket \psi$ (see algorithm 3). Therefore, the classical output bits we obtain after performing the Bell measurement in algorithm 3 are independent of the circuits $C_{q_1}$ and $C_{q_2}$). Suppose for both circuits we obtain the same classical outputs $a_1b_1,\ldots, a_nb_n.$ From algorithm 3 we have 
- 
+Suppose we want to evaluate circuits on some state $\ket \psi$ follows that for both circuits $C_{q_1}$ and $C_{q_2}$ in algorithm 3 we have the same state $\rho_{AB}=\rho\otimes \ket \psi$ (see algorithm 3). Therefore, the classical output bits we obtain after performing the Bell measurement in algorithm 3 are independent of the circuits $C_{q_1}$ and $C_{q_2}$). Suppose for both circuits we obtain the same classical outputs $a_1b_1,\ldots, a_nb_n.$ From algorithm 3 we have
+
  \begin{equation}
   \label{eq:2}
 C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}})\ket{\psi}=C_q^\prime (\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}})\ket{\psi}
 \end{equation}
-Let $s=a_1b_1,\ldots, a_nb_n$ and let 
+Let $s=a_1b_1,\ldots, a_nb_n$ and let
 
  \begin{equation}
  \label{eq:3}
@@ -187,7 +187,7 @@ Since $C_q^\prime(\ket{\psi})=C_q^\prime(\ket{\psi})$ we can substitute $C_q^\pr
 (\zgate^{\otimes_{i=1}^{n} a_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} b_{i}^\prime})C_q(\ket{\psi})=(\zgate^{\otimes_{i=1}^{n} d_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} e_{i}^\prime})C_q(\ket{\psi})
 \end{equation}
 
-It follows from equation \ref{eq:5} that 
+It follows from equation \ref{eq:5} that
 \begin{equation}
   \label{eq:6}
 (\zgate^{\otimes_{i=1}^{n} a_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} b_{i}^\prime})=(\zgate^{\otimes_{i=1}^{n} d_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} e_{i}^\prime})
@@ -223,6 +223,7 @@ It follows from equation \ref{eq:6}  that $$\zgate^{a_i^\prime} \cdot \xgate^{b_
 
 \section{Obfuscating Beyond Clifford Circuits}
 \label{QiO:Clifford+T:family}
+\Anne{I think we need to work on the structure of this section, currently when reading quickly, it is hard to understand how the various pieces fit together}
 Recall from  section \ref{defn:Clifford+T:family} that adding a non-Clifford gate  such as $\tgate$-gate to Clifford gates gives us a generating set for all unitary quantum circuits. In this section we show how to build quantum indistinguishability obfuscation for any quantum circuit that has at most logarithmic  $\tgate$-gates in the size of the circuit.
 %\anote{Is this the correct link to the Definition?}
 
@@ -264,13 +265,13 @@ for   $\alpha_i \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\},$  $i\in[4].
 Let $C_q$ be a $1$-qubit circuit we want to obfuscate and $\ket{\psi}$ is the quantum state on which we want to evaluate $C_q.$ Note we can write any $1$-qubit circuit as a sequence of gates from the set $\{\hgate, \tgate\}$ \footnote{The set $\{\hgate,  \tgate\}$ is universal for 1-qubit unitary.}
 
 $$C_q=(g_{|C_q|},\ldots,g_2,g_1 ),\; g_i\in\{\hgate, \tgate\}$$
-In gate teleportation algorithm we have an subsystem of the form $C_q \xgate^b\zgate^a (\ket{\psi})$ (section \ref{protocol: gate  teleportation}) 
+In gate teleportation algorithm we have an subsystem of the form $C_q \xgate^b\zgate^a (\ket{\psi})$ (section \ref{protocol: gate  teleportation})
 
 \begin{equation}
 \label{eq:pgate4}
 C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_2,g_1 )\xgate^b\zgate^a (\ket{\psi}),
 \end{equation}
-and to evaluate the circuit on the input we have to apply a correction unitary. If $g_1=\hgate$ then we can write the above system as 
+and to evaluate the circuit on the input we have to apply a correction unitary. If $g_1=\hgate$ then we can write the above system as
 
 \begin{equation}
 \begin{aligned}
@@ -279,7 +280,7 @@ C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_2)  \xgate^a \zgate^b g_1 
 =(g_{|C_q|},\ldots,g_2)(e_0 \igate +  e_1 \xgate + e_2 \zgate + e_3\xgate \zgate)g_1 (\ket{\psi})
 \end{aligned}
 \end{equation}
-where  $e_i \in \{0,1\},$  $i\in[4].$ Similarly if $g_1=\tgate,$ then we can also write the expression \ref{eq:pgate4} as 
+where  $e_i \in \{0,1\},$  $i\in[4].$ Similarly if $g_1=\tgate,$ then we can also write the expression \ref{eq:pgate4} as
 
 \begin{equation}
 \begin{aligned}
@@ -287,7 +288,7 @@ where  $e_i \in \{0,1\},$  $i\in[4].$ Similarly if $g_1=\tgate,$ then we can als
 C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_2)(e_0^\prime \igate +  e_1^\prime \xgate + e_2^\prime \zgate + e_3^\prime \xgate \zgate)g_1 (\ket{\psi})
 \end{aligned}
 \end{equation}
-where $e_i^\prime \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\}$  for $i\in[4].$ Note there are more possibilities for $e_i^\prime$'s in the expression \ref{eq:pgate6} then $e_i$'s in the expression \ref{eq:pgate5}. This is because $\tgate$-gates can affect the size of the coefficients and whereas $\hgate$-gates can only permute the coefficients in the summation. After applying $g_2$ to expressions \ref{eq:pgate5} or \ref{eq:pgate6} the number of terms in the summation cannot exceed to more than 4. Moreover, the size of the coefficients $e_i$'s may only change if $g_2=\tgate,$ 
+where $e_i^\prime \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\}$  for $i\in[4].$ Note there are more possibilities for $e_i^\prime$'s in the expression \ref{eq:pgate6} than $e_i$'s in the expression \ref{eq:pgate5}. This is because $\tgate$-gates can affect the size of the coefficients and whereas $\hgate$-gates can only permute the coefficients in the summation. After applying $g_2$ to expressions \ref{eq:pgate5} or \ref{eq:pgate6} the number of terms in the summation cannot exceed to more than~4. Moreover, the size of the coefficients $e_i$'s may only change if $g_2=\tgate,$
 
 \begin{equation}
 \begin{aligned}
@@ -297,14 +298,14 @@ C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_3)(\gamma_0 \igate +  \gam
 \end{equation}
 where $\gamma_i \in \mathbb{C}$ if $g_2=\tgate$ and $\gamma_i  \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\},$  $i\in[4].$
 
-Hence, it follows  that by applying the remaining  sequence of gates $(g_{|C_q|},\ldots,g_3)$, the expression \ref{eq:pgate7} can be written as 
+Hence, it follows  that by applying the remaining  sequence of gates $(g_{|C_q|},\ldots,g_3)$, the expression \ref{eq:pgate7} can be written as
 \begin{equation}
 \begin{aligned}
 \label{eq:pgate8}
-C_q \xgate^b\zgate^a (\ket{\psi})=(\beta_0 \igate +  \beta_1 \xgate + \beta_2 \zgate + \beta_3\xgate \zgate)(g_{|C_q|},\ldots,g_2,g_1 )(\ket{\psi}) 
+C_q \xgate^b\zgate^a (\ket{\psi})=(\beta_0 \igate +  \beta_1 \xgate + \beta_2 \zgate + \beta_3\xgate \zgate)(g_{|C_q|},\ldots,g_2,g_1 )(\ket{\psi})
 \end{aligned}
 \end{equation}
-where $\beta_i  \in \mathbb{C},$ $i\in[4].$  Therefore, for any  $1$-qubit circuit $C_q,$ the correction unitary can be written as  
+where $\beta_i  \in \mathbb{C},$ $i\in[4].$  Therefore, for any  $1$-qubit circuit $C_q,$ the correction unitary can be written as
 
 \begin{equation}
 \label{eq:pgate9}
@@ -323,7 +324,7 @@ Moreover, the update functions are for the any two equivalent 1-qubit circuit ar
 
 \begin{lemma}
 \label{lemma:1qubit}
-Let $C_q$ and $C_q^\prime$ be two equivalent 1-qubit circuits and 
+Let $C_q$ and $C_q^\prime$ be two equivalent 1-qubit circuits and
 \begin{equation*}
 F_{C_q}:\{0,1\}^2\rightarrow \mathbb{C}^4 \mbox{ and } F_{C_q^\prime}:\{0,1\}^2\rightarrow \mathbb{C}^4
 \end{equation*}
@@ -345,12 +346,12 @@ are the corresponding update functions for $C_q$ and $C_q^\prime,$  then $F_{C_q
  \end{aligned}
 \end{equation}
 
-Since,  $C_q (\rho)=C_q^\prime (\rho)$ for every input $\rho$ we can must have 
+Since,  $C_q (\rho)=C_q^\prime (\rho)$ for every input $\rho$ we can must have
 \begin{equation}
 C_q \xgate^b \zgate^a(\ket{\psi})= C_q^\prime \xgate^b \zgate^a(\ket{\psi}).
 \end{equation}
 
-Therefore we have 
+Therefore we have
 
 \begin{equation}
 \label{lemma:1qubit:eq3}
@@ -382,15 +383,15 @@ The equation \ref{lemma:1qubit:eq5},  can only be satisfied if $\beta_i = \beta_
 
 \subsection{Quantum Indistinguishability Obfuscation for $n$-qubit Circuits}
 In the previous section we showed how we can construct a $Qi\mathcal{O}$  for any $1$-qubit unitary circuit. In this section we show that how to construct  $Qi\mathcal{O}$ for any $n$-qubit unitary circuit $C_q$ using iO gate teleportation and quantum secure iO provided the number of $\tgate$-gates are in $C_q$ are $O(\log(|C_q|).$  The reason for $O(\log(|C_q|)$ bound is that when $\cnot$ and $\tgate$-gates are mixed together then the
-the second property ({\tt Polynomial Slowdown}) of $Qi\mathcal{O}$ is violated if $\tgate$-count $\in \omega(\log(|C_q|)).$ More precisely we will show that for any $n$-qubit circuit with $k$ number of $\tgate$-gates,  the correction unitary in the worst-case has $4^k$ terms is of form  \ref{exp:nqubit-correction} 
+the second property ({\tt Polynomial Slowdown}) of $Qi\mathcal{O}$ is violated if $\tgate$-count $\in \omega(\log(|C_q|)).$ More precisely we will show that for any $n$-qubit circuit with $k$ number of $\tgate$-gates,  the correction unitary in the worst-case has $4^k$ terms is of form  \ref{exp:nqubit-correction}
 
 \begin{equation}
 \label{exp:nqubit-correction}
 \sum_{i=0}^{4^k-1} \beta_i \xgate^{b{i_1}} \zgate^{a{i_1}}\otimes \cdots \otimes \xgate^{b{i_n}} \zgate^{a{i_n}},\; \beta_i\in\mathbb{C},\; a_{i,j},b_{i_j}\in\{0,1\}.
 \end{equation}
 
-Since, there are at most $2^{2n}$ bit strings of size $n,$ it follows from  \ref{exp:nqubit-correction} that for any $n$-qubit circuit the correction unitary can be written as a summation of at most $2^{2n}$ terms. This means the terms in the correction unitary can increase exponential in the number of $\tgate$-gates for $k\leq n.$ But if the correction unitary has $2^{2n}$ terms, then by applying more $\tgate$-gates or any gate cannot increase the number of terms in the expression \ref{exp:nqubit-correction}. However,  the size of size of coefficients $\beta_i$'s can be affected with each application of a $\tgate$-gate (see Remark \ref{remark:nqubit-correction2} for details). Note that for any uniform family of quantum circuits 
-$\mathcal{C}_q=\{C_{q_n}\mid n\in \mathbb{N}\}$ there exist a $poly(n)$ such that for every $C_{q_n}\in \mathcal{C}_q,$ imply $|C_{q_n}|\leq poly(n).$ Otherwise we can add $\igate$-gates to any circuit such that the $|C_q|\geq 2^{2n},$ and then obfuscate any circuit with polynomially many $\tgate$-gates using gate teleportation and class iO.
+Since, there are at most $2^{2n}$ bit strings of size $n,$ it follows from  \ref{exp:nqubit-correction} that for any $n$-qubit circuit the correction unitary can be written as a summation of at most $2^{2n}$ terms. This means the terms in the correction unitary can increase exponential in the number of $\tgate$-gates for $k\leq n.$ But if the correction unitary has $2^{2n}$ terms, then by applying more $\tgate$-gates or any gate cannot increase the number of terms in the expression \ref{exp:nqubit-correction}. However,  the size of size of coefficients $\beta_i$'s can be affected with each application of a $\tgate$-gate (see Remark \ref{remark:nqubit-correction2} for details). Note that for any uniform family of quantum circuits
+$\mathcal{C}_q=\{C_{q_n}\mid n\in \mathbb{N}\}$ there exist a $poly(n)$ such that for every $C_{q_n}\in \mathcal{C}_q,$ imply $|C_{q_n}|\leq poly(n).$ Otherwise we can add $\igate$-gates to any circuit such that the $|C_q|\geq 2^{2n},$ and then obfuscate any circuit with polynomially many $\tgate$-gates using gate teleportation and classical iO.
 
 
 Let $C_q$ be an $n$-qubit circuit and $\ket{\psi}$ be an $n$-qubit state. If we want to evaluate $C_q$ on the state $\ket{\psi}$ using gate teleportation, then we are required to compute the correction unitary $U^\prime$ corresponding to $C_q$ (section \ref{protocol: gate  teleportation}) satisfying equation \ref{nqubit:eq6}.
@@ -408,7 +409,7 @@ Let's construct $U^\prime$ and estimate how big it can grow. Suppose number of $
 \tgate(\xgate^{a_{j}}\zgate^{b_{j}})\mapsto \left(\lambda_{j_0} \igate + \lambda_{j_1} \xgate + \lambda_{j_2} \zgate + \lambda_{j_3} \xgate \zgate \right)\tgate=\left(\sum_{i=1}^4 \lambda_{j_i} \xgate^{a_{i}^\prime}\zgate^{b_{i}^\prime}\right)\tgate\\
  \end{aligned}
 \end{equation}
-where $\lambda_{j_i}\in\mathbb{C}, $  $a_{i}^\prime, b_{i}^\prime \in\{0,1\}$ for $i\in[4]$ and $j\in[l].$ For now also assume $C_q$ has no $\cnot$ gates. Then we can rewrite relation \ref{nqubit:eq6} as 
+where $\lambda_{j_i}\in\mathbb{C}, $  $a_{i}^\prime, b_{i}^\prime \in\{0,1\}$ for $i\in[4]$ and $j\in[l].$ For now also assume $C_q$ has no $\cnot$ gates. Then we can rewrite relation \ref{nqubit:eq6} as
 
 
 \begin{equation}
@@ -419,7 +420,7 @@ where $\lambda_{j_i}\in\mathbb{C}, $  $a_{i}^\prime, b_{i}^\prime \in\{0,1\}$ fo
 \end{equation}
 Now suppose $C_q$ has $\cnot$-gates. Then in the worst-case we have to expand the relation \ref{nqubit:eq8} as using identity $(A+B)\otimes C=A\otimes C + B\otimes C.$
 
- 
+
 \begin{equation}
 \label{nqubit:eq9}
 \begin{aligned}
@@ -427,7 +428,7 @@ C_q (\xgate^{a_{i}}\zgate^{b_{i}})^{\otimes_{i=1}^{n}}=\left(\sum_{j=1}^{4^l} \b
  =\left(\sum_{j=1}^{4^{l}} \beta_j \xgate^{b_{j1}^\prime}\zgate^{a_{j1}^\prime} \otimes \cdots \otimes\xgate^{b_{jl}^\prime}\zgate^{a_{jl}^\prime} \otimes \xgate^{a_{l+1}^\prime}\zgate^{b_{l+1}^\prime}  \otimes \cdots   \otimes\xgate^{a_{n}^\prime}\zgate^{b_{n}^\prime}\right)
  \end{aligned}
 \end{equation}
-where $\beta_j\in \mathbb{C}$ for $j\in[4^l].$  Recall that $k$ denote the number of $\tgate$-gates and $l\leq k,$ therefore in the worst case the correction unitary can have $4^k$ terms. 
+where $\beta_j\in \mathbb{C}$ for $j\in[4^l].$  Recall that $k$ denote the number of $\tgate$-gates and $l\leq k,$ therefore in the worst case the correction unitary can have $4^k$ terms.
 
 \begin{remark}
 \label{remark:nqubit-correction1}
@@ -439,17 +440,17 @@ Note the restriction that $\tgate$-gates are in the first $l$ wires of the circu
 \sum_{i=1}^{4^k} \beta_i \xgate^{b{i_1}} \zgate^{a{i_1}}\otimes \cdots \otimes \xgate^{b{i_n}} \zgate^{a{i_n}},\; \beta_i\in\mathbb{C},\; a_{i_j},b_{i_j}\in\{0,1\}.
 \end{equation}
 
-Therefore, if $k\in O(\log(|C_q|)$ (where $k$ is the $\tgate$-count), then the number of terms in the correction unitary \ref{nqubit-correction-final} are in $O(|C_q|).$ Also, note that if $k\in \omega(\log(|C_q|)),$ then there are $4^{\omega(\log(|C_q|)}$  terms in \ref{nqubit-correction-final}, which is a super-polynomial in $|C_q|.$ 
+Therefore, if $k\in O(\log(|C_q|)$ (where $k$ is the $\tgate$-count), then the number of terms in the correction unitary \ref{nqubit-correction-final} are in $O(|C_q|).$ Also, note that if $k\in \omega(\log(|C_q|)),$ then there are $4^{\omega(\log(|C_q|)}$  terms in \ref{nqubit-correction-final}, which is a super-polynomial in $|C_q|.$
 
 
 
 
 \begin{remark}
 \label{remark:nqubit-correction2}
-Note for any $n$-qubit circuit the correction unitary (relation \ref{nqubit-correction-final} can have at most $2^{2n}$ terms, regardless how many $\tgate$-gates a circuit has. To realize this suppose we have 
+Note for any $n$-qubit circuit the correction unitary (relation \ref{nqubit-correction-final} can have at most $2^{2n}$ terms, regardless how many $\tgate$-gates a circuit has. To realize this suppose we have
 $$C_q (\xgate^{a_{i}}\zgate^{b_{i}})^{\otimes_{i=1}^{n}}=\left(\sum_{j=0}^{l} \beta_j \xgate^{b_{j1}}\zgate^{a_{j1}} \otimes \cdots \otimes\xgate^{b_{jl}}\zgate^{a_{jl}} \otimes \xgate^{a_{l+1}^\prime}\zgate^{b_{l+1}^\prime}  \otimes \cdots   \otimes\xgate^{a_{n}^\prime}\zgate^{b_{n}^\prime}\right)$$
 for some integer $l>2^{2n}.$
-But since, there are at most $2^{2n}$ bit strings of size $2n,$ by pigeon hole principle we must have at least $2n-l$ terms that have common binary strings and by adding these common terms we are guaranteed to have every unitary that has at most $2^{2n}$ terms. This means that if the number of terms in the correction unitary grows exponentially (in the worst-case) in the number of $\tgate$-gates $k$ as far as $k\geq n.$ Note the size of the coefficients $\beta_i$ is a function of $\tgate$-gates and will be affected as number of $\tgate$-gates increases. So if there are exponentially many $\tgate$-gates then the size of the $\beta_i$ can also also grow exponentially. 
+But since, there are at most $2^{2n}$ bit strings of size $2n,$ by pigeon hole principle we must have at least $2n-l$ terms that have common binary strings and by adding these common terms we are guaranteed to have every unitary that has at most $2^{2n}$ terms. This means that if the number of terms in the correction unitary grows exponentially (in the worst-case) in the number of $\tgate$-gates $k$ as far as $k\geq n.$ Note the size of the coefficients $\beta_i$ is a function of $\tgate$-gates and will be affected as number of $\tgate$-gates increases. So if there are exponentially many $\tgate$-gates then the size of the $\beta_i$ can also also grow exponentially.
 \end{remark}
 
 
@@ -462,7 +463,7 @@ In the previous section saw that the general form of a correction unitary for an
 \item ({\bf Efficiency}) The update function can be computed by a classical circuit of polynomial size.
 \end{enumerate}
 
-Let $C_q$ be an $n$-qubit circuit and $\mathbb{C}^*= \mathbb{C}-\{0\}$ (i.e. set of all complex numbers excluding 0). The update function $F_{C_q}$ for the circuit is define as 
+Let $C_q$ be an $n$-qubit circuit and $\mathbb{C}^*= \mathbb{C}-\{0\}$ (i.e. set of all complex numbers excluding 0). The update function $F_{C_q}$ for the circuit is define as
 
 \begin{equation}
 \label{nqubit:eq10}
@@ -485,21 +486,21 @@ where string $b_{k_{i1}} a_{k_{i1}}\ldots b_{k_{in}} a_{k_{in}}$ is the binary r
 
 \begin{lemma}
 \label{lemma:nqubit}
-Let $C_q$ and $C_q^\prime$ be two equivalent $n$-qubit circuits and 
+Let $C_q$ and $C_q^\prime$ be two equivalent $n$-qubit circuits and
 \begin{equation*}
 \begin{aligned}
 F_{C_q}: \{0,1\}^{2n}\longrightarrow {\mathbb{C}^*}^m\times \{0,1,\ldots,2^{2n}-1\}^m,  \\
-F_{C_q^\prime}: \{0,1\}^{2n}\longrightarrow {\mathbb{C}^*}^{t}\times \{0,1,\ldots,2^{2n}-1\}^{t}. 
+F_{C_q^\prime}: \{0,1\}^{2n}\longrightarrow {\mathbb{C}^*}^{t}\times \{0,1,\ldots,2^{2n}-1\}^{t}.
 \end{aligned}
 \end{equation*}
 are the corresponding update functions for $C_q$ and $C_q^\prime,$  (as defined in relation relation \ref{nqubit:eq10}), then $F_{C_q}=F_{C_q^\prime}.$
 \end{lemma}
 
-\noindent{\bf Proof}: Suppose $C_q$ and $C_q^\prime$ are equivalent circuits and 
+\noindent{\bf Proof}: Suppose $C_q$ and $C_q^\prime$ are equivalent circuits and
 \begin{equation*}
 \begin{aligned}
 F_{C_q}(a_1,b_1,\ldots,a_n,b_n)= ((\beta_{k_1}, \beta_{k_2},\ldots, \beta_{k_m}),(k_1,k_2,\ldots, k_m)) \\
-F_{C_q}^\prime(a_1,b_1,\ldots,a_n,b_n)= ((\beta_{k_1}^\prime, \beta_{k_2}^\prime,\ldots, \beta_{k_m}^\prime),(k_1^\prime,k_2^\prime,\ldots, k_t^\prime)) 
+F_{C_q}^\prime(a_1,b_1,\ldots,a_n,b_n)= ((\beta_{k_1}^\prime, \beta_{k_2}^\prime,\ldots, \beta_{k_m}^\prime),(k_1^\prime,k_2^\prime,\ldots, k_t^\prime))
 \end{aligned}
 \end{equation*}
 For every quantum state $\ket{\psi}$ we have
@@ -526,7 +527,7 @@ We assume WLOG we can assume that the terms (on R.H.S and L.H.S) in the relation
 \left(\sum_{i=1}^m \beta_{k_i} \xgate^{b_{k_{i1}}} \zgate^{a_{k_{i1}}} \otimes \cdots  \otimes \xgate^{b_{k_{in}}} \zgate^{a_{k_{in}}}\right) C_q (\ket{\rho})=\left(\sum_{i=1}^t \beta_{k_i}^\prime \xgate^{b_{k_{i1}^\prime}} \zgate^{a_{k_{i1}}^\prime} \otimes \cdots  \otimes \xgate^{b_{k_{in}}^\prime} \zgate^{a_{k_{in}}^\prime}\right)C_q (\ket{\rho}).
 \end{aligned}
 \end{equation}
-From relation \ref{nqubit:eq14} it follows that 
+From relation \ref{nqubit:eq14} it follows that
 
 \begin{equation}
 \label{nqubit:eq15}
@@ -535,7 +536,7 @@ From relation \ref{nqubit:eq14} it follows that
 \end{aligned}
 \end{equation}
 
-From relation \ref{nqubit:eq15} we have 
+From relation \ref{nqubit:eq15} we have
 \begin{equation}
 \label{nqubit:eq16}
 \begin{aligned}
@@ -552,7 +553,7 @@ in the relation \ref{nqubit:eq16}, while the R.H.S is equal to a {\bf 0} matrix.
  Otherwise, L.H.S cannot equal to {\bf 0}. Therefore for all $i\in[m],$  $\beta_{k_i}=\beta_{k_i}^\prime$ and $k_i=k_i^\prime$ and we have $F_{C_q}=F_{C_q^\prime}.$
 
 \section*{Cost of Computing the Update Function}
-We have to show that the update function can be computed by a polynomially size classical circuit (see \ref{nqubit:update-function}). Let $C_q $ be an $n$-qubit circuit with at most $O(\log(|C_q|)$ $\tgate$-gates and 
+We have to show that the update function can be computed by a polynomially size classical circuit (see \ref{nqubit:update-function}). Let $C_q $ be an $n$-qubit circuit with at most $O(\log(|C_q|)$ $\tgate$-gates and
                                                                                         $$F_{C_q}(s)=((\beta_{k_1}, \beta_{k_2},\ldots, \beta_{k_m}),(k_1,k_2,\ldots, k_m)),\; \mbox{for } s\in\{0,1\}^{2n}.$$
 Since, $\tgate$-count in $O(\log(|C_q|),$ we have $m\in O(4^{\log(|C_q|}))= O(|C_q|).$ Moreover, each the size of $\beta_i \in poly(|C_q|)$ (appendix \ref{coeff:size}) and $k_i \in O(n),$ but $n\leq |C_q|,$ therefore  $k_i \in O(|C_q|).$ Now in order to compute $F_{C_q}$ we go gate by gate in $C_q$ and perform operations such as $\oplus$, swaps, $+$ and $\otimes$ on operand of size that are bounded by $poly(|C_q|).$ Therefore, $F_{C_q}$ can be computed in deterministic polynomial-time. From complexity theory we know that
 if $F_{C_q}$ can be computed in time $O(t|C_q|)),$ then there is a classical circuit $C$ of size $O(t^2|C_q|)),$ that can compute $F_{C_q}$ \cite{Sipser 3rd edition, page 407} (Sipser). Therefore $F_{C_q}$ can be computed by a classical circuit of $poly(|C_q|).$
@@ -562,4 +563,4 @@ The $Qi\mathcal{O}$ construction and proof of its security is identical to the t
 
 
 
-%\Anne{TODO: use package cleveref (ie. use \cref instead of \ref)} 
+%\Anne{TODO: use package cleveref (ie. use \cref instead of \ref)}

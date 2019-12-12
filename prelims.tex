@@ -87,7 +87,7 @@ A quantum circuit is an acyclic network of quantum gates connected by wires. The
 For $n\in \mathbb{N},$ the set of all $n\times n$ unitary matrix is denoted by $O(n,\mathbb{C})=\{U\in \mathbb{C}^{n\times n} \mid U\cdot U^\dagger={\bf I}\}.$ We say a quantum circuit $C_q$ computes $U\in O(n,\mathbb{C})$ if for every $\rho\in \mathcal{H}_n$
 $$U(\rho )=C_q(\rho).$$
 A quantum circuit that computes unitary matrix is called a reversible  quantum circuit, i.e it always possible to uniquely recover the input, given the output. A set of gates are said to be universal if, for any a unitary matrix $U$  a quantum circuit can be constructed for computing~$U$ using only gates from that set. It is a well-known fact that Clifford gates are not universal, but adding any non-Clifford gate, such as $\tgate$, gives a universal set of gates, where
-$$\quad\tgate = \left[\begin{array}{cc} 1 & 0\\ 0 & e^{i\pi/4}\end{array}\right],.$$
+$$\quad\tgate = \left[\begin{array}{cc} 1 & 0\\ 0 & e^{i\pi/4}\end{array}\right]\,.$$
 
 A family of quantum circuits $C=\{C_n\in \mathbb{N} \mid \}$ one for each input  size $n\in \mathbb{N}$ is called \emph{uniform} if there exists a deterministic Turing machine $M,$ such that
  \begin{itemize}
@@ -114,7 +114,7 @@ where $\rho_{in} \in \mathcal{H}_n,$ is the original state and $\ket{00\cdots 0}
 \label{protocol: gate-teleportation}
 We recall the \emph{Bell states}: %$\ket{\beta_{00}},$  $\ket{\beta_{01}},$ $\ket{\beta_{10}}$ and $\ket{\beta_{11}}.$
 $\ket{\beta_{00}}=\frac{1}{\sqrt2}\left(\ket{00}+\ket{11}\right)$, ${\beta_{01}}=\frac{1}{\sqrt2}\left(\ket{01}+\ket{10}\right)$,
-$\ket{\beta_{10}}=\frac{1}{\sqrt2}\left(\ket{00}-\ket{11}\right)$,  $\ket{\beta_{11}}=\frac{1}{\sqrt2}\left(\ket{01}-\ket{10}\right)$\,. 
+$\ket{\beta_{10}}=\frac{1}{\sqrt2}\left(\ket{00}-\ket{11}\right)$,  $\ket{\beta_{11}}=\frac{1}{\sqrt2}\left(\ket{01}-\ket{10}\right)$\,.
 
 Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate,\hgate\}$ on some qubit $\ket{\psi}.$ Then using gate teleportation  \cite{GC99} we can compute $U (\ket{\psi})$ as follows.
 \begin{algorithm}[H]

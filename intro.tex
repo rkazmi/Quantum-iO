@@ -1,13 +1,22 @@
 \section{Introduction}
 %\anote{start more smoothly. What is iO, how did it come about, why do we care, what is the state-of-the-art? Also, mention somewhere that a canonical form is an iO}
 %\anote{Add more background about the state-of-the art in iO: what are the current candidates, and is there a post-quantum one?}
-%\anote{introduce quantum cryptography. Introduce Quantum iO as per \cite{AF16arxiv}.
+%\anote{introduce quantum cryptography. Introduce Quantum iO as per \cite{AF16arxiv}.}
 \anote{introduce quantum cryptography.}
 A program obfuscation is a probabilistic polynomial-time algorithm that can transform a circuit $C$ into another circuit $C’$ that has the same functionality as $C$ but does reveal nothing about $C,$ except its functionality i.e. anything that can be learned from $C’$ about $C$ can also be learned from a black-box access to the functionality (input/output) of $C.$ This is called virtual black-box obfuscation. Unfortunately, Barak el~\cite{BGI+12}  proved that virtual black-box obfuscation is impossible in general.\footnote{They construct a family of booleans functions which is inherently unobfuscatable.} Motivated by this impossibility result Barak el~\cite{BGI+12} proposed a different notion of obfuscation called Indistinguishability Obfuscation $i\mathcal{O}.$ 
 
 An $i\mathcal{O}$ is a probabilistic polynomial-time algorithm that takes a circuit $C$ as an input and outputs a circuit $i\mathcal{O}(C)$ such that $i\mathcal{O}(C)(x)=C(x)$ for all inputs $x$ and size of $i\mathcal{O}(C)$ is at most polynomial in the size of $C.$ Moreover, it must be that for any two circuits $C_1$ and $C_2$ of the same size, the obfuscations of both circuits remain computationally indistinguishable.
 
  The $i\mathcal{O}$ achieves the notion of best possible obfuscations, which informally states that any information that is not hidden by the obfuscated circuit is also not hidden by any other same size circuit computing the same functionality ~\cite{GR14}. The indistinguishability obfuscation is a very powerful cryptographic tool and has been shown to enable digital signatures, public key encryption~\cite{SW14}, multiparty key agreement, broadcast encryption~\cite{BZ14}, fully homomorphic encryption~\cite{CLTV15} and zero knowledge~\cite{BP15} etc. 
+
+%\anote{introduce quantum cryptography. Introduce Quantum iO as per \cite{AF16arxiv}.}
+At the intuitive level, an \emph{obfuscator} is a probabilistic polynomial-time algorithm that  transforms a circuit $C$ into another circuit $C’$ that has the same functionality as $C$ but does not reveal anything about $C$, except its functionality \emph{i.e.}, anything that can be learned from $C’$ about $C$ can also be learned from a black-box access to the input-output functionality of~$C$. This concept is formalized in terms of \emph{virtual black-box obfuscation}, and was shown~\cite{BGI+12} to be unachievable in general. 
+\footnote{The argument consists in a construction of a family of Boolean functions which is inherently unobfuscatable.} Motivated by this impossibility result, the same work~\cite{BGI+12} proposed a weaker notion called \emph{indistinguishability obfuscation} ($i\mathcal{O}$).
+
+An $i\mathcal{O}$ is a probabilistic polynomial-time algorithm that takes a circuit $C$ as an input and outputs a circuit $i\mathcal{O}(C)$ such that $i\mathcal{O}(C)(x)=C(x)$ for all inputs $x$ and size of $i\mathcal{O}(C)$ is at most polynomial in the size $C.$ Moreover, it must be that for any two circuits $C_1$ and $C_2$ of the same size, the obfuscations of both circuits remain computationally indistinguishable, i.e. $iO(C_1)\sim^c iO(C_2).$ The $i\mathcal{O}$ achieves the notion of best possible obfuscations, which state that any information that is not hidden by the obfuscated circuit is also not hidden by any other similar size circuit computing the same functionality ~\cite{GR14}. The indistinguishability obfuscation is a very powerful cryptographic tool which that has been shown to enable digital signatures, public key encryption~\cite{SW14}, multiparty key agreement, broadcast encryption~\cite{BZ14}, fully homomorphic encryption~\cite{CLTV15} and zero knowledge~\cite{BP15} etc.
+
+The first candidate construction of $i\mathcal{O}$ was published in \cite{GGH+13}, whose security relied on the presume hardness of multilinear maps \cite{CLT13, LSS14, GGH15}. Unfortunately, there have been many quantum attacks on some multilinear maps \cite{ABD16, CDPR16, CGH17}.  Recently, a new $i\mathcal{O}$ scheme has been proposed under the some different assumptions \cite{AJL+19}. However, It is too premature to say anything about the quantum security of this new construction \cite{AJL+19}.
+>>>>>>> cb1e43456a7618188853241f2e9ad6faa9810903
 
 The first candidate construction of $i\mathcal{O}$ was published in \cite{GGH+13}, whose security relied on the presume hardness of multilinear maps \cite{CLT13, LSS14, GGH15}. Unfortunately, there have been many quantum attacks on multilinear maps \cite{ABD16, CDPR16, CGH17}.  Recently, a new $i\mathcal{O}$ scheme has been proposed under the some different assumptions \cite{AJL+19}. However, It is too premature to say anything about the quantum security of this new construction \cite{AJL+19}. 
 
@@ -35,7 +44,21 @@ In this work we define a new definition of computational quantum obfuscation $Qi
 
 
 
+<<<<<<< HEAD
 \subsubsection{Cliffords} TODO: place somewhere 
+=======
+
+
+
+%Quantum indistinguishability  for the encryption of quantum messages was first defined in~\cite{BJ15}, and was shown to be equivalent to quantum semantic security~\cite{ABF+16}. In terms of concrete schemes, \cite{BJ15} showed... while, \cite{ABF+16} showed...
+%In contrast, our contribution using $i\mathcal{O}$ shows.....
+
+%To the best of our knowledge, our second contribution is the first that describes how to achieve $i\mathcal{O}$ for some families of quantum circuits
+%(however, as noted above, the Clifford canonical form is well-known, and its extension to $i\mathcal{O}$ (see Section~\ref{sec:Clifford-$i\mathcal{O}$-canonical}) is relatively straightforward.
+
+
+\subsubsection{Cliffords} TODO: place somewhere
+>>>>>>> cb1e43456a7618188853241f2e9ad6faa9810903
 Although Clifford circuits can be efficiently simulated on a classical computer \cite{Got98}, this simulation is with respect to a \emph{classical} distribution, hence for a purely quantum computation, quantum circuits are required. While Clifford circuits are known not to be universal for quantum computation, they are an important building block for fault-tolerant quantum computing, for instant, due to the fact that Cliffords admit transversal computations on many fault-tolerant codes\cite{BCL+06}.
 
 
@@ -50,6 +73,11 @@ Although Clifford circuits can be efficiently simulated on a classical computer 
 %Section applications
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Applications}
+Two settings
+
+1) If we had full iO.
+
+2) Applications of iO for the circuit class that we are doing.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
