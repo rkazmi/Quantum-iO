@@ -3,7 +3,7 @@
 %Section
 \section{Quantum Indistinguishability Obfuscation}
 \label{sec:QiO-Cliffords and more}
-In this section we give a definition of equivalent quantum circuits and also define a notion of Quantum Indistinguishability Obfuscation $Qi\mathcal{O}.$ In section \ref{QiO:Clifford-Circuits} we show how to construct $Qi\mathcal{O}$ for some families of quantum circuits. We give two alternative methods, the first based on canonical forms, and the second based on gate teleportation.
+In this section we give a definition of equivalent quantum circuits and also define a notion of Quantum Indistinguishability Obfuscation $(Qi\mathcal{O})$. In  \Cref{QiO:Clifford-Circuits} we show how to construct $Qi\mathcal{O}$ for some families of quantum circuits. We give two alternative methods, the first based on canonical forms, and the second based on gate teleportation.
 
 %\anote{Need some blah blah at the beginning of a section to say what we present in this section.}
 
@@ -225,12 +225,12 @@ It follows from equation \ref{eq:6}  that $$\zgate^{a_i^\prime} \cdot \xgate^{b_
 Recall from  section \ref{defn:Clifford+T:family} that adding a non-Clifford gate  such as $\tgate$-gate to Clifford gates gives us a generating set for all unitary quantum circuits. In this section we show how to build quantum indistinguishability obfuscation for any quantum circuit that has at most logarithmic  $\tgate$-gates in the size of the circuit.
 %\anote{Is this the correct link to the Definition?}
 
-\subsubsection{Using a Canonical Form}
+\subsection{Using a Canonical Form}
 Main idea: Each Clifford layer is obfuscated using the canonical form. The $\tgate$-gate layers are given in the clear. The result is a canonical form, since the family is selected such that the description just given will be a canonical form.
 \anote{I think this one is less interesting because the $T$ gates are in the clear. Maybe drop it?}
 
 
-\subsubsection{Using Gate Teleportation}
+\subsection{Using Gate Teleportation}
 \label{QiO:Clifford+T:family+GT}
 In this section we will show how we can obfuscate any 1-qubit unitary circuit using gate teleportation and a quantum secure iO; and then based on this idea we will show how we can obfuscate any $n$-qubit circuit $C_q$ as far as the number of $\tgate$-gates remain logarithmic in $|C_q|.$ The $\tgate$ relates to the $\xgate, \zgate$
 $$\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\pgate^b \tgate$$
@@ -430,7 +430,7 @@ where $\beta_j\in \mathbb{C}$ for $j\in[4^l].$  Recall that $k$ denote the numbe
 
 \begin{remark}
 \label{remark:nqubit-correction1}
-Note the restriction that $\tgate$-gates are in the first $l$ wires of the circuit has no affect on our analysis. This because, any permutation of the wires in the circuit will give us $l$ terms of form $\sum_{i=1}^4 \lambda_{j_i} \xgate^{a_{j_i}^\prime} \zgate^{b_{j_i}^\prime}$ and $n-l$ terms of the form $\xgate^{a_{i}^\prime} \zgate^{b_{i}^\prime}.$  And the tensor product of these terms in any order will result into a unitary in the worst-case of form
+Note the restriction that $\tgate$-gates are in the first $l$ wires of the circuit has no affect on our analysis. This because, any permutation of the wires in the circuit will give us $\ell$ terms of form $\sum_{i=1}^4 \lambda_{j_i} \xgate^{a_{j_i}^\prime} \zgate^{b_{j_i}^\prime}$ and $n-l$ terms of the form $\xgate^{a_{i}^\prime} \zgate^{b_{i}^\prime}.$  And the tensor product of these terms in any order will result into a unitary in the worst-case of form
 \end{remark}
 
 \begin{equation}
@@ -550,16 +550,15 @@ in the relation \ref{nqubit:eq16}, while the R.H.S is equal to a {\bf 0} matrix.
 \end{equation}
  Otherwise, L.H.S cannot equal to {\bf 0}. Therefore for all $i\in[m],$  $\beta_{k_i}=\beta_{k_i}^\prime$ and $k_i=k_i^\prime$ and we have $F_{C_q}=F_{C_q^\prime}.$
 
-\section*{Cost of Computing the Update Function}
+\subsection{Cost of Computing the Update Function}
 We have to show that the update function can be computed by a polynomially size classical circuit (see \ref{nqubit:update-function}). Let $C_q $ be an $n$-qubit circuit with at most $O(\log(|C_q|)$ $\tgate$-gates and
                                                                                         $$F_{C_q}(s)=((\beta_{k_1}, \beta_{k_2},\ldots, \beta_{k_m}),(k_1,k_2,\ldots, k_m)),\; \mbox{for } s\in\{0,1\}^{2n}.$$
 Since, $\tgate$-count in $O(\log(|C_q|),$ we have $m\in O(4^{\log(|C_q|}))= O(|C_q|).$ Moreover, each the size of $\beta_i \in poly(|C_q|)$ (appendix \ref{coeff:size}) and $k_i \in O(n),$ but $n\leq |C_q|,$ therefore  $k_i \in O(|C_q|).$ Now in order to compute $F_{C_q}$ we go gate by gate in $C_q$ and perform operations such as $\oplus$, swaps, $+$ and $\otimes$ on operand of size that are bounded by $poly(|C_q|).$ Therefore, $F_{C_q}$ can be computed in deterministic polynomial-time. From complexity theory we know that
-if $F_{C_q}$ can be computed in time $O(t|C_q|)),$ then there is a classical circuit $C$ of size $O(t^2|C_q|)),$ that can compute $F_{C_q}$. %\cite{Sipser 3rd edition, page 407} (Sipser). 
+if $F_{C_q}$ can be computed in time $O(t|C_q|)),$ then there is a classical circuit $C$ of size $O(t^2|C_q|)),$ that can compute $F_{C_q}$. %\cite{Sipser 3rd edition, page 407} (Sipser).
 Therefore $F_{C_q}$ can be computed by a classical circuit of $poly(|C_q|).$
 
 \subsection{$Qi\mathcal{O}$ for Unitary Quantum Circuits with Low $\tgate$ gate Complexity}
-The $Qi\mathcal{O}$ construction and proof of its security is identical to the to the construction for Clifford gates (section \ref{sec:Clifford-iO-teleportaion}).
+The $Qi\mathcal{O}$ construction and proof of its security is identical to the  construction for Clifford gates (section \ref{sec:Clifford-iO-teleportaion}).
 
 
 
-\Anne{TODO: use package cleveref}

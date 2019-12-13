@@ -60,7 +60,7 @@ $$\quad\cnot = \left[\begin{array}{cccc} 1 & 0 & 0 & 0\\ 0 & 1 & 0 & 0\\ 0 & 0 &
 \quad\tgate = \left[\begin{array}{cc} 1 & 0\\ 0 & e^{i\pi/4}\end{array}\right].$$
 
 \subsubsection*{Quantum One Time Pad}
-For any single-qubit density operator $\rho \in \mathcal{D} (\mathcal{H}_1)$ and for any uniformly chosen bits $s$ and $t,$ 
+For any single-qubit density operator $\rho \in \mathcal{D} (\mathcal{H}_1)$ and for any uniformly chosen bits $s$ and $t,$
 
  $\xgate^s \zgate^t \rho \zgate^t \xgate^s$ is information-theoretically indistinguishable from the state $\mathds{1}_1/2$ to an observer that has no knowledge of $s$ and $t$ \cite{AMTW00}.
 
@@ -96,7 +96,7 @@ A family of quantum circuits $C=\{C_n\in \mathbb{N} \mid \}$ one for each input 
  \end{itemize}
 
 All quantum operations are not unitary (reversible), nevertheless a general (possibly irreversible) quantum operation also called superoperator can efficiently be simulated by a reversible quantum operations by adding auxiliary states to the original system, then performing a unitary operation on the joint system, and then tracing out $Tr$ some subsystem \cite{KLM07}. More precisely, this can be described as the map:
-%\anote{todo: find ref (I think Sebastien has some references in his thesis). Actually, do we use this?} 
+%\anote{todo: find ref (I think Sebastien has some references in his thesis). Actually, do we use this?}
 $$\rho_{in} \xmapsto{\mbox{superoperator}} \rho_{out}=Tr_B(U(\rho_{in} \otimes \ket{00\cdots 0} \bra{00\cdots 0})U^\dagger)$$
 
 where $\rho_{in} \in \mathcal{H}_n,$ is the original state and $\ket{00\cdots 0}$ is an auxiliary state of dimension at most $n^2.$ A circuit that computes a general quantum operation is called a general quantum circuit.  Therefore, general quantum circuits can refer to both reversible or irreversible circuits. A polynomial-time quantum algorithm is a uniform family of general quantum circuits. \\
@@ -155,9 +155,9 @@ U( \xgate^b \zgate^a( \ket{\psi}))_B=Tr_{AB}(\ket{\beta_{ab}}_{AC}\otimes U( \xg
 \label{update function}
 In the gate teleportation (\ref{protocol: gate-teleportation}) we have to compute bits $(a^\prime, b^\prime)\in\mathbb{F}_2^2$ such that
 \begin{equation*}
-U\xgate^b\zgate^a \ket{\psi}=\xgate^{b^\prime}\zgate^{a^\prime}U(\ket{\psi}),  
+U\xgate^b\zgate^a \ket{\psi}=\xgate^{b^\prime}\zgate^{a^\prime}U(\ket{\psi}),
 \end{equation*}
-The ordered pair $(a^\prime, b^\prime)$ are computed by an update rule that is completely determinant by the gate $U$ and $(a,b)\in\mathbb{F}_2^2.$ We can describe this rule concisely by an update function 
+The ordered pair $(a^\prime, b^\prime)$ are computed by an update rule that is completely determined by the gate $U$ and $(a,b)\in\mathbb{F}_2^2.$ We can describe this rule concisely by an update function
 \begin{equation*}
 f_U:\mathbb{F}^2\rightarrow \mathbb{F}^2, \; (a,b)\mapsto (a^\prime,b^\prime).
 \end{equation*}
@@ -185,14 +185,14 @@ The update rule for the $\cnot$ gate is
 f_{\cnot}:\mathbb{F}_2^4\rightarrow \mathbb{F}_2^4, \; (a_1,b_1,a_2,b_2)\mapsto (a_1\oplus a_2,b_1,a_2, b_1\oplus b_2).
 \end{aligned}
 \end{equation*}
-Therefore we have 
+Therefore we have
 \begin{equation*}
 \begin{aligned}
   \cnot(\xgate^{a_1}\zgate^{b_1}\otimes \xgate^{a_2}\otimes \zgate{b_2}))\ket{\psi}= (\xgate^{a_1\oplus a_2}\zgate^{b_1}\otimes \xgate^{a_2} \zgate^{b_1\oplus b_2})\cnot(\ket{\psi})
  \end{aligned}
 \end{equation*}
 	
-In general, let $\mathcal{C}_q$ be an $n$-qubit Clifforf circuit. \footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group.} and $\mathcal{C}_q$ is consist of sequence of gates $g_k,\ldots,g_2,g_1$ for $k=|\mathcal{C}_q|.$\footnote{In this paper we assume that we apply gates from R.H.S.} 
+In general, let $\mathcal{C}_q$ be an $n$-qubit Clifforf circuit. \footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group.} and $\mathcal{C}_q$ is consist of sequence of gates $g_k,\ldots,g_2,g_1$ for $k=|\mathcal{C}_q|.$\footnote{In this paper we assume that we apply gates from R.H.S.}
 \begin{equation}
 \label{relation:update}
 \begin{aligned}
@@ -203,7 +203,7 @@ where  $(a_1,b_1,\ldots,a_n,b_n)\in\mathbb{F}_2^{2n}$ obtained in the step 4 of 
 The update function corresponding to the circuit $C_q$ is computed by composing the update functions of each gate in $\mathcal{C}_q$
 \begin{equation*}
 \begin{aligned}
-F_{\mathcal{C}_q}:\, \mathbb{F}_2^{2n} \rightarrow  \mathbb{F}_2^{2n}, \; F_{\mathcal{C}_q}=f_k\circ\cdots \circ f_2 \circ f_1 \\(a_1,b_1,\dots, a_n,b_n)\mapsto (a_1^\prime,b_2^\prime,\dots, a_n^\prime,b_n^\prime) 
+F_{\mathcal{C}_q}:\, \mathbb{F}_2^{2n} \rightarrow  \mathbb{F}_2^{2n}, \; F_{\mathcal{C}_q}=f_k\circ\cdots \circ f_2 \circ f_1 \\(a_1,b_1,\dots, a_n,b_n)\mapsto (a_1^\prime,b_2^\prime,\dots, a_n^\prime,b_n^\prime)
  \end{aligned}
 \end{equation*}
 We can rewrite the relation \ref{relation:update} as
@@ -214,7 +214,7 @@ We can rewrite the relation \ref{relation:update} as
 \end{equation*}
 where $(a_1^\prime,b_1^\prime,\dots, a_n^\prime,b_n^\prime)=F_{C_q}(a_1,b_1,\ldots,a_n,b_n).$ \\
 
-\noindent{\bf Example for Update Function:} $C_q=\cnot \cdot (\igate \otimes \hgate)$ is 2-qubit circuit the update function $F_{C_q}$ for this circuit is 
+\noindent{\bf Example for Update Function:} $C_q=\cnot \cdot (\igate \otimes \hgate)$ is 2-qubit circuit the update function $F_{C_q}$ for this circuit is
 
 \begin{equation*}
 \begin{aligned}
