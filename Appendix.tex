@@ -18,3 +18,106 @@
 
  \subsection{Size of Coefficients in Update Functions}
  \label{coeff:size}
+ Recall from section \ref{QiO:Clifford+T:family+GT}, that
+ \begin{equation}
+  \label{eq1:1qubit-size}
+\begin{aligned}
+\tgate \xgate^b \zgate^a=\left[\left(\frac{1+i}{2}\right) \xgate^b \zgate^{a\oplus b} + \left(\frac{1-i}{2}\right)\xgate^b \zgate^a\right] \tgate. \\
+\end{aligned}
+\end{equation}
+If $b=0,$ then the above relation introduces no complex numbers and is reduce to
+\begin{equation*}
+\tgate \zgate^a=  \zgate^{a} \tgate. 
+\end{equation*}
+ 
+ Therefore, for the worst-case analysis we assume from now that $b=1.$ Moreover, the size of the coefficients are unaffected whether $a=0$ or $a=1.$  
+\begin{equation}
+ \label{eq2:1qubit-size}
+ \tgate \xgate \zgate^a= 
+\begin{cases}
+   \tgate \xgate =\left[\left(\frac{1+i}{2}\right) \xgate \zgate + \left(\frac{1-i}{2}\right)\xgate \right] \tgate, & \text{if } a=0\\
+   \tgate \xgate\zgate= \left[\left(\frac{1+i}{2}\right) \xgate  + \left(\frac{1-i}{2}\right)\xgate \zgate\right] \tgate,              & \text{if } a=1
+\end{cases}
+\end{equation}
+
+It follows from the relationship \ref{eq1:1qubit-size} that in the worst-case we can write the relationship \ref{eq1:1qubit-size} as
+
+ \begin{equation}
+ \label{eq3:1qubit-size}
+\tgate \xgate^b \zgate^a=(\alpha_1 \xgate +\alpha_2 \xgate\zgate)\tgate, \mbox{ for } \alpha_i\in\left\{\frac{1+i}{2}, \frac{1-i}{2}\right\}, \alpha_1\neq\alpha_2
+\end{equation}
+ 
+ Let $C_q$ be  quantum circuit with $k$ number of $\tgate$-gates and $k\in O(\log(|C_q||)).$  We notice the following relations between the following numbers
+ 
+\begin{equation}
+ \label{relation:complex}
+\frac{1+}{2}+ \frac{1-i}{2}=1, \quad \frac{1+i}{2}\frac{1-i}{2}=1/2, \quad \frac{1+}{2}^2+ \frac{1-i}{2}^2=0
+\end{equation}
+ 
+ For convenience we first consider the case for 1-qubit circuit (section \ref{QiO:Clifford+T:family+GT}) and show that the size of the largest coefficient in the correction unitary can att most $O(k)$ bits.  Let $g_{|C_q|},\dots, g_2,g_1$ be a topological ordering of the gates in  $C_q.$  Without loss of generality we can assume that $g_i\in\{\hgate, \tgate\},$ for $i\in [|C_q|].$  Notice that $\hgate$ cannot increase the  size  coefficients in the relation \ref{eq3:1qubit-size}. In fact if we apply a $\tgate$-gate after the $\hgate$-gate the size of coefficients may not increase, for example in the relation \ref{eq4:1qubit-size} $\hgate$ has flipped the $\xgate$ to the $\zgate;$  and now when $\tgate$-gate applied to it, no new coefficients are introduced
+
+
+ \begin{equation}
+ \label{eq4:1qubit-size}
+\tgate\hgate \xgate=\tgate \zgate=\zgate \hgate
+\end{equation}
+ 
+ 
+ \begin{itemize}
+ \item[] Worst-Case Analysis for 1-qubit Quantum Circuits
+ \begin{itemize}
+ \item[1] Apply $\tgate$-gate to $\xgate^b \zgate^a$ our correction unitary has the form in the worst-case
+ \begin{equation}
+ \label{eq5:1qubit-size}
+(\alpha_1 \xgate +\alpha_2 \xgate\zgate)\tgate, 
+\end{equation}
+\item[] Set $\alpha_1=\frac{1+i}{2}$ and $\alpha_2=\frac{1-i}{2}$ \footnote{We can also set $\alpha_1=\frac{1-i}{2}$ and $\alpha_2=\frac{1+}{2}$ and will have the same worst-case analysis see equation \ref{eq2:1qubit-size} .}
+\item[2] Apply 2nd $\tgate$-gate to the relation \ref{eq5:1qubit-size} and obtain
+\begin{equation}
+ \label{eq6:1qubit-size}
+((\alpha_1\alpha_1+\alpha_2\alpha_2) \xgate\zgate +(\alpha_1\alpha_2+\alpha_2\alpha_1) \xgate)\tgate=\xgate\tgate  \mbox{ (see relation  \ref{relation:complex})}.
+\end{equation}
+\item[3] Apply again $\tgate$-gate to the relation \ref{eq6:1qubit-size} and obtain
+\begin{equation}
+ \label{eq7:1qubit-size}
+ (\alpha_1 \xgate +\alpha_2 \xgate\zgate)\tgate\tgate
+\end{equation}
+  \end{itemize}
+ \end{itemize} 
+% \begin{equation}
+% \label{eq4:1qubit-size}
+%\hgate\tgate \xgate^b \zgate^a=(\alpha_1 \zgate +\alpha_2 \xgate, \mbox{ for } \alpha_i\in\left\{\frac{1+i}{2}, \frac{1-i}{2}\right\}
+%\end{equation}
+ 
+%\begin{equation*}
+%\begin{aligned}
+%\tgate \xgate^b \zgate^a=\left[\left(\frac{1+i}{2}\right) \xgate^b \zgate^{a\oplus b} + \left(\frac{1-i}{2}\right)\xgate^b \zgate^a\right] \tgate. \\
+%\end{aligned}
+%\end{equation*}
+%If $b=0,$ then the above relation reduce to
+%\begin{equation*}
+%\begin{aligned}
+%\tgate \zgate^a=  \zgate^{a} \tgate. 
+%\end{aligned}
+%%And there is no complex coefficient is introduce. So in the worst-case $b\neq 0,$ in that case we rewrite equation \ref{eq2:1qubit-size} as 
+%\end{equation*}
+%
+ Let $C_q$ be  quantum circuit with $k$ number of $\tgate$-gates and $k\in O(\log(|C_q||)).$ 
+ 
+ 
+ Then the size of any coefficient in the update function is at most $O(\log(|C_q|)$ bits. 
+ 
+ 
+ 
+ 
+ 
+ Let $g_{|C_q|},\dots, g_2,g_1$ be a topological ordering of the gates in 1-qubit circuit $C_q.$ \begin{equation}
+ \label{eq2:1qubit-size}
+ (g_{|C_q|},\dots, g_2,g_1) \xgate ^b \zgate^a, \; a,b\{0,1\}
+ \end{equation}
+ \begin{equation}
+ \label{eq3:1qubit-size}
+ g_{|C_q|},\dots, g_{i-1},\tgate \xgate ^{b_{i-1}} \zgate^{a_{i-1}},g_{i-1} \ldots g_1 \; a,b\{0,1\}
+ \end{equation}
+Note that $\hgate$-gate only impact the bits $a,b$ and have no impact on the size of the coefficients (section \ref{QiO:Clifford+T:family+GT}). Suppose $g_i$ is the first $\tgate$-gate in the sequence from R.H.S. We can rewrite \ref{eq1:1qubit-size}
+
