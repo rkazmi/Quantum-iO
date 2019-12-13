@@ -43,22 +43,19 @@ In terms of constructing $Qi\mathcal{O}$, we first focus on the family of \emph{
 principle of gate teleportation~\cite{GC99}. 
 Clifford circuits are quantum circuits that are built from the gate set $\{\hgate, \zgate, \cnot, \xgate, \pgate\}$ \Anne{need to check how defined in prelims}. They are known not to be universal for quantum computation and  are, in a certain sense, the quantum equivalent of classical \emph{linear circuits}. It is known that Clifford circuits can be efficiently simulated on a classical computer~\cite{Got98}; however, note that  this simulation is with respect to a \emph{classical} distribution, hence for a purely quantum computation, quantum circuits are required, which motivates the obfuscation of this circuit class. Next,  Clifford circuits are known not to be universal for quantum computation, but they are an important building block for fault-tolerant quantum computing, for instance, due to the fact that Cliffords admit transversal computations on many fault-tolerant codes\cite{BCL+06}.
 
-Our first construction of $Qi\mathcal{O}$ for Clifford circuits starts with the well-known fact that a canonical form is an $i\mathcal{O}$. We point out that a canonical form for Clifford circuit was presented in~\cite{AG04}; which completes this construction (we also note that an alternative canonical form was also presented in~\cite{Sel13}). This canonical form technique  does not require any computational assumption. Moreover, the obfuscated circuits are classical, and hence can be easily communicated, stored, used and copied. Our second construction of $Qi\mathcal{O}$ for Clifford circuits takes a very different approach. We start with the 
+\paragraph{Obfuscating Cliffords using a canonical form.} Our first construction of $Qi\mathcal{O}$ for Clifford circuits starts with the well-known fact that a canonical form is an $i\mathcal{O}$. We point out that a canonical form for Clifford circuit was presented in~\cite{AG04}; which completes this construction (we also note that an alternative canonical form was also presented in~\cite{Sel13}). This canonical form technique  does not require any computational assumption. Moreover, the obfuscated circuits are classical, and hence can be easily communicated, stored, used and copied.
+
+\paragraph{Obfuscating Cliffords using gate teleportation.} Our second construction of $Qi\mathcal{O}$ for Clifford circuits takes a very different approach. We start with the gate-teleportation scheme~\cite{GC99}: according to this, it is possible to \emph{encode} a quantum computation~$C$ into a quantum state (specifically, by preparing a collection of entangled qubit pairs, and applying~$C$ to half of this preparation). Then, in order to perform a quantum computatation on a target input $\ket{\psi}$, we \emph{teleport} $\ket{\psi}$ \emph{into} the prepared entangled state. This causes the state $\ket{\psi}$ to undergo the evolution of $C$, \emph{up to some corrections}, based on the teleportation bits. If $C$ is chosen from the Clifford circuits, these corrections are relatively simple and thus the idea is to use a classical  $i\mathcal{O}$ to provide the correction function (Note that our construction does not require a full $i\mathcal{O}$ but rather rely on a weaker $i\mathcal{O}$ that can obfuscate a certain family of functions.) 
+In contrast to the previous scheme, the gate-teleportation scheme requires the assumption of quantum-secure classical $i\mathcal{O}$ for a certain family of functions (section \ref{update function}) and the obfuscated circuits are quantum. While this presents a technological challenge to communication, storage and also usage, there could be advantages to storing quantum programs into quantum states, for instance to take advantage of their \emph{uncloneability} \cite{Aar09,BL19arxiv}.
+
+
+
+\paragraph{Obfuscating Beyond Cliffords} Next, in our main result \Cref{QiO:Clifford+T:family}, we generalize the gate-teleportation scheme for Clifford circuits, and show an $Qi\mathcal{O}$ obfuscator for all quantum circuits where the number of non-Clifford ($T$) gates is at most logarithmic in the circuit size. 
 
 
 
 
 
-Next, in our main result, we manage to generalize the gate-teleportation scheme for Clifford circuits, and show an $Qi\mathcal{O}$ obfuscator for all quantum circuits where the number of non-Clifford ($T$) gates is at most logarithmic in the circuit size.
-
-\subsubsection{Clifford Circuits}
-\label{sec:intro-cliffords}
-
- The two constructions present different advantages:  In contrast, the gate-teleportation scheme requires the assumption of quantum-secure classical $i\mathcal{O}$ for a certain family of functions (section \ref{update function}) and the obfuscated circuits are quantum.\footnote{Note that our construction does not require a full $i\mathcal{O}$ but rather rely on a weaker $i\mathcal{O}$ that can obfuscate a certain family of functions.} While this presents a technological challenge to communication, storage and also usage, there could be advantages to storing quantum programs into quantum states, for instance to take advantage of their \emph{uncloneability} \cite{Aar09,BL19arxiv}.
-
-
-\subsubsection{Clifford+ T Circuits}
-\label{sec:intro-Clifford+T}
 
 Furthermore, in our main result, we manage to generalize the gate-teleportation scheme for Clifford circuits, and show an $Qi\mathcal{O}$ obfuscator for all quantum circuits where the number of non-Clifford ($T$) gates is at most logarithmic in the circuit size.
 
@@ -89,11 +86,8 @@ In this work we define a new definition of computational quantum obfuscation $Qi
 
 
 
-\anote{Make sure we emphasize somewhere why the paper belong in the ICT conference--- perhaps because the reduction is information-theoretic, assuming classical iO?}
+\anote{TODO: emphasize other work where a limited number of $T$-gates was tolerated, e.g. \cite{BJ15}., and also how the $T$-gate is often seen as the bottle-neck, e.g. in fault-tolerant quantum computing, and state as open problem the general case.  }
 
-\anote{TODO: emphasize other work where a limited number of $T$-gates was tolerated, e.g. \cite{BJ15}., and also how the $T$-gate is often seen as the bottle-neck, e.g. in fault-tolerant quantum computing. }
-
-\Anne{Is there an advantage in using quantum states to obfuscate programs? I would suspect that one big advantage would be unclonable programs (they cannot be copied). Is this too ambitious to look at?  What does it even mean to have unclonable programs? (this links with work that I am currently doing with Sébastien Lord, a PhD student).}
 
 
 \subsection{More on Related Work}
@@ -112,27 +106,27 @@ The quantum obfuscation is studied more rigorously in \cite{AF16arxiv}, where th
  The main contribution of their work was to extend the classical impossibility results to the quantum settings such as a generic transformation of quantum circuits into black-box-obfuscated quantum circuits is impossible \cite{AF16arxiv},  statistical indistinguishability obfuscation is impossible, up to an unlikely complexity-theoretic collapse \cite{AF16arxiv}. However, no concrete instantiation was provided in their paper for any of type quantum obfuscations. They also discussed a number of applications of quantum black-box obfuscation such as CPA-secure quantum encryption, quantum fully-homomorphic encryption, and public-key quantum money, however it is not clear what impact these impossibility results have on these applications. They also showed that an existence of a computational quantum indistinguishability obfuscation would imply a witness encryption scheme for all languages in QMA  \cite{AF16arxiv}.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Section applications
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    \subsection{Applications}
+%Two settings
+%
+%1) If we had full iO.
+%
+%2) Applications of iO for the circuit class that we are doing.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Section applications
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \subsection{Applications}
-Two settings
-
-1) If we had full iO.
-
-2) Applications of iO for the circuit class that we are doing.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Section Conclusion and Open Problems
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Conclusion and Open Questions}
-
-The main open questions related to this work are:
-
-$i\mathcal{O}$ obfuscation for general quantum circuits
-
-applications of gate-teleportation based quantum $i\mathcal{O}$ (for instance, to unclonable programs~\cite{Aar09}).
+%%Section Conclusion and Open Problems
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Conclusion and Open Questions}
+%
+%The main open questions related to this work are:
+%
+%$i\mathcal{O}$ obfuscation for general quantum circuits
+%
+%applications of gate-teleportation based quantum $i\mathcal{O}$ (for instance, to unclonable programs~\cite{Aar09}).
 
 
 \subsection*{Outline}
