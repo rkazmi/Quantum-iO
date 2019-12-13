@@ -21,14 +21,33 @@
 \newcommand{\bit}[1]{\{0,1\}^{#1}}
 
 
-\newboolean{ElectronicVersion}
-\setboolean{ElectronicVersion}{true}
+% amsthm environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+%\newtheorem{remark}[definition]{Remark}
+\newtheorem{note}[definition]{Note}
+\newtheorem{game}[definition]{Game}
+%\newtheorem{scheme}[definition]{Scheme}
 
-\ifthenelse{\boolean{ElectronicVersion}}{
-    \usepackage[letterpaper=true,pdftex,bookmarks,pagebackref,
-	plainpages=false, % Needed if Roman numbers in frontpages
-        pdfpagelabels=true % Adds page number as label in Acrobat's page count
-        ]{hyperref}}{}
+
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{claim}[definition]{Claim}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{lemma}[definition]{Lemma}
+
+
+%\newboolean{ElectronicVersion}
+%\setboolean{ElectronicVersion}{true}
+%
+%\ifthenelse{\boolean{ElectronicVersion}}{
+%    \usepackage[letterpaper=true,pdftex,bookmarks,pagebackref,
+%	plainpages=false, % Needed if Roman numbers in frontpages
+%        pdfpagelabels=true % Adds page number as label in Acrobat's page count
+%        ]{hyperref}}{}
+%
 
 %\makeatletter
 %\newtheorem*{rep@theorem}{\rep@title}
@@ -39,19 +58,6 @@
 % {\end{rep@theorem}}}
 %\makeatother
 
-
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{definition}{Definition}
-\newtheorem{cor}[theorem]{Corollary}
-\newtheorem{fact}[theorem]{Fact}
-\newtheorem{claim}[theorem]{Claim}
-\newtheorem{conjecture}[theorem]{Conjecture}
-\newtheorem{example}[theorem]{Example}
-%\newreptheorem{theorem}{Theorem}
-\newtheorem{goal}{Research Goal}[section]
 
 
 % highlight
@@ -74,6 +80,8 @@
 #2
 \hrule
 \end{minipage}}
+
+
 
 
 \def\ket#1{{\lvert}#1\rangle}
