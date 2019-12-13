@@ -29,7 +29,7 @@ principle of gate teleportation~\cite{GC99} (see Section~\ref{XX}). The two cons
 
 %\Anne{note to Raza: when adding bib entries to quantum.bib, just add a quick entry at the bottom of quantum.bib. Then Sebastien will clean it up and send us the corrected .bib (Sébastien has a small contract as admin of the quantum.bib).}
 
-\subsection{Obfuscation in a Quantum World}
+\subsection{More of Related Work}
 \label{sec:obf-quantum}
 The quantum obfuscation was first studied in \cite{AJJ14}, where a new notion called
 $(G,\Gamma)$-{\em indistinguishability obfuscation} was proposed. Where $G$ is a set of gates and $\Gamma$ is a set of relations satisfied by the elements of $G.$ In this notion any two circuits over the set of gates $G$ are perfectly indistinguishable if they differ by some sequence of applications of the relations in~$\Gamma.$ One of the motivations of their work was to provide a weaker definition of perfectly indistinguishable obfuscation, which is shown to be impossible under certain complexity-theoretic assumptions \cite{AJJ14}. However, to the best of our knowledge, $(G,\Gamma)$-{\em indistinguishability obfuscation} is  incomparable with the computational indistinguishability obfuscation \cite{BGI+12, GGH+13}, which is the topic of this paper.
@@ -45,8 +45,16 @@ The quantum obfuscation is studied more rigorously in \cite{AF16arxiv}, where th
  The main contribution of their work was to extend the classical impossibility results to the quantum settings such as a generic transformation of quantum circuits into black-box-obfuscated quantum circuits is impossible \cite{AF16arxiv},  statistical indistinguishability obfuscation is impossible, up to an unlikely complexity-theoretic collapse \cite{AF16arxiv}. However, no concrete instantiation was provided in their paper for any of type quantum obfuscations. They also discussed a number of applications of quantum black-box obfuscation such as CPA-secure quantum encryption, quantum fully-homomorphic encryption, and public-key quantum money, however it is not clear what impact these impossibility results have on these applications. They also showed that an existence of a computational quantum indistinguishability obfuscation would imply a witness encryption scheme for all languages in QMA  \cite{AF16arxiv}.
 
 
-\subsection{Our Results}
-In this work we define a new definition of computational quantum obfuscation $Qi\mathcal{O}$ and provide two concrete instantiation of it. The first instantiation is based on the work of Aaronson and Gottesman~\cite{AG04}, In this paper, an efficient algorithm to compute a canonical form of any Clifford circuit was describe. The second instantiation is based on gate-teleportation \cite{} and assume an existence of a quantum-secure classical $i\mathcal{O}$ for certain class of functions (section \ref{update function}). Using this technique we can obfuscate any $n$-qubit quantum circuit as far as the number of $\tgate$-gates are in $O(\log(n)).$
+\subsection{Techniques}
+
+In section \ref{sec:QiO-Cliffords and more} we provide a new definition of quantum indistinguishability obfuscation. We provide two methodologies for constructing a quantum indistinguishability obfuscation for Clifford circuits. One is based on canonical form of Clifford circuits  while other is based on the principle of gate teleportation.  The construction based on canonical form requires no computational assumptions and is in fact perfectly indistinguishability obfuscation (information theoratically secure), where as the gate teleportation based construction assumes the existence of a quantum secure classical $i\mathcal{O}.$ In section \ref{QiO:Clifford+T:family} we show how to a construct quantum indistinguishability obfuscation from gate teleportation and $i\mathcal{O}$ for any reversible quantum circuit that has at most logarithmic $\tgate$-gates.
+
+
+
+
+
+
+In this work we define a new definition of computational quantum obfuscation $Qi\mathcal{O}$ and provide two concrete instantiation of it. The first instantiation is based on the work of Aaronson and Gottesman~\cite{AG04}, In this paper, an efficient algorithm to compute a canonical form of any Clifford circuit was describe. The second instantiation is based on gate-teleportation \cite{} and assume an existence of a quantum-secure classical $i\mathcal{O}$ for certain class of functions (section \Cref{update function}). Using this technique we can obfuscate any $n$-qubit quantum circuit as far as the number of $\tgate$-gates are in $O(\log(n)).$
 
 
 
@@ -82,7 +90,7 @@ Two settings
 2) Applications of iO for the circuit class that we are doing.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Section Conclusion and Open Problems
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Conclusion and Open Questions}
@@ -95,5 +103,4 @@ applications of gate-teleportation based quantum $i\mathcal{O}$ (for instance, t
 
 
 \subsection*{Outline}
-In section \ref{sec:QiO-Cliffords and more} we provide a new definition of quantum indistinguishability obfuscation. We provide two methodologies for constructing a quantum indistinguishability obfuscation for Clifford circuits. One is based on canonical form of Clifford circuits  while other is based on the principle of gate teleportation.  The construction based on canonical form requires no computational assumptions and is in fact perfectly indistinguishability obfuscation (information theoratically secure), where as the gate teleportation based construction assumes the existence of a quantum secure classical $i\mathcal{O}.$ In section \ref{QiO:Clifford+T:family} we show how to a construct quantum indistinguishability obfuscation from gate teleportation and $i\mathcal{O}$ for any reversible quantum circuit that has at most logarithmic $\tgate$-gates.
-
+\Cref{sec: iO-clifford-functions}...
