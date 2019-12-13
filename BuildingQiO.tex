@@ -255,6 +255,8 @@ Since $a$ and $b$ are bits, the equation \ref{eq:pgate2} can be written as a lin
 \end{equation}
 for   $\alpha_i \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\},$  $i\in[4].$ The equation \ref{eq:pgate3} is important as we will see that the correction unitary or any 1-qubit circuit can be expressed in the form of \ref{eq:pgate3} .
 
+\subsection{Single-qubit circuits}
+\label{sec:1-qubit}
 
 Let $C_q$ be a $1$-qubit circuit we want to obfuscate and $\ket{\psi}$ is the quantum state on which we want to evaluate $C_q.$ Note we can write any $1$-qubit circuit as a sequence of gates from the set $\{\hgate, \tgate\}$ \footnote{The set $\{\hgate,  \tgate\}$ is universal for 1-qubit unitary.}
 
@@ -376,6 +378,7 @@ The equation \ref{lemma:1qubit:eq5},  can only be satisfied if $\beta_i = \beta_
 
 
 \subsection{Quantum Indistinguishability Obfuscation for $n$-qubit Circuits}
+\label{sec:n-qubit-circuits}
 In the previous section we showed how we can construct a $Qi\mathcal{O}$  for any $1$-qubit unitary circuit. In this section we show that how to construct  $Qi\mathcal{O}$ for any $n$-qubit unitary circuit $C_q$ using iO gate teleportation and quantum secure iO provided the number of $\tgate$-gates are in $C_q$ are $O(\log(|C_q|).$  The reason for $O(\log(|C_q|)$ bound is that when $\cnot$ and $\tgate$-gates are mixed together then the
 the second property ({\tt Polynomial Slowdown}) of $Qi\mathcal{O}$ is violated if $\tgate$-count $\in \omega(\log(|C_q|)).$ More precisely we will show that for any $n$-qubit circuit with $k$ number of $\tgate$-gates,  the correction unitary in the worst-case has $4^k$ terms is of form  \ref{exp:nqubit-correction}
 
