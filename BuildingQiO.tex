@@ -140,7 +140,6 @@ Since $C_{q_1}(\ket{\tau})=C_{q_2}(\ket{\tau})$ for every quantum state $\ket{\t
 \rho_1=(I\otimes C_{q_1}) \ket{\beta^{2n}}=(I\otimes C_{q_2}) \ket{\beta^{2n}}=\rho_2.
 \end{equation}
 And of course $B_q$ will always be the same circuit for circuits. So the only thing we need to show that $i\mathcal{O}(C_{F_{C_{q_1}}})$ and $i\mathcal{O}(C_{F_{C_{q_2}}})$ are computationally indistinguishable against any polynomial-time quantum adversary. Note if we can prove that $F_{C_{q_1}}$ and $F_{C_{q_2}}$ are equivalent functions then we can conclude that the classical circuits ($C_{q_1}$ and $C_{q_2}$) that computes these functions are also be equivalent. Then from the definition of classical quantum secure $i\mathcal{O}$ we can conclude that  $iO(C_{F_{C_{q_2}}})$ and $iO(C_{F_{C_{q_2}}})$ are computationally indistinguishable against any polynomial-time quantum adversary. From Theorem \ref{sec:Clifford Functions} we have $F_{C_{q_1}}$ and $F_{C_{q_2}}$ equivalent functions, therefore $Qi\mathcal{O}$ is a quantum secure indistinguishability obfuscation for all Clifford Circuits.\footnote{Note without loss of generality we can assume that $|C_{F_{C_{q_1}}}|=|C_{F_{C_{q_2}}}|,$ because we can always increase the size of a circuit by adding trivial gates to it. }
-
 \end{itemize}
 
 
@@ -192,7 +191,6 @@ It follows from equation \ref{eq:5} that
 \end{equation}
 
 It follows from equation \ref{eq:6}  that $$\zgate^{a_i^\prime} \cdot \xgate^{b_i^\prime}=\zgate^{d_i^\prime} \cdot \xgate^{e_i^\prime} \mbox{ for all } i\in[n].$$ This means $a_i^\prime=d_i^\prime$ and  $b_i^\prime=e_i^\prime$ and therefore, if $C_{q_1}$ and $C_{q_2},$ are two equivalent circuits, then they have the same update function.
-
 \end{flushleft}
 
 
@@ -225,14 +223,12 @@ It follows from equation \ref{eq:6}  that $$\zgate^{a_i^\prime} \cdot \xgate^{b_
 Recall from  section \ref{defn:Clifford+T:family} that adding a non-Clifford gate  such as $\tgate$-gate to Clifford gates gives us a generating set for all unitary quantum circuits. In this section we show how to build quantum indistinguishability obfuscation for any quantum circuit that has at most logarithmic  $\tgate$-gates in the size of the circuit.
 %\anote{Is this the correct link to the Definition?}
 
-\subsection{Using a Canonical Form}
-Main idea: Each Clifford layer is obfuscated using the canonical form. The $\tgate$-gate layers are given in the clear. The result is a canonical form, since the family is selected such that the description just given will be a canonical form.
-\anote{I think this one is less interesting because the $T$ gates are in the clear. Maybe drop it?}
+
 
 
 \subsection{Using Gate Teleportation}
 \label{QiO:Clifford+T:family+GT}
-In this section we will show how we can obfuscate any 1-qubit unitary circuit using gate teleportation and a quantum secure iO; and then based on this idea we will show how we can obfuscate any $n$-qubit circuit $C_q$ as far as the number of $\tgate$-gates remain logarithmic in $|C_q|.$ The $\tgate$ relates to the $\xgate, \zgate$
+In this section we show how we can obfuscate any 1-qubit unitary circuit using gate teleportation and a quantum secure iO; and then based on this idea we will show how we can obfuscate any $n$-qubit circuit $C_q$ as far as the number of $\tgate$-gates remain logarithmic in $|C_q|.$ The $\tgate$ relates to the $\xgate, \zgate$
 $$\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\pgate^b \tgate$$
 If $b=0,$ then we don't have to worry about $\pgate$ gate otherwise we have to perform a $\pgate$ correction. We can write $\pgate=(\frac{1+i}{2}) \igate + (\frac{1-i}{2})\zgate,$ therefore
 
