@@ -5,9 +5,7 @@
 \label{sec:QiO-Cliffords and more}
 <<<<<<< HEAD
 In this section we provide definitions of equivalent quantum circuits and  Quantum Indistinguishability Obfuscation $Qi\mathcal{O}.$ In section \ref{QiO:Clifford-Circuits} we show how to construct $Qi\mathcal{O}$ for Clifford circuits. The first construction is based on a canonical form, and the second is based on the principle of gate teleportation.
-=======
-In this section we give a definition of equivalent quantum circuits and also define a notion of Quantum Indistinguishability Obfuscation $(Qi\mathcal{O})$. In  \Cref{QiO:Clifford-Circuits} we show how to construct $Qi\mathcal{O}$ for some families of quantum circuits. We give two alternative methods, the first based on canonical forms, and the second based on gate teleportation.
->>>>>>> f878d051e3af1775497199c6bb1a3446e82bc8cd
+
 
 %\anote{Need some blah blah at the beginning of a section to say what we present in this section.}
 
@@ -52,7 +50,6 @@ Where $k=|C_{q_1}|=|C_{q_2}|.$
 
 \subsubsection{$Qi\mathcal{O}$ for Clifford Circuits via Canonical Form}
 \label{sec:Clifford-iO-canonical}
-<<<<<<< HEAD
 Aaronson and Gottesman invented a polynomial-time quantum algorithm (polynomial size circuit) that takes a Clifford circuit $C_q$ and outputs its canonical form (see ~\cite{AG04} section VI). This canonical form is invariant for any two equivalent circuits. Moreover the size of the canonical form remains polynomial in the size of the input circuit. 
 \begin{algorithm}[H]
 \label{QiO:Canonical-Clifford}
@@ -71,10 +68,6 @@ Aaronson and Gottesman invented a polynomial-time quantum algorithm (polynomial 
 \end{algorithm}
 
 
-=======
-Aaronson and Gottesman invented a polynomial-quantum algorithm (polynomial size circuit) that takes a Clifford circuit $C_q$ and output its canonical form~\cite{AG04} (section VI). This canonical form is invariant for any two equivalent circuits. Moreover the size of the canonical form remain $poly(|C_q|).$ Therefore, the $Qi\mathcal{O}$ in essentially the Aaronson and Gottesman algorithm that takes a Clifford circuit $C_q,$ as an input and output its canonical form $C_q^\prime$ and an empty register $\rho$ \footnote{Note we output the empty register to satisfy the definition of quantum indistinguishability obfuscation (\ref{def:QiO}).}
-														$$(\rho, C_q^\prime)\leftarrow Qi\mathcal{O}(C_q).$$
->>>>>>> f878d051e3af1775497199c6bb1a3446e82bc8cd
 
  \begin{lemma}
 The algorithm \ref{QiO:Canonical-Clifford} is a Quantum Indistinguishability Obfuscation for Clifford Circuits.
@@ -124,7 +117,7 @@ However,  our construction relies on the assumption that a quantum secure $i\mat
   \begin{enumerate}
   \item   Write $C_q^\prime=(B_q, C^\prime)$ and the joint system $\rho_{AB}=\rho \otimes \ket{\psi}.$
   \item   Obtain the state $\rho_{AB}^\prime=B_q(\rho_{AB})$ and classical output $(a_1,b_1\ldots,a_n,b_n).$
-  \item   Compute $C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}})\ket{\psi}=Tr_A(\rho_{AB}^\prime)$ (see  gate teleportation protocol \ref{protocol: gate-teleportation}).
+  \item   Compute $C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}a_{i}})\ket{\psi}=Tr_A(\rho_{AB}^\prime)$ (see  gate teleportation protocol \ref{protocol: gate-teleportation}).
   \item   Compute the update function $$(a_1^\prime, b_1^\prime,\ldots, a_n^\prime, b_n^\prime)=C^\prime(a_1,b_1\ldots,a_n,b_n).$$
   \item    Compute the correction unitary $(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime})$
   \item   Apply  $(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime})$ to the system $C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}})\ket{\psi}$ to obtain the state $C_q(\ket{\psi})$ as follows,
@@ -191,48 +184,65 @@ Let $C_{q_1}$ and $C_{q_2}$ be two equivalent Clifford circuits and  $F_{C_{q_1}
 
 \begin{flushleft}
 {\bf Proof:} For any {\em n}-qubit state $\ket \psi$ we have $C_{q_1}(\ket \psi)=C_{q_2}(\ket \psi)$ and let $F_{C_{q_1}}$ and $F_{C_{q_2}}$ denote the update functions for the circuits $C_{q_1}$ and $C_{q_2}.$ Suppose $F_{C_{q_1}}\neq F_{C_{q_2}},$  then there must exist at least one binary string $a_1b_1,\ldots, a_nb_n$ such that
-\begin{equation*}
+\begin{equation}
+\label{fun:assumption1}
 F_{C_{q_1}}(a_1,b_1,\ldots,a_n,b_n)\neq F_{C_{q_2}}(a_1,b_1,\ldots,a_n,b_n)
-\end{equation*}
-
-From the above (see indistinguishability) we have (see equation \ref{eq:1})
+\end{equation}
+Let $C_1$ and $C_2$ be circuits that compute $F_{C_{q_1}}$ and $F_{C_{q_1}},$ then it follows from the assumption \ref{fun:assumption1} that
 \begin{equation*}
-\left(\rho ,\left(B_q, i\mathcal{O}(C_{F_{C_{q_1}}})\right)\right)= Qi\mathcal{O}(C_{q_1}) \mbox{ and } \left(\rho ,\left(B_q, i\mathcal{O}(C_{F_{C_{q_2}}})\right)\right)= Qi\mathcal{O}(C_{q_2}).
+C_1(a_1,b_1,\ldots,a_n,b_n)\neq C_2(a_1,b_1,\ldots,a_n,b_n)
 \end{equation*}
 
-Suppose we want to evaluate circuits on some state $\ket \psi$ follows that for both circuits $C_{q_1}$ and $C_{q_2}$ in algorithm 3 we have the same state $\rho_{AB}=\rho\otimes \ket \psi$ (see algorithm 3). Therefore, the classical output bits we obtain after performing the Bell measurement in algorithm 3 are independent of the circuits $C_{q_1}$ and $C_{q_2}$). Suppose for both circuits we obtain the same classical outputs $a_1b_1,\ldots, a_nb_n.$ From algorithm 3 we have
+
+%\begin{equation*}
+%\left(\rho ,\left(B_q, i\mathcal{O}(C_1})\right)\right)= Qi\mathcal{O}(C_2}) \mbox{ and } \left(\rho ,\left(B_q, i\mathcal{O}(C_{F_{C_{q_2}}})\right)\right)= Qi\mathcal{O}(C_{q_2}).
+%\end{equation*}
+
+Suppose we want to evaluate circuits $C_{q_1}$ and $C_{q_2}$ on some state $\ket \psi$ using algorithm \ref{QiO:Clifford-teleportation} and algorithm \ref{Eval:Clifford-teleportation}. Then in the step 3 of the 
+ algorithm \ref{Eval:Clifford-teleportation} we are left with subsystems %$\rho_{AB}=\rho\otimes \ket \psi$ (see algorithm 3). Therefore, the classical output bits we obtain after performing the Bell measurement in algorithm 3 are independent of the circuits $C_{q_1}$ and $C_{q_2}$). Suppose for both circuits we obtain the same classical outputs $a_1b_1,\ldots, a_nb_n.$ From algorithm 3 we have
 
  \begin{equation}
   \label{eq:2}
-C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}})\ket{\psi}=C_q^\prime (\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}})\ket{\psi}
+C_{q_1} (\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n}a_{i}^\prime})\ket{\psi} \;\mbox{ and }\;
+C_{q_2} (\xgate^{\otimes_{i=1}^{n} \beta_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n}\alpha_{i}^\prime})\ket{\psi}
 \end{equation}
-Let $s=a_1b_1,\ldots, a_nb_n$ and let
+where $a_1^\prime b_1^\prime,\ldots, a_n^\prime b_n^\prime$ and $\alpha_1^\prime \beta_1^\prime,\ldots, \alpha_n^\prime \beta_n^\prime$ are random bits obtained after Bell measurement (algorithm  \ref{Eval:Clifford-teleportation}, step 2).
+
+Let $s=a_1b_1,\ldots, a_nb_n$  and suppose $a_i^\prime=\alpha_i=a_i$ and $b_i^\prime=\beta_i^\prime=b_i,$ for all  $i\in[n]$ and 
 
  \begin{equation}
  \label{eq:3}
 F_{C_{q_1}}(s)=(a^\prime_1,b^\prime_1,\ldots, a^\prime_n,b^\prime_n) \mbox{ and } F_{C_{q_2}}(s)=(d_1^\prime,e_1^\prime,\ldots, d_n^\prime,e^\prime_n)
 \end{equation}
 
-We can rewrite equation \ref{eq:2} as (see gate teleportation \ref{protocol: gate-teleportation} or algorithm 3.
+
+
+$C_{q_1}$ and $C_{q_2}$ are equivalent circuits. The relationships in equation \ref{eq:2} are also equivalent, i.e.
  \begin{equation}
   \label{eq:4}
+C_{q_1} (\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n}a_{i}^\prime})\ket{\psi}=C_{q_2} (\xgate^{\otimes_{i=1}^{n} \beta_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n}\alpha_{i}^\prime})\ket{\psi}
+\end{equation}
+
+We can rewrite the equation \ref{eq:4} by using update functions from \ref{eq:3}
+ \begin{equation}
+  \label{eq:5}
 (\zgate^{\otimes_{i=1}^{n} a_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} b_{i}^\prime})C_q(\ket{\psi})=(\zgate^{\otimes_{i=1}^{n} d_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} e_{i}^\prime})C_q^\prime(\ket{\psi})
 \end{equation}
 
-Since $C_q^\prime(\ket{\psi})=C_q^\prime(\ket{\psi})$ we can substitute $C_q^\prime$ for $C_q^\prime$ in equation \ref{eq:4}
+Since $C_q^\prime(\ket{\psi})=C_q^\prime(\ket{\psi})$ we can substitute $C_q^\prime$ for $C_q^\prime$ in equation \ref{eq:5}
 
 \begin{equation}
-  \label{eq:5}
+  \label{eq:6}
 (\zgate^{\otimes_{i=1}^{n} a_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} b_{i}^\prime})C_q(\ket{\psi})=(\zgate^{\otimes_{i=1}^{n} d_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} e_{i}^\prime})C_q(\ket{\psi})
 \end{equation}
 
-It follows from equation \ref{eq:5} that
+It follows from equation \ref{eq:6} that
 \begin{equation}
-  \label{eq:6}
+  \label{eq:7}
 (\zgate^{\otimes_{i=1}^{n} a_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} b_{i}^\prime})=(\zgate^{\otimes_{i=1}^{n} d_{i}^\prime} \cdot \xgate^{\otimes_{i=1}^{n} e_{i}^\prime})
 \end{equation}
 
-It follows from equation \ref{eq:6}  that $$\zgate^{a_i^\prime} \cdot \xgate^{b_i^\prime}=\zgate^{d_i^\prime} \cdot \xgate^{e_i^\prime} \mbox{ for all } i\in[n].$$ This means $a_i^\prime=d_i^\prime$ and  $b_i^\prime=e_i^\prime$ and therefore, if $C_{q_1}$ and $C_{q_2},$ are two equivalent circuits, then they have the same update function.
+It follows from equation \ref{eq:7}  that $$\zgate^{a_i^\prime} \cdot \xgate^{b_i^\prime}=\zgate^{d_i^\prime} \cdot \xgate^{e_i^\prime} \mbox{ for all } i\in[n].$$ Which is only possible if $a_i^\prime=d_i^\prime$ and  $b_i^\prime=e_i^\prime$ and therefore, if $C_{q_1}$ and $C_{q_2},$ are two equivalent circuits, then $F_{C_{q_1}}=F_{C_{q_2}}.$
 \end{flushleft}
 
 
