@@ -53,7 +53,7 @@ In contrast to the previous scheme, the gate-teleportation scheme requires the a
 \paragraph{Obfuscating Beyond Cliffords} Next, in our main result (\Cref{QiO:Clifford+T:family}), we generalize the gate-teleportation scheme for Clifford circuits, and show a $Qi\mathcal{O}$ obfuscator for all quantum circuits where the number of non-Clifford  gates is at most logarithmic in the circuit size. For this, we consider the commonly-used Clifford+$\tgate$ gateset, and we note that the $\tgate$ relates to the $\xgate, \zgate$ as: $\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\pgate^b \tgate$. This means that, if we implement a circuit $C$ with $\tgate$-gates as in the gate-teleportation scheme above, then the \emph{correction} function is no longer a simple Pauli update. However, this in only partially true: since the Paulis form a basis, there is always a way to represent an update as a complex, linear combination of Pauli matrices. In particular, for the case of a $\tgate$, we note that $\pgate=(\frac{1+i}{2}) \igate + (\frac{1-i}{2})\zgate$. Hence, it \emph{is} possible to produce an update function for general quantum circuits that are encoded via gate teleportation. To illustration this, we first analyze the case of a general Clifford+$\tgate$ quantum circuit on a \emph{single} qubit \Cref{sec:1-qubit}. Here, we are able to provide $Qi\mathcal{O}$ for all circuits. Next, for general quantum circuits, \Cref{sec:n-qubit-circuits}, we note that the update function becomes more and more complex as the number of $\tgate$ increases. We show that if limit the number of $\tgate$ to be logarithmic in the circuit size, we can nevertheless reach an efficient construction.
 
 
-We note that, also for other quantum cryptographic primitives, the $\tgate$ is often the bottleneck (somewhat skin to a \emph{multiplication} in the classical case. This has been observed, \emph{e.g.}, in the context of \emph{homomorphic quantum encryption} \cite{BJ15}, instantaneous quantum computation \cite{TODO} and also.... TODO 
+We note that, also for other quantum cryptographic primitives, the $\tgate$-gate is often the bottleneck (somewhat akin to a \emph{multiplication} in the classical case. This has been observed, \emph{e.g.}, in the context of \emph{homomorphic quantum encryption} \cite{BJ15}, instantaneous quantum computation \cite{TODO} and also.... TODO. Since the $\tgate$ is also typically the bottle neck for fault-tolerant quantum computing, techniques exist to reduce the $\tgate$-count in quantum circuits~\cite{AMMR13,DMM16,AMM14}.
 
 
 
@@ -82,7 +82,7 @@ We note that, also for other quantum cryptographic primitives, the $\tgate$ is o
 
 
 
-\anote{TODO: emphasize other work where a limited number of $T$-gates was tolerated, e.g. \cite{BJ15}., and also how the $T$-gate is often seen as the bottle-neck, e.g. in fault-tolerant quantum computing, and state as open problem the general case.  }
+
 
 
 
@@ -124,6 +124,7 @@ The quantum obfuscation is studied more rigorously in \cite{AF16arxiv}, where th
 %
 %applications of gate-teleportation based quantum $i\mathcal{O}$ (for instance, to unclonable programs~\cite{Aar09}).
 
-
-\subsection*{Outline}
-\Cref{sec: iO-clifford-functions}...
+%
+%\subsection*{Outline}
+%\Cref{sec: iO-clifford-functions}...
+The remainder of this paper is structured as follows. \Cref{sec:prelims} overviews basic notions required in this work. In \Cref{sec:QiO-Cliffords and more} we formally define indistinguishability obfuscation for quantum circuits and provide the construction for Clifford circuits. Finally, in \Cref{QiO:Clifford+T:family}, we give our main result which shows quantum indistinguishability obfuscation for quantum circuits with a logarithmic number of $\tgate$ gates. 
