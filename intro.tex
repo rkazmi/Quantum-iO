@@ -88,10 +88,10 @@ We note that, also for other quantum cryptographic primitives, the $\tgate$-gate
 
 \subsection{More on Related Work}
 \label{sec:obf-quantum}
-Quantum obfuscation was first studied in \cite{AJJ14}, where a new notion called
-$(G,\Gamma)$-{\em indistinguishability obfuscation} was proposed. Where $G$ is a set of gates and $\Gamma$ is a set of relations satisfied by the elements of $G.$ In this notion any two circuits over the set of gates $G$ are perfectly indistinguishable if they differ by some sequence of applications of the relations in~$\Gamma.$ One of the motivations of their work was to provide a weaker definition of perfectly indistinguishable obfuscation, which is shown to be impossible under certain complexity-theoretic assumptions \cite{AJJ14}. However, to the best of our knowledge, $(G,\Gamma)$-{\em indistinguishability obfuscation} is  incomparable with the computational indistinguishability obfuscation \cite{BGI+12, GGH+13}, which is the topic of this paper.
+Quantum obfuscation was first studied in \cite{AJJ14}, where a notion called
+$(G,\Gamma)$-{\em indistinguishability obfuscation} was proposed,  where $G$ is a set of gates and $\Gamma$ is a set of relations satisfied by the elements of $G$. In this notion, any two circuits over the set of gates $G$ are perfectly indistinguishable if they differ by some sequence of applications of the relations in~$\Gamma.$ One of the motivations of their work was to provide a weaker definition of perfectly indistinguishable obfuscation, which is shown to be impossible under certain complexity-theoretic assumptions \cite{AJJ14}. However, to the best of our knowledge, $(G,\Gamma)$-{\em indistinguishability obfuscation} is  incomparable with the computational indistinguishability obfuscation \cite{BGI+12, GGH+13}, which is the topic of our work. 
 
-The quantum obfuscation is studied more rigorously in \cite{AF16arxiv}, where the following notions of quantum obfuscation are defined.
+Quantum obfuscation is studied rigorously in \cite{AF16arxiv}, where the following notions of quantum obfuscation are defined.
 \begin{enumerate}
 \item Quantum black-box obfuscation.
 \item Quantum information-theoretic black-box obfuscation.
@@ -125,6 +125,6 @@ The quantum obfuscation is studied more rigorously in \cite{AF16arxiv}, where th
 %applications of gate-teleportation based quantum $i\mathcal{O}$ (for instance, to unclonable programs~\cite{Aar09}).
 
 %
-%\subsection*{Outline}
+\subsection*{Outline}
 %\Cref{sec: iO-clifford-functions}...
 The remainder of this paper is structured as follows. \Cref{sec:prelims} overviews basic notions required in this work. In \Cref{sec:QiO-Cliffords and more} we formally define indistinguishability obfuscation for quantum circuits and provide the construction for Clifford circuits. Finally, in \Cref{QiO:Clifford+T:family}, we give our main result which shows quantum indistinguishability obfuscation for quantum circuits with a logarithmic number of $\tgate$ gates. 
