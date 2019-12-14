@@ -3,7 +3,7 @@
 %Section
 \section{Quantum Indistinguishability Obfuscation}
 \label{sec:QiO-Cliffords and more}
-In this section we give a definition of equivalent quantum circuits and also define a notion of Quantum Indistinguishability Obfuscation $Qi\mathcal{O}.$ In section \ref{QiO:Clifford-Circuits} we show how to construct $Qi\mathcal{O}$ for some families of quantum circuits. We give two alternative methods, the first based on canonical forms, and the second based on gate teleportation.
+In this section we provide definitions of equivalent quantum circuits and  Quantum Indistinguishability Obfuscation $Qi\mathcal{O}.$ In section \ref{QiO:Clifford-Circuits} we show how to construct $Qi\mathcal{O}$ for Clifford circuits. The first construction is based on a canonical form, and the second is based on the principle of gate teleportation.
 
 %\anote{Need some blah blah at the beginning of a section to say what we present in this section.}
 
@@ -44,27 +44,43 @@ Where $k=|C_{q_1}|=|C_{q_2}|.$
 
 \subsection{Quantum Indistinguishability Obfuscation for Clifford Circuits}
 \label{QiO:Clifford-Circuits}
- In this section we present two methods to obfuscate any Clifford circuit,  one using a canonical form and the other using gate teleportation.
+ In this section we present two methods to construct $Qi\mathcal{O}$ for any Clifford circuit,  one using a canonical form and the other using gate teleportation.
 
-\subsubsection{$Qi\mathcal{O}$ for Clifford via Canonical Form}
+\subsubsection{$Qi\mathcal{O}$ for Clifford Circuits via Canonical Form}
 \label{sec:Clifford-iO-canonical}
-Aaronson and Gottesman invented a polynomial-quantum algorithm (polynomial size circuit) that takes a Clifford circuit $C_q$ and output its canonical form ~\cite{AG04} (section VI). This canonical form is invariant for any two equivalent circuits. Moreover the size of the canonical form remain $poly(|C_q|).$ Therefore, the $Qi\mathcal{O}$ in essentially the Aaronson and Gottesman algorithm that takes a Clifford circuit $C_q,$ as an input and output its canonical form $C_q^\prime$ and an empty register $\rho$ \footnote{Note we output the empty register to satisfy the definition of quantum indistinguishability obfuscation (\ref{def:QiO}).}
-														$$(\rho, C_q^\prime)\leftarrow Qi\mathcal{O}(C_q).$$
+Aaronson and Gottesman invented a polynomial-time quantum algorithm (polynomial size circuit) that takes a Clifford circuit $C_q$ and outputs its canonical form (see ~\cite{AG04} section VI). This canonical form is invariant for any two equivalent circuits. Moreover the size of the canonical form remains polynomial in the size of the input circuit. 
+\begin{algorithm}[H]
+\label{QiO:Canonical-Clifford}
+   \caption{$Qi\mathcal{O}$ using Canonical Form}
+  \begin{itemize}
+\item Input: A $n$-qubit Clifford Circuit $C_q.$
+ \begin{enumerate}
+  \item   Using  the Aaronson and Gottesman algorithm~\cite{AG04} compute the canonical form of $C_q$
+   		\begin{equation*}
+ 		 C_q^\prime \xleftarrow{\mbox{canonical form}}C_q
+ 		 \end{equation*}
+  \item Let $\rho$ be an empty register.
+  \item Output $\left(\rho,C_q^\prime \right).$\footnote{Note we output the empty register to satisfy the definition of quantum indistinguishability obfuscation (\ref{def:QiO}).}
+  \end{enumerate}
+  \end{itemize}
+\end{algorithm}
+
+
 
  \begin{lemma}
-The above construction (section \ref{sec:Clifford-iO-canonical}) is a Quantum Indistinguishability Obfuscation for Clifford Circuits.
+The algorithm \ref{QiO:Canonical-Clifford} is a Quantum Indistinguishability Obfuscation for Clifford Circuits.
 \end{lemma}
 
-\noindent {\bf Proof}: We have to show that the construction satisfies definition \ref{def:QiO} . Note $Qi\mathcal{O}$ is a polynomial-time quantum algorithm, since it is essentially the same a Aaronson and Gottesman a polynomial-quantum algorithm for computing a canonical form of a Clifford circuit ~\cite{AG04} (section VI).
-To show the construction satisfies all 3 properties of the definition \ref{def:QiO}; let $C_q^\prime$ be the canonical form of some Clifford circuit $C_q.$  Since, $C_q^\prime$ and $C_q$ are equivalent circuits (definition \ref{def:equivalent-circuits}) they have the same function functionality. Note $\rho$ is an empty register and the size of $|C_q^\prime| \in poly(|C_q|)$ ~\cite{AG04}, hence the construction is efficient (polynomial slowdown). Moreover the canonical form reveals no knowledge about the input circuit except the unitary it computes, therefore this $Qi\mathcal{O}$ is perfectly indistinguishable against any quantum adversary. Therefore, also computationally indistinguishable against any quantum adversary.
+\noindent {\bf Proof}: We have to show that the construction \ref{QiO:Canonical-Clifford} satisfies the definition of quantum indistinguishability obfuscation \ref{def:QiO}. Note that the construction is essentially the Aaronson and Gottesman  algorithm~\cite{AG04}. Therefore, it runs in polynomial-time. 
+Since,  $C_q^\prime$ is the canonical form of $C_q,$ they have the same functionality. Note $\rho$ is an empty register and the size of $|C_q^\prime| \in poly(|C_q|)$ ~\cite{AG04}, therefore the construction is efficient (polynomial slowdown). Finally note the canonical form reveals no information about the input circuit $C_q$ excepts its functionality, therefore this $Qi\mathcal{O}$ is perfectly indistinguishable against any quantum adversary. Hence, computationally indistinguishable against any quantum adversary.
 
 
 
 \subsubsection{$Qi\mathcal{O}$ for Clifford via Gate Teleportation}
 \label{sec:Clifford-iO-teleportaion}
-In this section we  show that how gate teleportation can be used to construct a quantum indistinguishability obfuscation for Clifford circuits Our algorithm relies on the assumption that there exists a quantum secure $i\mathcal{O}$ for classical circuits, this seems problematic at first since, there is no provably quantum secure $i\mathcal{O}$ known for general classical circuits.
+In this section we  show how gate teleportation (section \ref{protocol: gate-teleportation}) can be used to construct a quantum indistinguishability obfuscation for Clifford circuits. Our algorithm relies on the assumption that there exists a quantum secure $i\mathcal{O}$ for classical circuits, this seems problematic at first, since there is no provably quantum secure $i\mathcal{O}$ known for general classical circuits.
 %\anote{Really? I thought there were some candidates.... }
-However,  our construction relies on the assumption that a quantum secure $i\mathcal{O}$ exists for a very specific class of classical circuits the compute update functions (section \ref{update function}). And In fact, it is easy to construct an $i\mathcal{O}$ for classical circuits that compute update functions for Clifford circuits (appendix \ref{sec: iO-clifford-functions}). %section \ref{sec: iO-clifford-functions}). %\anote{Indeed, we're looking at some classical circuits that are probably quite easy to deal with. I'm not sure they are Cliffords, however, since I think they are classical functions.}
+However,  our construction relies on the assumption that a quantum secure $i\mathcal{O}$ exists for a very specific class of boolean circuits.\footnote{Circuits that compute update functions for Clifford circuits section \ref{update function}}.  And in fact, it is easy to construct an $i\mathcal{O}$ for this class of circuits (see appendix \ref{sec: iO-clifford-functions}). %section \ref{sec: iO-clifford-functions}). %\anote{Indeed, we're looking at some classical circuits that are probably quite easy to deal with. I'm not sure they are Cliffords, however, since I think they are classical functions.}
 
 
 %\anote{below, $\rho$ is usually a density matrix, which does not require a $\ket{\cdot}$.}
@@ -79,9 +95,9 @@ However,  our construction relies on the assumption that a quantum secure $i\mat
   \item Prepare $2n$ qubit Bell state $\ket{\beta^{ 2n}}=\ket{\beta_{00}}\otimes \cdots \otimes \ket{\beta_{00}}.$
   \item Apply the circuit $C_q$ on the right most $n$ qubits and obtain a system $\rho$
   										 $$\rho=(\igate_n\otimes C_q) \ket{\beta^{2n}}.$$
- \item Compute the classical circuit $C_{F_{C_q}}$ that computes the update function $F_{C_q}.$	
- \item  Set $C=i\mathcal{O}(C_{F_{C_q}}).$							
-  \item Let $B_q$ denote the circuit that takes a $3n$ qubit state and perform a Bell measurement on the leftmost $2n$-qubits of the input state and obtain the bits (output of measurement), $(a_1,b_1\ldots,a_n,b_n)$
+ \item Compute the classical circuit $C$ that computes the update function $F_{C_q}.$	
+ \item  Set $C^\prime\leftarrow i\mathcal{O}(C).$							
+  \item Let $B_q$ denote the circuit that takes a $2n$ qubit state as an input and perform a Bell measurement on it.
   \item Set $C_q^\prime=(B_q, C^\prime).$
   \item Output $\left(\rho,C_q^\prime \right).$
   \end{enumerate}
@@ -97,10 +113,10 @@ However,  our construction relies on the assumption that a quantum secure $i\mat
  \begin{itemize}
   \item Input $\left(\rho,C_q^\prime \right)$ and a quantum state $\ket{\psi}.$
   \begin{enumerate}
-  \item   Write $C_q^\prime=(B_q, C)$ and the joint system $\rho_{AB}=\rho \otimes \ket{\psi}.$
+  \item   Write $C_q^\prime=(B_q, C^\prime)$ and the joint system $\rho_{AB}=\rho \otimes \ket{\psi}.$
   \item   Obtain the state $\rho_{AB}^\prime=B_q(\rho_{AB})$ and classical output $(a_1,b_1\ldots,a_n,b_n).$
   \item   Compute $C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n}})\ket{\psi}=Tr_A(\rho_{AB}^\prime)$ (see  gate teleportation protocol \ref{protocol: gate-teleportation}).
-  \item   Compute the update function $$(a_1^\prime, b_1^\prime,\ldots, a_n^\prime, b_n^\prime)=C(a_1,b_1\ldots,a_n,b_n).$$
+  \item   Compute the update function $$(a_1^\prime, b_1^\prime,\ldots, a_n^\prime, b_n^\prime)=C^\prime(a_1,b_1\ldots,a_n,b_n).$$
   \item    Compute the correction unitary $(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime})$
   \item   Apply  $(\xgate^{\otimes_{i=1}^{n} b_{i}^\prime} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}^\prime})$ to the system $C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}})\ket{\psi}$ to obtain the state $C_q(\ket{\psi})$ as follows,
   \begin{equation*}
@@ -115,7 +131,7 @@ However,  our construction relies on the assumption that a quantum secure $i\mat
 \end{algorithm}
 
 \begin{theorem}
-If $i\mathcal{O}$ is a quantum secure classical indistinguishability obfuscation, then $Qi\mathcal{O}$ constructed from the gate teleportation  a quantum Indistinguishability Obfuscation for all Clifford Circuits.
+If $i\mathcal{O}$ is a quantum secure classical indistinguishability obfuscation, then algorithm \ref{QiO:Clifford-teleportation} is a quantum Indistinguishability Obfuscation for all Clifford Circuits.
 \end{theorem}
 
 \anote{Note to self: I have not checked the below}
@@ -123,15 +139,26 @@ If $i\mathcal{O}$ is a quantum secure classical indistinguishability obfuscation
 \noindent{\bf Proof}:
 \begin{itemize}
 \item  {\tt Functionality:} The functionality $Qi\mathcal{O}$ is followed from the gate teleportation (section \ref{protocol: gate-teleportation}).
-\item {\tt Polynomial Slowdown:} Note $\rho$ is a $O(n)$-qubit state  and the size of $|C_q|=|B_q|+|C^\prime|.$ The circuit $B_q$ perform the Bell measurement of a $O(n)$ qubit system. Therefore, $B_q$ can be constructed with $O(n)$ gates. Note from complexity theory we know that if a function can be computed by a deterministic algorithm in time $t(n),$ then it can be computed by a circuit of size $O(t^2(n)).$ Therefore if we can show  that  ${F_{q_c}}$ can be computed in $poly(|C_q|),$ then we can conclude that the size of $|C|\in poly(|C_q|).$ Note the function $F_{C_q}$ takes  $2n$ bits as an input and perform $O(n)$ operations on the input bits for each gate in $C_{q}.$ There are at most $|C_q|$ gates, therefore the total cost of computing $F_{C_q}$ is $O(n)|C_q|.$  Note any $n$-qubit circuit $C_q,$ $n\leq |C_q|,$ the function $F_{C_q}$ can be computed by a circuit  of size at most $poly(|C_{q}|).$ Therefore,
+\item {\tt Polynomial Slowdown:} Note $\rho$ is a $O(n)$-qubit state and the size of $|C_q^\prime|=|B_q|+|C^\prime|.$ The circuit $B_q$ perform the Bell measurement of a $O(n)$ qubit system. Therefore, $B_q$ can be constructed with $O(|C_q|)$ gates and since $C^\prime\leftarrow i\mathcal{O}(C),$ the $i\mathcal{O}$ guarantees that $|C^\prime|\in poly(|C|).$ So all we have to show that $|C|\in poly(|C_q|).$  Let $g_{|C_q|},\dots, g_2,g_1$ be a topological ordering of the gates in $C_q.$ For each gate $g_i$ $C$ has to implement one of the following operations on input bits (section \ref{update function}) 
+ \begin{itemize}
+ \item[] $(a,b)\xrightarrow{\xgate, \zgate}(a,b).$  
+ \item[]  $(a,b)\xrightarrow{\hgate}(b,a)$         (one swap).
+ \item[]  $(a,b)\xrightarrow{\pgate}(a,a\oplus b)$      (one $\oplus$ operation).
+ \item[]  $(a_1,b_1,a_2,b_2)\xrightarrow{\mbox{\cnot}}(a_1\oplus a_2,b_1,a_2, b_1\oplus b_2)$ (two $\oplus$ operations).
+ \end{itemize}
+ Each these operation can be implemented by constant number of gates. Therefore, the size of $C\in O(|C_q|),$ hence we have
 \begin{equation*}
 \rho\in poly(|C_q|)    \mbox{ and } |C_q^\prime |=|B_q|+|C| \in poly(|C_q|)
 \end{equation*}
 
-\item  {\tt Indistinguishability:} Let $C_{q_1}$ and $C_{q_2}$ be two $n$-qubit equivalent Clifford circuits
+\item  {\tt Indistinguishability:} Let $C_{q_1}$ and $C_{q_2}$ be two $n$-qubit equivalent Clifford circuits of the same size. We have to show that $Qi\mathcal{O}(C_{q_1})\sim^c Qi\mathcal{O}(C_{q_2})$ are computationally indistinguishable. Let
 \begin{equation*}
-\left(\rho_1 ,\left(B_q, i\mathcal{O}(C_{F_{C_{q_1}}})\right)\right)= Qi\mathcal{O}(C_{q_1}) \mbox{ and } \left(\rho_2 ,\left(B_q, i\mathcal{O}(C_{F_{C_{q_2}}})\right)\right)= Qi\mathcal{O}(C_{q_2})
+\begin{aligned}
+(\rho_1 ,(B_q, i\mathcal{O}(C_1)) \leftarrow Qi\mathcal{O}(C_{q_1}) \mbox{ and }
+(\rho_2 ,(B_q, i\mathcal{O}(C_2))\leftarrow Qi\mathcal{O}(C_{q_2})
+ \end{aligned}
 \end{equation*}
+
 
 Since $C_{q_1}(\ket{\tau})=C_{q_2}(\ket{\tau})$ for every quantum state $\ket{\tau}$ we have,
 
@@ -139,7 +166,13 @@ Since $C_{q_1}(\ket{\tau})=C_{q_2}(\ket{\tau})$ for every quantum state $\ket{\t
 \label{eq:1}
 \rho_1=(I\otimes C_{q_1}) \ket{\beta^{2n}}=(I\otimes C_{q_2}) \ket{\beta^{2n}}=\rho_2.
 \end{equation}
-And of course $B_q$ will always be the same circuit for circuits. So the only thing we need to show that $i\mathcal{O}(C_{F_{C_{q_1}}})$ and $i\mathcal{O}(C_{F_{C_{q_2}}})$ are computationally indistinguishable against any polynomial-time quantum adversary. Note if we can prove that $F_{C_{q_1}}$ and $F_{C_{q_2}}$ are equivalent functions then we can conclude that the classical circuits ($C_{q_1}$ and $C_{q_2}$) that computes these functions are also be equivalent. Then from the definition of classical quantum secure $i\mathcal{O}$ we can conclude that  $iO(C_{F_{C_{q_2}}})$ and $iO(C_{F_{C_{q_2}}})$ are computationally indistinguishable against any polynomial-time quantum adversary. From Theorem \ref{sec:Clifford Functions} we have $F_{C_{q_1}}$ and $F_{C_{q_2}}$ equivalent functions, therefore $Qi\mathcal{O}$ is a quantum secure indistinguishability obfuscation for all Clifford Circuits.\footnote{Note without loss of generality we can assume that $|C_{F_{C_{q_1}}}|=|C_{F_{C_{q_2}}}|,$ because we can always increase the size of a circuit by adding trivial gates to it. }
+And of course the bell measure circuit $B_q$ is the same for both $Qi\mathcal{O}(C_{q_1})$ and $Qi\mathcal{O}(C_{q_2}).$ So the only thing we need to show that $i\mathcal{O}(C_1)\sim^ci\mathcal{O}(C_2)$ are computationally indistinguishable against any polynomial-time quantum adversary. In order to prove that $i\mathcal{O}(C_1)\sim^c\mathcal{O}(C_2)$ we have to prove 
+
+\begin{enumerate}
+\item $C_1$ and $C_2$ are equivalent circuits, i.e. they computes the same functionality.
+\item  $|C_1|=|C_2|.$
+\end{enumerate}
+Then using the $i\mathcal{O}$ definition we can conclude that $i\mathcal{O}(C_1)\sim^c\mathcal{O}(C_2).$ Note $C_1$ computes the update function $F_{C_{q_1}}$ and $C_2$ computes the update function $F_{C_{q_2}}.$ From Theorem \ref{sec:Clifford Functions} we have $F_{C_{q_1}}=F_{C_{q_2}},$ therefore, $C_1$ and $C_2$ must be equivalent circuits. Moreover if we use the $i\mathcal{O}$ defined in the appendix \ref{sec:appendix} then we are guaranteed to have $|C_1|=|C_2|.$ Therefore we have $i\mathcal{O}(C_1)\sim^c\mathcal{O}(C_2)$ and this complete the proof. But what if we are using any arbitrary quantum secure $i\mathcal{O},$ then it might be the classical circuit $C_1$ and $C_2$ are of different sizes, even if  $|C_{q_1}|=|C_{q_2}|.$  But this is not a problem, suppose $C_q$ be a quantum circuit we want to obfuscate. The classical circuit $C$ is constructed by going through each gate in $C_{q}.$ Some gates are more costly than others (for e.g $\cnot$ vs $\zgate,$ see above or section \ref{update functions}). Note that we can obtain an upper on all the classical circuits corresponding quantum circuits of the same size, for example by replacing gates in $C_q$ by the most costly gates and then computing the classical circuit for resulting quantum gate. Now suppose $m$ is the upper bound on the size of classical circuits corresponding of $|C_q|,$ then for any circuit $C_q,$ we first calculate $C$ and then pad $C$ with $m-|C|$ identity gates. This will ensure that if $|C_{q_1}|=|C_{q_2}|,$ then $|C_1|=|C_2|.$
 \end{itemize}
 
 
