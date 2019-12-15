@@ -5,23 +5,24 @@
 \section{Obfuscating Beyond Clifford Circuits}
 \label{QiO:Clifford+T:family}
 \Anne{I think we need to work on the structure of this section, currently when reading quickly, it is hard to understand how the various pieces fit together}
-Recall from  section \ref{defn:Clifford+T:family} that adding a non-Clifford gate  such as $\tgate$-gate to Clifford gates gives us a generating set for all unitary quantum circuits. In this section we show how to build quantum indistinguishability obfuscation for any quantum circuit that has at most logarithmic  $\tgate$-gates in the size of the circuit.
-%\anote{Is this the correct link to the Definition?}
+In the previous section we show how we can construct a $Qi\mathcal{O}$ for Clifford circuits from gate-teleportation and $i\mathcal{O}.$ In this section, we extend the gate teleportation technique to show how we can construct $Qi\mathcal{O}$ for any quantum circuit that has at most logarithmic non-Clifford-gates in the circuit size.  We start by constructing a $Qi\mathcal{O}$ for any 1-qubit quantum circuit (section \ref{QiO:Clifford+T:family+GT}), then in section \ref{sec:n-qubit-circuits}  we extend the 1-qubit construction to any $n$-qubit quantum circuit that has at most logarithmic  $\tgate$-gates in the circuit size.\footnote{Recall from  section \ref{defn:Clifford+T:family} that adding a non-Clifford gate  such as $\tgate$-gate to Clifford gates gives us a generating set for all unitary quantum circuits.}
 
 
 
-
-\subsection{Using Gate Teleportation}
+\subsection{$Qi\mathcal{O}$ for 1-Qubit Quantum Circuits}
 \label{QiO:Clifford+T:family+GT}
-In this section we show how we can obfuscate any 1-qubit unitary circuit using gate teleportation and a quantum secure iO; and then based on this idea we will show how we can obfuscate any $n$-qubit circuit $C_q$ as far as the number of $\tgate$-gates remain logarithmic in $|C_q|.$ The $\tgate$ relates to the $\xgate, \zgate$
-$$\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\pgate^b \tgate$$
-If $b=0,$ then we don't have to worry about $\pgate$ gate otherwise we have to perform a $\pgate$ correction. We can write $\pgate=(\frac{1+i}{2}) \igate + (\frac{1-i}{2})\zgate,$ therefore
+In this section we show how we can obfuscate any 1-qubit unitary circuit using gate teleportation and a quantum secure $i\mathcal{O}.$  The $\tgate$ relates to the $\xgate, \zgate$ as
+\begin{equation}
+\label{eq:pgate}
+\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\pgate^b \tgate.
+\end{equation}
+If $b=0,$ then we don't have to worry about $\pgate$ gate otherwise we have to perform a $\pgate$ correction. This is undesirable as $\pgate$ does not commute with $\xgate,$ making the update function complicated. Note we can write $\pgate=(\frac{1+i}{2}) \igate + (\frac{1-i}{2})\zgate,$ therefore equation \ref{eq:pgate} can be rewritten as,
 
 \begin{equation}
 \label{eq:pgate1}
 \tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate\right]^b \tgate
 \end{equation}
-Note  $\left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate\right]^b=\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate^b$ for $b \in \{0,1\},$ therefore we can rewrite the equation \ref{eq:pgate1} as
+Note  $\left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate\right]^b=\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgate^b$ for $b \in \{0,1\},$ therefore we can rewrite equation \ref{eq:pgate1} as,
 \begin{equation}
 \label{eq:pgate2}
 \begin{aligned}
@@ -30,7 +31,7 @@ Note  $\left[\left(\frac{1+i}{2}\right) \igate + \left(\frac{1-i}{2}\right)\zgat
 \end{aligned}
 \end{equation}
 
-Since $a$ and $b$ are bits, the equation \ref{eq:pgate2} can be written as a linear combination of $\{\igate, \xgate, \zgate, \xgate \zgate\},$
+Since $a,b\in\{0,1\}$ there only four possible combinations ($a=b=0$, $a=b=1$, $a=1,b=0$ and $a=0,b=1).$ This mean we can be express equation \ref{eq:pgate2} as a linear combination of $\{\igate, \xgate, \zgate, \xgate \zgate\},$
 
 \begin{equation}
 \label{eq:pgate3}
@@ -38,48 +39,41 @@ Since $a$ and $b$ are bits, the equation \ref{eq:pgate2} can be written as a lin
 \tgate \xgate^b \zgate^a= (\alpha_0 \igate +  \alpha_1 \xgate + \alpha_2 \zgate + \alpha_3 \xgate\zgate)\tgate \\
 \end{aligned}
 \end{equation}
-for   $\alpha_i \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\},$  $i\in[4].$ The equation \ref{eq:pgate3} is important as we will see that the correction unitary or any 1-qubit circuit can be expressed in the form of \ref{eq:pgate3} .
+where $\alpha_i \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\},$ for  $i\in[4].$ The equation \ref{eq:pgate3} is important as we will see that the correction unitary for any 1-qubit circuit can be expressed in this form.
 
 \subsection{Single-qubit circuits}
 \label{sec:1-qubit}
 
-Let $C_q$ be a $1$-qubit circuit we want to obfuscate and $\ket{\psi}$ is the quantum state on which we want to evaluate $C_q.$ Note we can write any $1$-qubit circuit as a sequence of gates from the set $\{\hgate, \tgate\}$ \footnote{The set $\{\hgate,  \tgate\}$ is universal for 1-qubit unitary.}
+Let $C_q$ be a $1$-qubit circuit we want to obfuscate and $\ket{\psi}$ is the quantum state on which we want to evaluate $C_q.$ Note we can write any $1$-qubit circuit as a sequence of gates from the set $\{\hgate, \tgate\}$ \footnote{The set $\{\hgate,  \tgate\}$ is universal for 1-qubit unitary \cite{KLM07}.}
 
 $$C_q=(g_{|C_q|},\ldots,g_2,g_1 ),\; g_i\in\{\hgate, \tgate\}$$
-In gate teleportation algorithm we have an subsystem of the form $C_q \xgate^b\zgate^a (\ket{\psi})$ (section \ref{protocol: gate  teleportation})
+Recall that in gate-teleportation construction for Clifford circuits we are left with a subsystem of the form $C_q \xgate^b\zgate^a (\ket{\psi})$ (section \ref{Eval:Clifford-teleportation}, algorithm 4, step 3)
 
 \begin{equation}
 \label{eq:pgate4}
 C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_2,g_1 )\xgate^b\zgate^a (\ket{\psi}),
 \end{equation}
-and to evaluate the circuit on the input we have to apply a correction unitary. If $g_1=\hgate$ then we can write the above system as
+and to evaluate the circuit on $\ket{\psi}$ we have to apply a correction unitary. We can write the system in \ref{eq:pgate4} as
 
 \begin{equation}
 \begin{aligned}
 \label{eq:pgate5}
-C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_2)  \xgate^a \zgate^b g_1 (\ket{\psi}) \\
-=(g_{|C_q|},\ldots,g_2)(e_0 \igate +  e_1 \xgate + e_2 \zgate + e_3\xgate \zgate)g_1 (\ket{\psi})
+C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_2)(\alpha_0 \igate +  \alpha_1 \xgate + \alpha_2 \zgate + \alpha_3 \xgate \zgate)g_1 (\ket{\psi})
 \end{aligned}
 \end{equation}
-where  $e_i \in \{0,1\},$  $i\in[4].$ Similarly if $g_1=\tgate,$ then we can also write the expression \ref{eq:pgate4} as
-
-\begin{equation}
-\begin{aligned}
-\label{eq:pgate6}
-C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_2)(e_0^\prime \igate +  e_1^\prime \xgate + e_2^\prime \zgate + e_3^\prime \xgate \zgate)g_1 (\ket{\psi})
-\end{aligned}
+ where $\alpha_i \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\}.$ We can write the equation \ref{eq:pgate5}  as a conditional equation based on if $g_2=\tgate$ or $g_2=\hgate.$
+ 
+ \begin{equation}
+  C_q \xgate^b\zgate^a (\ket{\psi})= 
+\begin{cases}
+  (g_{|C_q|},\ldots,g_3)(\alpha_0 \igate +  \alpha_2 \xgate + \alpha_1 \zgate + \alpha_3 \xgate \zgate)g_2g_1 (\ket{\psi}), & \text{if } g_2=\tgate\\
+ (g_{|C_q|},\ldots,g_3)(\alpha_0 \igate +  \alpha_1 \zgate + \alpha_2^\prime \xgate + \alpha_3^\prime \xgate \zgate)g_2g_1 (\ket{\psi}), & \text{if } g_2=\hgate\\        
+\end{cases}
 \end{equation}
-where $e_i^\prime \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\}$  for $i\in[4].$ Note there are more possibilities for $e_i^\prime$'s in the expression \ref{eq:pgate6} than $e_i$'s in the expression \ref{eq:pgate5}. This is because $\tgate$-gates can affect the size of the coefficients and whereas $\hgate$-gates can only permute the coefficients in the summation. After applying $g_2$ to expressions \ref{eq:pgate5} or \ref{eq:pgate6} the number of terms in the summation cannot exceed to more than~4. Moreover, the size of the coefficients $e_i$'s may only change if $g_2=\tgate,$
 
-\begin{equation}
-\begin{aligned}
-\label{eq:pgate7}
-C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_3)(\gamma_0 \igate +  \gamma_1 \xgate + \gamma_2 \zgate + \gamma_3 \xgate \zgate)g_2g_1 (\ket{\psi})
-\end{aligned}
-\end{equation}
-where $\gamma_i \in \mathbb{C}$ if $g_2=\tgate$ and $\gamma_i  \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\},$  $i\in[4].$
+where $\alpha_2^\prime=\alpha_2(1-i)/2+\alpha_3(1+i)/2$ and $\alpha_3^\prime=\alpha_3(1-i)/2+\alpha_2(1+i)/2$  for $i\in[4].$ Note that in the expression above the coefficients may change if $g_2$ happens to be a $\tgate$-gate;  whereas if $g_2$ is an $\hgate$-gate then the size of coefficients remains unaffected. Moreover, applying any number of gates to a system of form \ref{eq:pgate3} cannot increase the number of terms, i.e. the number of terms in the summation remain at most 4. However, the size of coefficients $\alpha_i$ can be changed with each application of a $\tgate$-gate.
 
-Hence, it follows  that by applying the remaining  sequence of gates $(g_{|C_q|},\ldots,g_3)$, the expression \ref{eq:pgate7} can be written as
+Hence, it follows that by applying the remaining  sequence of gates $(g_{|C_q|},\ldots,g_3)$, the system \ref{eq:pgate5} can be written as
 \begin{equation}
 \begin{aligned}
 \label{eq:pgate8}
@@ -93,52 +87,57 @@ where $\beta_i  \in \mathbb{C},$ $i\in[4].$  Therefore, for any  $1$-qubit circu
  (\beta_0 \igate +   \beta_1 \xgate +  \beta_2 \zgate +  \beta_3 \xgate\zgate), \mbox{ for }  \beta_i \in \mathbb{C},\; i\in[n]
 \end{equation}
 
-Moreover, it can be shown that the size of $\beta_i$'s grows at most a polynomial in the number of $\tgate$-gates in the circuit (appendix \ref{coeff:size}). Therefore the update function for any $1$-qubit circuit $C_q$ can be defined as a following map,
+Moreover, the size of the coefficients $\beta_i$'s grows at most a polynomial in the number of $\tgate$-gates. This is discussed in (appendix \ref{coeff:size}). Therefore the update function for any $1$-qubit circuit $C_q$ can be defined as a following map,
 
 \begin{equation*}
 F_{C_q}:\{0,1\}^2\rightarrow \mathbb{C}^4,\; (a,b)\mapsto (\beta_0, \beta_1,\beta_2,\beta_3),
 \end{equation*}
 which corresponds to the correction unitary $(\beta_0 \igate +  \beta_1 \xgate + \beta_2 \zgate + \beta_3\xgate \zgate).$
-Moreover, the update functions are for the any two equivalent 1-qubit circuit are equivalent (see Lemma \ref{lemma:1qubit}). Therefore, we can obfuscate any 1-qubit circuit using gate teleportation and a quantum secure iO as we did for the Clifford circuits (section \ref{sec:Clifford-iO-teleportaion}).
+Moreover, the update functions for any two equivalent 1-qubit circuit are equivalent (see Lemma \ref{lemma:1qubit}). Therefore, we can obfuscate any 1-qubit circuit using gate teleportation and a quantum secure $i\mathcal{O}$ as we did for the Clifford circuits (section \ref{sec:Clifford-iO-teleportaion}). The proof is nearly identical to the gate teleportation based Clifford construction (section \ref{sec:Clifford-iO-teleportaion}).
 
 
 
 \begin{lemma}
 \label{lemma:1qubit}
-Let $C_q$ and $C_q^\prime$ be two equivalent 1-qubit circuits and
+Let $C_{q_1}$ and $C_{q_2}$ be two equivalent 1-qubit circuits and
 \begin{equation*}
 F_{C_q}:\{0,1\}^2\rightarrow \mathbb{C}^4 \mbox{ and } F_{C_q^\prime}:\{0,1\}^2\rightarrow \mathbb{C}^4
 \end{equation*}
-are the corresponding update functions for $C_q$ and $C_q^\prime,$  then $F_{C_q}=F_{C_q^\prime}.$
+are the corresponding update functions for $C_{q_1}$  and $C_{q_2},$   then $F_{C_q}=F_{C_q^\prime}.$
 \end{lemma}
 
-{\bf Proof:}  Suppose  $C_q$ and $C_q^\prime$ be two equivalent and let  $F_{C_q}(a,b)=(\beta_0, \beta_1, \beta_2, \beta_3)$ and $F_{C_q^\prime}(a,b)=(\beta_0^\prime, \beta_1^\prime, \beta_2^\prime, \beta_3^\prime)$ for $a,b\in\{0,1\}$ be their corresponding update functions. Let $(\ket{\psi}$ be any  qubit.
+{\bf Proof:}  Suppose $C_{q_1}$ and $C_{q_2}$ be two equivalent 1-qubit circuits and let $F_{C_{q_1}}$ and $F_{C_{q_2}}$ be the corresponding update functions. Suppose $F_{C_{q_1}}\neq F_{C_{q_2}}$ Then there must exist at least one input $(a,b)$ such that
+\begin{equation}
+\label{fun:assumption1}
+F_{C_{q_1}}(a,b)\neq F_{C_{q_2}}(a,b)
+\end{equation}
+Let $C_1$ and $C_2$ be circuits that compute $F_{C_{q_1}}$ and $F_{C_{q_2}},$ then it follows from the relation \ref{fun:assumption1} that
+\begin{equation*}
+C_1(a,b)=(\beta_0, \beta_1, \beta_2 , \beta_3)\neq (\beta_0^\prime, \beta_1^\prime, \beta_2^\prime , \beta_3^\prime)=C_2(a,b)
+\end{equation*}
+
+Suppose we want to evaluated circuits $C_{q_1}$ and $C_{q_2}$ on some state $\ket \psi$ using gate teleportaton (section \ref{protocol: gate-teleportation}). And further assume that the classical output of the Bell measurement for both circuits is  $(a,b)$ (section \ref{protocol: gate-teleportation}, step 4). After step 5 of  gate teleportation protocol (section \ref{protocol: gate-teleportation}) we are left with systems \ref{lemma:1qubit:eq1} and \ref{lemma:1qubit:eq2}
 \begin{equation}
 \label{lemma:1qubit:eq1}
 \begin{aligned}
- C_q \xgate^b \zgate^a(\ket{\psi})=(\beta_0 \igate+\beta_1 \xgate+\beta_2 \zgate+\beta_3 \xgate \zgate)  C_q (\ket{\psi}).\\
+ C_{q_1} \xgate^b \zgate^a(\ket{\psi})=(\beta_0 \igate+\beta_1 \xgate+\beta_2 \zgate+\beta_3 \xgate \zgate)  C_{q_1} (\ket{\psi}).\\
  \end{aligned}
 \end{equation}
 
 \begin{equation}
 \label{lemma:1qubit:eq2}
 \begin{aligned}
- C_q^\prime \xgate^b \zgate^a(\ket{\psi})=(\beta_0^\prime \igate+\beta_1^\prime \xgate+\beta_2^\prime \zgate+\beta_3^\prime \xgate \zgate)  C_q^\prime (\ket{\psi}).
+ C_{q_2}\xgate^b \zgate^a(\ket{\psi})=(\beta_0^\prime \igate+\beta_1^\prime \xgate+\beta_2^\prime \zgate+\beta_3^\prime \xgate \zgate)  C_{q_2}(\ket{\psi}).
  \end{aligned}
 \end{equation}
 
-Since,  $C_q (\rho)=C_q^\prime (\rho)$ for every input $\rho$ we can must have
-\begin{equation}
-C_q \xgate^b \zgate^a(\ket{\psi})= C_q^\prime \xgate^b \zgate^a(\ket{\psi}).
-\end{equation}
-
-Therefore we have
+Since, $C_{q_1}$ and $C_{q_2}$ are equivalent circuits we must have $C_{q_1} \xgate^b \zgate^a(\ket{\psi})=C_{q_2} \xgate^b \zgate^a(\ket{\psi}),$ therefore
 
 \begin{equation}
 \label{lemma:1qubit:eq3}
 \begin{aligned}
-(\beta_0 \igate+\beta_1 \xgate+\beta_2 \zgate+\beta_3 \xgate \zgate)  C_q (\ket{\psi})=(\beta_0^\prime \igate+\beta_1^\prime \xgate+\beta_2^\prime \zgate+\beta_3^\prime \xgate \zgate)  C_q^\prime (\ket{\psi})\\
-(\beta_0 \igate+\beta_1 \xgate+\beta_2 \zgate+\beta_3 \xgate \zgate)  C_q (\ket{\psi})=(\beta_0^\prime \igate+\beta_1^\prime \xgate+\beta_2^\prime \zgate+\beta_3^\prime \xgate \zgate)  C_q(\ket{\psi}).\\
+(\beta_0 \igate+\beta_1 \xgate+\beta_2 \zgate+\beta_3 \xgate \zgate)  C_{q_1} (\ket{\psi})=(\beta_0^\prime \igate+\beta_1^\prime \xgate+\beta_2^\prime \zgate+\beta_3^\prime \xgate \zgate)  C_{q_2} (\ket{\psi})\\
+=(\beta_0^\prime \igate+\beta_1^\prime \xgate+\beta_2^\prime \zgate+\beta_3^\prime \xgate \zgate)  C_{q_1}(\ket{\psi}).\\
 \end{aligned}
 \end{equation}
 
@@ -159,12 +158,12 @@ From equation \ref{lemma:1qubit:eq4}
 \end{aligned}
 \end{equation}
 
-The equation \ref{lemma:1qubit:eq5},  can only be satisfied if $\beta_i = \beta_i^\prime$ for every $i\in[4],$ therefore,  $F_{C_q}=F_{C_q^\prime}.$
+The equation \ref{lemma:1qubit:eq5},  can only be satisfied if $\beta_i = \beta_i^\prime$ for every $i\in[4],$ therefore we have a contradiction and $F_{C_{q_1}}=F_{C_{q_2}}.$
 
 
 \subsection{Quantum Indistinguishability Obfuscation for $n$-qubit Circuits}
 \label{sec:n-qubit-circuits}
-In the previous section we showed how we can construct a $Qi\mathcal{O}$  for any $1$-qubit unitary circuit. In this section we show that how to construct  $Qi\mathcal{O}$ for any $n$-qubit unitary circuit $C_q$ using iO gate teleportation and quantum secure iO provided the number of $\tgate$-gates are in $C_q$ are $O(\log(|C_q|).$  The reason for $O(\log(|C_q|)$ bound is that when $\cnot$ and $\tgate$-gates are mixed together then the
+In the previous section we showed how we can construct a $Qi\mathcal{O}$  for any $1$-qubit unitary circuit. In this section we show that how to construct  $Qi\mathcal{O}$ for any $n$-qubit unitary circuit $C_q$ using  gate teleportation and quantum secure $i\mathcal{O}$ provided the number of $\tgate$-gates are in $C_q$ are $O(\log(|C_q|).$  The reason for $O(\log(|C_q|)$ bound is that when $\cnot$ and $\tgate$-gates are mixed together then the
 the second property ({\tt Polynomial Slowdown}) of $Qi\mathcal{O}$ is violated if $\tgate$-count $\in \omega(\log(|C_q|)).$ More precisely we will show that for any $n$-qubit circuit with $k$ number of $\tgate$-gates,  the correction unitary in the worst-case has $4^k$ terms is of form  \ref{exp:nqubit-correction}
 
 \begin{equation}
@@ -173,7 +172,7 @@ the second property ({\tt Polynomial Slowdown}) of $Qi\mathcal{O}$ is violated i
 \end{equation}
 
 Since, there are at most $2^{2n}$ bit strings of size $n,$ it follows from  \ref{exp:nqubit-correction} that for any $n$-qubit circuit the correction unitary can be written as a summation of at most $2^{2n}$ terms. This means the terms in the correction unitary can increase exponential in the number of $\tgate$-gates for $k\leq n.$ But if the correction unitary has $2^{2n}$ terms, then by applying more $\tgate$-gates or any gate cannot increase the number of terms in the expression \ref{exp:nqubit-correction}. However,  the size of size of coefficients $\beta_i$'s can be affected with each application of a $\tgate$-gate (see Remark \ref{remark:nqubit-correction2} for details). Note that for any uniform family of quantum circuits
-$\mathcal{C}_q=\{C_{q_n}\mid n\in \mathbb{N}\}$ there exist a $poly(n)$ such that for every $C_{q_n}\in \mathcal{C}_q,$ imply $|C_{q_n}|\leq poly(n).$ Otherwise we can add $\igate$-gates to any circuit such that the $|C_q|\geq 2^{2n},$ and then obfuscate any circuit with polynomially many $\tgate$-gates using gate teleportation and classical iO.
+$\mathcal{C}_q=\{C_{q_n}\mid n\in \mathbb{N}\}$ there exist a $poly(n)$ such that for every $C_{q_n}\in \mathcal{C}_q,$ imply $|C_{q_n}|\leq poly(n).$ Otherwise we can add $\igate$-gates to any circuit such that the $|C_q|\geq 2^{2n},$ and then obfuscate any circuit with polynomially many $\tgate$-gates using gate teleportation and classical $i\mathcal{O}$.
 
 
 Let $C_q$ be an $n$-qubit circuit and $\ket{\psi}$ be an $n$-qubit state. If we want to evaluate $C_q$ on the state $\ket{\psi}$ using gate teleportation, then we are required to compute the correction unitary $U^\prime$ corresponding to $C_q$ (section \ref{protocol: gate  teleportation}) satisfying equation \ref{nqubit:eq6}.
