@@ -41,7 +41,7 @@ Since $a,b\in\{0,1\}$ there only four possible combinations ($a=b=0$, $a=b=1$, $
 \end{equation}
 where $\alpha_i \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\},$ for  $i\in[4].$ The equation \ref{eq:pgate3} is important as we will see that the correction unitary for any 1-qubit circuit can be expressed in this form.
 
-\subsection{Single-qubit circuits}
+\subsection{Single-Qubit Circuits}
 \label{sec:1-qubit}
 
 Let $C_q$ be a $1$-qubit circuit we want to obfuscate and $\ket{\psi}$ is the quantum state on which we want to evaluate $C_q.$ Note we can write any $1$-qubit circuit as a sequence of gates from the set $\{\hgate, \tgate\}$ \footnote{The set $\{\hgate,  \tgate\}$ is universal for 1-qubit unitary \cite{KLM07}.}
@@ -62,12 +62,12 @@ C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_2)(\alpha_0 \igate +  \alp
 \end{aligned}
 \end{equation}
  where $\alpha_i \in\left\{0,1, \frac{1+i}{2}, \frac{1-i}{2}\right\}.$ We can write the equation \ref{eq:pgate5}  as a conditional equation based on if $g_2=\tgate$ or $g_2=\hgate.$
- 
+
  \begin{equation}
-  C_q \xgate^b\zgate^a (\ket{\psi})= 
+  C_q \xgate^b\zgate^a (\ket{\psi})=
 \begin{cases}
   (g_{|C_q|},\ldots,g_3)(\alpha_0 \igate +  \alpha_2 \xgate + \alpha_1 \zgate + \alpha_3 \xgate \zgate)g_2g_1 (\ket{\psi}), & \text{if } g_2=\tgate\\
- (g_{|C_q|},\ldots,g_3)(\alpha_0 \igate +  \alpha_1 \zgate + \alpha_2^\prime \xgate + \alpha_3^\prime \xgate \zgate)g_2g_1 (\ket{\psi}), & \text{if } g_2=\hgate\\        
+ (g_{|C_q|},\ldots,g_3)(\alpha_0 \igate +  \alpha_1 \zgate + \alpha_2^\prime \xgate + \alpha_3^\prime \xgate \zgate)g_2g_1 (\ket{\psi}), & \text{if } g_2=\hgate\\
 \end{cases}
 \end{equation}
 

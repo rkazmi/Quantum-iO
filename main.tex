@@ -23,7 +23,7 @@
 
 
 
-\title{Indistinguishability obfuscation \\for\\ quantum circuits of low $\tgate$-gate complexity}
+\title{Indistinguishability obfuscation for \\quantum circuits of \\  low $\tgate$-gate complexity}
 
 
 \author{Anne Broadbent and Raza Ali Kazmi}
@@ -36,8 +36,8 @@
 \maketitle
 
 \begin{abstract}
-An \emph{indistiguishability obfuscator} $i\mathcal{O}$ is probabilistic polynomial-time algorithm that takes a circuit $C$ as input
-and outputs a new circuit $C^\prime$ that has the same functionality as the input circuit, such that  for any two circuits of the same size that compute the \emph{same} function, the outputs of the indistinguishability obfuscator are computationally indistinguishable. In this paper, we study indistinguishability obfuscation for \emph{quantum} circuits. We construct an indistinguishability  obfuscator that takes as input a quantum circuit and outputs a quantum state together with a quantum circuit, which together can be used to evaluate the original quantum circuit on any quantum input; the security guarantee being that for two quantum circuits of the same size that have the same input-output behaviour, the outputs of the obfuscator are indistinguishable. In our construction, the size of the output of the obfuscator is exponential in the number of non-Clifford gates, which means that the construction is efficient as long as the number of non-Clifford gates is logarithmic.
+An \emph{indistiguishability obfuscator}is probabilistic polynomial-time algorithm that takes a circuit as input
+and outputs a new circuit  that has the same functionality as the input circuit, such that  for any two circuits of the same size that compute the \emph{same} function, the outputs of the indistinguishability obfuscator are computationally indistinguishable. Here, we study indistinguishability obfuscation for \emph{quantum} circuits. We construct an indistinguishability  obfuscator that takes as input a quantum circuit and outputs a quantum state together with a quantum circuit, which together can be used to evaluate the original quantum circuit on any quantum input; the security guarantee being that for two quantum circuits of the same size that have the same input-output behaviour, the outputs of the obfuscator are indistinguishable. In our construction, the size of the output of the obfuscator is exponential in the number of non-Clifford (\tgate gates), which means that the construction is efficient as long as the number of $\tgate$-gates  is logarithmic in the circuit size. 
 \end{abstract}
 
 \newpage
@@ -94,12 +94,7 @@ and outputs a new circuit $C^\prime$ that has the same functionality as the inpu
 \section*{Acknowledgements}
 This material is based upon work supported by the Air Force Office of Scientific Research under award number FA9550-17-1-0083, Canada's   NFRF and NSERC, an Ontario ERA, and the University of Ottawa’s Research Chairs program.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\bibliographystyle{bst/alphaarxiv}
-\bibliography{bib/full,bib/quantum,bib/more}
-%\bibliography{bib/full.bib/quantum.bib}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -107,5 +102,12 @@ This material is based upon work supported by the Air Force Office of Scientific
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix
 \input{Appendix.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{bst/alphaarxiv}
+\bibliography{bib/full,bib/quantum,bib/more}
+%\bibliography{bib/full.bib/quantum.bib}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
