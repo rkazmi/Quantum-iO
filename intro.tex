@@ -10,7 +10,7 @@ An $i\mathcal{O}$ is a probabilistic polynomial-time algorithm that takes a circ
 
 The first candidate construction of $i\mathcal{O}$ was published in~\cite{GGH+13}, whose security relied on the presumed hardness of multilinear maps~\cite{CLT13, LSS14, GGH15}. Unfortunately, there have been many quantum attacks on  multilinear maps~\cite{ABD16, CDPR16, CGH17}.  Recently, a new $i\mathcal{O}$ scheme was proposed under  different assumptions \cite{AJL+19}. Whether or not this scheme is resistant against quantum attacks remains to be determined.
 
-In the quantum world, obfuscation has been studied in \cite{AJJ14,AF16arxiv}. In a nutshell (see Section\ref{sec:obf-quantum} for more details), \cite{AJJ14} show a type of obfuscation for quantum circuits, but without a security reduction.  On the other hand,  the focus of \cite{AF16arxiv} is on impossibility of obfuscation for quantum circuits in a variety of scenarios. Thus, despite these works, until now, the achievability of indistinguishability obfuscation for quantum circuits has remained wide open.
+In the quantum world, obfuscation has been studied in \cite{AJJ14,AF16arxiv}. In a nutshell (see Section\Cref{sec:obf-quantum} for more details), \cite{AJJ14} show a type of obfuscation for quantum circuits, but without a security reduction.  On the other hand,  the focus of \cite{AF16arxiv} is on impossibility of obfuscation for quantum circuits in a variety of scenarios. Thus, despite these works, until now, the achievability of indistinguishability obfuscation for quantum circuits has remained wide open.
 
 
 
@@ -46,7 +46,7 @@ Clifford circuits are quantum circuits that are built from the gate set $\{\hgat
 \paragraph{Obfuscating Cliffords using a canonical form.} Our first construction of $Qi\mathcal{O}$ for Clifford circuits starts with the well-known fact that a canonical form is an $i\mathcal{O}$. We point out that a canonical form for Clifford circuit was presented in~\cite{AG04}; which completes this construction (we also note that an alternative canonical form was also presented in~\cite{Sel13}). This canonical form technique  does not require any computational assumption. Moreover, the obfuscated circuits are classical, and hence can be easily communicated, stored, used and copied.
 
 \paragraph{Obfuscating Cliffords using gate teleportation.} Our second construction of $Qi\mathcal{O}$ for Clifford circuits takes a very different approach. We start with the gate-teleportation scheme~\cite{GC99}: according to this, it is possible to \emph{encode} a quantum computation~$C$ into a quantum state (specifically, by preparing a collection of entangled qubit pairs, and applying~$C$ to half of this preparation). Then, in order to perform a quantum computatation on a target input $\ket{\psi}$, we \emph{teleport} $\ket{\psi}$ \emph{into} the prepared entangled state. This causes the state $\ket{\psi}$ to undergo the evolution of $C$, \emph{up to some corrections}, based on the teleportation bits. If $C$ is chosen from the Clifford circuits, these corrections are relatively simple and thus the idea is to use a classical  $i\mathcal{O}$ to provide the correction function (Note that our construction does not require a full $i\mathcal{O}$ but rather rely on a weaker $i\mathcal{O}$ that can obfuscate a certain family of functions.) 
-In contrast to the previous scheme, the gate-teleportation scheme requires the assumption of quantum-secure classical $i\mathcal{O}$ for a certain family of functions (section \ref{update function}) and the obfuscated circuits are quantum. While this presents a technological challenge to communication, storage and also usage, there could be advantages to storing quantum programs into quantum states, for instance to take advantage of their \emph{uncloneability} \cite{Aar09,BL19arxiv}.
+In contrast to the previous scheme, the gate-teleportation scheme requires the assumption of quantum-secure classical $i\mathcal{O}$ for a certain family of functions (section \Cref{update function}) and the obfuscated circuits are quantum. While this presents a technological challenge to communication, storage and also usage, there could be advantages to storing quantum programs into quantum states, for instance to take advantage of their \emph{uncloneability} \cite{Aar09,BL19arxiv}.
 
 
 
@@ -57,7 +57,7 @@ We note that, also for other quantum cryptographic primitives, the $\tgate$-gate
 
 
 
-%In section \ref{sec:QiO-Cliffords and more} we provide a new definition of quantum indistinguishability obfuscation. We provide two methodologies for constructing a quantum indistinguishability obfuscation for Clifford circuits. One is based on canonical form of Clifford circuits  while other is based on the principle of gate teleportation.  The construction based on canonical form requires no computational assumptions and is in fact perfectly indistinguishability obfuscation (information theoratically secure), where as the gate teleportation based construction assumes the existence of a quantum secure classical $i\mathcal{O}.$ In section \ref{QiO:Clifford+T:family} we show how to a construct quantum indistinguishability obfuscation from gate teleportation and $i\mathcal{O}$ for any reversible quantum circuit that has at most logarithmic $\tgate$-gates.
+%In section \Cref{sec:QiO-Cliffords and more} we provide a new definition of quantum indistinguishability obfuscation. We provide two methodologies for constructing a quantum indistinguishability obfuscation for Clifford circuits. One is based on canonical form of Clifford circuits  while other is based on the principle of gate teleportation.  The construction based on canonical form requires no computational assumptions and is in fact perfectly indistinguishability obfuscation (information theoratically secure), where as the gate teleportation based construction assumes the existence of a quantum secure classical $i\mathcal{O}.$ In section \Cref{QiO:Clifford+T:family} we show how to a construct quantum indistinguishability obfuscation from gate teleportation and $i\mathcal{O}$ for any reversible quantum circuit that has at most logarithmic $\tgate$-gates.
 
 
 
@@ -75,7 +75,7 @@ We note that, also for other quantum cryptographic primitives, the $\tgate$-gate
 %In contrast, our contribution using $i\mathcal{O}$ shows.....
 
 %To the best of our knowledge, our second contribution is the first that describes how to achieve $i\mathcal{O}$ for some families of quantum circuits
-%(however, as noted above, the Clifford canonical form is well-known, and its extension to $i\mathcal{O}$ (see Section~\ref{sec:Clifford-$i\mathcal{O}$-canonical}) is relatively straightforward.
+%(however, as noted above, the Clifford canonical form is well-known, and its extension to $i\mathcal{O}$ (see Section~\Cref{sec:Clifford-$i\mathcal{O}$-canonical}) is relatively straightforward.
 
 
 
