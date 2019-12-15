@@ -74,7 +74,7 @@ For any single-qubit density operator $\rho \in \mathcal{D} (\mathcal{H}_1)$ we 
 
 \begin{definition}
 \label{defn:Clifford+T:family}
- \noindent{\bf Clifford Group}: The set of gates $\{\xgate, \zgate, \pgate, \cnot,\hgate\}$ applied to arbitrary wires (redundantly) generates the Clifford group, where
+ \noindent{\bf Clifford Group}: The set of gates $\{\xgate, \zgate, \pgate, \cnot,\hgate\}$ applied to arbitrary wires (redundantly) generates the Clifford group.
 
 \Anne{something missing here?}
 
@@ -146,11 +146,7 @@ Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate,\h
   \label{eq:telepprtation5}
 U( \xgate^b \zgate^a( \ket{\psi}))_B=Tr_{AB}(\ket{\beta_{ab}}_{AC}\otimes U( \xgate^b \zgate^a( \ket{\psi}))_B.)
  \end{equation}
-<<<<<<< HEAD
-\item Compute the update function $f_U(a,b)=(a^\prime,b^\prime)$ associated with the gate $U.$ (see section \Cref{update function}).
-=======
 \item Compute the update function $f_U(a,b)=(a^\prime,b^\prime)$ associated with the gate $U.$ (See \Cref{update function}).
->>>>>>> ab88b72462bfff6cdc3fcc809bfa8491451336ce
 \item Apply the correction unitary $\zgate^{a^\prime}  \xgate^{b^\prime}$ to the system B.
  \begin{equation}
   \label{eq:telepprtation5}
@@ -162,11 +158,7 @@ U( \xgate^b \zgate^a( \ket{\psi}))_B=Tr_{AB}(\ket{\beta_{ab}}_{AC}\otimes U( \xg
 
 \subsection{Update Functions for Quantum Circuits}
 \label{update function}
-<<<<<<< HEAD
-In the gate teleportation (\Cref{protocol: gate-teleportation}) we have to compute bits $(a^\prime, b^\prime)\in\mathbb{F}_2^2$ such that
-=======
 In the gate teleportation (\Cref{algo:gate-teleport}) we have to compute bits $(a^\prime, b^\prime)\in\mathbb{F}_2^2$ such that
->>>>>>> ab88b72462bfff6cdc3fcc809bfa8491451336ce
 \begin{equation*}
 U\xgate^b\zgate^a \ket{\psi}=\xgate^{b^\prime}\zgate^{a^\prime}U(\ket{\psi}),
 \end{equation*}
@@ -186,11 +178,7 @@ For any $(a,b)\in\mathbb{F}_2^2$ and any single Clifford gate $U,$ the correspon
 %\cnot (\xgate^{b_1}\zgate^{a_1} \otimes \xgate^{b_2}\zgate^{a_2})=({\xgate^{b_1} {\zgate^{a_1\oplus a_2}}} \otimes {\xgate^{b_1\oplus b_2}}\zgate^{a_2})\cnot, \mbox{ where } f_{\cnot}(a_1,b_1,a_2,b_2)=(a_1\oplus a_2,b_1,a_2, b_1\oplus b_2).\\
 \end{aligned}
 \end{equation*}
-<<<<<<< HEAD
-Note we can evaluate $\cnot$ gate on any 2-qubit state $\ket{\psi}$ using gate-teleportation. In this case we have to prepare $4$ qubit Bell state $\ket \beta_{00}\otimes \beta_{00}$ in the step 1 (gate-teleportation \Cref{protocol: gate-teleportation}). After step 4 of the gate teleportation the system will be in the state
-=======
 Note we can evaluate $\cnot$ gate on any 2-qubit state $\ket{\psi}$ using gate-teleportation. In this case we have to prepare $4$ qubit Bell state $\ket{\beta_{00}}\otimes \ket{\beta_{00}}$ in step~1 ((\Cref{algo:gate-teleport})). After step~4 of \Cref{algo:gate-teleport}, the system will be in the state
->>>>>>> ab88b72462bfff6cdc3fcc809bfa8491451336ce
 \begin{equation*}
 \begin{aligned}
  \ket\beta_{a_1,b_1}\otimes \ket\beta_{a_2,b_2} \otimes \cnot(\xgate^{a_1}\zgate^{b_1}\otimes \xgate^{a_2}\zgate^{b_2})\ket{\psi}
@@ -216,22 +204,14 @@ In general, let $\mathcal{C}_q$ be an $n$-qubit Clifford circuit\footnote{A Clif
  \ket\beta_{a_1,b_1}\otimes \cdots \otimes \ket\beta_{a_n,b_n} \otimes C_q(\xgate^{a_1}\zgate^{b_1}\otimes \cdots \otimes\xgate^{a_n}\zgate^{b_n})\ket{\psi}
 \end{aligned}
 \end{equation}
-<<<<<<< HEAD
-where  $(a_1,b_1,\ldots,a_n,b_n)\in\mathbb{F}_2^{2n}$ obtained in the step 4 of the gate teleportation \Cref{protocol: gate-teleportation}.
-=======
 where  $(a_1,b_1,\ldots,a_n,b_n)\in\mathbb{F}_2^{2n}$ obtained in the step 4 of \Cref{algo:gate-teleport}.
->>>>>>> ab88b72462bfff6cdc3fcc809bfa8491451336ce
 The update function corresponding to the circuit $C_q$ is computed by composing the update functions of each gate in $\mathcal{C}_q$
 \begin{equation*}
 \begin{aligned}
 F_{\mathcal{C}_q}:\, \mathbb{F}_2^{2n} \rightarrow  \mathbb{F}_2^{2n}, \; F_{\mathcal{C}_q}=f_k\circ\cdots \circ f_2 \circ f_1 \\(a_1,b_1,\dots, a_n,b_n)\mapsto (a_1^\prime,b_2^\prime,\dots, a_n^\prime,b_n^\prime)
  \end{aligned}
 \end{equation*}
-<<<<<<< HEAD
-We can rewrite the relation \Cref{relation:update} as
-=======
 We can rewrite \Cref{relation:update} as
->>>>>>> ab88b72462bfff6cdc3fcc809bfa8491451336ce
 \begin{equation*}
 \begin{aligned}
 \ket\beta_{a_1,b_1}\otimes \cdots \otimes \ket\beta_{a_n,b_n} \otimes (\xgate^{a_1^\prime}\zgate^{b_1^\prime}\otimes \cdots \otimes\xgate^{a_n^\prime}\zgate^{b_n^\prime})C_q(\ket{\psi}),
@@ -255,13 +235,8 @@ And computed as by first applying the $f_\hgate$ to the first two input bits and
 \end{equation*}
 
 \begin{remark}
-<<<<<<< HEAD
-Using gate teleportation we can also evaluate a  $\tgate,$  hence any $n$-qubit circuit. However, the update function becomes more complicated. This is discuss in section \Cref{QiO:Clifford+T:family+GT}.
-						$$\tgate \xgate^b \zgate^a= \xgate^b \zgate^{a\oplus b} \pgate^b \tgate$$
-=======
 Using gate teleportation we can also evaluate a  $\tgate,$  hence any $n$-qubit circuit. However, the update function becomes more complicated. This is discuss in \Cref{QiO:Clifford+T:family+GT}.
 %						$$\tgate \xgate^b \zgate^a= \xgate^b \zgate^{a\oplus b} \pgate^b \tgate$$
->>>>>>> ab88b72462bfff6cdc3fcc809bfa8491451336ce
 \end{remark}
 
 
