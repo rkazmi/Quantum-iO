@@ -3,18 +3,19 @@
 \subsection{Basic Classical Cryptographic Notions}
 \label{sec:classical-prelims}
 Let $\mathbb{N}$ be the set of positive integers. For $n \in \mathbb{N}$, we set $[n] = \{1, \cdots, n\}.$ We denote the set of all  binary strings of length $n$ by $\bit{n}.$
- An element $s \in \bit{n}$ is called a bitstring, and $|s|=n$ denotes its length. We denote an arbitrary polynomial from the set $\mathbb{N}$ to $\mathbb{N}$ by $poly( ).$
+ An element $s \in \bit{n}$ is called a bitstring, and $|s|=n$ denotes its length. We denote an arbitrary polynomial from the set $\mathbb{N}$ to $\mathbb{N}$ by $poly(\cdot).$
 
 
 A function ${\rm negl}:\mathbb{N}\rightarrow\mathbb{R}^{+}\cup \{0\}$ is \emph{negligible} if for every positive polynomial $p(n)$ there exists a positive integer $n_0$ such that  for all  $n>n_0,$ ${\rm negl}(n) < 1/ p(n).$   A typical use of negligible functions is to indicate that the probability of success of some algorithm is too small to be amplified to a constant by a feasible (\emph{i.e.}, polynomial) number of repetitions. Given two bit strings $x$ and $y$ of equal length, we denote their bitwise XOR by $x \oplus y.$
 
 \subsubsection{Classical Circuits and Algorithms}
- For $n, m\in\mathbb{N}$ let  $f:\bit{n}\rightarrow \bit{m}$ be a function. We say a circuit $C$ computes $f$ if for every $s \in \bit{n},\; C(s)=f(s).$  We define the size of a circuit $C$ as the number of gates in it and is denoted by $|C|.$ A set of gates for classical computation  are universal if, for all $n, m\in\mathbb{N}$, and for every function $f:\bit{n}\rightarrow \bit{m}$ a circuit can be constructed for computing~$f$ using only gates from that set. It is a well known fact that \{AND, OR, NOT\} is a set of universal gates for classical circuits. A family of circuits $\mathcal{F}=\{C_n\mid n\in\mathbb{N}\},$ one for each input  size $n\in \mathbb{N}$ is called uniform if there exists a deterministic Turing machine $M,$ such that
+ For $n, m\in\mathbb{N}$ let  $f:\bit{n}\rightarrow \bit{m}$ be a function. We say a circuit $C$ computes $f$ if for every $s \in \bit{n},\; C(s)=f(s).$  We define the size of a circuit $C$ as the number of gates in it and is denoted by $|C|.$ A set of gates for classical computation is universal if, for all $n, m\in\mathbb{N}$, and for every function $f:\bit{n}\rightarrow \bit{m}$ a circuit can be constructed for computing~$f$ using only gates from that set. It is a well-known fact that \{AND, OR, NOT\} is a set of universal gates for classical circuits. A family of circuits $\mathcal{F}=\{C_n\mid n\in\mathbb{N}\},$ one for each input  size $n\in \mathbb{N}$ is called uniform if there exists a deterministic Turing machine $M,$ such that
  \begin{itemize}
  \item For each $n\in\mathbb{N},$ $M$ outputs a description of $C_n \in \mathcal{F}$ on input $1^n.$
  \item  For each $n\in\mathbb{N},$ $M$ runs in time $poly(n).$
  \end{itemize}
 
+\Anne{We need to give references where this definition comes from.}
 
 \begin{definition}\label{def:qiO} {\rm({\bf Quantum Secure Indistinguishability Obfuscation} $i\mathcal{O}$)}
 A probabilistic polynomial-time algorithm is a \emph{quantum-secure computational indistinguishability obfuscator} $i\mathcal{O}$ for a class of circuits ${\mathcal C},$ if the following conditions hold:
@@ -34,7 +35,7 @@ A probabilistic polynomial-time algorithm is a \emph{quantum-secure computationa
 \subsection{Basic Quantum Notions}
 \label{sec:quantum-prelims}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-Given an $n$-bit string $x$, the corresponding quantum-computational $n$-qubit basis state is denoted~$\ket{x}$. The $2^n$-dimensional Hilbert space spanned by $n$-qubit basis states is denoted:
+Given an $n$-bit string $x$, the corresponding  $n$-qubit quantum basis state is denoted~$\ket{x}$. The $2^n$-dimensional Hilbert space spanned by $n$-qubit basis states is denoted:
 %\anote{in general, we will try to include equation numbers unless there is a reason not to. This will help in reviewing and referencing our work.}
 \begin{equation}
 \label{eq:hilbert-space}
@@ -56,14 +57,14 @@ We will work with the following set of unitary gates
 $$\xgate = \left[\begin{array}{cc} 0 & 1\\ 1 & 0\end{array}\right],
 \quad\zgate = \left[\begin{array}{cc} 1 & 0\\ 0 & -1\end{array}\right],
 \quad\pgate = \left[\begin{array}{cc} 1 & 0\\ 0 & i\end{array}\right],
- \quad\hgate = \frac{1}{\sqrt{2}}\left[\begin{array}{cc}1 & 1\\1 & -1\end{array}\right], \quad\mbox{and}$$
-$$\quad\cnot = \left[\begin{array}{cccc} 1 & 0 & 0 & 0\\ 0 & 1 & 0 & 0\\ 0 & 0 & 0 & 1\\ 0 & 0 & 1 & 0\end{array}\right],
+ \quad\hgate = \frac{1}{\sqrt{2}}\left[\begin{array}{cc}1 & 1\\1 & -1\end{array}\right], $$
+$$\quad\cnot = \left[\begin{array}{cccc} 1 & 0 & 0 & 0\\ 0 & 1 & 0 & 0\\ 0 & 0 & 0 & 1\\ 0 & 0 & 1 & 0\end{array}\right], \text{and} 
 \quad\tgate = \left[\begin{array}{cc} 1 & 0\\ 0 & e^{i\pi/4}\end{array}\right].$$
 
 \subsubsection*{Quantum One Time Pad}
-For any single-qubit density operator $\rho \in \mathcal{D} (\mathcal{H}_1)$ and for any uniformly chosen bits $s$ and $t,$
-
- $\xgate^s \zgate^t \rho \zgate^t \xgate^s$ is information-theoretically indistinguishable from the state $\mathds{1}_1/2$ to an observer that has no knowledge of $s$ and $t$ \cite{AMTW00}.
+For any single-qubit density operator $\rho \in \mathcal{D} (\mathcal{H}_1)$ we encrypt it by sampling at uniform bits $s$ and $t$, and producing 
+ $\xgate^s \zgate^t \rho \zgate^t \xgate^s$. To an observer that has no knowledge of $s$ and $t$, this system is information-theoretically indistinguishable from the state $\mathds{1}_1/2$ \cite{AMTW00}.
+ \Anne{Did we define $\mathds{1}$? }
 
 %The above map can be straightforwardly extended to the $n$-qubit case in order to obtain an elementary {\em quantum encryption scheme} called the {\em quantum one-time pad}\cite{AMTW00}.
 %We first set $\xgate_j = \mathds{1}^{\otimes j-1} \otimes \xgate \otimes \mathds{1}^{\otimes n-j}$ and likewise for $\ygate_j$ and $\zgate_j$. We define the $n$-qubit Pauli group $\mathcal P_n$ to be the subgroup of $\operatorname{SU}(\mathcal{H}_n)$ generated by $\{\xgate_j, \ygate_j, \zgate_j : j = 1, \dots, n \}$. Note that Hermiticity is inherited from the single-qubit case, \emph{i.e.}, $P^\dag = P$ for every $P \in \mathcal{P}_n$.
@@ -75,32 +76,34 @@ For any single-qubit density operator $\rho \in \mathcal{D} (\mathcal{H}_1)$ and
 \label{defn:Clifford+T:family}
  \noindent{\bf Clifford Group}: The set of gates $\{\xgate, \zgate, \pgate, \cnot,\hgate\}$ applied to arbitrary wires (redundantly) generates the Clifford group, where
 
+\Anne{something missing here?}
+
 We note the following relations between these gates:
 $$\xgate\zgate = - \zgate\xgate,\quad \tgate^2=\pgate,\quad\pgate^2=\zgate,\quad\hgate\xgate\hgate=\zgate,\quad \tgate\pgate=\pgate\tgate,\quad\pgate\zgate=\zgate\pgate.$$
 Also, for any $a,b\in\{0,1\}$ we have
 $\hgate\xgate^b\zgate^a=\xgate^a\zgate^b \hgate$\,.
 \end{definition}
 
-\subsubsection{Quantum Circuits and Algorithm}
-A quantum circuit is an acyclic network of quantum gates connected by wires. The quantum gates represent quantum operations and wire represents the qubits on which gates act. In, general a quantum circuits can have $n$-input qubits and $m$-output qubits for any integer $n,m\geq 0.$
+\subsubsection{Quantum Circuits and Algorithms}
+A quantum circuit is an acyclic network of quantum gates connected by wires. The quantum gates represent quantum operations and wires represent the qubits on which gates act. In, general a quantum circuits can have $n$-input qubits and $m$-output qubits for any integer $n,m\geq 0.$
 %\anote{todo: define what is a quantum circuit, and also any type of notation that will be used in the rest of the paper. For instance, what does $\hgate-\cnot-\pgate-\cnot-\pgate-\cnot-\hgate-\pgate-\cnot-\pgate-\cnot$ mean? Do I apply gates from left-to-right, or from right-to-left?}
 
-For $n\in \mathbb{N},$ the set of all $n\times n$ unitary matrix is denoted by $O(n,\mathbb{C})=\{U\in \mathbb{C}^{n\times n} \mid U\cdot U^\dagger={\bf I}\}.$ We say a quantum circuit $C_q$ computes $U\in O(n,\mathbb{C})$ if for every $\rho\in \mathcal{H}_n$
-$$U(\rho )=C_q(\rho).$$
-A quantum circuit that computes unitary matrix is called a reversible  quantum circuit, i.e it always possible to uniquely recover the input, given the output. A set of gates are said to be universal if, for any a unitary matrix $U$  a quantum circuit can be constructed for computing~$U$ using only gates from that set. It is a well-known fact that Clifford gates are not universal, but adding any non-Clifford gate, such as $\tgate$, gives a universal set of gates, where
-$$\quad\tgate = \left[\begin{array}{cc} 1 & 0\\ 0 & e^{i\pi/4}\end{array}\right]\,.$$
+For $n\in \mathbb{N},$ the set of all $n\times n$ unitary matrices is denoted by $O(n,\mathbb{C})=\{U\in \mathbb{C}^{n\times n} \mid U\cdot U^\dagger={\bf I}\}.$ We say a quantum circuit $C_q$ computes $U\in O(n,\mathbb{C})$ if for every $\rho\in \mathcal{H}_n$
+$$U(\rho )=C_q(\rho).$$ \Anne{Hmm, for density matrices, usually the action is more like $U\rho U^\dag$. Alternatively, if we work with pure states, then yes we can write $U \ket{\psi}$}
+A quantum circuit that computes a unitary matrix is called a \emph{reversible  quantum circuit}, \emph{i.e.}, it always possible to uniquely recover the input, given the output. A set of gates are said to be universal if, for any a unitary matrix~$U$  a quantum circuit can be constructed for computing~$U$ using only gates from that set. It is a well-known fact that Clifford gates are not universal, but adding any non-Clifford gate, such as $\tgate$, gives a universal set of gates, where
+$$\quad\tgate = \left[\begin{array}{cc} 1 & 0\\ 0 & e^{i\pi/4}\end{array}\right]\,.$$ \Anne{Hmm, for quantum circuits, we actually only have \emph{approximate} universality. We should probably mention this, and give a reference. }
 
-A family of quantum circuits $C=\{C_n\in \mathbb{N} \mid \}$ one for each input  size $n\in \mathbb{N}$ is called \emph{uniform} if there exists a deterministic Turing machine $M,$ such that
+A family of quantum circuits $C=\{C_n\in \mathbb{N} \mid \}$  \Anne{notation?} one for each input  size $n\in \mathbb{N}$ is called \emph{uniform} if there exists a deterministic Turing machine $M,$ such that
  \begin{itemize}
  \item For each $n\in\mathbb{N},$ $M$ outputs a description of $C_n \in \mathcal{F}$ on input $1^n.$
  \item  For each $n\in\mathbb{N},$ $M$ runs in $poly(n).$
  \end{itemize}
 
-All quantum operations are not unitary (reversible), nevertheless a general (possibly irreversible) quantum operation also called superoperator can efficiently be simulated by a reversible quantum operations by adding auxiliary states to the original system, then performing a unitary operation on the joint system, and then tracing out $Tr$ some subsystem \cite{KLM07}. More precisely, this can be described as the map:
+In general, quantum operations are not necessarily unitary (reversible), nevertheless a general (possibly irreversible) quantum operation also called a \emph{superoperator} can efficiently be simulated by a reversible quantum operations by adding auxiliary states to the original system, then performing a unitary operation on the joint system, and then tracing out %$Tr$ 
+some subsystem \cite{KLM07}. More precisely, this can be described as the map:
 %\anote{todo: find ref (I think Sebastien has some references in his thesis). Actually, do we use this?}
-$$\rho_{in} \xmapsto{\mbox{superoperator}} \rho_{out}=Tr_B(U(\rho_{in} \otimes \ket{00\cdots 0} \bra{00\cdots 0})U^\dagger)$$
-
-where $\rho_{in} \in \mathcal{H}_n,$ is the original state and $\ket{00\cdots 0}$ is an auxiliary state of dimension at most $n^2.$ A circuit that computes a general quantum operation is called a general quantum circuit.  Therefore, general quantum circuits can refer to both reversible or irreversible circuits. A polynomial-time quantum algorithm is a uniform family of general quantum circuits. \\
+$$\rho_{in} \xmapsto{\mbox{superoperator}} \rho_{out}=Tr_B(U(\rho_{in} \otimes \ket{00\cdots 0} \bra{00\cdots 0})U^\dagger)$$\,m
+where $\rho_{in} \in \mathcal{H}_n,$ is the original state and $\ket{00\cdots 0}$ is an auxiliary state of dimension at most $n^2.$ A circuit that computes a general quantum operation is called a general quantum circuit.  Therefore, general quantum circuits can refer to both reversible or irreversible circuits. A polynomial-time quantum algorithm is a uniform family of general quantum circuits. \Anne{Note to self: I am wondering where we use this in the paper.}
 
 %\noindent {\em Remark}: From now we use the term  quantum circuits to refer to reversible quantum circuits only and the term quantum algorithm is reserved for some family of general quantum circuits. \anote{ok, well actually I do believe that we could define quantum circuits that also include auxiliary qubit preparation and measurements/trace outs, and that we can obfuscate these also using gate teleportation. Hence the distinction circuit/algorithm is not very natural. Need to think about this.}
 
@@ -111,9 +114,10 @@ where $\rho_{in} \in \mathcal{H}_n,$ is the original state and $\ket{00\cdots 0}
 %We recall the \emph{Bell states}: %$\ket{\beta_{00}},$  $\ket{\beta_{01}},$ $\ket{\beta_{10}}$ and $\ket{\beta_{11}}.$
 %$\ket{\beta_{00}}=\frac{1}{\sqrt2}\left(\ket{00}+\ket{11}\right)$, ${\beta_{01}}=\frac{1}{\sqrt2}\left(\ket{01}+\ket{10}\right)$,
 %$\ket{\beta_{10}}=\frac{1}{\sqrt2}\left(\ket{00}-\ket{11}\right)$,  $\ket{\beta_{11}}=\frac{1}{\sqrt2}\left(\ket{01}-\ket{10}\right)$\,.
-Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate,\hgate\}$ on some qubit $\ket{\psi}.$ Then using gate teleportation  \cite{GC99} we can compute $U (\ket{\psi})$ as follows.
-\begin{algorithm}[H]
+Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate,\hgate\}$ on some qubit $\ket{\psi}.$ Then using gate teleportation  \cite{GC99} we can compute $U (\ket{\psi})$ as in \Cref{algo:gate-teleport}.
+\begin{algorithm}[]
 \caption{Gate Teleportation.}
+\label{algo:gate-teleport}
 \begin{enumerate}
 \item  Prepare a $2$ qubit Bell state $\ket{\beta_{00}}=\frac{\ket{00}+\ket{11})}{\sqrt{2}}.$
 \item Write the joint system as
@@ -142,7 +146,11 @@ Suppose we want to evaluate a single qubit gate $U\in\{\xgate, \zgate, \pgate,\h
   \label{eq:telepprtation5}
 U( \xgate^b \zgate^a( \ket{\psi}))_B=Tr_{AB}(\ket{\beta_{ab}}_{AC}\otimes U( \xgate^b \zgate^a( \ket{\psi}))_B.)
  \end{equation}
+<<<<<<< HEAD
 \item Compute the update function $f_U(a,b)=(a^\prime,b^\prime)$ associated with the gate $U.$ (see section \Cref{update function}).
+=======
+\item Compute the update function $f_U(a,b)=(a^\prime,b^\prime)$ associated with the gate $U.$ (See \Cref{update function}).
+>>>>>>> ab88b72462bfff6cdc3fcc809bfa8491451336ce
 \item Apply the correction unitary $\zgate^{a^\prime}  \xgate^{b^\prime}$ to the system B.
  \begin{equation}
   \label{eq:telepprtation5}
@@ -154,7 +162,11 @@ U( \xgate^b \zgate^a( \ket{\psi}))_B=Tr_{AB}(\ket{\beta_{ab}}_{AC}\otimes U( \xg
 
 \subsection{Update Functions for Quantum Circuits}
 \label{update function}
+<<<<<<< HEAD
 In the gate teleportation (\Cref{protocol: gate-teleportation}) we have to compute bits $(a^\prime, b^\prime)\in\mathbb{F}_2^2$ such that
+=======
+In the gate teleportation (\Cref{algo:gate-teleport}) we have to compute bits $(a^\prime, b^\prime)\in\mathbb{F}_2^2$ such that
+>>>>>>> ab88b72462bfff6cdc3fcc809bfa8491451336ce
 \begin{equation*}
 U\xgate^b\zgate^a \ket{\psi}=\xgate^{b^\prime}\zgate^{a^\prime}U(\ket{\psi}),
 \end{equation*}
@@ -174,7 +186,11 @@ For any $(a,b)\in\mathbb{F}_2^2$ and any single Clifford gate $U,$ the correspon
 %\cnot (\xgate^{b_1}\zgate^{a_1} \otimes \xgate^{b_2}\zgate^{a_2})=({\xgate^{b_1} {\zgate^{a_1\oplus a_2}}} \otimes {\xgate^{b_1\oplus b_2}}\zgate^{a_2})\cnot, \mbox{ where } f_{\cnot}(a_1,b_1,a_2,b_2)=(a_1\oplus a_2,b_1,a_2, b_1\oplus b_2).\\
 \end{aligned}
 \end{equation*}
+<<<<<<< HEAD
 Note we can evaluate $\cnot$ gate on any 2-qubit state $\ket{\psi}$ using gate-teleportation. In this case we have to prepare $4$ qubit Bell state $\ket \beta_{00}\otimes \beta_{00}$ in the step 1 (gate-teleportation \Cref{protocol: gate-teleportation}). After step 4 of the gate teleportation the system will be in the state
+=======
+Note we can evaluate $\cnot$ gate on any 2-qubit state $\ket{\psi}$ using gate-teleportation. In this case we have to prepare $4$ qubit Bell state $\ket{\beta_{00}}\otimes \ket{\beta_{00}}$ in step~1 ((\Cref{algo:gate-teleport})). After step~4 of \Cref{algo:gate-teleport}, the system will be in the state
+>>>>>>> ab88b72462bfff6cdc3fcc809bfa8491451336ce
 \begin{equation*}
 \begin{aligned}
  \ket\beta_{a_1,b_1}\otimes \ket\beta_{a_2,b_2} \otimes \cnot(\xgate^{a_1}\zgate^{b_1}\otimes \xgate^{a_2}\zgate^{b_2})\ket{\psi}
@@ -193,21 +209,29 @@ Therefore we have
  \end{aligned}
 \end{equation*}
 	
-In general, let $\mathcal{C}_q$ be an $n$-qubit Clifforf circuit. \footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group.} and $\mathcal{C}_q$ is consist of sequence of gates $g_k,\ldots,g_2,g_1$ for $k=|\mathcal{C}_q|.$\footnote{In this paper we assume that we apply gates from R.H.S.}
+In general, let $\mathcal{C}_q$ be an $n$-qubit Clifford circuit\footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group.} and $\mathcal{C}_q$ is asequence of gates $g_k,\ldots,g_2,g_1$ for $k=|\mathcal{C}_q|.$\footnote{In this paper we assume that we apply gates from right-to-left.}
 \begin{equation}
 \label{relation:update}
 \begin{aligned}
  \ket\beta_{a_1,b_1}\otimes \cdots \otimes \ket\beta_{a_n,b_n} \otimes C_q(\xgate^{a_1}\zgate^{b_1}\otimes \cdots \otimes\xgate^{a_n}\zgate^{b_n})\ket{\psi}
 \end{aligned}
 \end{equation}
+<<<<<<< HEAD
 where  $(a_1,b_1,\ldots,a_n,b_n)\in\mathbb{F}_2^{2n}$ obtained in the step 4 of the gate teleportation \Cref{protocol: gate-teleportation}.
+=======
+where  $(a_1,b_1,\ldots,a_n,b_n)\in\mathbb{F}_2^{2n}$ obtained in the step 4 of \Cref{algo:gate-teleport}.
+>>>>>>> ab88b72462bfff6cdc3fcc809bfa8491451336ce
 The update function corresponding to the circuit $C_q$ is computed by composing the update functions of each gate in $\mathcal{C}_q$
 \begin{equation*}
 \begin{aligned}
 F_{\mathcal{C}_q}:\, \mathbb{F}_2^{2n} \rightarrow  \mathbb{F}_2^{2n}, \; F_{\mathcal{C}_q}=f_k\circ\cdots \circ f_2 \circ f_1 \\(a_1,b_1,\dots, a_n,b_n)\mapsto (a_1^\prime,b_2^\prime,\dots, a_n^\prime,b_n^\prime)
  \end{aligned}
 \end{equation*}
+<<<<<<< HEAD
 We can rewrite the relation \Cref{relation:update} as
+=======
+We can rewrite \Cref{relation:update} as
+>>>>>>> ab88b72462bfff6cdc3fcc809bfa8491451336ce
 \begin{equation*}
 \begin{aligned}
 \ket\beta_{a_1,b_1}\otimes \cdots \otimes \ket\beta_{a_n,b_n} \otimes (\xgate^{a_1^\prime}\zgate^{b_1^\prime}\otimes \cdots \otimes\xgate^{a_n^\prime}\zgate^{b_n^\prime})C_q(\ket{\psi}),
@@ -215,6 +239,7 @@ We can rewrite the relation \Cref{relation:update} as
 \end{equation*}
 where $(a_1^\prime,b_1^\prime,\dots, a_n^\prime,b_n^\prime)=F_{C_q}(a_1,b_1,\ldots,a_n,b_n).$ \\
 
+\Anne{I suggest maybe to remove this example?}
 \noindent{\bf Example for Update Function:} $C_q=\cnot \cdot (\igate \otimes \hgate)$ is 2-qubit circuit the update function $F_{C_q}$ for this circuit is
 
 \begin{equation*}
@@ -230,8 +255,13 @@ And computed as by first applying the $f_\hgate$ to the first two input bits and
 \end{equation*}
 
 \begin{remark}
+<<<<<<< HEAD
 Using gate teleportation we can also evaluate a  $\tgate,$  hence any $n$-qubit circuit. However, the update function becomes more complicated. This is discuss in section \Cref{QiO:Clifford+T:family+GT}.
 						$$\tgate \xgate^b \zgate^a= \xgate^b \zgate^{a\oplus b} \pgate^b \tgate$$
+=======
+Using gate teleportation we can also evaluate a  $\tgate,$  hence any $n$-qubit circuit. However, the update function becomes more complicated. This is discuss in \Cref{QiO:Clifford+T:family+GT}.
+%						$$\tgate \xgate^b \zgate^a= \xgate^b \zgate^{a\oplus b} \pgate^b \tgate$$
+>>>>>>> ab88b72462bfff6cdc3fcc809bfa8491451336ce
 \end{remark}
 
 
