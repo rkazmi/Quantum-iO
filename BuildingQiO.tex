@@ -50,7 +50,7 @@ Where $k=|C_{q_1}|=|C_{q_2}|.$
 
 \subsubsection{$Qi\mathcal{O}$ for Clifford Circuits via Canonical Form}
 \label{sec:Clifford-iO-canonical}
-\Anne{what happened to all the subtlelties we had to fix in Aaronson-Gottesman?}
+%\Anne{what happened to all the subtlelties we had to fix in Aaronson-Gottesman?}
 Aaronson and Gottesman invented a polynomial-time quantum algorithm (polynomial size circuit) that takes a Clifford circuit $C_q$ and outputs its canonical form (see~\cite{AG04}, section~VI). This canonical form is invariant for any two equivalent circuits. Moreover the size of the canonical form remains polynomial in the size of the input circuit.
 \begin{algorithm}[]
 \label{QiO:Canonical-Clifford}
@@ -63,7 +63,7 @@ Aaronson and Gottesman invented a polynomial-time quantum algorithm (polynomial 
  		 C_q^\prime \xleftarrow{\mbox{canonical form}}C_q
  		 \end{equation*}
   \item Let $\ket{\phi}$ be an empty register.
-  \item Output $\left(\ket{\phi},C_q^\prime \right)$. 
+  \item Output $\left(\ket{\phi},C_q^\prime \right)$.
   \end{enumerate}
   \end{itemize}
 \end{algorithm}
@@ -100,14 +100,14 @@ However,  our construction relies on the assumption that a quantum secure $i\mat
   										 $$\ket{\phi}=(\igate_n\otimes C_q) \ket{\beta^{2n}}.$$
  \item Compute the classical circuit $C$ that computes the update function $F_{C_q}.$	
  \item Set $C^\prime\leftarrow i\mathcal{O}(C).$							
-  \item Description of the circuit  $C_q^\prime:$ 
+  \item Description of the circuit  $C_q^\prime:$
     \begin{enumerate}
-     \item  Perform the Bell measurement on the leftmost $2n$-qubits on the system $\ket{\phi}\otimes \ket{\psi}),$ where $\ket{\phi}$ is an auxiliary state and $\ket{\psi}$ is an input state. Obtain classical bits $(a_1,b_1\ldots,a_n,b_n)$ and compute the new state 
+     \item  Perform the Bell measurement on the leftmost $2n$-qubits on the system $\ket{\phi}\otimes \ket{\psi}),$ where $\ket{\phi}$ is an auxiliary state and $\ket{\psi}$ is an input state. Obtain classical bits $(a_1,b_1\ldots,a_n,b_n)$ and compute the new state
      \begin{equation}
      \label{eq:last}
       C_q(\xgate^{\otimes_{i=1}^{n} b_{i}} \cdot \zgate^{\otimes_{i=1}^{n} a_{i}})\ket{\psi}.
       \end{equation}
-     \item Compute the correction bits 
+     \item Compute the correction bits
       \begin{equation}
      \label{eq:last1}
   (a_1^\prime, b_1^\prime,\ldots, a_n^\prime, b_n^\prime)=C^\prime(a_1,b_1\ldots,a_n,b_n).
@@ -171,7 +171,6 @@ If $i\mathcal{O}$ is a Quantum Secure Classical Indistinguishability Obfuscation
  \item[]  $(a,b)\xrightarrow{\pgate}(a,a\oplus b)$      (one $\oplus$ operation).
  \item[]  $(a_1,b_1,a_2,b_2)\xrightarrow{\mbox{\cnot}}(a_1\oplus a_2,b_1,a_2, b_1\oplus b_2)$ (two $\oplus$ operations).
  \end{itemize}
- Each of these operations can be implemented by a constant number of gates. Therefore, the size of $|C|\in O(|C_q|),$ hence we have %\Anne{funny wording, Raza please check}
 \begin{equation*}
 \ket{\phi}\in poly(|C_q|)    \mbox{ and } |C_q^\prime |= \in poly(|C_q|).
 \end{equation*}
@@ -211,7 +210,7 @@ Let $C_{q_1}$ and $C_{q_2}$ be two equivalent $n$-qubit Clifford circuits and  $
 \label{fun:assumption1}
 F_{C_{q_1}}(a_1,b_1,\ldots,a_n,b_n)\neq F_{C_{q_2}}(a_1,b_1,\ldots,a_n,b_n)
 \end{equation}
-Let $C_1$ and $C_2$ be circuits that compute $F_{C_{q_1}}$ and $F_{C_{q_2}}$ respectively, then 
+Let $C_1$ and $C_2$ be circuits that compute $F_{C_{q_1}}$ and $F_{C_{q_2}}$ respectively, then
 \begin{equation}
 \label{ineq:1}
 C_1(a_1,b_1,\ldots,a_n,b_n)\neq C_2(a_1,b_1,\ldots,a_n,b_n)

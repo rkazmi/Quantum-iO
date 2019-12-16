@@ -4,7 +4,7 @@
 %\anote{introduce quantum cryptography. Introduce Quantum iO as per \cite{AF16arxiv}.}
 At the intuitive level, an \emph{obfuscator} is a probabilistic polynomial-time algorithm that  transforms a circuit $C$ into another circuit $C’$ that has the same functionality as $C$ but does not reveal anything about $C$, except its functionality \emph{i.e.}, anything that can be learned from $C’$ about $C$ can also be learned from  black-box access to the input-output functionality of~$C$. This concept is formalized in terms of \emph{virtual black-box obfuscation}, and was shown~\cite{BGI+12} to be unachievable in general.
 %\footnote{The argument consists in a construction of a family of Boolean functions which is inherently unobfuscatable.}.
-Motivated by this impossibility result, the same work~\cite{BGI+12} proposed a weaker notion called \emph{indistinguishability obfuscation} 
+Motivated by this impossibility result, the same work~\cite{BGI+12} proposed a weaker notion called \emph{indistinguishability obfuscation}
 
 An \emph{indistinguishability obfuscator} ($i\mathcal{O}$) is a probabilistic polynomial-time algorithm that takes a circuit~$C$ as  input and outputs a circuit $i\mathcal{O}(C)$ such that $i\mathcal{O}(C)(x)=C(x)$ for all inputs~$x$ and the size of $i\mathcal{O}(C)$ is at most polynomial in the size $C$. Moreover, it must be that for any two circuits $C_1$ and $C_2$ of the same size and that compute the same function, the obfuscations of both circuits are computationally indistinguishable. An $i\mathcal{O}$ achieves the notion of \emph{best possible obfuscation}, which states that any information that is not hidden by the obfuscated circuit is also not hidden by any  circuit of similar size computing the same functionality~\cite{GR14}. Indistinguishability obfuscation is a very powerful cryptographic tool which has been shown to enable, among others: digital signatures, public key encryption~\cite{SW14}, multiparty key agreement, broadcast encryption~\cite{BZ14}, fully homomorphic encryption~\cite{CLTV15} and witness-indistinguishable proofs~\cite{BP15}.
 
@@ -21,7 +21,6 @@ In the quantum world, obfuscation has been studied in \cite{AJJ14,AF16arxiv}. In
 %Our first contribution echoes the private-to-public key transformation of~\cite{SW14}, by showing its applicability to the encryption of \emph{quantum} messages. In this case, the security is based on (quantum-secure one-way functions?)..., and is shown according to the notion of quantum semantic security ~\cite{BJ15,ABF+16}. Our second contribution shows how to build $i\mathcal{O}$ for certain families of quantum circuits. Namely, we show two different ways in which Clifford circuits admit an $i\mathcal{O}$ scheme. The first method is based on the canonical representation of Clifford circuits~\cite{AG04,Nest10}, while the second method is based on the principle of gate teleportation~\cite{GC99}. We  extend these schemes to circuits that include layers of non-Clifford $\tgate$-gates, as long as each Clifford layer is within a family of circuits that admit the $i\mathcal{O}$ obfuscation described above, and as long as the $\tgate$-gates are in fixed positions.
 % The two above methods present different advantages: the technique using the canonical form is straightforward and in fact does not require the assumption of a quantum-secure classical $i\mathcal{O}$. By construction, the obfuscated circuits is classical, and hence can be easily communicated, stored, used and copied. In contrast, the gate-teleportation scheme requires the assumption of quantum-secure classical $i\mathcal{O}$. By construction, the obfuscated circuits are quantum. While this presents a technological challenge to communication, storage and also usage, it could enable a new functionality related to the \emph{unclonability} of quantum states (see Open Questions below).
 
-%\Anne{note to Raza: when adding bib entries to quantum.bib, just add a quick entry at the bottom of quantum.bib. Then Sebastien will clean it up and send us the corrected .bib (Sébastien has a small contract as admin of the quantum.bib).}
 
 
 
@@ -29,16 +28,11 @@ In the quantum world, obfuscation has been studied in \cite{AJJ14,AF16arxiv}. In
 \subsection{Overview of Results and Techniques}
 \label{sec:techniques}
 
-%In this work, we continue the study of computational indistinguishable obfuscation in the quantum world.
 Our contribution establishes indistinguishability obfuscation for certain families of quantum circuits.  At a high level, we achieve our constructions via quantum techniques that allow \emph{information-theoretic} reductions to classical indistinguishability obfuscation. We now overview our results and techniques.
 
-%\Anne{I need to check \cite{AG04} again: does their definition include a quantum state, as output by the obfuscator?}
-%$Qi\mathcal{O}$
-%and show how to construct a $Qi\mathcal{O}$ for certain families of quantum circuits.
 First, we define indistinguishability obfuscation for quantum circuits ($Qi\mathcal{O}$)(\Cref{sec:QiO-Cliffords and more}). Importantly, this definition specifies that on input a classical description of a quantum circuit~$C_q$, the obfuscator outputs a \emph{pair} $(\rho, C_q^\prime)$, where $\rho$ is a quantum state and $C_q^\prime$ is a quantum circuit, with the property that
 $C_q^\prime(\rho,\ket{\phi})=C_{q}(\ket{\phi})$ for all inputs $\ket{\phi}$.
-%\Anne{I am currently thinking that we could let the quantum iO output a pure state, \emph{e.g.}, $\ket{\phi}$, instead of a mixed state $\rho$. This could simplify things later. But I don't know if this is general enough.}
- 
+
 In terms of constructing $Qi\mathcal{O}$, we first focus on the family of \emph{Clifford} circuits and show two methods of obfuscation: one straightforward method based on the canonical representation of Cliffords, and another based on the
 % is based on the canonical representation of Clifford circuits~\cite{AG04}, while the second construction is based on the
 principle of gate teleportation~\cite{GC99}.
@@ -54,7 +48,9 @@ In contrast to the previous scheme, the gate-teleportation scheme requires the a
 \paragraph{Obfuscating Beyond Cliffords} Next, in our main result (\Cref{QiO:Clifford+T:family}), we generalize the gate-teleportation scheme for Clifford circuits, and show a $Qi\mathcal{O}$ obfuscator for all quantum circuits where the number of non-Clifford  gates is at most logarithmic in the circuit size. For this, we consider the commonly-used Clifford+$\tgate$ gateset, and we note that the $\tgate$ relates to the $\xgate, \zgate$ as: $\tgate \xgate^b \zgate^a=\xgate^b \zgate^{a\oplus b}\pgate^b \tgate$. This means that, if we implement a circuit $C$ with $\tgate$ gates as in the gate-teleportation scheme above, then the \emph{correction} function is no longer a simple Pauli update (as in the case for Cliffords). However, this is only partially true: since the Paulis form a basis, there is always a way to represent an update as a complex, linear combination of Pauli matrices. In particular, for the case of a $\tgate$, we note that $\pgate=(\frac{1+i}{2}) \igate + (\frac{1-i}{2})\zgate$. Hence, it \emph{is} possible to produce an update function for general quantum circuits that are encoded via gate teleportation. To illustration this, we first analyze the case of a general Clifford+$\tgate$ quantum circuit on a \emph{single} qubit (\Cref{sec:1-qubit}). Here, we are able to provide $Qi\mathcal{O}$ for all circuits. Next, for general quantum circuits, (\Cref{sec:n-qubit-circuits}), we note that the update function becomes more and more complex as the number of $\tgate$ gates increases. We show that if we limit the number of $\tgate$ gates to be logarithmic in the circuit size, we can nevertheless reach an efficient construction.
 
 
-We note that,  for many other quantum cryptographic primitives, it is the case that the $\tgate$ gate the bottleneck (somewhat akin to a \emph{multiplication} in the classical case. This has been observed, \emph{e.g.}, in the context of \emph{homomorphic quantum encryption} \cite{BJ15}, instantaneous quantum computation \cite{TODO} and also.... TODO. Because of these applications, and since the $\tgate$ is also typically the bottle neck for fault-tolerant quantum computing, techniques exist to reduce the $\tgate$ count in quantum circuits~\cite{AMMR13,DMM16,AMM14}.
+We note that,  for many other quantum cryptographic primitives, it is the case that the $\tgate$ gate the bottleneck (somewhat akin to a \emph{multiplication} in the classical case). This has been observed, \emph{e.g.}, in the context of \emph{homomorphic quantum encryption}~\cite{BJ15}, and instantaneous quantum computation \cite{Spel16}.
+% and also.... TODO. 
+Because of these applications, and since the $\tgate$ is also typically the bottle neck for fault-tolerant quantum computing, techniques exist to reduce the $\tgate$ count in quantum circuits~\cite{AMMR13,DMM16,AMM14}.
 
 
 
@@ -83,11 +79,11 @@ We note that,  for many other quantum cryptographic primitives, it is the case t
 Quantum obfuscation was first studied in \cite{AJJ14}, where a notion called
 $(G,\Gamma)$-{\em indistinguishability obfuscation} was proposed,  where $G$ is a set of gates and $\Gamma$ is a set of relations satisfied by the elements of $G$. In this notion, any two circuits over the set of gates $G$ are perfectly indistinguishable if they differ by some sequence of applications of the relations in~$\Gamma.$ One of the motivations of their work was to provide a weaker definition of perfectly indistinguishable obfuscation, which is shown to be impossible under certain complexity-theoretic assumptions \cite{AJJ14}. However, to the best of our knowledge, $(G,\Gamma)$-{\em indistinguishability obfuscation} is  incomparable with  computational indistinguishability obfuscation \cite{BGI+12, GGH+13}, which is the topic of our work.
 
-Quantum obfuscation is studied rigorously in \cite{AF16arxiv}, where the various notions of quantum obfuscation are defined (including quantum black-box obfuscation, quantum indistinguishability obfuscation, and quantum Best-Possible obfuscation. 
+Quantum obfuscation is studied rigorously in \cite{AF16arxiv}, where the various notions of quantum obfuscation are defined (including quantum black-box obfuscation, quantum indistinguishability obfuscation, and quantum Best-Possible obfuscation.
 %
  The main contribution of their work is to extend the classical impossibility results to the quantum setting.
- %such as a generic transformation of quantum circuits into black-box-obfuscated quantum circuits is impossible \cite{AF16arxiv},  statistical indistinguishability obfuscation is impossible, up to an unlikely complexity-theoretic collapse \cite{AF16arxiv}. 
- However, no concrete instantiation was provided in their paper for any of type quantum obfuscations. 
+ %such as a generic transformation of quantum circuits into black-box-obfuscated quantum circuits is impossible \cite{AF16arxiv},  statistical indistinguishability obfuscation is impossible, up to an unlikely complexity-theoretic collapse \cite{AF16arxiv}.
+ However, no concrete instantiation was provided in their paper for any of type quantum obfuscations.
  %They also discussed a number of applications of quantum black-box obfuscation such as CPA-secure quantum encryption, quantum fully-homomorphic encryption, and public-key quantum money, however it is not clear what impact these impossibility results have on these applications.
   We note that  \cite{AF16arxiv} shows that the existence of a computational quantum indistinguishability obfuscation implies a witness encryption scheme for all languages in \textsf{QMA}.
 
