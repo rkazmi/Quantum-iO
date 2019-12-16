@@ -184,7 +184,7 @@ In this section, we construct a $Qi\mathcal{O}$ for all quantum circuits where t
 \end{equation}
 where  ${\bf B}=\{0,1\}^{2n}.$
 
-Therefore, we must have $k\in O(\log(|C_q|)).$ Note that the above map corresponds to the correction unitary \Cref{exp:nqubit-correction}
+Therefore, we must have $k\in O(\log(|C_q|))$.  Note that the above map corresponds to the correction unitary \Cref{exp:nqubit-correction}
 
 
 
@@ -201,15 +201,15 @@ Let $C_q$ be an $n$-qubit circuit and $\ket{\psi}$ be an $n$-qubit state. If we 
 C_qU(\ket{\psi})= U^\prime C_q (\xgate^{a_{1}}\zgate^{b_{1}}\otimes \xgate^{a_{2}}\zgate^{b_{2}}\otimes \cdots \otimes \xgate^{a_{n}}\zgate^{b_{n}})(\ket{\psi}).
 \end{equation}
 
-Let us construct $U^\prime$ and estimate how big it can grow. Suppose there are $k\leq n$ number of $\tgate$ gates in $C_q$ for some non-negative integer $k\leq n.$ To simplify the analysis we assume that $\tgate$-gates are in the first $l$ wires of $C_q,$ and all of $\cnot$ gates are acted after all the $\tgate$-gates \footnote{This restriction will not not affect our analysis see remark \cref{remark:nqubit-correction1}.} Note we must have $l\leq k.$ Then for every $j$-th wire with $\tgate$-gate(s)
+Let us construct $U^\prime$ and estimate how big it can grow. Suppose there are $k\leq n$ number of $\tgate$ gates in $C_q$ for some non-negative integer $k\leq n.$ To simplify the analysis, we assume that $\tgate$-gates are in the first $l$ wires of $C_q,$ and all of $\cnot$ gates are acted after all the $\tgate$-gates \footnote{This restriction will not not affect our analysis see remark \cref{remark:nqubit-correction1}.} Note we must have $l\leq k.$ Then for every $j$-th wire with $\tgate$-gate(s) \Anne{need to discuss the assumptions about the CNOT position. IS this the right way to say it, or would it be better to simply argue that only the $T$ gate causes issues, so we ignore all the other gates?}
 
 \begin{equation}
 \begin{aligned}
 \label{nqubit:eq7}
-\tgate(\xgate^{a_{j}}\zgate^{b_{j}})\mapsto \left(\lambda_{j_0} \igate + \lambda_{j_1} \xgate + \lambda_{j_2} \zgate + \lambda_{j_3} \xgate \zgate \right)\tgate=\left(\sum_{i=1}^4 \lambda_{j_i} \xgate^{a_{i}^\prime}\zgate^{b_{i}^\prime}\right)\tgate\\
+\tgate(\xgate^{a_{j}}\zgate^{b_{j}})\mapsto \left(\lambda_{j_0} \igate + \lambda_{j_1} \xgate + \lambda_{j_2} \zgate + \lambda_{j_3} \xgate \zgate \right)\tgate=\left(\sum_{i=1}^4 \lambda_{j_i} \xgate^{a_{i}^\prime}\zgate^{b_{i}^\prime}\right)\tgate\,,\\
  \end{aligned}
 \end{equation}
-where $\lambda_{j_i}\in\mathbb{C}, $  $a_{i}^\prime, b_{i}^\prime \in\{0,1\}$ for $i\in[4]$ and $j\in[l].$ Then we can rewrite relation \Cref{nqubit:eq6} as
+where $\lambda_{j_i}\in\mathbb{C}, $  $a_{i}^\prime, b_{i}^\prime \in\{0,1\}$ for $i\in[4]$ and $j\in[l].$ Then we can rewrite \Cref{nqubit:eq6} as
 
 
 \begin{equation}
@@ -218,7 +218,7 @@ where $\lambda_{j_i}\in\mathbb{C}, $  $a_{i}^\prime, b_{i}^\prime \in\{0,1\}$ fo
  C_q (\xgate^{a_{i}}\zgate^{b_{i}})^{\otimes_{i=1}^{n}}\ket{\psi}= \left(\sum_{i=1}^4 \lambda_{j_i} \xgate^{a_{i}^\prime}\zgate^{b_{i}^\prime}\right)^{\otimes_{i=1}^{l}} \otimes \left(\xgate^{a_{i}^\prime}\zgate^{b_{i}^\prime}\right)^{\otimes_{i=l+1}^{n}}\\
 \end{aligned}
 \end{equation}
-Due to $\cnot$ gates we have to expand the relation \Cref{nqubit:eq8}  using the identity $(A+B)\otimes C=A\otimes C + B\otimes C.$
+Due to $\cnot$ gates we have to expand the relation \Cref{nqubit:eq8}  using the identity $(A+B)\otimes C=A\otimes C + B\otimes C$. \Anne{i don't understand this.}
 
 
 \begin{equation}
@@ -232,7 +232,7 @@ where $\beta_j\in \mathbb{C}$ for $j\in[4^l].$  Recall that $k$ denotes the numb
 
 
 
-Therefore, we define an update function for any $n$-quantum circuit $C_q$ with $k\leq n\leq |C_q|$ number of $\tgate$-gates as a map.
+Therefore, we define an update function for any $n$-qubit quantum circuit $C_q$ with $k\leq n\leq |C_q|$ number of $\tgate$-gates as a map.
 \begin{equation}
 \label{nqubit:eq10}
 \begin{aligned}
@@ -241,12 +241,13 @@ Therefore, we define an update function for any $n$-quantum circuit $C_q$ with $
 \end{aligned}
 \end{equation}
 Which corresponds to the correction unitary defined in \Cref{exp:nqubit-correction}.
-\subsection{Remark}
+\subsubsection{Remark}
 \label{remark:nqubit-correction1}
 Note the restriction that $\tgate$-gates are in the first $l$ wires of the circuit has no affect on our analysis. This is because, any permutation of the wires in the circuit will give us $\ell$ terms of form $\sum_{i=1}^4 \lambda_{j_i} \xgate^{a_{j_i}^\prime} \zgate^{b_{j_i}^\prime}$ and $n-l$ terms of the form $\xgate^{a_{i}^\prime} \zgate^{b_{i}^\prime}.$  And the tensor product of these terms in any order will result into a unitary in the worst-case of form. Moreover, $\cnot$ does not increase the number of terms in the update function or affect the size of the coefficients. So our worst-case analysis is not affected by this restriction.
 
 
-\subsection{$Qi\mathcal{O}$ for Unitary Quantum Circuits with Low $\tgate$ gate Complexity}
+\subsubsection{Analysis}
+%{$Qi\mathcal{O}$ for Unitary Quantum Circuits with Low $\tgate$ gate Complexity}
 The $Qi\mathcal{O}$ construction and proof of its security is identical to the  construction for Clifford gates (section \Cref{sec:Clifford-iO-teleportaion}). We only need to prove the following two properties concerning the update functions.
 \begin{enumerate}
 \item For any two equivalent quantum circuits $C_{q_1}$ and $C_{q_2}$ the corresponding update functions are equal $F_{C_{q_1}}=F_{C_{q_2}}.$
@@ -311,7 +312,7 @@ Let $C_{q_1}$ and $C_{q_2}$ be two equivalent $n$-qubit circuits  and $k\leq n$
 are the corresponding update functions for $C_{q_1}$ and $C_{q_2}$  then $F_{C_{q_1}}=F_{C_{q_2}},$ where ${\bf B}=\{0,1\}^{2n}$
 \end{lemma}
 
-\noindent{\bf Proof}: Suppose $C_{q_1}$ and $C_{q_2}$ are equivalent circuits and Suppose $F_{C_{q_1}}\neq F_{C_{q_2}},$  then there must exist at least one input string ${\bf s}=a_1b_1,\ldots, a_nb_n$ such that
+\noindent{\bf Proof}: Suppose $C_{q_1}$ and $C_{q_2}$ are equivalent circuits and suppose $F_{C_{q_1}}\neq F_{C_{q_2}},$  then there must exist at least one input string ${\bf s}=a_1b_1,\ldots, a_nb_n$ such that
 \begin{equation}
 \label{assumption}
 F_{C_{q_1}}({\bf s})\neq F_{C_{q_2}}({\bf s})
@@ -368,9 +369,9 @@ We have to show that the update function can be computed by a polynomially size 
 F_{C_q}(s)=((\beta_1, {\bf s}_1),\ldots, (\beta_k, {\bf s}_k)),\; \mbox{for } s\in\{0,1\}^{2n}.
  \end{equation*}
 
-Each $\beta_i \in poly(|C_q|)$ (appendix \Cref{coeff:size}) and $|{\bf s}_i|=2n,$ but $n\leq |C_q|,$ therefore ${\bf s}_i \in O(|C_q|).$  Therefore the size of each pair $(\beta_i, {\bf s}_i)$ is in $O(poly|C_q|)$ and there are only $\log(|C_q|)$ pairs.
- Moreover,  the size of $\beta_i \in poly(|C_q|)$ (appendix \Cref{coeff:size}). So the size of the function is polynomial. To compute $F_{C_q}$ we go gate by gate in $C_q$ and perform operations such as $\oplus$, swaps, $+$ and $\times$ on operand of size that are bounded by $poly(|C_q|).$ There are $|C_q|$ gates we have to go through and each require at most $poly(|C_q|)$
-operations.Therefore, $F_{C_q}$ can be computed with $poly(|C_q|)$ size classical circuit.
+Each $\beta_i \in poly(|C_q|)$ (\Cref{coeff:size}) and $|{\bf s}_i|=2n,$ but $n\leq |C_q|,$ therefore ${\bf s}_i \in O(|C_q|).$  Therefore the size of each pair $(\beta_i, {\bf s}_i)$ is in $O(poly|C_q|)$ and there are only $\log(|C_q|)$ pairs.
+ Moreover,  the size of $\beta_i \in poly(|C_q|)$ (\Cref{coeff:size}). So the size of the function is polynomial. To compute $F_{C_q}$ we go gate by gate in $C_q$ and perform operations such as $\oplus$, swaps, $+$ and $\times$ on operands of size that are bounded by $poly(|C_q|)$.  There are $|C_q|$ gates we have to go through and each require at most $poly(|C_q|)$
+operations. Therefore, $F_{C_q}$ can be computed with $poly(|C_q|)$ size classical circuit.
 
 
 
