@@ -164,7 +164,7 @@ The equation \Cref{lemma:1qubit:eq5},  can only be satisfied if $\beta_i = \beta
 
 \subsection{$Qi\mathcal{O}$ via Gate Teleportation for all Quantum Circuits with Low $\tgate$-gate Complexity }
 \label{sec:n-qubit-circuits}
-In this section we construct a $Qi\mathcal{O}$ for all quantum circuits where the number of $\tgate$-gates is at most logarithmic in the circuit size. The construction is very similar to the gate teleportation for Clifford circuits (\Cref{sec:Clifford-iO-teleportaion}). The reason for this bound is that the update function blow up once number of $\tgate$-gates are greater than logarithmic in circuit size. More, precisely the update function for any $n$-qubit quantum circuit $C_q$ with $k$ number of $\tgate$-gates can be defined as the following map. \footnote{It is discussed below why this map is defined conditionally on $k\leq n$ and $k>n$.}
+In this section we construct a $Qi\mathcal{O}$ for all quantum circuits where the number of $\tgate$-gates is at most logarithmic in the circuit size. The construction is very similar to the gate teleportation for Clifford circuits (\Cref{sec:Clifford-iO-teleportaion}). The reason for this bound is that the update function blows up once number of $\tgate$-gates are greater than logarithmic in circuit size. More, precisely the update function for any $n$-qubit quantum circuit $C_q$ with $k$ number of $\tgate$-gates can be defined as the following map. \footnote{It is discussed below why this map is defined conditionally on $k\leq n$ and $k>n$.}
 
 \begin{equation}
 \label{nqubit:eq0}
@@ -189,16 +189,16 @@ Therefore, we must have $k\in O(\log(|C_q|)).$ Note that the above map correspon
 \label{exp:nqubit-correction}
 \sum_{i=1}^{4^k} \beta_i \xgate^{b_{i_1}} \zgate^{a_{i_1}}\otimes \cdots \otimes \xgate^{b{i_n}} \zgate^{a_{i_n}},\;  \; k\leq n.
 \end{equation}
-where $\beta_i\in\mathbb{C}$ and ${\bf s}_i=a_{i_1}b_{i_1}, \ldots, a_{i_n}b_{i_n} \in\{0,1\}^{2n}.$  Note that there are at most $2^{2n}$ bit strings of size $2n,$ therefore it follows from \Cref{exp:nqubit-correction} that for any $n$-qubit circuit the correction unitary can be written as a summation of at most $2^{2n}$ terms. Note that the range of the update function increases exponential in the number of $\tgate$-gates for $k\leq n$ and but if $k>n$ then the range of update function become fixed and no longer depend on $k$ (see \Cref{nqubit:eq0}). However, it is important to realize that the sizes of coefficients $\beta_i$'s (\Cref{nqubit:eq0}) can increased with each application of a $\tgate$-gate.
+where $\beta_i\in\mathbb{C}$ and ${\bf s}_i=a_{i_1}b_{i_1}, \ldots, a_{i_n}b_{i_n} \in\{0,1\}^{2n}.$  Note that there are at most $2^{2n}$ bit strings of size $2n,$ therefore it follows from \Cref{exp:nqubit-correction} that for any $n$-qubit circuit the correction unitary can be written as a summation of at most $2^{2n}$ terms. Note that the range of the update function increases exponentially in the number of $\tgate$-gates for $k\leq n$ but if $k>n$ then the range of update function becomes fixed and no longer depends on $k$ (see \Cref{nqubit:eq0}). However, it is important to realize that the sizes of coefficients $\beta_i$'s (\Cref{nqubit:eq0}) can be increased with each application of a $\tgate$-gate.
 
 \subsection{Worst-Case Correction Unitary}
-Let $C_q$ be an $n$-qubit circuit and $\ket{\psi}$ be an $n$-qubit state. If we want to evaluate $C_q$ on the state $\ket{\psi}$ using gate teleportation, then we are required to compute a correction unitary $U^\prime$ corresponding to $C_q$ (\Cref{protocol: gate-teleportation}) satisfying equation \Cref{nqubit:eq6}. We will show that in the worst-case the correction unitary is of form \Cref{exp:nqubit-correction}.
+Let $C_q$ be an $n$-qubit circuit and $\ket{\psi}$ be an $n$-qubit state. If we want to evaluate $C_q$ on the state $\ket{\psi}$ using gate teleportation, then we are required to compute a correction unitary $U^\prime$ corresponding to $C_q$ (\Cref{protocol: gate-teleportation}) satisfying \Cref{nqubit:eq6}. We will show that in the worst-case the correction unitary is of form \Cref{exp:nqubit-correction}.
 \begin{equation}
 \label{nqubit:eq6}
 C_qU(\ket{\psi})= U^\prime C_q (\xgate^{a_{1}}\zgate^{b_{1}}\otimes \xgate^{a_{2}}\zgate^{b_{2}}\cdots \otimes \xgate^{a_{n}}\zgate^{b_{n}})(\ket{\psi}).
 \end{equation}
 
-Let's construct $U^\prime$ and estimate how big it can grow. Suppose number of $\tgate$ gates in $C_q$ are $k$ for some non-negative integer $k\leq n.$ To simplify the analysis we assume that $\tgate$-gates are in the first $l$ wires of $C_q.$ And all of $\cnot$ gates are acted after all the $\tgate$-gates \footnote{This restriction will not not affect our analysis see remark \cref{remark:nqubit-correction1}.} Note we must have $l\leq k.$ Then for every $j$-th wire with $\tgate$-gate(s)
+Let's construct $U^\prime$ and estimate how big it can grow. Suppose there are $k\leq n$ number of $\tgate$ gates in $C_q$ for some non-negative integer $k\leq n.$ To simplify the analysis we assume that $\tgate$-gates are in the first $l$ wires of $C_q,$ and all of $\cnot$ gates are acted after all the $\tgate$-gates \footnote{This restriction will not not affect our analysis see remark \cref{remark:nqubit-correction1}.} Note we must have $l\leq k.$ Then for every $j$-th wire with $\tgate$-gate(s)
 
 \begin{equation}
 \begin{aligned}
@@ -225,7 +225,7 @@ C_q (\xgate^{a_{i}}\zgate^{b_{i}})^{\otimes_{i=1}^{n}}=\left(\sum_{j=1}^{4^l} \b
  =\left(\sum_{j=1}^{4^{l}} \beta_j \xgate^{b_{j1}^\prime}\zgate^{a_{j1}^\prime} \otimes \cdots \otimes\xgate^{b_{jl}^\prime}\zgate^{a_{jl}^\prime} \otimes \xgate^{a_{l+1}^\prime}\zgate^{b_{l+1}^\prime}  \otimes \cdots   \otimes\xgate^{a_{n}^\prime}\zgate^{b_{n}^\prime}\right)
  \end{aligned}
 \end{equation}
-where $\beta_j\in \mathbb{C}$ for $j\in[4^l].$  Recall that $k$ denote the number of $\tgate$-gates and $l\leq k\leq n,$ therefore in the worst case the correction unitary can have $4^k$ terms.
+where $\beta_j\in \mathbb{C}$ for $j\in[4^l].$  Recall that $k$ denotes the number of $\tgate$-gates and $l\leq k\leq n,$ therefore in the worst case the correction unitary can have $4^k$ terms.
 
 
 
@@ -240,12 +240,11 @@ Therefore, we define an update function for any $n$-quantum circuit $C_q$ with $
 Which corresponds to the correction unitary defined in \Cref{exp:nqubit-correction}.
 \subsection{Remark}
 \label{remark:nqubit-correction1}
-Note the restriction that $\tgate$-gates are in the first $l$ wires of the circuit has no affect on our analysis. This because, any permutation of the wires in the circuit will give us $\ell$ terms of form $\sum_{i=1}^4 \lambda_{j_i} \xgate^{a_{j_i}^\prime} \zgate^{b_{j_i}^\prime}$ and $n-l$ terms of the form $\xgate^{a_{i}^\prime} \zgate^{b_{i}^\prime}.$  And the tensor product of these terms in any order will result into a unitary in the worst-case of form. Moreover, $\cnot$ don't increases the number of terms in the update function or affect the size of the coefficients. So our worst-case analysis is not affected by this restriction.
+Note the restriction that $\tgate$-gates are in the first $l$ wires of the circuit has no affect on our analysis. This is because, any permutation of the wires in the circuit will give us $\ell$ terms of form $\sum_{i=1}^4 \lambda_{j_i} \xgate^{a_{j_i}^\prime} \zgate^{b_{j_i}^\prime}$ and $n-l$ terms of the form $\xgate^{a_{i}^\prime} \zgate^{b_{i}^\prime}.$  And the tensor product of these terms in any order will result into a unitary in the worst-case of form. Moreover, $\cnot$ does not increase the number of terms in the update function or affect the size of the coefficients. So our worst-case analysis is not affected by this restriction.
 
 
 \subsection{$Qi\mathcal{O}$ for Unitary Quantum Circuits with Low $\tgate$ gate Complexity}
-The $Qi\mathcal{O}$ construction and proof of its security is identical to the  construction for Clifford gates (section \Cref{sec:Clifford-iO-teleportaion}). We only need to proof two things
-
+The $Qi\mathcal{O}$ construction and proof of its security is identical to the  construction for Clifford gates (section \Cref{sec:Clifford-iO-teleportaion}). We only need to prove the following two properties concerning the update functions.
 \begin{enumerate}
 \item For any two equivalent quantum circuits $C_{q_1}$ and $C_{q_2}$ the corresponding update functions are equal $F_{C_{q_1}}=F_{C_{q_2}}.$
 \item The update function can be computed by classical circuit of size $poly(|C_q|).$
@@ -321,7 +320,7 @@ Let $C_1$ and $C_2$ be circuits that compute $F_{C_{q_1}}$ and $F_{C_{q_2}}$ res
 C_1({\bf s)}=((\beta_1, {\bf s}_1),\ldots, (\beta_n, {\bf s}_n))\neq ((\beta_1^\prime, {\bf s}_1^\prime),\ldots, (\beta_n^\prime, {\bf s}_n^\prime))=C_2({\bf s})
 \end{equation}
 
-Suppose we want to evaluated circuits $C_{q_1}$ and $C_{q_2}$ on some state $\ket \psi$ using gate teleportaton (\Cref{protocol: gate-teleportation}). And further assume that the classical output of the Bell measurement (\Cref{protocol: gate-teleportation}, step 4) for both circuits is the same string ${\bf s}.$ After step 5 of  gate teleportation protocol (\Cref{protocol: gate-teleportation}) we are left with the following systems
+Suppose we evaluated circuits $C_{q_1}$ and $C_{q_2}$ on some state $\ket \psi$ using gate teleportaton (\Cref{protocol: gate-teleportation}), and further assume that the classical output of the Bell measurement (\Cref{protocol: gate-teleportation}, step 4) for both circuits is the same string ${\bf s}.$ After step 5 of gate teleportation protocol (\Cref{protocol: gate-teleportation}) we are left with the following systems
  \begin{equation*}
 C_{q_1} (\xgate^{a_{i}}\zgate^{b_{i}})^{\otimes_{i=1}^{n}}\ket{\psi} \;\mbox{ and }\;
 C_{q_2} (\xgate^{a_{i}}\zgate^{b_{i}})^{\otimes_{i=1}^{n}}\ket{\psi}
@@ -330,7 +329,7 @@ C_{q_2} (\xgate^{a_{i}}\zgate^{b_{i}})^{\otimes_{i=1}^{n}}\ket{\psi}
 Since $C_{q_1}$ and $C_{q_2}$ are equivalent quantum circuits we have
  \begin{equation}
  \label{nqubit:eq10}
-C_{q_1} (\xgate^{a_{i}}\zgate^{b_{i}})^{\otimes_{i=1}^{n}}\ket{\psi}=C_{q_2} (\xgate^{a_{i}}\zgate^{b_{i}})^{\otimes_{i=1}^{n}}\ket{\psi}
+C_{q_1} (\xgate^{a_{i}}\zgate^{b_{i}})^{\otimes_{i=1}^{n}}\ket{\psi}=C_{q_2} (\xgate^{a_{i}}\zgate^{b_{i}})^{\otimes_{i=1}^{n}}\ket{\psi}.
 \end{equation}
 Using the circuits for the update functions \ref{fun:assumption2} we can rewrite \Cref{nqubit:eq10} as
 \begin{equation}
@@ -357,7 +356,7 @@ From \cref{nqubit:eq13} it follows that for every $i\in [4^k]$
 \label{nqubit:eq14}
 \beta_{k_i} \xgate^{b_{k_{i1}}} \zgate^{a_{k_{i1}}} \otimes \cdots  \otimes \xgate^{b_{k_{in}}} \zgate^{a_{k_{in}}}=\beta_{k_i}^\prime \xgate^{b_{k_{i1}^\prime}} \zgate^{a_{k_{i1}}^\prime} \otimes \cdots  \otimes \xgate^{b_{k_{in}}^\prime} \zgate^{a_{k_{in}}^\prime}
 \end{equation}
-From \Cref{nqubit:eq14} we can conclude that $(\beta_i, {\bf s}_i)=(\beta_i^\prime, {\bf s}_i^\prime)$ for every $i\in [4^k],$ therefore we have contradiction and $F_{C_{q_1}}=F_{C_{q_2}}.$
+From \Cref{nqubit:eq14} we can conclude that $(\beta_i, {\bf s}_i)=(\beta_i^\prime, {\bf s}_i^\prime)$ for every $i\in [4^k],$ therefore we have a contradiction and $F_{C_{q_1}}=F_{C_{q_2}}.$
 
 
 \subsection{Cost of Computing the Update Function}
@@ -367,7 +366,7 @@ F_{C_q}(s)=((\beta_1, {\bf s}_1),\ldots, (\beta_k, {\bf s}_k)),\; \mbox{for } s\
  \end{equation*}  
  
 Each $\beta_i \in poly(|C_q|)$ (appendix \Cref{coeff:size}) and $|{\bf s}_i|=2n,$ but $n\leq |C_q|,$ therefore ${\bf s}_i \in O(|C_q|).$  Therefore the size of each pair $(\beta_i, {\bf s}_i)$ is in $O(poly|C_q|)$ and there are only $\log(|C_q|)$ pairs.
- Moreover,  the size of $\beta_i \in poly(|C_q|)$ (appendix \Cref{coeff:size}). So the size of the function is polynomial. To compute $F_{C_q}$ we go gate by gate in $C_q$ and perform operations such as $\oplus$, swaps, $+$ and $\otimes$ on operand of size that are bounded by $poly(|C_q|).$ There are $|C_q|$ gates we have to go through and each require at most $poly(|C_q|)$ 
+ Moreover,  the size of $\beta_i \in poly(|C_q|)$ (appendix \Cref{coeff:size}). So the size of the function is polynomial. To compute $F_{C_q}$ we go gate by gate in $C_q$ and perform operations such as $\oplus$, swaps, $+$ and $\times$ on operand of size that are bounded by $poly(|C_q|).$ There are $|C_q|$ gates we have to go through and each require at most $poly(|C_q|)$ 
 operations.Therefore, $F_{C_q}$ can be computed with $poly(|C_q|)$ size classical circuit. 
 
 
