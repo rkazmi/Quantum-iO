@@ -15,10 +15,14 @@ A function ${\rm negl}:\mathbb{N}\rightarrow\mathbb{R}^{+}\cup \{0\}$ is \emph{n
  \item  For each $n\in\mathbb{N},$ $M$ runs in time $poly(n).$
  \end{itemize}
 
+
+%\Anne{We need to give references where this definition comes from.}
+
 \subsection{Indistinguishability Obfuscation}
 We now provide a definition of indistinguishability obfuscation $i\mathcal{O}$ that is secure against polynomial-time quantum adversaries. Our definition is based on the $i\mathcal{O}$ definition presented in~\cite{GR14}.
 \begin{definition}\label{def:qiO} {\rm({\bf Quantum Secure Indistinguishability Obfuscation}, $i\mathcal{O}$)}
 A probabilistic polynomial-time algorithm is a \emph{quantum-secure computational indistinguishability obfuscator} $i\mathcal{O}$ for a class of circuits ${\mathcal C},$ if the following conditions hold:
+
 
 \begin{enumerate}
 \item {\tt Functionality:} For any circuit $C\in {\mathcal C},$ and for all inputs $x$ $$i\mathcal{O}(C)(x)=C(x).$$
@@ -193,7 +197,7 @@ Therefore we have
  \end{aligned}
 \end{equation*}
 	
-In general, let $\mathcal{C}_q$ be an $n$-qubit Clifford circuit\footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group.} and $\mathcal{C}_q$ is asequence of gates $g_k,\ldots,g_2,g_1$ for $k=|\mathcal{C}_q|.$\footnote{In this paper we assume that we apply gates from right-to-left.}
+In general, let $\mathcal{C}_q$ be an $n$-qubit Clifford circuit\footnote{A Clifford circuit is a quantum circuit in which every gate is from the Clifford group.} and $\mathcal{C}_q$ is a sequence of gates $g_k,\ldots,g_2,g_1$ for $k=|\mathcal{C}_q|.$\footnote{In this paper we assume that we apply gates from right-to-left.}
 \begin{equation}
 \label{relation:update}
 \begin{aligned}
@@ -231,7 +235,7 @@ where $(a_1^\prime,b_1^\prime,\dots, a_n^\prime,b_n^\prime)=F_{C_q}(a_1,b_1,\ldo
 %\end{equation*}
 
 \begin{remark}
-Using gate teleportation we can also evaluate a  $\tgate,$  hence any $n$-qubit circuit. However, the update function becomes more complicated. This is discuss in \Cref{QiO:Clifford+T:family+GT}.
+Using gate teleportation we can also evaluate a  $\tgate,$ hence any $n$-qubit circuit. However, the update function becomes more complicated. This is discuss in \Cref{QiO:Clifford+T:family+GT}.
 %						$$\tgate \xgate^b \zgate^a= \xgate^b \zgate^{a\oplus b} \pgate^b \tgate$$
 \end{remark}
 
