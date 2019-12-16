@@ -15,10 +15,11 @@ A function ${\rm negl}:\mathbb{N}\rightarrow\mathbb{R}^{+}\cup \{0\}$ is \emph{n
  \item  For each $n\in\mathbb{N},$ $M$ runs in time $poly(n).$
  \end{itemize}
 
-\Anne{We need to give references where this definition comes from.}
-
+%\Anne{We need to give references where this definition comes from.}
+\section*{Indistinguishability Obfuscation}
+Below we provide a definition of indistinguishability obfuscation $i\mathcal{O}$ that is secure against polynomial-time quantum adversaries. Our definition is based on the $i\mathcal{O}$ definition presented in \cite{GR14}.
 \begin{definition}\label{def:qiO} {\rm({\bf Quantum Secure Indistinguishability Obfuscation} $i\mathcal{O}$)}
-A probabilistic polynomial-time algorithm is a \emph{quantum-secure computational indistinguishability obfuscator} $i\mathcal{O}$ for a class of circuits ${\mathcal C},$ if the following conditions hold: \cite{GR14}
+A probabilistic polynomial-time algorithm is a \emph{quantum-secure computational indistinguishability obfuscator} $i\mathcal{O}$ for a class of circuits ${\mathcal C},$ if the following conditions hold: 
 
 \begin{enumerate}
 \item {\tt Functionality:} For any circuit $C\in {\mathcal C},$ and for all inputs $x$ $$i\mathcal{O}(C)(x)=C(x).$$
@@ -88,8 +89,8 @@ A quantum circuit is an acyclic network of quantum gates connected by wires. The
 
 For $n\in \mathbb{N},$ the set of all $n\times n$ unitary matrices is denoted by $O(n,\mathbb{C})=\{U\in \mathbb{C}^{n\times n} \mid U\cdot U^\dagger={\bf I}\}.$ We say a quantum circuit $C_q$ computes $U\in O(n,\mathbb{C})$ if for every $\ket{\psi}\in \mathcal{H}_n$
 $$U(\ket{\psi})=C_q(\ket{\psi}).$$ %\Anne{Hmm, for density matrices, usually the action is more like $U\rho U^\dag$. Alternatively, if we work with pure states, then yes we can write $U \ket{\psi}$}
-A quantum circuit that computes a unitary matrix is called a \emph{reversible  quantum circuit}, \emph{i.e.}, it always possible to uniquely recover the input, given the output. A set of gates are said to be universal if, for any a unitary matrix~$U$  a quantum circuit can be constructed for computing~$U$ using only gates from that set. It is a well-known fact that Clifford gates are not universal, but adding any non-Clifford gate, such as $\tgate$, gives a universal set of gates, where
-$$\quad\tgate = \left[\begin{array}{cc} 1 & 0\\ 0 & e^{i\pi/4}\end{array}\right]\,.$$ \Anne{Hmm, for quantum circuits, we actually only have \emph{approximate} universality. We should probably mention this, and give a reference. }
+A quantum circuit that computes a unitary matrix is called a \emph{reversible  quantum circuit}, \emph{i.e.}, it always possible to uniquely recover the input, given the output. A set of gates is said to be universal if for any integer $n \geq 1,$ any $n$-qubit unitary operator can be approximated to arbitrary accuracy by a quantum circuit using only gates from that set \cite{KLM07}. It is a well-known fact that Clifford gates are not universal, but adding any non-Clifford gate, such as $\tgate$, gives a universal set of gates, where
+$$\quad\tgate = \left[\begin{array}{cc} 1 & 0\\ 0 & e^{i\pi/4}\end{array}\right]\,.$$ %\Anne{Hmm, for quantum circuits, we actually only have \emph{approximate} universality. We should probably mention this, and give a reference. }
 
 A family of quantum circuits $\mathcal{C}_q=\{C_{q_n}\in\mid n\in \mathbb{N}  \}$   one for each input  size $n\in \mathbb{N}$ is called \emph{uniform} if there exists a deterministic Turing machine $M,$ such that
  \begin{itemize}
