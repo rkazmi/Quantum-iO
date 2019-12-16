@@ -30,7 +30,7 @@ In the quantum world, obfuscation has been studied in \cite{AJJ14,AF16arxiv}. In
 
 Our contribution establishes indistinguishability obfuscation for certain families of quantum circuits.  At a high level, we achieve our constructions via quantum techniques that allow \emph{information-theoretic} reductions to classical indistinguishability obfuscation. We now overview our results and techniques.
 
-<<<<<<< HEAD
+
 %\Anne{I need to check \cite{AG04} again: does their definition include a quantum state, as output by the obfuscator?}
 %$Qi\mathcal{O}$
 %and show how to construct a $Qi\mathcal{O}$ for certain families of quantum circuits.
@@ -38,11 +38,6 @@ First, we define indistinguishability obfuscation for quantum circuits ($Qi\math
 $C_q^\prime(\ket{\phi},\ket{\psi})=C_{q}(\ket{\psi})$ for all inputs $\ket{\psi}$.
 %\Anne{I am currently thinking that we could let the quantum iO output a pure state, \emph{e.g.}, $\ket{\phi}$, instead of a mixed state $\rho$. This could simplify things later. But I don't know if this is general enough.}
  
-=======
-First, we define indistinguishability obfuscation for quantum circuits ($Qi\mathcal{O}$)(\Cref{sec:QiO-Cliffords and more}). Importantly, this definition specifies that on input a classical description of a quantum circuit~$C_q$, the obfuscator outputs a \emph{pair} $(\rho, C_q^\prime)$, where $\rho$ is a quantum state and $C_q^\prime$ is a quantum circuit, with the property that
-$C_q^\prime(\rho,\ket{\phi})=C_{q}(\ket{\phi})$ for all inputs $\ket{\phi}$.
-
->>>>>>> 17de88662c212859045db5411e569b7e70c62e6f
 In terms of constructing $Qi\mathcal{O}$, we first focus on the family of \emph{Clifford} circuits and show two methods of obfuscation: one straightforward method based on the canonical representation of Cliffords, and another based on the
 % is based on the canonical representation of Clifford circuits~\cite{AG04}, while the second construction is based on the
 principle of gate teleportation~\cite{GC99}.
@@ -89,11 +84,9 @@ Because of these applications, and since the $\tgate$ is also typically the bott
 Quantum obfuscation was first studied in \cite{AJJ14}, where a notion called
 $(G,\Gamma)$-{\em indistinguishability obfuscation} was proposed,  where $G$ is a set of gates and $\Gamma$ is a set of relations satisfied by the elements of $G$. In this notion, any two circuits over the set of gates $G$ are perfectly indistinguishable if they differ by some sequence of applications of the relations in~$\Gamma.$ One of the motivations of their work was to provide a weaker definition of perfectly indistinguishable obfuscation, which is shown to be impossible under certain complexity-theoretic assumptions \cite{AJJ14}. However, to the best of our knowledge, $(G,\Gamma)$-{\em indistinguishability obfuscation} is incomparable with computational indistinguishability obfuscation \cite{BGI+12, GGH+13}, which is the topic of our work.
 
-<<<<<<< HEAD
+
 Quantum obfuscation is studied rigorously in \cite{AF16arxiv}, where the various notions of quantum obfuscation are defined (including quantum black-box obfuscation, quantum indistinguishability obfuscation, and quantum Best-Possible obfuscation). 
-=======
-Quantum obfuscation is studied rigorously in \cite{AF16arxiv}, where the various notions of quantum obfuscation are defined (including quantum black-box obfuscation, quantum indistinguishability obfuscation, and quantum Best-Possible obfuscation.
->>>>>>> 17de88662c212859045db5411e569b7e70c62e6f
+
 %
  The main contribution of their work is to extend the classical impossibility results to the quantum setting.
  %such as a generic transformation of quantum circuits into black-box-obfuscated quantum circuits is impossible \cite{AF16arxiv},  statistical indistinguishability obfuscation is impossible, up to an unlikely complexity-theoretic collapse \cite{AF16arxiv}.
