@@ -19,13 +19,13 @@
 
  \subsection{Size of Coefficients in Update Functions}
  \label{coeff:size}
-The following map is an isomporphism between $\mathbb{C}$ and $\mathbb{R^2}$
+The following map is an isomporphism between $\mathbb{C}$ and $\mathbb{R}^2$
  \begin{equation}
   \label{size:map:real-complex)}
   f:\mathbb{C}\leftarrow \mathbb{R}^2, \; (a+b_i)\mapsto (a,b)
 \end{equation}
 
-Therefore, the size of a complex number is $|a|+|b|.$\footnote{Note the notation $|a|+|b|$ means, sum of the number of bits in $a$ and $b.$}. So can estimate the size of complex numbers by treating them as an ordered pairs of real numbers. Let $C_q$ be an $n$-qubit circuit and let $k\in O(\log(|C_q|)$ be the number of $\tgate$-gates in $C_q.$ Recall from the that the update function for $C_q$ is given by the following map \Cref{nqubit:eq0},
+Therefore, the size of a complex number is simply the size $\tgate$$|a|+|b|.$\footnote{Note the notation $|a|+|b|$ means, sum of the number of bits in $a$ and $b.$}. So can estimate the size of complex numbers by treating them as an ordered pairs of real numbers. Let $C_q$ be an $n$-qubit circuit and let $k\in O(\log(|C_q|)$ be the number of $\tgate$ gates in $C_q.$ Recall from the that the update function for $C_q$ is given by the following map \Cref{nqubit:eq0},
 \begin{equation}
 \begin{aligned}
  F_{C_q}: \{0,1\}^{2n}\longrightarrow  (\mathbb{C} \times {\bf B})^{4^k}
@@ -36,30 +36,21 @@ Therefore, the size of a complex number is $|a|+|b|.$\footnote{Note the notation
  (a_1,b_1,\ldots, a_n,b_n) \mapsto \left((\beta_1, {\bf s}_1),\dots, (\beta_{4^k}, {\bf s}_{4^k}))\right).
 \end{aligned}
 \end{equation}      
-where  ${\bf B}=\{0,1\}^{2n}.$ 
-
-The above map corresponds to the following correction unitary \Cref{exp:nqubit-correction}
+where ${\bf B}=\{0,1\}^{2n}.$ The above map corresponds to the following correction unitary \Cref{exp:nqubit-correction}
 
  \begin{equation*}
 \sum_{i=1}^{4^k} \beta_i \xgate^{b_{i_1}} \zgate^{a_{i_1}}\otimes \cdots \otimes \xgate^{b{i_n}} \zgate^{a_{i_n}},\;  \; k\leq n.
 \end{equation*}
  
- Moreover, the complex coefficients $\beta_i$ are construction by adding and multiplying numbers from the set $\left\{\frac{1+i}{2},\frac{1-i}{2}\right\}.$ We note the following properties these numbers
-
+Moreover, the complex coefficients $\beta_i$ are construction by adding and multiplying numbers from the set $\left\{\frac{1+i}{2},\frac{1-i}{2}\right\}.$ We note the following properties these numbers
 
  $$\left(\frac{1+i}{2}\right)\pm \left(\frac{1-i}{2}\right)=\pm1.$$
-
+$$ \hspace{4cm}\left(\frac{1\pm i}{2}\right)^m=\left(\frac{\pm i}{2}\right)^l, \mbox{ when $m$ odd postive integer}$$
+ $$\hspace{4cm}\left(\frac{1\pm i}{2}\right)^m=\left(\frac{\pm i}{2}\right)^l \left(\frac{1\pm i}{2}\right), \mbox{ when $m$ even postive integer}$$
+  
  
-\begin{equation*}
- \begin{aligned}
-  \left(\frac{1\pm i}{2}\right)^m= 
-\begin{cases}
-    (\frac{\pm i}{2})^l,& \text{if } m=2l \text{ and } l\in\mathbb{N}\\
-    (\frac{\pm i}{2})^l\frac{(1\pm i)}{2},              & \text{if } m=2l+1 \text{ and } l\in\mathbb{N}\\
-\end{cases}
-\end{aligned}
- \end{equation*}
- Therefore, we can represent $\left(\frac{1\pm i}{2}\right)^m$ in $O(m)$ and $\left(\frac{1+ i}{2}\right)^{m_1} \left(\frac{1- i}{2}\right)^{m_2}$ in $O(m_1+m_2)$ bits, for $m_1,m_2\in\mathbb{N}.$ 
+
+ Therefore, we can represent $\left(\frac{1\pm i}{2}\right)^m$ in $O(m)$ bits  and $\left(\frac{1+ i}{2}\right)^{s} \left(\frac{1- i}{2}\right)^{t}$ in $O(s+t)$ bits, for $s,t\in\mathbb{N}.$ 
  Note that each $\beta_i$ can be written as 
  $$\beta_i=\sum_{i=1}^{poly(k)}a_{i_1}a_{i_2}\cdots a_{i_{poly(k)}},\; \mbox{ for } a_{i_j}\in\left\{\frac{1+i}{2},\frac{1-i}{2}\right\}$$
 The size of the each term $a_{i_1}a_{i_2}\cdots a_{i_{poly(k)}}$ is at most $O(poly(k))$ and there are $O(poly(k))$ terms. Therefore, the size of each $|\beta_i|\in O(poly(|C_q)|).$

@@ -5,7 +5,7 @@
 \section{Obfuscating Beyond Clifford Circuits}
 \label{QiO:Clifford+T:family}
 \Anne{I think we need to work on the structure of this section, currently when reading quickly, it is hard to understand how the various pieces fit together}
-In the previous section we show how we can construct a $Qi\mathcal{O}$ for Clifford circuits from gate-teleportation and $i\mathcal{O}.$ In this section, we extend the gate teleportation technique to show how we can construct $Qi\mathcal{O}$ for any quantum circuit that has at most logarithmic non-Clifford-gates in the circuit size.  We start by constructing a $Qi\mathcal{O}$ for any 1-qubit quantum circuit (\cref{QiO:Clifford+T:family+GT}), then in \Cref{sec:n-qubit-circuits}  we extend the 1-qubit construction to any $n$-qubit quantum circuit that has at most logarithmic  $\tgate$-gates in the circuit size.\footnote{Recall from  \Cref{defn:Clifford+T:family} that adding a non-Clifford gate  such as $\tgate$-gate to Clifford gates gives us a generating set for all unitary quantum circuits.}
+In the previous section we show how we can construct a $Qi\mathcal{O}$ for Clifford circuits from gate-teleportation and $i\mathcal{O}.$ In this section, we extend the gate teleportation technique to show how we can construct $Qi\mathcal{O}$ for any quantum circuit that has at most logarithmic non-Clifford-gates in the circuit size.  We start by constructing a $Qi\mathcal{O}$ for any 1-qubit quantum circuit (\cref{QiO:Clifford+T:family+GT}), then in \Cref{sec:n-qubit-circuits}  we extend the 1-qubit construction to any $n$-qubit quantum circuit that has at most logarithmic  $\tgate$ gates in the circuit size.\footnote{Recall from  \Cref{defn:Clifford+T:family} that adding a non-Clifford gate  such as $\tgate$ gate to Clifford gates gives us a generating set for all unitary quantum circuits.}
 
 
 
@@ -71,7 +71,7 @@ C_q \xgate^b\zgate^a (\ket{\psi})=(g_{|C_q|},\ldots,g_2)(\alpha_0 \igate +  \alp
 \end{cases}
 \end{equation}
 
-where $\alpha_2^\prime=\alpha_2(1-i)/2+\alpha_3(1+i)/2$ and $\alpha_3^\prime=\alpha_3(1-i)/2+\alpha_2(1+i)/2$ for $i\in[4].$ Note that in the expression above the coefficients may change if $g_2$ happens to be a $\tgate$-gate;  whereas if $g_2$ is an $\hgate$-gate then the size of coefficients remains unaffected. Moreover, applying any number of gates to a system of form \ref{eq:pgate3} cannot increase the number of terms, i.e. the number of terms in the summation remain at most 4. However, the size of coefficients $\alpha_i$ can be changed with each application of a $\tgate$-gate.
+where $\alpha_2^\prime=\alpha_2(1-i)/2+\alpha_3(1+i)/2$ and $\alpha_3^\prime=\alpha_3(1-i)/2+\alpha_2(1+i)/2$ for $i\in[4].$ Note that in the expression above the coefficients may change if $g_2$ happens to be a $\tgate$ gate;  whereas if $g_2$ is an $\hgate$-gate then the size of coefficients remains unaffected. Moreover, applying any number of gates to a system of form \ref{eq:pgate3} cannot increase the number of terms, i.e. the number of terms in the summation remain at most 4. However, the size of coefficients $\alpha_i$ can be changed with each application of a $\tgate$ gate.
 
 Hence, it follows that by applying the remaining  sequence of gates $(g_{|C_q|},\ldots,g_3)$, the system \ref{eq:pgate5} can be written as
 \begin{equation}
@@ -87,7 +87,7 @@ where $\beta_i  \in \mathbb{C},$ $i\in[4].$  Therefore, for any  $1$-qubit circu
  (\beta_0 \igate +   \beta_1 \xgate +  \beta_2 \zgate +  \beta_3 \xgate\zgate), \mbox{ for }  \beta_i \in \mathbb{C},\; i\in[n]
 \end{equation}
 
-Moreover, the size of the coefficients $\beta_i$'s grows at most a polynomial in the number of $\tgate$-gates. This is discussed in (appendix \Cref{coeff:size}). Therefore the update function for any $1$-qubit circuit $C_q$ can be defined as a following map,
+Moreover, the size of the coefficients $\beta_i$'s grows at most a polynomial in the number of $\tgate$ gates. This is discussed in (\Cref{coeff:size}). Therefore the update function for any $1$-qubit circuit $C_q$ can be defined as a following map,
 
 \begin{equation*}
 F_{C_q}:\{0,1\}^2\rightarrow \mathbb{C}^4,\; (a,b)\mapsto (\beta_0, \beta_1,\beta_2,\beta_3),
@@ -162,9 +162,9 @@ The equation \Cref{lemma:1qubit:eq5},  can only be satisfied if $\beta_i = \beta
 
 
 
-\subsection{$Qi\mathcal{O}$ via Gate Teleportation for all Quantum Circuits with Low $\tgate$-gate Complexity }
+\subsection{$Qi\mathcal{O}$ via Gate Teleportation for all Quantum Circuits with Low $\tgate$ gate Complexity }
 \label{sec:n-qubit-circuits}
-In this section we construct a $Qi\mathcal{O}$ for all quantum circuits where the number of $\tgate$-gates is at most logarithmic in the circuit size. The construction is very similar to the gate teleportation for Clifford circuits (\Cref{sec:Clifford-iO-teleportaion}). The reason for this bound is that the update function blows up once number of $\tgate$-gates are greater than logarithmic in circuit size. More, precisely the update function for any $n$-qubit quantum circuit $C_q$ with $k$ number of $\tgate$-gates can be defined as the following map. \footnote{It is discussed below why this map is defined conditionally on $k\leq n$ and $k>n$.}
+In this section we construct a $Qi\mathcal{O}$ for all quantum circuits where the number of $\tgate$ gates is at most logarithmic in the circuit size. The construction is very similar to the gate teleportation for Clifford circuits (\Cref{sec:Clifford-iO-teleportation}). The reason for this bound is that the update function blows up once number of $\tgate$ gates are greater than logarithmic in circuit size. More, precisely the update function for any $n$-qubit quantum circuit $C_q$ with $k$ number of $\tgate$ gates can be defined as the following map. \footnote{It is discussed below why this map is defined conditionally on $k\leq n$ and $k>n$.}
 
 \begin{equation}
 \label{nqubit:eq0}
@@ -365,8 +365,8 @@ We have to show that the update function can be computed by a polynomially size 
 F_{C_q}(s)=((\beta_1, {\bf s}_1),\ldots, (\beta_k, {\bf s}_k)),\; \mbox{for } s\in\{0,1\}^{2n}.
  \end{equation*}  
  
-Each $\beta_i \in poly(|C_q|)$ (appendix \Cref{coeff:size}) and $|{\bf s}_i|=2n,$ but $n\leq |C_q|,$ therefore ${\bf s}_i \in O(|C_q|).$  Therefore the size of each pair $(\beta_i, {\bf s}_i)$ is in $O(poly|C_q|)$ and there are only $\log(|C_q|)$ pairs.
- Moreover,  the size of $\beta_i \in poly(|C_q|)$ (appendix \Cref{coeff:size}). So the size of the function is polynomial. To compute $F_{C_q}$ we go gate by gate in $C_q$ and perform operations such as $\oplus$, swaps, $+$ and $\times$ on operand of size that are bounded by $poly(|C_q|).$ There are $|C_q|$ gates we have to go through and each require at most $poly(|C_q|)$ 
+Each $\beta_i \in poly(|C_q|)$ (\Cref{coeff:size}) and $|{\bf s}_i|=2n,$ but $n\leq |C_q|,$ therefore ${\bf s}_i \in O(|C_q|).$  Therefore the size of each pair $(\beta_i, {\bf s}_i)$ is in $O(poly|C_q|)$ and there are only $\log(|C_q|)$ pairs.
+ Moreover,  the size of $\beta_i \in poly(|C_q|)$ ( \Cref{coeff:size}). So the size of the function is polynomial. To compute $F_{C_q}$ we go gate by gate in $C_q$ and perform operations such as $\oplus$, swaps, $+$ and $\times$ on operand of size that are bounded by $poly(|C_q|).$ There are $|C_q|$ gates we have to go through and each require at most $poly(|C_q|)$ 
 operations.Therefore, $F_{C_q}$ can be computed with $poly(|C_q|)$ size classical circuit. 
 
 
