@@ -20,7 +20,7 @@ $$C_{q_1}(\ket{\psi}) =C_{q_2}(\ket{\psi}).$$
 \begin{definition}{\rm (Quantum Indistinguishability Obfuscation)}
 \label{def:QiO}
 A  polynomial-time quantum algorithm for a class of quantum circuits $\mathcal{C}_Q$ is a \emph{quantum computational indistinguishability obfuscator} ($Qi\mathcal{O}$)  if the following conditions hold:
-\Anne{as already noted, I am wondering if we should use a pure state $\ket{\phi}$ instead of a mixed state $\rho$, mostly because $ C_q^\prime(\ket{\phi},\ket{\psi})$ is funny notation. }
+%\Anne{as already noted, I am wondering if we should use a pure state $\ket{\phi}$ instead of a mixed state $\rho$, mostly because $ C_q^\prime(\ket{\phi},\ket{\psi})$ is funny notation. }
 
 \begin{enumerate}
 \item {\tt Functionality:}  For every $C_q\in \mathcal{C}_Q$ and every quantum state $\ket{\psi},$
@@ -50,7 +50,7 @@ Where $k=|C_{q_1}|=|C_{q_2}|.$
 
 \subsubsection{$Qi\mathcal{O}$ for Clifford Circuits via Canonical Form}
 \label{sec:Clifford-iO-canonical}
-\Anne{what happened to all the subtlelties we had to fix in Aaronson-Gottesman?}
+%\Anne{what happened to all the subtlelties we had to fix in Aaronson-Gottesman?}
 Aaronson and Gottesman invented a polynomial-time quantum algorithm (polynomial size circuit) that takes a Clifford circuit $C_q$ and outputs its canonical form (see~\cite{AG04}, section~VI). This canonical form is invariant for any two equivalent circuits. Moreover the size of the canonical form remains polynomial in the size of the input circuit.
 \begin{algorithm}[]
 \label{QiO:Canonical-Clifford}
