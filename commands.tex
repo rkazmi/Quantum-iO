@@ -1,5 +1,7 @@
 \newif\ifSUBMISSION
-\SUBMISSIONfalse
+
+%\SUBMISSIONfalse
+\SUBMISSIONtrue
 
 \ifSUBMISSION
 \newcommand{\rnote}[1]{\textcolor{olive}{\small (Raza: #1)}}
@@ -7,19 +9,23 @@
 \newcommand{\NEWRAZA}[1]{#1}
 \newcommand{\anote}[1]{}
 \newcommand{\NEWANNE}[1]{#1}
+\newcommand{\Anne}[1]{}
+\newcommand{\Raza}[1]{{\color{red}\sc note}\footnote{\color{red} \underline{{\sc gus}:} #1}}
+
 \else
 \newcommand{\rnote}[1]{\textcolor{olive}{\small (Raza: #1)}}
 \newcommand{\NEWRAZA}[1]{\textcolor{red}{#1}}
 \newcommand{\anote}[1]{\textcolor{blue}{\small (Anne: #1)}}
 \newcommand{\NEWANNE}[1]{\textcolor{purple}{#1}}
+
+\newcommand{\Anne}[1]{{\color{red}\sc note}\footnote{\color{red} \underline{{\sc anne}:} #1}}
+\newcommand{\Raza}[1]{{\color{red}\sc note}\footnote{\color{red} \underline{{\sc gus}:} #1}}
+
 \fi
 
 
 
-\newcommand{\Anne}[1]{{\color{red}\sc note}\footnote{\color{red} \underline{{\sc anne}:} #1}}
-\newcommand{\Raza}[1]{{\color{red}\sc note}\footnote{\color{red} \underline{{\sc gus}:} #1}}
 \newcommand{\bit}[1]{\{0,1\}^{#1}}
-
 
 % amsthm environments
 \theoremstyle{definition}
