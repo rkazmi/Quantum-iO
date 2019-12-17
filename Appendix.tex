@@ -13,7 +13,7 @@
   \end{enumerate}
 \end{algorithm}
 %
-\noindent Note $C_q^\prime$ reveal no information about $C_q,$ except the functionality. Therefore, $C^\prime$ can reveal no information about about $C_q,$ excepts its functionality. Note $|C^\prime|$ is at most $poly|C_q|.$ Moreover, each step of the $i\mathcal{O}$ can be done in the $poly(|C_q|),$ therefore $i\mathcal{O}$ runs in polynomial-time.
+\noindent Note $C_q^\prime$ reveals no information about $C_q,$ except the functionality. Therefore, $C^\prime$ reveals no information about about $C_q,$ excepts its functionality. Note $|C^\prime|$ is at most $poly|C_q|.$ Moreover, each step of the $i\mathcal{O}$ can be done in the $poly(|C_q|),$ therefore $i\mathcal{O}$ runs in polynomial-time.
 
 
 
@@ -25,7 +25,7 @@ The following map is an isomorphism between $\mathbb{C}$ and $\mathbb{R}^2$
   f:\mathbb{C}\leftarrow \mathbb{R}^2, \; (a+b_i)\mapsto (a,b)
 \end{equation}
 
-Therefore, the size of a complex number is simply the size $\tgate$$|a|+|b|.$\footnote{Note the notation $|a|+|b|$ means, sum of the number of bits in $a$ and $b.$}. So we can estimate the size of complex numbers by treating them as an ordered pairs of real numbers. Let $C_q$ be an $n$-qubit circuit and let $k\in O(\log(|C_q|)$ be the number of $\tgate$ gates in $C_q.$ Recall  that the update function for $C_q$ is given by the following map (\Cref{nqubit:eq0}),
+Therefore, the size of a complex number $a+bi$ is simply $|a|+|b|.$\footnote{Note the notation $|a|+|b|$ means, sum of the number of bits in $a$ and $b.$}. So we can estimate the size of complex numbers by treating them as an ordered pairs of real numbers. Let $C_q$ be an $n$-qubit circuit and let $k\in O(\log(|C_q|)$ be the number of $\tgate$ gates in $C_q.$ Recall  that the update function for $C_q$ is given by the following map (\Cref{nqubit:eq0}),
 \begin{equation}
 \begin{aligned}
  F_{C_q}: \{0,1\}^{2n}\longrightarrow  (\mathbb{C} \times {\bf B})^{4^k}
